@@ -1,6 +1,5 @@
 import Logo from './logo.svg?component';
 import { Button } from '@/components/base';
-import { useState } from 'react';
 
 function App() {
   const onClick = () => console.log('hi');
