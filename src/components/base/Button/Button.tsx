@@ -35,34 +35,28 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       ...others
     },
     ref,
-  ) => (
-    <ButtonBlock
-      ref={ref}
-      size={size}
-      variant={variant}
-      boxShadow={boxShadow}
-      disabled={disabled}
-      color={color}
-      fontWeight={fontWeight}
-      fullWidth={fullWidth}
-      width={width}
-      {...others}
-    >
-      {children}
-    </ButtonBlock>
-  ),
-);
+  ) => {
+    if (fullWidth && width)
+      console.error('width가 있으면 fullWidth는 falsy 해야함');
 
-// type ButtonBlockProps = Omit<
-//   ButtonProps,
-//   | 'color'
-//   | 'variant'
-//   | 'size'
-//   | 'fullWidth'
-//   | 'width'
-//   | 'boxShadow'
-//   | 'fontWeight'
-// >;
+    return (
+      <ButtonBlock
+        ref={ref}
+        size={size}
+        variant={variant}
+        boxShadow={boxShadow}
+        disabled={disabled}
+        color={color}
+        fontWeight={fontWeight}
+        fullWidth={fullWidth}
+        width={width}
+        {...others}
+      >
+        {children}
+      </ButtonBlock>
+    );
+  },
+);
 
 type ButtonBlockProps = Omit<ButtonProps, 'children' | 'disabled' | 'loading'>;
 
@@ -78,6 +72,7 @@ const ButtonBlock = styled.button<ButtonBlockProps>`
   border-radius: 4px;
   transition: background-color 300ms;
   cursor: pointer;
+
   ${(props) =>
     props.fullWidth &&
     css`
@@ -85,6 +80,7 @@ const ButtonBlock = styled.button<ButtonBlockProps>`
       min-width: 100%;
       max-width: 100%;
     `}
+
   ${({ fullWidth, width, size, fontWeight }) =>
     sizes({ fullWidth, width, fontWeight })[size ?? 'medium']};
   ${(props) => getVariant(props.variant ?? 'default')};
@@ -108,12 +104,13 @@ const buttonSizeBuilder = ({
   font-size: ${fontSize}px;
   font-weight: ${fontWeight};
 
-  ${fullWidth === true
+  ${fullWidth
     ? css`
         width: 100%;
       `
     : css`
         width: ${width}px;
+        min-width: ${width}px;
       `}
 `;
 

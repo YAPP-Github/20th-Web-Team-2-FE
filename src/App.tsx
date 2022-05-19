@@ -26,6 +26,10 @@ function App() {
         <Button size="large" variant="grayBlack">
           다음
         </Button>
+        <p> size === 'large' variant === 'grayBlack' width === 100 </p>
+        <Button size="large" variant="grayBlack" width={100}>
+          다음
+        </Button>
       </header>
     </div>
   );
