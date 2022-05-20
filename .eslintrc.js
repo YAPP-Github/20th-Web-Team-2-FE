@@ -1,4 +1,4 @@
-module.exports = {
+{
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -11,7 +11,6 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
-    'airbnb',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
@@ -25,4 +24,4 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'on',
     '@typescript-eslint/no-explicit-any': 'on',
   },
-};
+}
