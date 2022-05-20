@@ -8,6 +8,7 @@ body,
 }
 * {
   box-sizing: border-box;
+  margin: 0;
 }
 a {
   color: inherit;
