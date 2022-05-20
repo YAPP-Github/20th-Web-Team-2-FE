@@ -1,11 +1,13 @@
 import Logo from './logo.svg?component';
 import { Button } from '@/components/base';
+import GlobalStyles from './lib/styles/globalStyles';
 
 function App() {
   const onClick = () => console.log('hi');
 
   return (
     <div className="App">
+      <GlobalStyles />
       <header>
         <Logo />
         <p> size === 'medium', variant === 'default' </p>
