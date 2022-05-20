@@ -1,4 +1,5 @@
-{
+// eslint-disable-next-line no-undef
+module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -19,9 +20,11 @@
     es2021: true,
   },
   rules: {
-    '@typescript-eslint/interface-name-prefix': 'on',
-    '@typescript-eslint/explicit-function-return-type': 'on',
-    '@typescript-eslint/explicit-module-boundary-types': 'on',
-    '@typescript-eslint/no-explicit-any': 'on',
+    '@typescript-eslint/interface-name-prefix': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'react/no-unescaped-entities': 'off',
   },
-}
+};
