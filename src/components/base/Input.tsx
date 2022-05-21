@@ -43,7 +43,6 @@ function Input({
     }
   }, []);
 
-  console.log(focusColor);
   return (
     <InputStyled
       {...rest}
