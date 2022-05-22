@@ -5,6 +5,10 @@ html,
 body,
 #root {
   height: 100%;
+  font-family: Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: auto;
+  font-size: 16px;
 }
 * {
   box-sizing: border-box;
@@ -103,7 +107,6 @@ video {
   border: 0;
   font-size: 100%;
   vertical-align: baseline;
-  font-family: "Noto Sans KR", sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -122,7 +125,6 @@ section {
 body {
   line-height: 1;
   margin: 0;
-  font-family: "Noto Sans KR", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
