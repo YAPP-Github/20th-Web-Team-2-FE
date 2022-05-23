@@ -12,14 +12,7 @@ interface InputStyle {
 interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement>,
     InputStyle {
-  /**
-   * width : 가로길이
-   */
   width?: string;
-
-  /**
-   * height : 세로길이
-   */
   height?: string;
 
   /**
