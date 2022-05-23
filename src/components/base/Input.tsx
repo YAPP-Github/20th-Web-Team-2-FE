@@ -21,13 +21,13 @@ interface InputProps
   isFocus?: boolean;
 }
 
-function Input({
+const Input = ({
   width = '312px',
   height = '38px',
   focusColor = palette.primary,
   isFocus = false,
   ...rest
-}: InputProps) {
+}: InputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ function Input({
       isFocus={isFocus}
     />
   );
-}
+};
 
 const InputStyled = styled.input<InputProps>`
   width: ${({ width }) => width};
