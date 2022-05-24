@@ -8,8 +8,11 @@ import MultiRangeSlider from '@/components/base/MultiRangeSlider';
 import 'sweetalert2/dist/sweetalert2.css';
 import Swal from 'sweetalert2';
 import { swalConfig } from '@/lib/styles/swalStyles';
+import useToggle from './hooks/common/useToggle';
+import ModalTemplate from './components/Modal';
 
 function App() {
+  const [isToggle, onChangeToggle] = useToggle();
   const onClick = async () => {
     const { isConfirmed, isDismissed } = await swalConfirm();
     if (isConfirmed) console.log('isConfirmed: ', isConfirmed);
@@ -19,6 +22,21 @@ function App() {
   return (
     <ThemeProvider theme={{ palette }}>
       <div className="App">
+        <GlobalStyles />
+        <Button onClick={onChangeToggle}>모달</Button>
+        {isToggle && (
+          <ModalTemplate
+            width={512}
+            height={172}
+            onToggleModal={onChangeToggle}
+            bottonName="다음"
+            onClick={() => {
+              console.log('확인');
+            }}
+            title="탈퇴하면 저장한 모든 설문정보가 사라집니다."
+            text="🥺 정말 탈퇴하시겠어요?"
+          />
+        )}
         <GlobalStyles />
         <header>
           <p> size === 'medium', variant === 'default' </p>
