@@ -9,7 +9,7 @@ const fadeIn = keyframes`
   }
 `;
 
-const pop = keyframes`
+const popIn = keyframes`
   50% {
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
@@ -24,9 +24,17 @@ const pop = keyframes`
   }
 `;
 
+const popOut = keyframes`
+  100% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+  }
+`;
+
 const transitions = {
   fadeIn,
-  pop,
+  popIn,
+  popOut,
 };
 
 export default transitions;

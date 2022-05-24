@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ReactNode, ReactPortal } from 'react';
 import reactDom from 'react-dom';
 
