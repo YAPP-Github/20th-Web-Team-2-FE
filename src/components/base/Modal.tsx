@@ -6,8 +6,8 @@ import { Button } from '.';
 import ModalPortal from './ModalPortal';
 
 interface IModalInnerStyled {
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
 }
 
 interface IModalInnerProps extends IModalInnerStyled {
@@ -15,7 +15,7 @@ interface IModalInnerProps extends IModalInnerStyled {
 }
 
 interface ModalTemplateProps extends IModalInnerStyled {
-  title: string;
+  title?: string;
   text: string;
   /**
    * 확인 버튼의 이름, 취소 버튼은 이름 고정.
@@ -28,7 +28,7 @@ interface ModalTemplateProps extends IModalInnerStyled {
   onClick: () => void;
 }
 
-function ModalTemplate({ width, height, title, text, bottonName, onToggleModal, onClick, ...rest }: ModalTemplateProps) {
+function ModalTemplate({ width = 264, height = 140, title, text, bottonName, onToggleModal, onClick, ...rest }: ModalTemplateProps) {
   const [isClose, setIsClose] = useState(false);
   // modal 닫기전 시간 지연시켜 애니매이션 보게하기 위함
   const onCloseModal = () => {
@@ -51,7 +51,7 @@ function ModalTemplate({ width, height, title, text, bottonName, onToggleModal, 
               취소
             </ModalButton>
             <ModalButton
-              width={210}
+              width={100}
               onClick={() => {
                 onClick();
                 onCloseModal();
@@ -120,11 +120,12 @@ const ModalBtnBox = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-top: 10px;
+  margin: 10px 0 0 2px;
 `;
 
 const ModalButton = styled(Button)`
-  margin: 5px 0 5px 5px;
+  margin: 5px;
+  min-width: 40%;
 `;
 
 const ModalBackground = styled.div`
