@@ -120,7 +120,7 @@ const ModalBtnBox = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: 10px 0 0 2px;
+  margin-top: 10px;
 `;
 
 const ModalButton = styled(Button)`
