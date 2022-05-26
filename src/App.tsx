@@ -8,8 +8,8 @@ import MultiRangeSlider from '@/components/base/MultiRangeSlider';
 import 'sweetalert2/dist/sweetalert2.css';
 import Swal from 'sweetalert2';
 import { swalConfig } from '@/lib/styles/swalStyles';
+import ModalTemplate from './components/base/Modal';
 import useToggle from './hooks/common/useToggle';
-import ModalTemplate from './components/Modal';
 
 function App() {
   const [isToggle, onChangeToggle] = useToggle();

@@ -2,7 +2,7 @@ import { palette } from '@/lib/styles/palette';
 import transitions from '@/lib/styles/transitions';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Button } from './base';
+import { Button } from '.';
 import ModalPortal from './ModalPortal';
 
 interface IModalInnerStyled {
