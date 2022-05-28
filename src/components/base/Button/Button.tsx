@@ -114,7 +114,8 @@ const ButtonBlock = styled.button<ButtonBlockProps>`
     `}
 `;
 
-type ButtonSizeBuilder = Record<string, string | number | undefined>;
+// type ButtonSizeBuilder = Record<string, string | number | undefined>;
+type ButtonSizeBuilder = Pick<ButtonBlockProps, 'height' | 'fontSize' | 'fontWeight'>;
 
 const buttonSizeBuilder = ({ height, fontSize, fontWeight }: ButtonSizeBuilder) => css`
   height: ${height}px;
@@ -126,13 +127,11 @@ const sizes = ({ fontSize, fontWeight, height }: Pick<ButtonProps, 'fontWeight' 
   small: buttonSizeBuilder({
     height: height ?? 38,
     fontSize: fontSize ?? 12,
-    lineHeight: 1.5,
     fontWeight: fontWeight ?? 600,
   }),
   medium: buttonSizeBuilder({
     height: height ?? 48,
     fontSize: fontSize ?? 14,
-    lineHeight: 1.2142857143,
     fontWeight: fontWeight ?? 700,
   }),
 });
