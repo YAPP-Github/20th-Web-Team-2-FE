@@ -2,7 +2,7 @@ import React, { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { palette } from '@/lib/styles/palette';
 
-export type ButtonSizes = 'small' | 'medium' | 'large';
+export type ButtonSizes = 'small' | 'medium';
 /*
   medium: 이전, 다음 버튼과 크기는 같은데 font-size가 14로 다름
 */
@@ -20,7 +20,7 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   fontWeight?: 300 | 400 | 600 | 700;
   fullWidth?: boolean;
   width?: number;
-  height?: number;
+  height?: 38 | 48 | 70 | 100;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -35,13 +35,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       color = 'white',
       fullWidth = true,
       width,
-      fontWeight = 400,
+      height,
+      fontWeight,
       ...others
     },
     ref,
   ) => {
-    if (fullWidth && width) console.error('width가 있으면 fullWidth는 falsy 해야함');
-
     return (
       <ButtonBlock
         ref={ref}
@@ -54,6 +53,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         fontWeight={fontWeight}
         fullWidth={fullWidth}
         width={width}
+        height={height}
         {...others}
       >
         {children}
@@ -94,7 +94,7 @@ const ButtonBlock = styled.button<ButtonBlockProps>`
     `}
   
 
-  ${({ size, fontWeight, fontSize }) => sizes({ fontSize, fontWeight })[size ?? 'small']};
+  ${({ size, fontWeight, fontSize, height }) => sizes({ fontSize, fontWeight, height })[size ?? 'small']};
   ${(props) => getVariant(props.variant ?? 'default')};
   ${(props) =>
     props.boxShadow &&
@@ -117,28 +117,22 @@ const ButtonBlock = styled.button<ButtonBlockProps>`
 type ButtonSizeBuilder = Record<string, string | number | undefined>;
 
 const buttonSizeBuilder = ({ height, fontSize, fontWeight }: ButtonSizeBuilder) => css`
-  font-size: ${fontSize}px;
   height: ${height}px;
+  font-size: ${fontSize}px;
   font-weight: ${fontWeight};
 `;
 
-const sizes = ({ fontSize, fontWeight }: Pick<ButtonProps, 'fontWeight' | 'fontSize'>) => ({
+const sizes = ({ fontSize, fontWeight, height }: Pick<ButtonProps, 'fontWeight' | 'fontSize' | 'height'>) => ({
   small: buttonSizeBuilder({
-    height: 38,
+    height: height ?? 38,
     fontSize: fontSize ?? 12,
     lineHeight: 1.5,
     fontWeight: fontWeight ?? 600,
   }),
   medium: buttonSizeBuilder({
-    height: 48,
+    height: height ?? 48,
     fontSize: fontSize ?? 14,
     lineHeight: 1.2142857143,
-    fontWeight: fontWeight ?? 700,
-  }),
-  large: buttonSizeBuilder({
-    height: 48,
-    fontSize: fontSize ?? 16,
-    lineHeight: 1.125,
     fontWeight: fontWeight ?? 700,
   }),
 });
