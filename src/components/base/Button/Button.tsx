@@ -3,9 +3,6 @@ import styled, { css } from 'styled-components';
 import { palette } from '@/lib/styles/palette';
 
 export type ButtonSizes = 'small' | 'medium';
-/*
-  medium: 이전, 다음 버튼과 크기는 같은데 font-size가 14로 다름
-*/
 export type ButtonVariants = 'default' | 'gray' | 'grayBlack';
 export type ButtonColors = 'white' | 'gray' | 'black';
 
@@ -21,6 +18,7 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   fullWidth?: boolean;
   width?: number;
   height?: 38 | 48 | 70 | 100;
+  active?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -37,6 +35,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       width,
       height,
       fontWeight,
+      active = false,
       ...others
     },
     ref,
@@ -54,6 +53,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         fullWidth={fullWidth}
         width={width}
         height={height}
+        active={active}
         {...others}
       >
         {children}
@@ -78,30 +78,35 @@ const ButtonBlock = styled.button<ButtonBlockProps>`
   transition: background-color 300ms;
   cursor: pointer;
 
+  ${({ size, fontWeight, fontSize, height }) => sizes({ fontSize, fontWeight, height })[size ?? 'small']};
+  ${(props) => getVariant(props.variant ?? 'default')};
+
   ${(props) =>
     props.fullWidth &&
-    !props.width &&
     css`
       width: 100%;
-      min-width: 100%;
       max-width: 100%;
     `}
 
   ${(props) =>
-    !props.fullWidth &&
     props.width &&
     css`
       width: ${props.width}px;
     `}
-  
 
-  ${({ size, fontWeight, fontSize, height }) => sizes({ fontSize, fontWeight, height })[size ?? 'small']};
-  ${(props) => getVariant(props.variant ?? 'default')};
+  ${(props) =>
+    props.active &&
+    css`
+      background-color: ${palette.primary};
+      color: ${palette.white};
+    `}
+
   ${(props) =>
     props.boxShadow &&
     css`
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     `};
+
   ${(props) =>
     props.disabled &&
     css`
@@ -173,13 +178,9 @@ ${variant === 'grayBlack' &&
     }
   `}
 
-  /* FIXME: hover, focus, active 될 때 각각 어떻게 될지 */
+  /* FIXME: hover, focus 될 때 각각 어떻게 될지 */
   &:focus {
-    background-color: ${palette.primary};
-    box-shadow: 0 0 1px 2px ${palette.gray};
-  }
-  &:active {
-    background-color: ${palette.gray};
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   }
 `;
 
