@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 
 const Landing = () => {
   return (
+    /* 실제 랜딩페이지 작업 시에는 아래 내용 삭제해 주세요! */
     <div>
       Landing
       <ul>
