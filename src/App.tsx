@@ -46,10 +46,9 @@ function App() {
             max={210}
             defaultMin={160}
             defaultMax={180}
-            onChange={({ min, max }) =>
-              console.log(`min = ${min}, max = ${max}`)
-            }
+            onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
           />
+          테스트
         </header>
       </div>
     </ThemeProvider>
