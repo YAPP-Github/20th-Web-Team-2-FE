@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { palette } from '@/lib/styles/palette';
 
 export type ButtonSizes = 'small' | 'medium';
-export type ButtonVariants = 'default' | 'gray' | 'grayBlack';
+export type ButtonVariants = 'default' | 'gray' | 'grayBlack' | 'kakao';
 export type ButtonColors = 'white' | 'gray' | 'black';
 
 export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'size' | 'color'> {
@@ -178,7 +178,19 @@ ${variant === 'grayBlack' &&
     }
   `}
 
-  /* FIXME: hover, focus 될 때 각각 어떻게 될지 */
+  &:focus {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  ${variant === 'kakao' &&
+  css`
+    background-color: ${palette.kakao};
+    color: ${palette.black};
+    font-weight: 700;
+
+    &:hover {
+    }
+  `}
+
   &:focus {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   }
