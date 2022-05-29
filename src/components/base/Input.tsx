@@ -9,9 +9,7 @@ interface InputStyle {
   focusColor?: string;
 }
 
-interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement>,
-    InputStyle {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, InputStyle {
   width?: string;
   height?: string;
 
@@ -21,13 +19,7 @@ interface InputProps
   isFocus?: boolean;
 }
 
-const Input = ({
-  width = '312px',
-  height = '38px',
-  focusColor = palette.primary,
-  isFocus = false,
-  ...rest
-}: InputProps) => {
+const Input = ({ width = '312px', height = '38px', focusColor = palette.primary, isFocus = false, ...rest }: InputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -36,15 +28,7 @@ const Input = ({
     }
   }, []);
 
-  return (
-    <InputStyled
-      {...rest}
-      height={height}
-      width={width}
-      focusColor={focusColor}
-      isFocus={isFocus}
-    />
-  );
+  return <InputStyled {...rest} height={height} width={width} focusColor={focusColor} isFocus={isFocus} />;
 };
 
 const InputStyled = styled.input<InputProps>`

@@ -1,44 +1,45 @@
 import React, { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
+import { palette } from '@/lib/styles/palette';
 
-export type ButtonSizes = 'medium' | 'large';
+export type ButtonSizes = 'small' | 'medium';
 export type ButtonVariants = 'default' | 'gray' | 'grayBlack';
 export type ButtonColors = 'white' | 'gray' | 'black';
 
-export interface ButtonProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'size' | 'color'> {
+export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'size' | 'color'> {
   children: React.ReactNode;
   size?: ButtonSizes;
   variant?: ButtonVariants;
   boxShadow?: boolean;
   disabled?: boolean;
   color?: ButtonColors;
-  fontWeight?: 400 | 700;
+  fontSize?: number;
+  fontWeight?: 300 | 400 | 600 | 700;
   fullWidth?: boolean;
   width?: number;
-  loading?: boolean;
+  height?: 38 | 48 | 70 | 100;
+  active?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       children,
-      size = 'medium',
+      size = 'small',
+      fontSize,
       variant = 'default',
       boxShadow = false,
       disabled = false,
       color = 'white',
-      loading = false,
       fullWidth = true,
       width,
-      fontWeight = 400,
+      height,
+      fontWeight,
+      active = false,
       ...others
     },
     ref,
   ) => {
-    if (fullWidth && width)
-      console.error('width가 있으면 fullWidth는 falsy 해야함');
-
     return (
       <ButtonBlock
         ref={ref}
@@ -47,9 +48,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         boxShadow={boxShadow}
         disabled={disabled}
         color={color}
+        fontSize={fontSize}
         fontWeight={fontWeight}
         fullWidth={fullWidth}
         width={width}
+        height={height}
+        active={active}
         {...others}
       >
         {children}
@@ -57,8 +61,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
   },
 );
+Button.displayName = 'Button';
 
-type ButtonBlockProps = Omit<ButtonProps, 'children' | 'disabled' | 'loading'>;
+type ButtonBlockProps = Omit<ButtonProps, 'children'>;
 
 const ButtonBlock = styled.button<ButtonBlockProps>`
   display: inline-flex;
@@ -73,67 +78,67 @@ const ButtonBlock = styled.button<ButtonBlockProps>`
   transition: background-color 300ms;
   cursor: pointer;
 
+  ${({ size, fontWeight, fontSize, height }) => sizes({ fontSize, fontWeight, height })[size ?? 'small']};
+  ${(props) => getVariant(props.variant ?? 'default')};
+
   ${(props) =>
     props.fullWidth &&
     css`
       width: 100%;
-      min-width: 100%;
       max-width: 100%;
     `}
 
-  ${({ fullWidth, width, size, fontWeight }) =>
-    sizes({ fullWidth, width, fontWeight })[size ?? 'medium']};
-  ${(props) => getVariant(props.variant ?? 'default')};
+  ${(props) =>
+    props.width &&
+    css`
+      width: ${props.width}px;
+    `}
+
+  ${(props) =>
+    props.active &&
+    css`
+      background-color: ${palette.primary};
+      color: ${palette.white};
+    `}
+
   ${(props) =>
     props.boxShadow &&
     css`
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     `};
+
+  ${(props) =>
+    props.disabled &&
+    css`
+      /* TODO: disabled 시 백그라운드 처리 */
+      background-color: ${palette.grayDarker};
+      cursor: not-allowed;
+
+      &: hover {
+        background-color: ${palette.grayDarker};
+      }
+    `}
 `;
 
-type ButtonSizeBuilder = Record<string, number | boolean>;
+// type ButtonSizeBuilder = Record<string, string | number | undefined>;
+type ButtonSizeBuilder = Pick<ButtonBlockProps, 'height' | 'fontSize' | 'fontWeight'>;
 
-const buttonSizeBuilder = ({
-  width,
-  height,
-  fontSize,
-  fontWeight,
-  fullWidth,
-}: ButtonSizeBuilder) => css`
+const buttonSizeBuilder = ({ height, fontSize, fontWeight }: ButtonSizeBuilder) => css`
   height: ${height}px;
   font-size: ${fontSize}px;
   font-weight: ${fontWeight};
-
-  ${fullWidth
-    ? css`
-        width: 100%;
-      `
-    : css`
-        width: ${width}px;
-        min-width: ${width}px;
-      `}
 `;
 
-const sizes = ({
-  fullWidth,
-  width,
-  fontWeight,
-}: Pick<ButtonProps, 'fullWidth' | 'width' | 'fontWeight'>) => ({
-  medium: buttonSizeBuilder({
-    height: 38,
-    fontSize: 12,
-    lineHeight: 1.5,
-    fontWeight: fontWeight ?? 400,
-    fullWidth: fullWidth ?? true,
-    width,
+const sizes = ({ fontSize, fontWeight, height }: Pick<ButtonProps, 'fontWeight' | 'fontSize' | 'height'>) => ({
+  small: buttonSizeBuilder({
+    height: height ?? 38,
+    fontSize: fontSize ?? 12,
+    fontWeight: fontWeight ?? 600,
   }),
-  large: buttonSizeBuilder({
-    height: 48,
-    fontSize: 18,
-    lineHeight: 1,
-    fontWeight: fontWeight ?? 400,
-    fullWidth: fullWidth ?? true,
-    width,
+  medium: buttonSizeBuilder({
+    height: height ?? 48,
+    fontSize: fontSize ?? 14,
+    fontWeight: fontWeight ?? 700,
   }),
 });
 
@@ -142,48 +147,43 @@ const getVariant = (variant: ButtonVariants) => css`
 
   ${variant === 'default' &&
   css`
-    background-color: #49dac4;
-    ${getColor('white')};
+    background-color: ${palette.primary};
+    color: ${palette.white};
+    font-weight: 600;
+
+    &:hover {
+      background-color: ${palette.gray};
+    }
   `}
 
   ${variant === 'gray' &&
   css`
-    background-color: #e8e8e8;
-    ${getColor('gray')};
+    background-color: ${palette.grayLight};
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: 300;
+
+    &:hover {
+      /* TODO: hover 색 처리 */
+    }
   `}
 
 ${variant === 'grayBlack' &&
   css`
-    background-color: #e8e8e8;
-    ${getColor('black')};
+    background-color: ${palette.grayLight};
+    color: ${palette.black};
+    font-weight: 400;
+
+    &:hover {
+      /* TODO: hover 색 처리 */
+    }
   `}
 
-  &:hover {
-    background-color: #f2f3f7;
-  }
+  /* FIXME: hover, focus 될 때 각각 어떻게 될지 */
   &:focus {
-    box-shadow: 0 0 1px 2px #e4e5ed;
-  }
-  &:active {
-    background-color: '#e4e5ed';
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   }
 `;
 
-const getColor = (color: ButtonColors) => css`
-  ${color === 'white' &&
-  css`
-    color: #fff;
-  `}
-
-  ${color === 'gray' &&
-  css`
-    color: rgba(0, 0, 0, 0.6);
-  `}
-
-	${color === 'black' &&
-  css`
-    color: #000;
-  `}
-`;
+Button.displayName = 'Button';
 
 export default Button;

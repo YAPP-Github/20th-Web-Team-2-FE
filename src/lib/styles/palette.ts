@@ -3,5 +3,6 @@ export const palette = {
   grayLight: '#E8E8E8',
   gray: '#e4e5ed',
   grayDarker: '#6F6F6F',
-  white: '#FFFFFF',
+  white: '#fff',
+  black: '#000',
 } as const;
