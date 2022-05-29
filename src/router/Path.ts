@@ -1,5 +1,5 @@
 enum Path {
-  LandingPage = '/',
+  Landing = '/',
 }
 
 export default Path;

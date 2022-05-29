@@ -7,7 +7,7 @@ function Routing() {
   return (
     <Routes>
       {/* <Route path="*" element={<NotFoundPage />} /> */}
-      <Route path={Path.LandingPage} element={<Landing />} />
+      <Route path={Path.Landing} element={<Landing />} />
     </Routes>
   );
 }
