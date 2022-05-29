@@ -1,4 +1,3 @@
-import React from 'react';
 import Logo from '@/logo.svg?component';
 import { Button } from '@/components/base/index';
 import ProgressBar from '@/components/base/ProgressBar';
