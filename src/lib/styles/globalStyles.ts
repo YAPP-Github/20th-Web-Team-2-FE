@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { palette } from './palette';
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -162,6 +163,52 @@ const GlobalStyles = createGlobalStyle`
     background-color: transparent;
     cursor: pointer;
     padding: 0;
+  }
+
+  .swal2-container {
+    z-index: 10600 !important;
+  }
+
+  .swal2-actions {
+    width: 100%;
+  }
+
+  .swal2-popup {
+    padding: 0;
+    /* max-width: 300px; */
+  }
+
+  .swal2-title {
+    font-size: 1.3rem;
+    padding-top: 1.5rem;
+    line-height: 1.7rem !important;
+  }
+
+  .swal2-html-container {
+    /* margin: 1rem 4rem 0 !important; */
+    line-height: 1.7rem !important;
+  }
+
+  .swal2-confirm {
+    flex: 1 !important;
+    background-color: ${palette.primary} !important;
+    border-radius: 4px;
+
+    &:focus {
+      box-shadow: 0 0 0 3px ${palette.grayLight} !important;
+    }
+  }
+
+  .swal2-cancel {
+    flex: 1 !important;
+    margin-right: 0 !important;
+    border-radius: 4px;
+    color: black !important;
+    background-color: ${palette.white} !important;
+
+    &:focus {
+      box-shadow: 0 0 0 3px ${palette.grayLight} !important;
+    }
   }
 `;
 
