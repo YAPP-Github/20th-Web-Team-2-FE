@@ -1,4 +1,4 @@
-import { Logo, StringLogo } from '@/assets/img';
+import { StringLogo, RadiousLogo } from '@/assets/img';
 import { Button } from '@/components/base';
 import { palette } from '@/lib/styles/palette';
 import React from 'react';
@@ -8,7 +8,7 @@ function LandingPage() {
   return (
     <LandingPageLayout>
       <MainIconBox>
-        <Icon src={Logo} />
+        <Icon src={RadiousLogo} />
         <MainNameStyled src={StringLogo} />
         <TextStyled>유학생을 위한 미팅/소개팅</TextStyled>
       </MainIconBox>
@@ -28,6 +28,7 @@ const LandingPageLayout = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border-radius: 5px;
 `;
 const MainIconBox = styled.div`
   padding-top: 42%;
@@ -46,7 +47,6 @@ const LoginBtnBox = styled.div`
   flex: 1 1 10%;
 `;
 const Icon = styled.img`
-  background-color: ${palette.primary};
   width: 84px;
   height: 84px;
   margin: 35px auto;
