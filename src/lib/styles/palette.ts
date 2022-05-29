@@ -5,4 +5,5 @@ export const palette = {
   grayDarker: '#6F6F6F',
   white: '#fff',
   black: '#000',
+  kakao: '#FEE500',
 } as const;
