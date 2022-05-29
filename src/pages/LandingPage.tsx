@@ -1,7 +1,26 @@
-import { Button, Modal } from '@/components/base';
+import { Logo, StringLogo } from '@/assets/img';
+import { Button } from '@/components/base';
 import { palette } from '@/lib/styles/palette';
 import React from 'react';
 import styled from 'styled-components';
+
+function LandingPage() {
+  return (
+    <LandingPageLayout>
+      <MainIconBox>
+        <Icon src={Logo} />
+        <MainNameStyled src={StringLogo} />
+        <TextStyled>유학생을 위한 미팅/소개팅</TextStyled>
+      </MainIconBox>
+      <LoginBtnBox>
+        <TextStyled>간단하게 로그인하고 인연을 찾아보세요.</TextStyled>
+        <Button size="medium" fontWeight={700} width={312} variant={'kakao'}>
+          카카오 로그인
+        </Button>
+      </LoginBtnBox>
+    </LandingPageLayout>
+  );
+}
 
 const LandingPageLayout = styled.div`
   text-align: center;
@@ -16,16 +35,17 @@ const MainIconBox = styled.div`
   flex-direction: column;
   flex: 1 1 60%;
 `;
-const MainNameStyled = styled.div`
-  font-family: 'SANGJU Gotgam';
-  font-size: 26px;
+const MainNameStyled = styled.img`
+  margin: 0 auto;
+  width: 78px;
 `;
 const LoginBtnBox = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: column;
   flex: 1 1 10%;
 `;
-const Icon = styled.div`
+const Icon = styled.img`
   background-color: ${palette.primary};
   width: 84px;
   height: 84px;
@@ -34,24 +54,7 @@ const Icon = styled.div`
 const TextStyled = styled.div`
   font-size: 12px;
   margin: 12px;
+  color: ${palette.grayDarker};
 `;
-
-function LandingPage() {
-  return (
-    <LandingPageLayout>
-      <MainIconBox>
-        <Icon />
-        <MainNameStyled>외딴썸</MainNameStyled>
-        <TextStyled>유학생을 위한 미팅/소개팅</TextStyled>
-      </MainIconBox>
-      <LoginBtnBox>
-        <TextStyled>간단하게 로그인하고 인연을 찾아보세요.</TextStyled>
-        <Button size="large" fontWeight={700}>
-          카카오 로그인
-        </Button>
-      </LoginBtnBox>
-    </LandingPageLayout>
-  );
-}
 
 export default LandingPage;
