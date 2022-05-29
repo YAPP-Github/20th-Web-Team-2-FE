@@ -12,8 +12,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
-    "styled-components": "^5.3.5",
-    "sweetalert2": "^11.4.14"
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@honkhonk/vite-plugin-svgr": "^1.1.0",

@@ -25,6 +25,10 @@ const popIn = keyframes`
 `;
 
 const popOut = keyframes`
+  50% {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
   100% {
     -webkit-transform: scale(0.5);
     transform: scale(0.5);
