@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-interface ProgressBarProps {
+export interface ProgressBarProps {
   currStep: number;
   totalStep: number;
 }

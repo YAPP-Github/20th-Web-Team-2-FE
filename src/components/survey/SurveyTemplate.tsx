@@ -2,15 +2,15 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ReactNode } from 'react';
 import { Button } from '@/components/base';
-import ProgressBar from '@/components/base/ProgressBar';
+import ProgressBar, { ProgressBarProps } from '@/components/base/ProgressBar';
 
-interface SurveyTemplateProps {
+interface SurveyTemplateProps extends Partial<ProgressBarProps> {
   children: ReactNode;
   hasProgressBar?: boolean;
   disableNext: boolean;
 }
 
-const SurveyTemplate = ({ children, hasProgressBar = true, disableNext }: SurveyTemplateProps) => {
+const SurveyTemplate = ({ children, hasProgressBar = true, disableNext, currStep = 1, totalStep = 1 }: SurveyTemplateProps) => {
   return (
     <>
       <HeaderWrapper>
@@ -18,7 +18,7 @@ const SurveyTemplate = ({ children, hasProgressBar = true, disableNext }: Survey
       </HeaderWrapper>
       {children}
       <NavigationWrapper>
-        {hasProgressBar && <ProgressBar currStep={1} totalStep={10} />}
+        {hasProgressBar && <ProgressBar currStep={currStep} totalStep={totalStep} />}
         <ButtonWrapper>
           <Button size="large" variant="gray">
             이전

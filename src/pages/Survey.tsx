@@ -7,7 +7,7 @@ const Survey = () => {
   const [canMoveNext, setCanMoveNext] = useState(true);
 
   return (
-    <SurveyTemplate disableNext={canMoveNext}>
+    <SurveyTemplate disableNext={canMoveNext} currStep={3} totalStep={10}>
       <Title>
         신원 확인을 위해 <br />
         학교 메일로 인증해주세요.
