@@ -4,7 +4,7 @@ import { palette } from '@/lib/styles/palette';
 import React from 'react';
 import styled from 'styled-components';
 
-function LandingPage() {
+function Landing() {
   return (
     <LandingPageLayout>
       <MainIconBox>
@@ -31,7 +31,7 @@ const LandingPageLayout = styled.div`
   border-radius: 5px;
 `;
 const MainIconBox = styled.div`
-  padding-top: 42%;
+  padding-top: 152px;
   display: flex;
   flex-direction: column;
   flex: 1 1 60%;
@@ -57,4 +57,4 @@ const TextStyled = styled.div`
   color: ${palette.grayDarker};
 `;
 
-export default LandingPage;
+export default Landing;
