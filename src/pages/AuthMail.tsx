@@ -1,15 +1,61 @@
+import { useState } from 'react';
+import styled from 'styled-components';
 import SurveyTemplate from '@/components/survey/SurveyTemplate';
 import { Button } from '@/components/base';
-import { useState } from 'react';
+import { Title } from '@/lib/styles/styledComponents';
+import { palette } from '@/lib/styles/palette';
+import { EmailForm } from '@/components/survey';
 
 const AuthMail = () => {
   const [canMoveNext, setCanMoveNext] = useState(true);
 
+  const onSubmitAuthCode = () => {
+    console.log('인증번호 보내는 로직');
+  };
+
   return (
-    <SurveyTemplate disableNext={canMoveNext} hasProgressBar={false}>
-      <Button onClick={() => setCanMoveNext((prev) => !prev)}>클릭</Button>
+    <SurveyTemplate disableNext={canMoveNext} currStep={3} totalStep={10}>
+      <Title>
+        신원 확인을 위해 <br />
+        학교 메일로 인증해주세요.
+      </Title>
+      <Description>예시: 1234@bu.du</Description>
+      <FormWrapper>
+        <EmailForm onSubmitAuthCode={onSubmitAuthCode} />
+      </FormWrapper>
     </SurveyTemplate>
   );
 };
+
+const Description = styled.p`
+  padding-top: 10px;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  color: rgba(0, 0, 0, 0.6);
+`;
+
+export const StyledButton = styled(Button)`
+  margin-top: 16px;
+`;
+
+const FormWrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  top: 40%;
+  transform: translateY(-50%);
+  margin-top: 65px;
+`;
+
+export const InputsWrapper = styled.div`
+  position: relative;
+`;
+
+export const ErrorMessage = styled.p`
+  position: absolute;
+  font-size: 12px;
+  color: ${palette.warning};
+`;
 
 export default AuthMail;
