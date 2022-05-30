@@ -20,12 +20,12 @@ const SurveyTemplate = ({ children, hasProgressBar = true, disableNext, currStep
       <NavigationWrapper>
         {hasProgressBar && <ProgressBar currStep={currStep} totalStep={totalStep} />}
         <ButtonWrapper>
-          <Button size="large" variant="gray">
+          <Button size="medium" variant="gray">
             이전
           </Button>
           <Button
             onClick={() => console.log('aa')}
-            size="large"
+            size="medium"
             disabled={disableNext}
             variant={disableNext ? 'gray' : 'default'}
             fontWeight={disableNext ? 400 : 700}
@@ -62,7 +62,6 @@ const NavigationWrapper = styled.div`
 
 const ButtonWrapper = styled.div`
   display: flex;
-  width: calc(50% - 4px);
   gap: 8px;
 `;
 
