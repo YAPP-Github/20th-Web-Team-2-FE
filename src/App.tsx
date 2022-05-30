@@ -1,15 +1,13 @@
 import GlobalStyles from './lib/styles/globalStyles';
 import styled, { ThemeProvider } from 'styled-components';
 import { palette } from '@/lib/styles/palette';
-import Routing from './router/Routing';
+import Routing from '@/router/Routing';
 
 function App() {
   return (
     <ThemeProvider theme={{ palette }}>
-      <AppLayout>
-        <GlobalStyles />
-        <Routing />
-      </AppLayout>
+      <GlobalStyles />
+      <Routing />
     </ThemeProvider>
   );
 }
