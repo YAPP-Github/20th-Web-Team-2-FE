@@ -4,20 +4,24 @@ import styled from 'styled-components';
 
 function LandingFooter() {
   return (
-    <FooterBox>
-      <div>자주 묻는 질문</div>
-      <div>연락처</div>
-      <div>개인정보 처리방침</div>
-      <div> 이용약관</div>
-    </FooterBox>
+    <FooterLayout>
+      <FooterContents>
+        <li>자주 묻는 질문</li>
+        <li>연락처</li>
+        <li>개인정보 처리방침</li>
+        <li> 이용약관</li>
+      </FooterContents>
+    </FooterLayout>
   );
 }
 
-const FooterBox = styled.div`
-  display: flex;
+const FooterLayout = styled.footer`
   margin: 15px 16px 0 16px;
-  font-size: 10px;
+`;
 
+const FooterContents = styled.ul`
+  display: flex;
+  font-size: 10px;
   justify-content: space-between;
   color: ${palette.grayDarker};
 `;

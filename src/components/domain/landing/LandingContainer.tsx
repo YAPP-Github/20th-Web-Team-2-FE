@@ -13,22 +13,22 @@ function LandingContainer() {
     <Container>
       <MainIconBox>
         <Icon src={RadiousLogo} />
-        <MainNameStyled src={StringLogo} />
+        <MainNameStyled src={StringLogo} alt="외딴썸" />
         <TextStyled>유학생을 위한 미팅/소개팅</TextStyled>
       </MainIconBox>
       {isLogin ? (
         <BtnBox>
           <BtnTextStyled>간단하게 로그인하고 인연을 찾아보세요.</BtnTextStyled>
-          <LandingBtn size="medium" fontWeight={700} width={312} variant={'kakao'} onClick={() => setIsLogin((prev) => !prev)}>
+          <LandingBtn size="medium" fontWeight={700} fullWidth variant={'kakao'} onClick={() => setIsLogin((prev) => !prev)}>
             카카오 로그인
           </LandingBtn>
         </BtnBox>
       ) : (
         <BtnBox>
-          <LandingBtn size="medium" fontWeight={700} width={312} variant={'default'} onClick={() => setIsLogin((prev) => !prev)}>
+          <LandingBtn size="medium" fontWeight={700} fullWidth variant={'default'} onClick={() => setIsLogin((prev) => !prev)}>
             시작하기
           </LandingBtn>
-          <LandingBtn size="medium" fontWeight={700} width={312} variant={'grayBlack'} onClick={() => setIsLogin((prev) => !prev)}>
+          <LandingBtn size="medium" fontWeight={700} fullWidth variant={'grayBlack'} onClick={() => setIsLogin((prev) => !prev)}>
             응답 수정하기
           </LandingBtn>
         </BtnBox>
@@ -37,7 +37,7 @@ function LandingContainer() {
   );
 }
 
-const Container = styled.div`
+const Container = styled.section`
   text-align: center;
   height: 92%;
   display: flex;
@@ -69,7 +69,7 @@ const Icon = styled.img`
   height: 84px;
   margin: 35px auto;
 `;
-const TextStyled = styled.div`
+const TextStyled = styled.h3`
   font-size: 12px;
   margin: 12px;
   color: ${palette.grayDarker};
