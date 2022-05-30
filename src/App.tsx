@@ -6,8 +6,10 @@ import Routing from '@/router/Routing';
 function App() {
   return (
     <ThemeProvider theme={{ palette }}>
-      <GlobalStyles />
-      <Routing />
+      <AppLayout>
+        <GlobalStyles />
+        <Routing />
+      </AppLayout>
     </ThemeProvider>
   );
 }
