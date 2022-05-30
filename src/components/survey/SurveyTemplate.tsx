@@ -12,7 +12,7 @@ interface SurveyTemplateProps extends Partial<ProgressBarProps> {
 
 const SurveyTemplate = ({ children, hasProgressBar = true, disableNext, currStep = 1, totalStep = 1 }: SurveyTemplateProps) => {
   return (
-    <>
+    <SurveyTemplateBlock>
       <HeaderWrapper>
         <Logo to="/">외딴썸</Logo>
       </HeaderWrapper>
@@ -34,9 +34,14 @@ const SurveyTemplate = ({ children, hasProgressBar = true, disableNext, currStep
           </Button>
         </ButtonWrapper>
       </NavigationWrapper>
-    </>
+    </SurveyTemplateBlock>
   );
 };
+
+const SurveyTemplateBlock = styled.div`
+  position: relative;
+  height: 100%;
+`;
 
 const HeaderWrapper = styled.header`
   height: 56px;
