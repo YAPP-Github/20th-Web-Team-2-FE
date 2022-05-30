@@ -75,11 +75,11 @@ const ButtonBlock = styled.button<ButtonBlockProps>`
   max-width: 100%;
   outline: none;
   border-radius: 4px;
-  transition: background-color 300ms;
+  transition: background-color 300ms, box-shadow 300ms;
   cursor: pointer;
 
   ${({ size, fontWeight, fontSize, height }) => sizes({ fontSize, fontWeight, height })[size ?? 'small']};
-  ${(props) => getVariant(props.variant ?? 'default')};
+  ${(props) => getVariant(props.variant ?? 'default', props.disabled ?? false)};
 
   ${(props) =>
     props.fullWidth &&
@@ -110,17 +110,10 @@ const ButtonBlock = styled.button<ButtonBlockProps>`
   ${(props) =>
     props.disabled &&
     css`
-      /* TODO: disabled 시 백그라운드 처리 */
-      background-color: ${palette.grayDarker};
       cursor: not-allowed;
-
-      &: hover {
-        background-color: ${palette.grayDarker};
-      }
     `}
 `;
 
-// type ButtonSizeBuilder = Record<string, string | number | undefined>;
 type ButtonSizeBuilder = Pick<ButtonBlockProps, 'height' | 'fontSize' | 'fontWeight'>;
 
 const buttonSizeBuilder = ({ height, fontSize, fontWeight }: ButtonSizeBuilder) => css`
@@ -142,7 +135,7 @@ const sizes = ({ fontSize, fontWeight, height }: Pick<ButtonProps, 'fontWeight' 
   }),
 });
 
-const getVariant = (variant: ButtonVariants) => css`
+const getVariant = (variant: ButtonVariants, isDisabled: boolean) => css`
   border: none;
 
   ${variant === 'default' &&
@@ -161,10 +154,6 @@ const getVariant = (variant: ButtonVariants) => css`
     background-color: ${palette.grayLight};
     color: rgba(0, 0, 0, 0.6);
     font-weight: 300;
-
-    &:hover {
-      /* TODO: hover 색 처리 */
-    }
   `}
 
 ${variant === 'grayBlack' &&
@@ -178,10 +167,22 @@ ${variant === 'grayBlack' &&
     }
   `}
 
-  /* FIXME: hover, focus 될 때 각각 어떻게 될지 */
-  &:focus {
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
+  /* FIXME: 버튼 마다 조금씩 달라서 이 부분 추후 시안나오면 수정 */
+  ${isDisabled
+    ? css`
+         {
+          background-color: ${palette.grayLight};
+          color: rgba(0, 0, 0, 0.6);
+        }
+      `
+    : css`
+         {
+          font-weight: 600;
+          background-color: ${palette.primary};
+          color: ${palette.white};
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+      `}
 `;
 
 Button.displayName = 'Button';
