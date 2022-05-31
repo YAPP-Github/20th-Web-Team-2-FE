@@ -4,15 +4,16 @@ import SurveyTemplate from '@/components/survey/SurveyTemplate';
 import { Button } from '@/components/base';
 import { Title } from '@/lib/styles/styledComponents';
 import { palette } from '@/lib/styles/palette';
-import { EmailForm } from '@/components/survey';
+import { EmailForm, AuthCodeForm } from '@/components/authMail';
 
 const AuthMail = () => {
   const [cantMoveNext, setCantMoveNext] = useState(true);
+  const [email, setEmail] = useState('');
 
   const onSubmitAuthCode = (email: string) => {
     try {
       console.log('인증번호 보내는 로직', email);
-      setCantMoveNext(false);
+      setEmail(email);
     } catch (e) {
       console.error('인증번호 보내는 로직');
     }
@@ -27,6 +28,7 @@ const AuthMail = () => {
       <Description>예시: 1234@bu.du</Description>
       <FormWrapper>
         <EmailForm onSubmitAuthCode={onSubmitAuthCode} />
+        <AuthCodeForm email={email} setCantMoveNext={setCantMoveNext} />
       </FormWrapper>
     </SurveyTemplate>
   );

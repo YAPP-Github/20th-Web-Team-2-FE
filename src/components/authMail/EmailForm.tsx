@@ -16,19 +16,21 @@ const EmailForm = ({ onSubmitAuthCode }: EmailFormProps) => {
     },
     onSubmit: async () => {
       try {
-        console.log('try');
-        onSubmitAuthCode(values.email);
+        if (values.email) {
+          console.log('try');
+          onSubmitAuthCode(values.email);
+        }
       } catch (e) {
         console.error('Modal 띄워야 할 듯');
       }
     },
     validate: ({ email }) => {
       const newErrors: InitialValues = { email: '' };
-      if (email.length === 0) {
+      if (email?.length === 0) {
         newErrors.email = '이메일을 입력해주세요';
         return newErrors;
       }
-      if (!checkForm({ value: email, type: 'email' })) newErrors.email = '올바른 이메일 형식이 아닙니다';
+      if (email && !checkForm({ value: email, type: 'email' })) newErrors.email = '올바른 이메일 형식이 아닙니다';
       return newErrors;
     },
   });
