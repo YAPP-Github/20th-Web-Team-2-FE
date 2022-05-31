@@ -7,14 +7,19 @@ import { palette } from '@/lib/styles/palette';
 import { EmailForm } from '@/components/survey';
 
 const AuthMail = () => {
-  const [canMoveNext, setCanMoveNext] = useState(true);
+  const [cantMoveNext, setCantMoveNext] = useState(true);
 
-  const onSubmitAuthCode = () => {
-    console.log('인증번호 보내는 로직');
+  const onSubmitAuthCode = (email: string) => {
+    try {
+      console.log('인증번호 보내는 로직', email);
+      setCantMoveNext(false);
+    } catch (e) {
+      console.error('인증번호 보내는 로직');
+    }
   };
 
   return (
-    <SurveyTemplate disableNext={canMoveNext} currStep={3} totalStep={10}>
+    <SurveyTemplate disableNext={cantMoveNext} currStep={3} totalStep={10}>
       <Title>
         신원 확인을 위해 <br />
         학교 메일로 인증해주세요.

@@ -5,7 +5,7 @@ import useForm, { InitialValues } from '@/hooks/common/useForm';
 import { checkForm } from '@/utils/validations';
 
 interface EmailFormProps {
-  onSubmitAuthCode: () => void;
+  onSubmitAuthCode: (email: string) => void;
 }
 
 const EmailForm = ({ onSubmitAuthCode }: EmailFormProps) => {
@@ -16,7 +16,8 @@ const EmailForm = ({ onSubmitAuthCode }: EmailFormProps) => {
     },
     onSubmit: async () => {
       try {
-        onSubmitAuthCode();
+        console.log('try');
+        onSubmitAuthCode(values.email);
       } catch (e) {
         console.error('Modal 띄워야 할 듯');
       }
@@ -41,9 +42,7 @@ const EmailForm = ({ onSubmitAuthCode }: EmailFormProps) => {
       <InputsWrapper>
         <Input name="email" placeholder="이메일" maxLength={50} onChange={handleChange} ref={emailInputRef} />
         {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
-        <StyledButton variant="gray" disabled={!!errors.email}>
-          인증번호 보내기
-        </StyledButton>
+        <StyledButton disabled={!!errors.email}>인증번호 보내기</StyledButton>
       </InputsWrapper>
     </form>
   );

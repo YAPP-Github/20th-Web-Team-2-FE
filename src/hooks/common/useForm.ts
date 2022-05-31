@@ -24,7 +24,7 @@ const useForm = ({ initialValues, onSubmit, validate }: useFormProps) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
     e.preventDefault();
-    if (Object.keys(errors).length === 0) {
+    if (Object.values(errors).length === 1) {
       await onSubmit();
     }
     setIsLoading(false);

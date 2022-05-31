@@ -110,6 +110,9 @@ const ButtonBlock = styled.button<ButtonBlockProps>`
   ${(props) =>
     props.disabled &&
     css`
+      font-weight: 300;
+      background-color: ${palette.grayLight};
+      color: rgba(0, 0, 0, 0.6);
       cursor: not-allowed;
     `}
 `;
@@ -147,6 +150,13 @@ const getVariant = (variant: ButtonVariants, isDisabled: boolean) => css`
     &:hover {
       background-color: ${palette.gray};
     }
+    ${isDisabled &&
+    css`
+      font-weight: 300;
+      background-color: ${palette.grayLight};
+      color: rgba(0, 0, 0, 0.6);
+      cursor: not-allowed;
+    `}
   `}
 
   ${variant === 'gray' &&
@@ -161,14 +171,8 @@ ${variant === 'grayBlack' &&
     background-color: ${palette.grayLight};
     color: ${palette.black};
     font-weight: 400;
-
-    &:hover {
-      /* TODO: hover 색 처리 */
-    }
-  `}
-
-  /* FIXME: 버튼 마다 조금씩 달라서 이 부분 추후 시안나오면 수정 */
-  ${isDisabled
+  `} /* FIXME: 버튼 마다 조금씩 달라서 이 부분 추후 시안나오면 수정 */
+  /* ${isDisabled
     ? css`
          {
           background-color: ${palette.grayLight};
@@ -182,7 +186,7 @@ ${variant === 'grayBlack' &&
           color: ${palette.white};
           box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         }
-      `}
+      `} */
 `;
 
 Button.displayName = 'Button';
