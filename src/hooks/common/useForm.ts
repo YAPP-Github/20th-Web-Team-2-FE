@@ -5,13 +5,13 @@ export interface InitialValues {
   authCode?: string;
 }
 
-interface useFormProps {
+interface UseFormProps {
   initialValues: InitialValues;
   onSubmit: () => void;
   validate: (arg: InitialValues) => InitialValues;
 }
 
-const useForm = ({ initialValues, onSubmit, validate }: useFormProps) => {
+const useForm = ({ initialValues, onSubmit, validate }: UseFormProps) => {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState<Record<string, never> | InitialValues>({});
   const [isLoading, setIsLoading] = useState(false);

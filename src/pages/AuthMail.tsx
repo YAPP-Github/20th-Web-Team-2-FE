@@ -28,7 +28,7 @@ const AuthMail = () => {
   };
 
   return (
-    <SurveyTemplate disableNext={cantMoveNext} currStep={3} totalStep={10}>
+    <SurveyTemplate disableNext={cantMoveNext} hasProgressBar={false}>
       <Title>
         신원 확인을 위해 <br />
         학교 메일로 인증해주세요.
