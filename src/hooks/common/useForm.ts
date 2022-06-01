@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 
 export interface InitialValues {
-  email: string;
+  email?: string;
   authCode?: string;
 }
 
@@ -24,9 +24,8 @@ const useForm = ({ initialValues, onSubmit, validate }: useFormProps) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
     e.preventDefault();
-    if (Object.values(errors).length === 1) {
-      await onSubmit();
-    }
+    console.log(Object.values(errors), 'auth');
+    await onSubmit();
     setIsLoading(false);
   };
 
