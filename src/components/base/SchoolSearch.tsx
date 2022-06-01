@@ -12,7 +12,7 @@ const SchoolSearch = () => {
     const { value } = e.target;
     if (!schools.map(({ name }: { name: string }) => name).includes(value)) return;
     setSelectedSchools((prev) => [...prev, value]);
-    inputRef.current!.value = '';
+    if (inputRef.current) inputRef.current.value = '';
   };
 
   const handleDeleteClick = (value: string) => {
