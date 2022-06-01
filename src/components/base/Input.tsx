@@ -19,24 +19,17 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, InputS
   isFocus?: boolean;
 }
 
-const Input = React.forwardRef(
-  (
-    { width = '100%', height = '38px', focusColor = palette.primary, isFocus = false, ...rest }: InputProps,
-    ref: React.Ref<HTMLInputElement | null>,
-  ) => {
-    const inputRef = useRef<HTMLInputElement>(null);
+const Input = ({ width = '100%', height = '38px', focusColor = palette.primary, isFocus = false, ...rest }: InputProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
 
-    useEffect(() => {
-      if (inputRef.current) {
-        inputRef.current.focus();
-      }
-    }, []);
-    // FIXME: ref 고치기
-    return <InputStyled ref={ref} {...rest} height={height} width={width} focusColor={focusColor} isFocus={isFocus} />;
-  },
-);
-
-Input.displayName = 'Input';
+  useEffect(() => {
+    if (inputRef.current && isFocus) {
+      console.log(isFocus, 'isFocus');
+      inputRef.current.focus();
+    }
+  }, [isFocus]);
+  return <InputStyled ref={inputRef} {...rest} height={height} width={width} focusColor={focusColor} isFocus={isFocus} />;
+};
 
 const InputStyled = styled.input<InputProps>`
   width: ${({ width }) => width};
