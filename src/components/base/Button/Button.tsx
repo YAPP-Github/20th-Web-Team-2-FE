@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { palette } from '@/lib/styles/palette';
 
 export type ButtonSizes = 'small' | 'medium';
-export type ButtonVariants = 'default' | 'gray' | 'grayBlack';
+export type ButtonVariants = 'default' | 'gray' | 'grayBlack' | 'kakao';
 export type ButtonColors = 'white' | 'gray' | 'black';
 
 export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'size' | 'color'> {
@@ -171,22 +171,25 @@ ${variant === 'grayBlack' &&
     background-color: ${palette.grayLight};
     color: ${palette.black};
     font-weight: 400;
-  `} /* FIXME: 버튼 마다 조금씩 달라서 이 부분 추후 시안나오면 수정 */
-  /* ${isDisabled
-    ? css`
-         {
-          background-color: ${palette.grayLight};
-          color: rgba(0, 0, 0, 0.6);
-        }
-      `
-    : css`
-         {
-          font-weight: 600;
-          background-color: ${palette.primary};
-          color: ${palette.white};
-          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-      `} */
+  `}
+
+
+  &:focus {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  ${variant === 'kakao' &&
+  css`
+    background-color: ${palette.kakao};
+    color: ${palette.black};
+    font-weight: 700;
+
+    &:hover {
+    }
+  `}
+
+  &:focus {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
 `;
 
 Button.displayName = 'Button';

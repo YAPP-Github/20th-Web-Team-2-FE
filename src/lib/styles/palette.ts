@@ -6,4 +6,5 @@ export const palette = {
   white: '#fff',
   black: '#000',
   warning: '#ff402b', // FIXME: 임시로 넣어둠
+  kakao: '#FEE500',
 } as const;
