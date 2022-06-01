@@ -52,14 +52,9 @@ const Test = () => {
         <p>프로그래스바</p>
         <ProgressBar currStep={3} totalStep={10} />
         <p>양방향 range input</p>
-        <div></div>
-        <MultiRangeSlider
-          min={130}
-          max={210}
-          defaultMin={160}
-          defaultMax={180}
-          onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
-        />
+        <MultiRangeSlider min={20} max={35} onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)} />
+        <div style={{ padding: '30px' }}></div>
+        <MultiRangeSlider min={120} max={210} onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)} />
         테스트
       </header>
     </>
