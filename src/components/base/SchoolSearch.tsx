@@ -10,8 +10,13 @@ const SchoolSearch = () => {
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
+    if (!schools.map(({ name }: { name: string }) => name).includes(value)) return;
     setSelectedSchools((prev) => [...prev, value]);
     inputRef.current!.value = '';
+  };
+
+  const handleDeleteClick = (value: string) => {
+    setSelectedSchools((prev) => prev.filter((val) => val !== value));
   };
 
   return (
@@ -27,12 +32,10 @@ const SchoolSearch = () => {
       </datalist>
       <SchoolWrapper>
         {selectedSchools.map((value, index) => (
-          <>
-            <School key={value + index}>
-              {value}
-              <DeleteIconWrapper icon={DeleteIcon} />
-            </School>
-          </>
+          <School key={value + index}>
+            {value}
+            <DeleteIconWrapper icon={DeleteIcon} onClick={() => handleDeleteClick(value)} />
+          </School>
         ))}
       </SchoolWrapper>
     </div>
@@ -83,12 +86,11 @@ const SchoolWrapper = styled.ul`
 
 const School = styled.li`
   position: relative;
-  height: 32px;
+  min-height: 32px;
   background-color: ${({ theme }) => theme.palette.grayLight};
   border-radius: 100px;
   padding: 7px 33px 7px 14px;
   font-size: 14px;
-  text-align: center;
 `;
 
 export default SchoolSearch;
