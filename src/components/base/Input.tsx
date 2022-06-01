@@ -19,27 +19,33 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, InputS
   isFocus?: boolean;
 }
 
-const Input = ({ width = '312px', height = '38px', focusColor = palette.primary, isFocus = false, ...rest }: InputProps) => {
+const Input = ({ width = '100%', height = '38px', focusColor = palette.primary, isFocus = false, ...rest }: InputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (inputRef.current) {
+    if (inputRef.current && isFocus) {
+      console.log(isFocus, 'isFocus');
       inputRef.current.focus();
     }
-  }, []);
-
-  return <InputStyled {...rest} height={height} width={width} focusColor={focusColor} isFocus={isFocus} />;
+  }, [isFocus]);
+  return <InputStyled ref={inputRef} {...rest} height={height} width={width} focusColor={focusColor} isFocus={isFocus} />;
 };
 
 const InputStyled = styled.input<InputProps>`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   border-bottom: 0.6px solid rgba(0, 0, 0, 0.6);
-  padding: 5.5px 12px 5.5px 10px;
+  padding: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  color: ${palette.black};
   outline: none;
   transition: all 0.2s linear;
   ::placeholder {
     color: rgba(0, 0, 0, 0.6);
+    font-weight: 300;
   }
   :focus {
     border-bottom: 0.6px solid ${({ focusColor }) => focusColor};

@@ -75,11 +75,11 @@ const ButtonBlock = styled.button<ButtonBlockProps>`
   max-width: 100%;
   outline: none;
   border-radius: 4px;
-  transition: background-color 300ms;
+  transition: background-color 300ms, box-shadow 300ms;
   cursor: pointer;
 
   ${({ size, fontWeight, fontSize, height }) => sizes({ fontSize, fontWeight, height })[size ?? 'small']};
-  ${(props) => getVariant(props.variant ?? 'default')};
+  ${(props) => getVariant(props.variant ?? 'default', props.disabled ?? false)};
 
   ${(props) =>
     props.fullWidth &&
@@ -110,17 +110,13 @@ const ButtonBlock = styled.button<ButtonBlockProps>`
   ${(props) =>
     props.disabled &&
     css`
-      /* TODO: disabled 시 백그라운드 처리 */
-      background-color: ${palette.grayDarker};
+      font-weight: 300;
+      background-color: ${palette.grayLight};
+      color: rgba(0, 0, 0, 0.6);
       cursor: not-allowed;
-
-      &: hover {
-        background-color: ${palette.grayDarker};
-      }
     `}
 `;
 
-// type ButtonSizeBuilder = Record<string, string | number | undefined>;
 type ButtonSizeBuilder = Pick<ButtonBlockProps, 'height' | 'fontSize' | 'fontWeight'>;
 
 const buttonSizeBuilder = ({ height, fontSize, fontWeight }: ButtonSizeBuilder) => css`
@@ -142,7 +138,7 @@ const sizes = ({ fontSize, fontWeight, height }: Pick<ButtonProps, 'fontWeight' 
   }),
 });
 
-const getVariant = (variant: ButtonVariants) => css`
+const getVariant = (variant: ButtonVariants, isDisabled: boolean) => css`
   border: none;
 
   ${variant === 'default' &&
@@ -154,6 +150,13 @@ const getVariant = (variant: ButtonVariants) => css`
     &:hover {
       background-color: ${palette.gray};
     }
+    ${isDisabled &&
+    css`
+      font-weight: 300;
+      background-color: ${palette.grayLight};
+      color: rgba(0, 0, 0, 0.6);
+      cursor: not-allowed;
+    `}
   `}
 
   ${variant === 'gray' &&
@@ -161,10 +164,6 @@ const getVariant = (variant: ButtonVariants) => css`
     background-color: ${palette.grayLight};
     color: rgba(0, 0, 0, 0.6);
     font-weight: 300;
-
-    &:hover {
-      /* TODO: hover 색 처리 */
-    }
   `}
 
 ${variant === 'grayBlack' &&
@@ -172,11 +171,8 @@ ${variant === 'grayBlack' &&
     background-color: ${palette.grayLight};
     color: ${palette.black};
     font-weight: 400;
-
-    &:hover {
-      /* TODO: hover 색 처리 */
-    }
   `}
+
 
   &:focus {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
