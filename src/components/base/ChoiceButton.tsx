@@ -1,4 +1,4 @@
-import React, { LabelHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes, LabelHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { palette } from '@/lib/styles/palette';
 
@@ -6,10 +6,25 @@ export type ButtonSizes = 'small' | 'medium';
 export type ButtonVariants = 'default' | 'gray' | 'grayBlack';
 export type ButtonColors = 'white' | 'gray' | 'black';
 
-export interface LabelProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'size' | 'color' | 'for'> {
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'color'> {
   isMultiple?: boolean;
-  name?: string;
+  name: string;
+  id: string;
+  checked?: boolean;
+  children: React.ReactNode;
+  size?: ButtonSizes;
+  variant?: ButtonVariants;
+  boxShadow?: boolean;
+  color?: ButtonColors;
+  fontSize?: number;
+  fontWeight?: 300 | 400 | 600 | 700;
+  fullWidth?: boolean;
+  width?: number;
+  height?: 38 | 48 | 70 | 100;
+}
+export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   id?: string;
+  checked?: boolean;
   children: React.ReactNode;
   size?: ButtonSizes;
   variant?: ButtonVariants;
@@ -24,8 +39,9 @@ export interface LabelProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 
 
 const ChoiceButton = ({
   isMultiple = false,
-  name,
   id,
+  name,
+  checked,
   children,
   size = 'small',
   fontSize,
@@ -37,10 +53,14 @@ const ChoiceButton = ({
   height,
   fontWeight,
   ...others
-}: LabelProps) => {
+}: InputProps) => {
   return (
     <>
-      {isMultiple ? <InputBlock type="checkbox" id={id} name={name} /> : <InputBlock type="radio" id={id} name={name} />}
+      {isMultiple ? (
+        <InputBlock type="checkbox" id={id} name={name} checked={checked} {...others} />
+      ) : (
+        <InputBlock type="radio" id={id} name={name} {...others} />
+      )}
       <Label
         htmlFor={id}
         size={size}
@@ -52,7 +72,6 @@ const ChoiceButton = ({
         fullWidth={fullWidth}
         width={width}
         height={height}
-        {...others}
       >
         {children}
       </Label>
