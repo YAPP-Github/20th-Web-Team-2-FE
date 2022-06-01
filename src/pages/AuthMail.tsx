@@ -15,7 +15,15 @@ const AuthMail = () => {
       console.log('인증번호 보내는 로직', email);
       setEmail(email);
     } catch (e) {
-      console.error('인증번호 보내는 로직');
+      console.error('에러 모달');
+    }
+  };
+
+  const onCheckAuthCode = () => {
+    try {
+      setCantMoveNext(false);
+    } catch (e) {
+      console.error('에러 모달');
     }
   };
 
@@ -28,7 +36,7 @@ const AuthMail = () => {
       <Description>예시: 1234@bu.du</Description>
       <FormWrapper>
         <EmailForm onSubmitAuthCode={onSubmitAuthCode} />
-        <AuthCodeForm email={email} setCantMoveNext={setCantMoveNext} />
+        <AuthCodeForm email={email} onCheckAuthCode={onCheckAuthCode} />
       </FormWrapper>
     </SurveyTemplate>
   );
