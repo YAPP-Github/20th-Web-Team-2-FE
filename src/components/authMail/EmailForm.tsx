@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Input } from '@/components/base';
 import { InputsWrapper, StyledButton, ErrorMessage } from '@/pages/AuthMail';
 import useForm, { InitialValues } from '@/hooks/common/useForm';
@@ -9,7 +9,7 @@ interface EmailFormProps {
 }
 
 const EmailForm = ({ onSubmitAuthCode }: EmailFormProps) => {
-  const emailInputRef = useRef<HTMLInputElement | null>(null);
+  const [onFocus, setFocus] = useState(true);
   const { values, errors, handleSubmit, handleChange } = useForm({
     initialValues: {
       email: '',
@@ -19,6 +19,7 @@ const EmailForm = ({ onSubmitAuthCode }: EmailFormProps) => {
         if (values.email) {
           console.log('try');
           onSubmitAuthCode(values.email);
+          setFocus(false);
         }
       } catch (e) {
         console.error('Modal 띄워야 할 듯');
@@ -35,14 +36,10 @@ const EmailForm = ({ onSubmitAuthCode }: EmailFormProps) => {
     },
   });
 
-  useEffect(() => {
-    if (emailInputRef.current) emailInputRef.current.focus();
-  }, []);
-
   return (
     <form onSubmit={handleSubmit}>
       <InputsWrapper>
-        <Input name="email" placeholder="이메일" maxLength={50} onChange={handleChange} ref={emailInputRef} />
+        <Input isFocus={onFocus} name="email" placeholder="이메일" maxLength={50} onChange={handleChange} />
         {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
         <StyledButton disabled={!!errors.email}>인증번호 보내기</StyledButton>
       </InputsWrapper>

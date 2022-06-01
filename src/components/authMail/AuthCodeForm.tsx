@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Input } from '@/components/base';
 import { InputsWrapper, StyledButton, ErrorMessage } from '@/pages/AuthMail';
 import useForm, { InitialValues } from '@/hooks/common/useForm';
@@ -47,7 +47,7 @@ const AuthCodeForm = ({ email, onCheckAuthCode }: AuthCodeFormProps) => {
   return (
     <form onSubmit={handleSubmit}>
       <InputsWrapper>
-        <Input name="authCode" placeholder="인증번호" maxLength={8} onChange={handleChange} />
+        <Input isFocus={!!email} name="authCode" placeholder="인증번호" maxLength={8} onChange={handleChange} />
         {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
         <StyledButton disabled={!!errors.authCode}>확인</StyledButton>
         {email && (
