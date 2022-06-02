@@ -7,6 +7,7 @@ import Survey from '@/pages/Survey';
 import NotFound from '@/pages/NotFound';
 import styled from 'styled-components';
 import LandingPage from '@/pages/LandingPage';
+import TypeOfMeetingSurvey from '@/pages/TypeOfMeetingSurvey';
 
 function Routing() {
   return (
@@ -17,6 +18,7 @@ function Routing() {
           <Route path={Path.Component} element={<Test />} />
           <Route path={Path.AuthMail} element={<AuthMail />} />
           <Route path={Path.Survey} element={<Survey />} />
+          <Route path={Path.TypeOfMeetingSurvey} element={<TypeOfMeetingSurvey />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
