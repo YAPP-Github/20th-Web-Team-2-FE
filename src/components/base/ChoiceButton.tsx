@@ -1,40 +1,29 @@
 import React, { InputHTMLAttributes, LabelHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { palette } from '@/lib/styles/palette';
+import { ButtonSizes, ButtonVariants, ButtonColors, sizes, getVariant } from '@/utils/buttons';
 
-export type ButtonSizes = 'small' | 'medium';
-export type ButtonVariants = 'default' | 'gray' | 'grayBlack';
-export type ButtonColors = 'white' | 'gray' | 'black';
-
-export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'color'> {
+type ChoiceButtonVariants = Exclude<ButtonVariants, 'kakao'>;
+interface CommonProps {
+  checked?: boolean;
+  children: React.ReactNode;
+  boxShadow?: boolean;
+  color?: ButtonColors;
+  fontSize?: number;
+  fontWeight?: 300 | 400 | 600 | 700;
+  fullWidth?: boolean;
+  width?: number;
+  height?: 38 | 48 | 70 | 100;
+  variant?: ChoiceButtonVariants;
+  size?: ButtonSizes;
+}
+interface InputBaseProps extends CommonProps, Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'color' | 'children' | 'height' | 'width'> {
   isMultiple?: boolean;
   name: string;
   id: string;
-  checked?: boolean;
-  children: React.ReactNode;
-  size?: ButtonSizes;
-  variant?: ButtonVariants;
-  boxShadow?: boolean;
-  color?: ButtonColors;
-  fontSize?: number;
-  fontWeight?: 300 | 400 | 600 | 700;
-  fullWidth?: boolean;
-  width?: number;
-  height?: 38 | 48 | 70 | 100;
 }
-export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
+interface LabelProps extends CommonProps, Omit<LabelHTMLAttributes<HTMLLabelElement>, 'children' | 'color'> {
   id?: string;
-  checked?: boolean;
-  children: React.ReactNode;
-  size?: ButtonSizes;
-  variant?: ButtonVariants;
-  boxShadow?: boolean;
-  color?: ButtonColors;
-  fontSize?: number;
-  fontWeight?: 300 | 400 | 600 | 700;
-  fullWidth?: boolean;
-  width?: number;
-  height?: 38 | 48 | 70 | 100;
 }
 
 const ChoiceButton = ({
@@ -53,7 +42,7 @@ const ChoiceButton = ({
   height,
   fontWeight,
   ...others
-}: InputProps) => {
+}: InputBaseProps) => {
   return (
     <>
       {isMultiple ? (
@@ -135,61 +124,6 @@ const Label = styled.label<ChoiceButtonBlockProps>`
     css`
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     `};
-`;
-
-type ButtonSizeBuilder = Pick<ChoiceButtonBlockProps, 'height' | 'fontSize' | 'fontWeight'>;
-
-const buttonSizeBuilder = ({ height, fontSize, fontWeight }: ButtonSizeBuilder) => css`
-  height: ${height}px;
-  font-size: ${fontSize}px;
-  font-weight: ${fontWeight};
-`;
-
-const sizes = ({ fontSize, fontWeight, height }: Pick<ChoiceButtonBlockProps, 'fontWeight' | 'fontSize' | 'height'>) => ({
-  small: buttonSizeBuilder({
-    height: height ?? 38,
-    fontSize: fontSize ?? 12,
-    fontWeight: fontWeight ?? 600,
-  }),
-  medium: buttonSizeBuilder({
-    height: height ?? 48,
-    fontSize: fontSize ?? 14,
-    fontWeight: fontWeight ?? 700,
-  }),
-});
-
-const getVariant = (variant: ButtonVariants) => css`
-  border: none;
-
-  ${variant === 'default' &&
-  css`
-    background-color: ${palette.primary};
-    color: ${palette.white};
-    font-weight: 600;
-
-    &:hover {
-      background-color: ${palette.gray};
-    }
-  `}
-
-  ${variant === 'gray' &&
-  css`
-    background-color: ${palette.grayLight};
-    color: rgba(0, 0, 0, 0.6);
-    font-weight: 400;
-  `}
-
-${variant === 'grayBlack' &&
-  css`
-    background-color: ${palette.grayLight};
-    color: ${palette.black};
-    font-weight: 400;
-  `}
-
-
-  &:focus {
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
 `;
 
 export default ChoiceButton;

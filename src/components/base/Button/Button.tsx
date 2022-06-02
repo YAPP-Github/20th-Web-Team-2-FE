@@ -1,25 +1,7 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { palette } from '@/lib/styles/palette';
-
-export type ButtonSizes = 'small' | 'medium';
-export type ButtonVariants = 'default' | 'gray' | 'grayBlack' | 'kakao';
-export type ButtonColors = 'white' | 'gray' | 'black';
-
-export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'size' | 'color'> {
-  children: React.ReactNode;
-  size?: ButtonSizes;
-  variant?: ButtonVariants;
-  boxShadow?: boolean;
-  disabled?: boolean;
-  color?: ButtonColors;
-  fontSize?: number;
-  fontWeight?: 300 | 400 | 600 | 700;
-  fullWidth?: boolean;
-  width?: number;
-  height?: 38 | 48 | 70 | 100;
-  active?: boolean;
-}
+import { ButtonProps, sizes, getVariant } from '@/utils/buttons';
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -97,6 +79,7 @@ const ButtonBlock = styled.button<ButtonBlockProps>`
   ${(props) =>
     props.active &&
     css`
+      font-weight: 700;
       background-color: ${palette.primary};
       color: ${palette.white};
     `}
@@ -110,86 +93,10 @@ const ButtonBlock = styled.button<ButtonBlockProps>`
   ${(props) =>
     props.disabled &&
     css`
-      font-weight: 300;
       background-color: ${palette.grayLight};
       color: rgba(0, 0, 0, 0.6);
       cursor: not-allowed;
     `}
-`;
-
-type ButtonSizeBuilder = Pick<ButtonBlockProps, 'height' | 'fontSize' | 'fontWeight'>;
-
-const buttonSizeBuilder = ({ height, fontSize, fontWeight }: ButtonSizeBuilder) => css`
-  height: ${height}px;
-  font-size: ${fontSize}px;
-  font-weight: ${fontWeight};
-`;
-
-const sizes = ({ fontSize, fontWeight, height }: Pick<ButtonProps, 'fontWeight' | 'fontSize' | 'height'>) => ({
-  small: buttonSizeBuilder({
-    height: height ?? 38,
-    fontSize: fontSize ?? 12,
-    fontWeight: fontWeight ?? 600,
-  }),
-  medium: buttonSizeBuilder({
-    height: height ?? 48,
-    fontSize: fontSize ?? 14,
-    fontWeight: fontWeight ?? 700,
-  }),
-});
-
-const getVariant = (variant: ButtonVariants, isDisabled: boolean) => css`
-  border: none;
-
-  ${variant === 'default' &&
-  css`
-    background-color: ${palette.primary};
-    color: ${palette.white};
-    font-weight: 600;
-
-    &:hover {
-      background-color: ${palette.gray};
-    }
-    ${isDisabled &&
-    css`
-      font-weight: 300;
-      background-color: ${palette.grayLight};
-      color: rgba(0, 0, 0, 0.6);
-      cursor: not-allowed;
-    `}
-  `}
-
-  ${variant === 'gray' &&
-  css`
-    background-color: ${palette.grayLight};
-    color: rgba(0, 0, 0, 0.6);
-    font-weight: 300;
-  `}
-
-${variant === 'grayBlack' &&
-  css`
-    background-color: ${palette.grayLight};
-    color: ${palette.black};
-    font-weight: 400;
-  `}
-
-
-  &:focus {
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  ${variant === 'kakao' &&
-  css`
-    background-color: ${palette.kakao};
-    color: ${palette.black};
-    font-weight: 700;
-
-    &:hover {
-    }
-  `}
-
-  &:focus {
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
 `;
 
 Button.displayName = 'Button';
