@@ -8,6 +8,7 @@ import NotFound from '@/pages/NotFound';
 import styled from 'styled-components';
 import LandingPage from '@/pages/LandingPage';
 import FoundPath from '@/pages/FoundPath';
+import Agreement from '@/pages/Agreement';
 
 function Routing() {
   return (
@@ -19,6 +20,7 @@ function Routing() {
           <Route path={Path.AuthMail} element={<AuthMail />} />
           <Route path={Path.Survey} element={<Survey />} />
           <Route path={Path.Survey9} element={<FoundPath />} />
+          <Route path={Path.Survey10} element={<Agreement />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
