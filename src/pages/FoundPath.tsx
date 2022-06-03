@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import styled from 'styled-components';
 import SurveyTemplate from '@/components/survey/SurveyTemplate';
-import { Button } from '@/components/base';
 import { Title } from '@/lib/styles/styledComponents';
-import { palette } from '@/lib/styles/palette';
 import CheckBox from '@/components/base/CheckBox';
+import { FormWrapper } from './AuthMail';
 
 const FoundPath = () => {
   const BTNS = ['페이스북', '인스타그램', '카카오단톡방', '카톡플친', '지인추천', '기타 커뮤니티'];
@@ -25,25 +23,4 @@ const FoundPath = () => {
   );
 };
 
-export const StyledButton = styled(Button)`
-  margin-top: 16px;
-`;
-
-const FormWrapper = styled.div`
-  position: absolute;
-  width: 100%;
-  top: 40%;
-  transform: translateY(-50%);
-  margin-top: 65px;
-`;
-
-export const InputsWrapper = styled.div`
-  position: relative;
-`;
-
-export const ErrorMessage = styled.p`
-  position: absolute;
-  font-size: 12px;
-  color: ${palette.warning};
-`;
 export default FoundPath;

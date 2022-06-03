@@ -55,7 +55,7 @@ export const StyledButton = styled(Button)`
   margin-top: 16px;
 `;
 
-const FormWrapper = styled.div`
+export const FormWrapper = styled.div`
   position: absolute;
   width: 100%;
   top: 40%;
