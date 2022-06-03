@@ -19,8 +19,8 @@ function Routing() {
           <Route path={Path.Component} element={<Test />} />
           <Route path={Path.AuthMail} element={<AuthMail />} />
           <Route path={Path.Survey} element={<Survey />} />
-          <Route path={Path.Survey9} element={<FoundPath />} />
-          <Route path={Path.Survey10} element={<Agreement />} />
+          <Route path={Path.Survey16} element={<FoundPath />} />
+          <Route path={Path.Survey17} element={<Agreement />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>

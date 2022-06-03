@@ -4,8 +4,8 @@ enum Path {
   AuthMail = '/auth-mail',
   Survey = '/survey/:surveyId',
 
-  Survey9 = '/survey9', // FIXME: 라우팅 어떻게 될지 몰라서 임시로 설정
-  Survey10 = '/survey10', // FIXME: 라우팅 어떻게 될지 몰라서 임시로 설정
+  Survey16 = '/survey16', // FIXME: 라우팅 어떻게 될지 몰라서 임시로 설정
+  Survey17 = '/survey17', // FIXME: 라우팅 어떻게 될지 몰라서 임시로 설정
 }
 
 export default Path;
