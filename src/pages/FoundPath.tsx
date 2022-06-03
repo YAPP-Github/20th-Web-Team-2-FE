@@ -7,6 +7,7 @@ import { palette } from '@/lib/styles/palette';
 import CheckBox from '@/components/base/CheckBox';
 
 const FoundPath = () => {
+  const BTNS = ['페이스북', '인스타그램', '카카오단톡방', '카톡플친', '지인추천', '기타 커뮤니티'];
   const [cantMoveNext, setCantMoveNext] = useState(true);
   console.log(cantMoveNext);
   return (
@@ -16,12 +17,9 @@ const FoundPath = () => {
         경로를 알려주세요.
       </Title>
       <FormWrapper>
-        <CheckBox text="페이스북" />
-        <CheckBox text="인스타그램" onChange={() => setCantMoveNext((prev) => !prev)} />
-        <CheckBox text="카카오 단톡방" />
-        <CheckBox text="카톡 플친" />
-        <CheckBox text="지인추천" />
-        <CheckBox text="기타 커뮤니티" />
+        {BTNS.map((btn) => (
+          <CheckBox key={btn} text={btn} onChange={() => setCantMoveNext((prev) => !prev)} />
+        ))}
       </FormWrapper>
     </SurveyTemplate>
   );
