@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import SurveyTemplate from '@/components/survey/SurveyTemplate';
 import { useState } from 'react';
 import { Button } from '@/components/base';
-import SchoolSearch from '@/components/base/SchoolSearch';
+import SchoolSearch from '@/components/domain/survey/SchoolSearch';
 
 const Survey = () => {
   const [canMoveNext, setCanMoveNext] = useState(true);
