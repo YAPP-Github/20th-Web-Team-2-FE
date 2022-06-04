@@ -16,7 +16,7 @@ export const MAX_AGE = 35;
 
 const AgeBox = ({ setAgeOption, setMultiAgeOption, children, isMulti = false }: AgeBoxProps) => {
   const handleSimpleChange = useCallback(
-    ({ _, max }: Ranges) => {
+    ({ max }: Ranges) => {
       if (!isMulti && setAgeOption) {
         setAgeOption(max);
       }
