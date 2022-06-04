@@ -2,14 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { SubTitle } from '@/lib/styles/styledComponents';
 import { ChoiceButton } from '@/components/base';
-import { GenderOptions } from '@/pages/MeetingSurvey5';
+import { GenderOptions } from '@/pages/GenderAverageAgeSurvey';
 
-interface GenderOfMeetingProps {
+interface GenderBoxProps {
   genderOption: GenderOptions;
   setGenderOption: React.Dispatch<React.SetStateAction<GenderOptions>>;
+  children: React.ReactNode;
 }
 
-const GenderOfMeeting = ({ genderOption, setGenderOption }: GenderOfMeetingProps) => {
+const GenderBox = ({ genderOption, setGenderOption, children }: GenderBoxProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id } = e.target;
     setGenderOption(id as GenderOptions);
@@ -17,7 +18,7 @@ const GenderOfMeeting = ({ genderOption, setGenderOption }: GenderOfMeetingProps
 
   return (
     <Container>
-      <SubTitle>성별을 선택해주세요.</SubTitle>
+      <SubTitle>{children}</SubTitle>
       <ButtonWrapper>
         {ITEMS.map((item) => (
           <ChoiceButton
@@ -58,4 +59,4 @@ const ButtonWrapper = styled.div`
   gap: 8px;
 `;
 
-export default GenderOfMeeting;
+export default GenderBox;
