@@ -8,7 +8,7 @@ enum Path {
   OurDepartmentsAverageHeightSurve = '/our-dprt-height',
   AvoidUniversitiesSurvey = '/avoid-univ',
   PreferUniversitiesSurvey = '/prefer-univ',
-  PreferAgeHeightSurvey = '/prefer-age-height',
+  PreferAverageAgeHeightSurvey = '/prefer-age-height',
   PreferDepartmentsSurvey = '/prefer-dprt',
   MindsetSurvey = '/mindset',
   PlaySurvey = '/paly',

@@ -8,6 +8,7 @@ import {
   LandingPage,
   TypeOfMeetingSurvey,
   OurDepartmentsAverageHeightSurvey,
+  PreferAverageAgeHeightSurvey,
   AvoidUniversitiesSurvey,
   PreferUniversitiesSurvey,
   PreferDepartmentsSurvey,
@@ -39,6 +40,7 @@ function Routing() {
             <Route path={Path.AvoidUniversitiesSurvey} element={<AvoidUniversitiesSurvey />} />
             <Route path={Path.PreferUniversitiesSurvey} element={<PreferUniversitiesSurvey />} />
             <Route path={Path.PreferDepartmentsSurvey} element={<PreferDepartmentsSurvey />} />
+            <Route path={Path.PreferAverageAgeHeightSurvey} element={<PreferAverageAgeHeightSurvey />} />
             <Route path={Path.MindsetSurvey} element={<MindsetSurvey />} />
             <Route path={Path.PlaySurvey} element={<PlaySurvey />} />
             <Route path={Path.IsAbroadSurvey} element={<IsAbroadSurvey />} />
