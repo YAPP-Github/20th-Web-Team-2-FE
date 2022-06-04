@@ -38,7 +38,7 @@ function LandingFooter() {
         <CompanyInfoTit className="biz-num ">사업자 등록번호</CompanyInfoTit> 248-40-00874
       </CompanyInfoBox>
       <CompanyInfoBox>
-        <CompanyInfoTit>주소지</CompanyInfoTit> 서울특별시 은평구 증산로 387-1
+        <CompanyInfoTit>주소지</CompanyInfoTit> 서울특별시 은평구 증산로 387-1 6층
       </CompanyInfoBox>
     </FooterLayout>
   );
