@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import LandingPage from '@/pages/LandingPage';
 import TypeOfMeetingSurvey from '@/pages/TypeOfMeetingSurvey';
 import FoundPath from '@/pages/FoundPath';
+import MeetingSurvey5 from '@/pages/MeetingSurvey5';
 
 function Routing() {
   return (
@@ -20,6 +21,7 @@ function Routing() {
           <Route path={Path.AuthMail} element={<AuthMail />} />
           <Route path={Path.Survey} element={<Survey />} />
           <Route path={Path.TypeOfMeetingSurvey} element={<TypeOfMeetingSurvey />} />
+          <Route path={Path.MeetingSurvey5} element={<MeetingSurvey5 />} />
           <Route path={Path.Survey9} element={<FoundPath />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
