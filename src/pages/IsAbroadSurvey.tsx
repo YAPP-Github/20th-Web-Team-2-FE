@@ -12,10 +12,10 @@ const IsAbroadSurvey = () => {
     setIsAbroad(id);
   };
   return (
-    <SurveyTemplate disableNext={true} hasProgressBar={false}>
+    <SurveyTemplate disableNext={true} hasProgressBar={false} currStep={3} totalStep={15}>
       <Title>
-        신원 확인을 위해 <br />
-        학교 메일로 인증해주세요.
+        지금 한국이신가요? <br />
+        해외이신가요?
       </Title>
       <BtnWrapper>
         <ChooseTwoBox height={100} items={ITEMS} selectedOption={isAbroad} onChangeOption={onChangeOption} children={undefined} />
