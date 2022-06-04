@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { Route, Routes, BrowserRouter, Outlet } from 'react-router-dom';
 import Path from '@/router/Path';
 import {
   AuthMail,
@@ -8,8 +8,10 @@ import {
   LandingPage,
   TypeOfMeetingSurvey,
   OurDepartmentsAverageHeightSurvey,
+  PreferAverageAgeHeightSurvey,
   AvoidUniversitiesSurvey,
   PreferUniversitiesSurvey,
+  PreferDepartmentsSurvey,
   MindsetSurvey,
   PlaySurvey,
   IsAbroadSurvey,
@@ -19,6 +21,12 @@ import {
   AgreementSurvey,
   KakaoIdSurvey,
   GenderAverageAgeSurvey,
+  OurUniversitiesSurvey,
+  MyDepartmentMindset,
+  MyMbtiHeight,
+  MyBodySmoke,
+  MyDateCount,
+  PreferDepartmentCharacter,
 } from '@/pages';
 import Test from '@/components/base/Test';
 
@@ -28,23 +36,45 @@ function Routing() {
       <PageLayout>
         <PageWrapper>
           <Routes>
-            <Route path="*" element={<NotFound />} />
             <Route path={Path.LandingPage} element={<LandingPage />} />
             <Route path={Path.Component} element={<Test />} />
             <Route path={Path.AuthMail} element={<AuthMail />} />
             <Route path={Path.TypeOfMeetingSurvey} element={<TypeOfMeetingSurvey />} />
-            <Route path={Path.GenderAverageAgeSurvey} element={<GenderAverageAgeSurvey />} />
-            <Route path={Path.OurDepartmentsAverageHeightSurve} element={<OurDepartmentsAverageHeightSurvey />} />
-            <Route path={Path.AvoidUniversitiesSurvey} element={<AvoidUniversitiesSurvey />} />
-            <Route path={Path.PreferUniversitiesSurvey} element={<PreferUniversitiesSurvey />} />
-            <Route path={Path.MindsetSurvey} element={<MindsetSurvey />} />
-            <Route path={Path.PlaySurvey} element={<PlaySurvey />} />
-            <Route path={Path.IsAbroadSurvey} element={<IsAbroadSurvey />} />
-            <Route path={Path.DomesticAreasSurvey} element={<DomesticAreasSurvey />} />
-            <Route path={Path.AbroadAreasSurvey} element={<AbroadAreasSurvey />} />
-            <Route path={Path.ChannelSurvey} element={<ChannelSurvey />} />
-            <Route path={Path.AgreementSurvey} element={<AgreementSurvey />} />
-            <Route path={Path.KakaoIdSurvey} element={<KakaoIdSurvey />} />
+            <Route path={'/meeting'} element={<Outlet />}>
+              <Route path={Path.GenderAverageAgeSurvey} element={<GenderAverageAgeSurvey />} />
+              <Route path={Path.OurUniversitiesSurvey} element={<OurUniversitiesSurvey />} />
+              <Route path={Path.OurDepartmentsAverageHeightSurvey} element={<OurDepartmentsAverageHeightSurvey />} />
+              <Route path={Path.AvoidUniversitiesSurvey} element={<AvoidUniversitiesSurvey />} />
+              <Route path={Path.PreferUniversitiesSurvey} element={<PreferUniversitiesSurvey />} />
+              <Route path={Path.PreferDepartmentsSurvey} element={<PreferDepartmentsSurvey />} />
+              <Route path={Path.PreferAgeHeightSurvey} element={<PreferAverageAgeHeightSurvey />} />
+              <Route path={Path.MindsetSurvey} element={<MindsetSurvey />} />
+              <Route path={Path.PlaySurvey} element={<PlaySurvey />} />
+              <Route path={Path.IsAbroadSurvey} element={<IsAbroadSurvey />} />
+              <Route path={Path.DomesticAreasSurvey} element={<DomesticAreasSurvey />} />
+              <Route path={Path.AbroadAreasSurvey} element={<AbroadAreasSurvey />} />
+              <Route path={Path.ChannelSurvey} element={<ChannelSurvey />} />
+              <Route path={Path.AgreementSurvey} element={<AgreementSurvey />} />
+              <Route path={Path.KakaoIdSurvey} element={<KakaoIdSurvey />} />
+            </Route>
+            <Route path={'/dating'} element={<Outlet />}>
+              <Route path={Path.GenderAverageAgeSurvey} element={<GenderAverageAgeSurvey />} />
+              <Route path={Path.MyDepartmentMindset} element={<MyDepartmentMindset />} />
+              <Route path={Path.MyMbtiHeight} element={<MyMbtiHeight />} />
+              <Route path={Path.MyBodySmoke} element={<MyBodySmoke />} />
+              <Route path={Path.MyDateCount} element={<MyDateCount />} />
+              <Route path={Path.AvoidUniversitiesSurvey} element={<AvoidUniversitiesSurvey />} />
+              <Route path={Path.PreferUniversitiesSurvey} element={<PreferUniversitiesSurvey />} />
+              {/*선호나이/키 페이지 추가*/}
+              <Route path={Path.PreferDepartmentCharacter} element={<PreferDepartmentCharacter />} />
+              <Route path={Path.IsAbroadSurvey} element={<IsAbroadSurvey />} />
+              <Route path={Path.DomesticAreasSurvey} element={<DomesticAreasSurvey />} />
+              <Route path={Path.AbroadAreasSurvey} element={<AbroadAreasSurvey />} />
+              <Route path={Path.ChannelSurvey} element={<ChannelSurvey />} />
+              <Route path={Path.AgreementSurvey} element={<AgreementSurvey />} />
+              <Route path={Path.KakaoIdSurvey} element={<KakaoIdSurvey />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </PageWrapper>
       </PageLayout>
@@ -57,7 +87,6 @@ const PageLayout = styled.div`
   height: 100%;
 `;
 const PageWrapper = styled.main`
-  margin: 0 16px;
   height: 100%;
 `;
 

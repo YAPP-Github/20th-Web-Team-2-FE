@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { ReactNode } from 'react';
+import { MouseEventHandler, ReactNode } from 'react';
 import { Button } from '@/components/base';
 import ProgressBar, { ProgressBarProps } from '@/components/base/ProgressBar';
 
@@ -8,9 +8,19 @@ interface SurveyTemplateProps extends Partial<ProgressBarProps> {
   children: ReactNode;
   hasProgressBar?: boolean;
   disableNext: boolean;
+  handlePrevClick?: MouseEventHandler<HTMLButtonElement>;
+  handleNextClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-const SurveyTemplate = ({ children, hasProgressBar = true, disableNext, currStep = 1, totalStep = 1 }: SurveyTemplateProps) => {
+const SurveyTemplate = ({
+  children,
+  hasProgressBar = true,
+  disableNext,
+  currStep = 1,
+  totalStep = 1,
+  handlePrevClick,
+  handleNextClick,
+}: SurveyTemplateProps) => {
   return (
     <SurveyTemplateBlock>
       <HeaderWrapper>
@@ -20,11 +30,11 @@ const SurveyTemplate = ({ children, hasProgressBar = true, disableNext, currStep
       <NavigationWrapper>
         {hasProgressBar && <ProgressBar currStep={currStep} totalStep={totalStep} />}
         <ButtonWrapper>
-          <Button size="medium" variant="gray">
+          <Button size="medium" variant="gray" onClick={handlePrevClick}>
             이전
           </Button>
           <Button
-            onClick={() => console.log('aa')}
+            onClick={handleNextClick}
             size="medium"
             disabled={disableNext}
             variant={disableNext ? 'gray' : 'default'}
