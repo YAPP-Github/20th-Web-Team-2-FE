@@ -4,6 +4,7 @@ import CheckBox from '@/components/base/CheckBox';
 import { FormWrapper } from './AuthMail';
 import useFoundPathCheck from '@/hooks/agreement/useFoundPathCheck';
 
+
 const FoundPath = () => {
   const { pathCheckList, onChangeCheck } = useFoundPathCheck();
   return (
