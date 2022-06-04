@@ -29,8 +29,18 @@ function LandingFooter() {
       <FooterLogo>
         <FaintLogo to="/">외딴썸</FaintLogo>
         <div>
-          <IconStyled src={KakaoIcon} />
-          <IconStyled src={InstagramIcon} />
+          <IconStyled
+            src={KakaoIcon}
+            onClick={() => {
+              window.open('http://pf.kakao.com/_XUkxkb', '_blank');
+            }}
+          />
+          <IconStyled
+            src={InstagramIcon}
+            onClick={() => {
+              window.open('https://www.instagram.com/lonessum_official/', '_blank');
+            }}
+          />
         </div>
       </FooterLogo>
       <CompanyInfoBox>

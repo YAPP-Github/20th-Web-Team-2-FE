@@ -18,7 +18,7 @@ function LandingContainer() {
         <MainNameStyled src={StringLogo} alt="외딴썸" />
         <TextStyled>유학생을 위한 미팅/소개팅</TextStyled>
       </MainIconBox>
-      {isLogin ? (
+      {!isLogin ? (
         <BtnBox>
           <BtnTextStyled>간단하게 로그인하고 인연을 찾아보세요.</BtnTextStyled>
           <LandingBtn size="medium" fontWeight={700} fullWidth variant={'kakao'}>
