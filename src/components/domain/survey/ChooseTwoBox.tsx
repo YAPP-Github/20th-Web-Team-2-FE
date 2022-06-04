@@ -7,8 +7,8 @@ import { ButtonSizes } from '@/utils/buttons';
 interface ChooseTwoBoxProps {
   selectedOption: string;
   onChangeOption: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  children: React.ReactNode;
-  items: Array<{ id: string; text: string }>;
+  children?: React.ReactNode;
+  items: Array<{ id: string; text: string; name: string }>;
   size?: ButtonSizes;
   height?: 38 | 48 | 70 | 100;
 }
@@ -16,12 +16,12 @@ interface ChooseTwoBoxProps {
 const ChooseTwoBox = ({ selectedOption, onChangeOption, children, items, size = 'medium', ...rest }: ChooseTwoBoxProps) => {
   return (
     <Container>
-      <SubTitle>{children}</SubTitle>
+      {children && <SubTitle> {children}</SubTitle>}
       <ButtonWrapper>
         {items.map((item) => (
           <ChoiceButton
             {...rest}
-            name="typeOfmeeting"
+            name={item.name}
             size={size}
             variant="grayBlack"
             id={item.id}

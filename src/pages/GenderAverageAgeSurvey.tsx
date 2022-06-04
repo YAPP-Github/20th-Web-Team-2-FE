@@ -48,12 +48,14 @@ const StyledTitle = styled(Title)`
 
 const ITEMS = [
   {
-    id: 'female',
+    id: 'FEMAIL',
     text: '여자',
+    name: 'gender',
   },
   {
-    id: 'male',
+    id: 'MAIL',
     text: '남자',
+    name: 'gender',
   },
 ];
 

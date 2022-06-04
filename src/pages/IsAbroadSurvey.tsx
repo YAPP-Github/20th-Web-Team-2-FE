@@ -28,7 +28,7 @@ const IsAbroadSurvey = () => {
         해외이신가요?
       </Title>
       <BtnWrapper>
-        <ChooseTwoBox height={100} items={ITEMS} selectedOption={isAbroad} onChangeOption={onChangeOption} children={undefined} />
+        <ChooseTwoBox height={100} items={ITEMS} selectedOption={isAbroad} onChangeOption={onChangeOption} />
       </BtnWrapper>
     </SurveyTemplate>
   );
@@ -41,10 +41,12 @@ const ITEMS = [
   {
     id: 'domestic',
     text: '국내',
+    name: 'isAbroad',
   },
   {
     id: 'abroad',
     text: '해외',
+    name: 'isAbroad',
   },
 ];
 export default IsAbroadSurvey;
