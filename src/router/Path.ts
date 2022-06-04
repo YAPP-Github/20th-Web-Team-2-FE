@@ -18,6 +18,12 @@ enum Path {
   ChannelSurvey = 'channel',
   AgreementSurvey = 'agreement',
   KakaoIdSurvey = 'kakao-id',
+
+  MyDepartmentMindset = 'my-department-mindset',
+  MyMbtiHeight = 'my-mbti-height',
+  MyBodySmoke = 'my-body-smoke',
+  MyDateCount = 'my-date-count',
+  PreferDepartmentCharacter = 'prefer-department-character',
 }
 
 export default Path;

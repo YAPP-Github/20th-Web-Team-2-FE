@@ -20,8 +20,13 @@ import {
   KakaoIdSurvey,
   GenderAverageAgeSurvey,
   OurUniversitiesSurvey,
+  MyDepartmentMindset,
 } from '@/pages';
 import Test from '@/components/base/Test';
+import MyMbtiHeight from '@/pages/MyMbtiHeight';
+import MyBodySmoke from '@/pages/MyBodySmoke';
+import MyDateCount from '@/pages/MyDateCount';
+import PreferDepartmentCharacter from '@/pages/PreferDepartmentCharacter';
 
 function Routing() {
   return (
@@ -50,13 +55,17 @@ function Routing() {
             </Route>
             <Route path={'/dating'} element={<Outlet />}>
               <Route path={Path.GenderAverageAgeSurvey} element={<GenderAverageAgeSurvey />} />
-              {/*MyDepartmentMindset my-department-mindset*/}
-              {/*MyMbtiHeight my-mbti-height*/}
-              {/**/}
+              <Route path={Path.MyDepartmentMindset} element={<MyDepartmentMindset />} />
+              <Route path={Path.MyMbtiHeight} element={<MyMbtiHeight />} />
+              <Route path={Path.MyBodySmoke} element={<MyBodySmoke />} />
+              <Route path={Path.MyDateCount} element={<MyDateCount />} />
               <Route path={Path.AvoidUniversitiesSurvey} element={<AvoidUniversitiesSurvey />} />
               <Route path={Path.PreferUniversitiesSurvey} element={<PreferUniversitiesSurvey />} />
               {/*선호나이/키 페이지 추가*/}
-
+              <Route path={Path.PreferDepartmentCharacter} element={<PreferDepartmentCharacter />} />
+              <Route path={Path.IsAbroadSurvey} element={<IsAbroadSurvey />} />
+              <Route path={Path.DomesticAreasSurvey} element={<DomesticAreasSurvey />} />
+              <Route path={Path.AbroadAreasSurvey} element={<AbroadAreasSurvey />} />
               <Route path={Path.ChannelSurvey} element={<ChannelSurvey />} />
               <Route path={Path.AgreementSurvey} element={<AgreementSurvey />} />
               <Route path={Path.KakaoIdSurvey} element={<KakaoIdSurvey />} />
