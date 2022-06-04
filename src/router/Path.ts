@@ -5,7 +5,7 @@ enum Path {
   TypeOfMeetingSurvey = '/type-of-meeting',
   GenderAverageAgeSurvey = '/gender-age',
   OurUniversitiesSurvey = '/our-univ',
-  OurDepartmentsAverageHeightSurve = '/our-dprt-height',
+  OurDepartmentsAverageHeightSurvey = '/our-dprt-height',
   AvoidUniversitiesSurvey = '/avoid-univ',
   PreferUniversitiesSurvey = '/prefer-univ',
   PreferAverageAgeHeightSurvey = '/prefer-age-height',
