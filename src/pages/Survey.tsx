@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import SurveyTemplate from '@/components/survey/SurveyTemplate';
+import { SurveyTemplate } from '@/components/domain/survey';
 import { useState } from 'react';
-import { Button } from '@/components/base';
-import SchoolSearch from '@/components/base/SchoolSearch';
+// import { Button, SimpleRangeSlider } from '@/components/base';
+// import MultiRangeSlider from '@/components/base/MultiRangeSlider';
+// import SchoolSearch from '@/components/base/SchoolSearch';
 
 const Survey = () => {
   const [canMoveNext, setCanMoveNext] = useState(true);
@@ -13,8 +14,8 @@ const Survey = () => {
         신원 확인을 위해 <br />
         학교 메일로 인증해주세요.
       </Title>
-      <SchoolSearch />
-      <Button onClick={() => setCanMoveNext((prev) => !prev)}>클릭</Button>
+      {/* <SimpleRangeSlider min={20} max={35} /> */}
+      {/* <Button onClick={() => setCanMoveNext((prev) => !prev)}>클릭</Button> */}
     </SurveyTemplate>
   );
 };

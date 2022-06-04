@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import SurveyTemplate from '@/components/survey/SurveyTemplate';
-import { Button } from '@/components/base';
+import { SurveyTemplate } from '@/components/domain/survey';
+import { Button, CheckBox } from '@/components/base';
 import { Title } from '@/lib/styles/styledComponents';
 import { palette } from '@/lib/styles/palette';
-import CheckBox from '@/components/base/CheckBox';
 
 const FoundPath = () => {
   const BTNS = ['페이스북', '인스타그램', '카카오단톡방', '카톡플친', '지인추천', '기타 커뮤니티'];
