@@ -4,13 +4,14 @@ import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 export interface Ranges {
   min: number;
   max: number;
+  isStep5?: boolean;
 }
 
 interface SimpleRangeSliderProps extends Ranges {
   onChange?: (rangeValues: Ranges) => void;
 }
 
-const SimpleRangeSlider = ({ min, max, onChange }: SimpleRangeSliderProps) => {
+const SimpleRangeSlider = ({ min, max, isStep5 = false, onChange }: SimpleRangeSliderProps) => {
   const [maxVal, setMaxVal] = useState(Math.ceil((min + max) / 2));
   const maxValRef = useRef<HTMLInputElement>(null);
   const range = useRef<HTMLDivElement>(null);
@@ -18,6 +19,12 @@ const SimpleRangeSlider = ({ min, max, onChange }: SimpleRangeSliderProps) => {
 
   const getPercent = useCallback((value: number) => Math.round(((value - min) / (max - min)) * 100), [min, max]);
   const getMidValue = useCallback(
+    (midLevel: 1 | 2) => {
+      return min + Math.floor((max - min) / 3) * midLevel;
+    },
+    [min, max],
+  );
+  const getMidValueWith5Steps = useCallback(
     (midLevel: 1 | 2) => {
       return min + Math.floor((max - min) / 3) * midLevel;
     },
@@ -33,7 +40,6 @@ const SimpleRangeSlider = ({ min, max, onChange }: SimpleRangeSliderProps) => {
   useEffect(() => {
     if (maxValRef.current) {
       const maxPercent = getPercent(maxVal);
-      console.log(maxPercent, 'maxPercent');
 
       if (range.current) {
         range.current.style.width = `${maxPercent}%`;
@@ -45,20 +51,38 @@ const SimpleRangeSlider = ({ min, max, onChange }: SimpleRangeSliderProps) => {
   }, [maxVal, getPercent]);
 
   useEffect(() => {
-    onChange?.({ min, max: maxVal });
-  }, [maxVal, onChange]);
+    onChange?.({ min, max: maxVal, isStep5 });
+  }, [maxVal, onChange, isStep5]);
 
   return (
     <Container>
-      <SliderInput type="range" min={min} max={max} value={maxVal} ref={maxValRef} onChange={(event) => handleChangeRange(event)} zIndex={4} />
+      <SliderInput
+        type="range"
+        min={min}
+        max={max}
+        step={isStep5 ? 5 : 1}
+        value={maxVal}
+        ref={maxValRef}
+        onChange={(event) => handleChangeRange(event)}
+        zIndex={4}
+      />
 
       <TrackWrapper>
         <Track />
         <Range ref={range} />
         <LabelWrapper>
           <Label>{min}</Label>
-          <Label>{getMidValue(1)}</Label>
-          <Label>{getMidValue(2)}</Label>
+          {isStep5 ? (
+            <>
+              <Step5LabelFirst>150</Step5LabelFirst>
+              <Step5LabelSecond>190</Step5LabelSecond>
+            </>
+          ) : (
+            <>
+              <Label>{getMidValue(1)}</Label>
+              <Label>{getMidValue(2)}</Label>
+            </>
+          )}
           <Label>{max}</Label>
         </LabelWrapper>
         <SignWrapper>
@@ -165,6 +189,16 @@ const Label = styled.span`
   color: ${({ theme }) => theme.palette.black};
   font-size: 12px;
   margin-top: 20px;
+`;
+
+const Step5LabelFirst = styled(Label)`
+  position: relative;
+  left: -18px;
+`;
+
+const Step5LabelSecond = styled(Label)`
+  position: relative;
+  left: 23px;
 `;
 
 export default SimpleRangeSlider;
