@@ -1,5 +1,6 @@
 import { StringLogo, RadiousLogo } from '@/assets/img';
-import { Button } from '@/components/base';
+import { Button, Modal } from '@/components/base';
+import useToggle from '@/hooks/common/useToggle';
 import { palette } from '@/lib/styles/palette';
 import React, { useState } from 'react';
 import styled from 'styled-components';
@@ -9,6 +10,7 @@ function LandingContainer() {
    * 로그인 되었는지 안되었는지는 나중에 리코일에서 꺼내기
    */
   const [isLogin, setIsLogin] = useState(false);
+  const [isModal, onToggleModal] = useToggle();
   return (
     <Container>
       <MainIconBox>
@@ -19,7 +21,7 @@ function LandingContainer() {
       {isLogin ? (
         <BtnBox>
           <BtnTextStyled>간단하게 로그인하고 인연을 찾아보세요.</BtnTextStyled>
-          <LandingBtn size="medium" fontWeight={700} fullWidth variant={'kakao'} onClick={() => setIsLogin((prev) => !prev)}>
+          <LandingBtn size="medium" fontWeight={700} fullWidth variant={'kakao'}>
             카카오 로그인
           </LandingBtn>
         </BtnBox>
@@ -32,6 +34,19 @@ function LandingContainer() {
             응답 수정하기
           </LandingBtn>
         </BtnBox>
+      )}
+      {isModal && (
+        <Modal
+          width={200}
+          height={140}
+          bottonName="기다리기"
+          title="프로젝트 준비중입니다!"
+          text="잠시만 기다려주세요"
+          onToggleModal={onToggleModal}
+          onClick={() => {
+            console.log('안녕하세요');
+          }}
+        />
       )}
     </Container>
   );
