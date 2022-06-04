@@ -1,14 +1,14 @@
-import Logo from './logo.svg?component';
-import { Test } from '@/components';
+import GlobalStyles from './lib/styles/globalStyles';
+import { ThemeProvider } from 'styled-components';
+import { palette } from '@/lib/styles/palette';
+import Routing from '@/router/Routing';
 
 function App() {
   return (
-    <div className="App">
-      <header>
-        <Logo />
-        <Test />
-      </header>
-    </div>
+    <ThemeProvider theme={{ palette }}>
+      <GlobalStyles />
+      <Routing />
+    </ThemeProvider>
   );
 }
 
