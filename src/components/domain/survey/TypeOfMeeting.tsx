@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ChoiceButton } from '../base';
+import { ChoiceButton } from '@/components/base';
 import { ChoiceOptions } from '@/pages/TypeOfMeetingSurvey';
 import { SubTitle } from '@/lib/styles/styledComponents';
 
@@ -60,7 +60,6 @@ const Container = styled.section`
   position: absolute;
   top: 40%;
   width: 100%;
-  height: 100%;
 `;
 
 const ButtonWrapper = styled.div`

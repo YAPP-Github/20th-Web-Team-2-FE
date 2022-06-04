@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import SurveyTemplate from '@/components/survey/SurveyTemplate';
-import { TypeOfMeeting } from '@/components/domain';
+import { SurveyTemplate, TypeOfMeeting } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 
 export type ChoiceOptions = 'oneByOne' | 'twoByTwo' | 'threeByThree' | 'fourByFour';
