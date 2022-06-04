@@ -11,7 +11,7 @@ enum Path {
   PreferAgeHeightSurvey = 'prefer-age-height',
   PreferDepartmentsSurvey = 'prefer-dprt',
   MindsetSurvey = 'mindset',
-  PlaySurvey = 'paly',
+  PlaySurvey = 'play',
   IsAbroadSurvey = 'isabroad',
   DomesticAreasSurvey = 'dmst-area',
   AbroadAreasSurvey = 'abroad-area',
