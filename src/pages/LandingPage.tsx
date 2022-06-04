@@ -1,5 +1,4 @@
-import LandingContainer from '@/components/domain/landing/LandingContainer';
-import LandingFooter from '@/components/domain/landing/LandingFooter';
+import { LandingContainer, LandingFooter } from '@/components/domain/landing';
 import React from 'react';
 import styled from 'styled-components';
 

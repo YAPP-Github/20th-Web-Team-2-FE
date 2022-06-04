@@ -48,7 +48,7 @@ const ChoiceButton = ({
       {isMultiple ? (
         <InputBlock type="checkbox" id={id} name={name} checked={checked} {...others} />
       ) : (
-        <InputBlock type="radio" id={id} name={name} {...others} />
+        <InputBlock type="radio" id={id} name={name} checked={checked} {...others} />
       )}
       <Label
         htmlFor={id}
