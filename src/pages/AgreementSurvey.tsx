@@ -6,11 +6,19 @@ import { Title } from '@/lib/styles/styledComponents';
 import React from 'react';
 import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
+import useMeetingNavigate from '@/hooks/common/useMeetingNavigate';
+import Path from '@/router/Path';
 
 const AgreementSurvey = () => {
+  const meetingNavigate = useMeetingNavigate();
   const { checkedList, checkedChoiceList, onChangeCheck, onChangeChoiceCheck, onCheckAll, isAllchecked } = useAgreementCheck();
   return (
-    <SurveyTemplate disableNext={!isAllchecked} hasProgressBar={false}>
+    <SurveyTemplate
+      disableNext={!isAllchecked}
+      hasProgressBar={false}
+      handlePrevClick={() => meetingNavigate(Path.ChannelSurvey)}
+      handleNextClick={() => meetingNavigate(Path.KakaoIdSurvey)}
+    >
       <Title>
         약관동의를 <br />
         진행해주세요.
