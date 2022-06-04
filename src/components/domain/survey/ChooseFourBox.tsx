@@ -19,7 +19,7 @@ interface ChooseFourBoxProps {
   children: React.ReactNode;
   isMulti?: boolean;
   items: ChooseFourBoxItemProps[];
-  top?: number;
+  top?: 45 | 97;
 }
 
 const ChooseFourBox = ({
