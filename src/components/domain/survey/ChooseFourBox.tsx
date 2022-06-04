@@ -72,9 +72,8 @@ const ChooseFourBox = ({
 };
 
 const Container = styled.section`
-  position: absolute;
-  top: 40%;
   width: 100%;
+  margin-top: 45px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -83,4 +82,4 @@ const ButtonWrapper = styled.div`
   gap: 8px;
 `;
 
-export default ChooseFourBox;
+export default React.memo(ChooseFourBox);

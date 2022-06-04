@@ -15,7 +15,14 @@ export const MIN_HEIGHT = 120;
 export const MAX_HEIGHT = 220;
 
 const HeightBox = ({ setHeightOption, setMultiHeightOption, children, isMulti = false }: HeightBoxProps) => {
-  console.log('render');
+  if (isMulti && !setMultiHeightOption) {
+    throw new Error('setMultiHeightOption is required when isMulti is true');
+  }
+
+  if (!isMulti && setMultiHeightOption) {
+    throw new Error('isMulti is required when setMultiHeightOption is truty');
+  }
+
   const handleSimpleChange = useCallback(
     ({ _, max }: Ranges) => {
       if (!isMulti && setHeightOption) {

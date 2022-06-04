@@ -36,7 +36,7 @@ function Routing() {
             <Route path={Path.AuthMail} element={<AuthMail />} />
             <Route path={Path.TypeOfMeetingSurvey} element={<TypeOfMeetingSurvey />} />
             <Route path={Path.GenderAverageAgeSurvey} element={<GenderAverageAgeSurvey />} />
-            <Route path={Path.OurDepartmentsAverageHeightSurve} element={<OurDepartmentsAverageHeightSurvey />} />
+            <Route path={Path.OurDepartmentsAverageHeightSurvey} element={<OurDepartmentsAverageHeightSurvey />} />
             <Route path={Path.AvoidUniversitiesSurvey} element={<AvoidUniversitiesSurvey />} />
             <Route path={Path.PreferUniversitiesSurvey} element={<PreferUniversitiesSurvey />} />
             <Route path={Path.PreferDepartmentsSurvey} element={<PreferDepartmentsSurvey />} />
