@@ -6,7 +6,6 @@ import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox
 
 const PreferDepartmentsSurvey = () => {
   const [checkedMultiOption, setMultiCheckedOption] = useState<ChooseFourBoxItemProps[]>(ITEMS);
-  console.log(checkedMultiOption, 'checkedMultiOption');
 
   return (
     <SurveyTemplate disableNext={!checkedMultiOption} currStep={3} totalStep={10}>
