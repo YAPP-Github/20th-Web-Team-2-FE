@@ -10,6 +10,7 @@ import {
   OurDepartmentsAverageHeightSurvey,
   AvoidUniversitiesSurvey,
   PreferUniversitiesSurvey,
+  PreferDepartmentsSurvey,
   MindsetSurvey,
   PlaySurvey,
   IsAbroadSurvey,
@@ -37,6 +38,7 @@ function Routing() {
             <Route path={Path.OurDepartmentsAverageHeightSurve} element={<OurDepartmentsAverageHeightSurvey />} />
             <Route path={Path.AvoidUniversitiesSurvey} element={<AvoidUniversitiesSurvey />} />
             <Route path={Path.PreferUniversitiesSurvey} element={<PreferUniversitiesSurvey />} />
+            <Route path={Path.PreferDepartmentsSurvey} element={<PreferDepartmentsSurvey />} />
             <Route path={Path.MindsetSurvey} element={<MindsetSurvey />} />
             <Route path={Path.PlaySurvey} element={<PlaySurvey />} />
             <Route path={Path.IsAbroadSurvey} element={<IsAbroadSurvey />} />
