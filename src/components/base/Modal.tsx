@@ -47,11 +47,12 @@ function ModalTemplate({ width = 264, height = 140, title, text, bottonName, onT
           <ModalTitle>{title}</ModalTitle>
           <ModalText>{text}</ModalText>
           <ModalBtnBox>
-            <ModalButton variant="gray" onClick={onCloseModal}>
+            <ModalButton height={28} width={90} variant="gray" onClick={onCloseModal}>
               취소
             </ModalButton>
             <ModalButton
-              width={100}
+              height={28}
+              width={90}
               onClick={() => {
                 onClick();
                 onCloseModal();
@@ -94,23 +95,23 @@ const ModalInner = styled.div<IModalInnerProps>`
   animation: ${({ isClose }) => (isClose ? transitions.popOut : transitions.popIn)} 0.2s ease-in-out;
 `;
 
-const ModalTitle = styled.div`
-  font-size: 1.3rem;
-  padding-top: 1.3rem;
+const ModalTitle = styled.h2`
+  font-size: 14px;
+  padding-top: 0.8rem;
   line-height: 1.7rem;
   text-align: center;
   font-weight: 600;
-  color: #545454;
 `;
 
 const ModalText = styled.div`
-  line-height: 1.7rem;
+  max-width: 160px;
+  margin: 0 20px 0 20px;
+  font-size: 12px;
+  line-height: 0.9rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.125em;
   flex: 1 1 35%;
-  color: #575757;
   text-align: center;
 `;
 
@@ -120,12 +121,11 @@ const ModalBtnBox = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: 10px 0 0 2px;
 `;
 
 const ModalButton = styled(Button)`
-  margin: 5px;
-  min-width: 40%;
+  margin: 2px;
+  min-width: 90px;
 `;
 
 const ModalBackground = styled.div`

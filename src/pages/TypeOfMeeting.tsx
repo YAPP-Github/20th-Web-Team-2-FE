@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { SurveyTemplate, TypeOfMeeting } from '@/components/domain/survey';
+import { SurveyTemplate } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
+import TypeOfMeetingBox from '@/components/domain/survey/TypeOfMeetingBox';
 
 export type ChoiceOptions = 'oneByOne' | 'twoByTwo' | 'threeByThree' | 'fourByFour';
 
-const TypeOfMeetingSurvey = () => {
+const TypeOfMeeting = () => {
   const [checkedOption, setCheckedOption] = useState<ChoiceOptions>('oneByOne');
 
   return (
@@ -14,9 +15,9 @@ const TypeOfMeetingSurvey = () => {
         <br />
         유형을 알려주세요.
       </Title>
-      <TypeOfMeeting checkedOption={checkedOption} setCheckedOption={setCheckedOption} />
+      <TypeOfMeetingBox checkedOption={checkedOption} setCheckedOption={setCheckedOption} />
     </SurveyTemplate>
   );
 };
 
-export default TypeOfMeetingSurvey;
+export default TypeOfMeeting;

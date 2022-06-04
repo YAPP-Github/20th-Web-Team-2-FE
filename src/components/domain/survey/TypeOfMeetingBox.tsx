@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ChoiceButton } from '@/components/base';
-import { ChoiceOptions } from '@/pages/TypeOfMeetingSurvey';
+import { ChoiceOptions } from '@/pages/TypeOfMeeting';
 import { SubTitle } from '@/lib/styles/styledComponents';
 
 interface TypeOfMeetingProps {
@@ -9,7 +9,7 @@ interface TypeOfMeetingProps {
   setCheckedOption: React.Dispatch<React.SetStateAction<ChoiceOptions>>;
 }
 
-const TypeOfMeeting = ({ checkedOption, setCheckedOption }: TypeOfMeetingProps) => {
+const TypeOfMeetingBox = ({ checkedOption, setCheckedOption }: TypeOfMeetingProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id } = e.target;
     setCheckedOption(id as ChoiceOptions);
@@ -68,4 +68,4 @@ const ButtonWrapper = styled.div`
   gap: 8px;
 `;
 
-export default TypeOfMeeting;
+export default TypeOfMeetingBox;
