@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import SurveyTemplate from '@/components/survey/SurveyTemplate';
+import { SurveyTemplate } from '@/components/domain/survey';
 import { Button } from '@/components/base';
 import { Title } from '@/lib/styles/styledComponents';
 import { palette } from '@/lib/styles/palette';
@@ -55,7 +55,7 @@ export const StyledButton = styled(Button)`
   margin-top: 16px;
 `;
 
-const FormWrapper = styled.div`
+export const FormWrapper = styled.div`
   position: absolute;
   width: 100%;
   top: 40%;

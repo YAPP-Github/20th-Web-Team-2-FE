@@ -32,21 +32,21 @@ const Test = () => {
         <p> props === 'boxShadow' </p>
         <Button boxShadow>인증번호로 보내기</Button>
         <p> size === 'large' </p>
-        <Button size="large">인증번호로 보내기</Button>
+        <Button size="medium">인증번호로 보내기</Button>
         <p> size === 'large' variant === 'gray' </p>
-        <Button size="large" variant="gray">
+        <Button size="medium" variant="gray">
           응답 수정하기
         </Button>
         <p> size === 'large' fontWeight = 700 </p>
-        <Button size="large" fontWeight={700}>
+        <Button size="medium" fontWeight={700}>
           다음
         </Button>
         <p> size === 'large' variant === 'grayBlack' </p>
-        <Button size="large" variant="grayBlack">
+        <Button size="medium" variant="grayBlack">
           다음
         </Button>
         <p> size === 'large' variant === 'grayBlack' width === 100 </p>
-        <Button size="large" variant="grayBlack" width={100}>
+        <Button size="medium" variant="grayBlack" width={100}>
           다음
         </Button>
         <p>프로그래스바</p>

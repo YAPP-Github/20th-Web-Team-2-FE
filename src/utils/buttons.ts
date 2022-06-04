@@ -17,7 +17,7 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   fontWeight?: 300 | 400 | 600 | 700;
   fullWidth?: boolean;
   width?: number;
-  height?: 38 | 48 | 70 | 100;
+  height?: 28 | 38 | 48 | 70 | 100;
   active?: boolean;
 }
 
