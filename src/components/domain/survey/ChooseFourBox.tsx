@@ -19,6 +19,7 @@ interface ChooseFourBoxProps {
   children: React.ReactNode;
   isMulti?: boolean;
   items: ChooseFourBoxItemProps[];
+  top?: number;
 }
 
 const ChooseFourBox = ({
@@ -29,6 +30,7 @@ const ChooseFourBox = ({
   children,
   isMulti = false,
   items,
+  top,
 }: ChooseFourBoxProps) => {
   if (isMulti && !setMultiCheckedOption) {
     throw new Error('setMultiCheckedOption is required');
@@ -52,7 +54,7 @@ const ChooseFourBox = ({
   };
 
   return (
-    <Container>
+    <Container top={top}>
       <SubTitle>{children}</SubTitle>
       <ButtonWrapper>
         {isMulti
@@ -71,9 +73,9 @@ const ChooseFourBox = ({
   );
 };
 
-const Container = styled.section`
+const Container = styled.section<{ top?: number }>`
   width: 100%;
-  margin-top: 45px;
+  margin-top: ${({ top }) => (top ? `${top}px` : '45px')};
 `;
 
 const ButtonWrapper = styled.div`
