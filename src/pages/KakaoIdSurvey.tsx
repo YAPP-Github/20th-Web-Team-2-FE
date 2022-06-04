@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
 
-const InputKaKao = () => {
+const KakaoIdSurvey = () => {
   const [isModal, onToggleModal] = useToggle();
   const [kakaoID, setkakaoID] = useState('');
   return (
@@ -69,4 +69,4 @@ const InputWrapper = styled(FormWrapper)`
   margin-top: 46px;
 `;
 
-export default InputKaKao;
+export default KakaoIdSurvey;

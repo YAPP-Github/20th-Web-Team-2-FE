@@ -7,7 +7,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
 
-const Agreement = () => {
+const AgreementSurvey = () => {
   const { checkedList, checkedChoiceList, onChangeCheck, onChangeChoiceCheck, onCheckAll, isAllchecked } = useAgreementCheck();
   return (
     <SurveyTemplate disableNext={!isAllchecked} hasProgressBar={false}>
@@ -33,4 +33,4 @@ export const DivisionLineStyled = styled.div`
   border: 0.75px solid ${palette.grayLight};
 `;
 
-export default Agreement;
+export default AgreementSurvey;

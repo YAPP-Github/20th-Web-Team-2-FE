@@ -4,7 +4,7 @@ import { FormWrapper } from './AuthMail';
 import useFoundPathCheck from '@/hooks/agreement/useFoundPathCheck';
 import { SurveyTemplate } from '@/components/domain/survey';
 
-const FoundPath = () => {
+const ChannelSurvey = () => {
   const { pathCheckList, onChangeCheck } = useFoundPathCheck();
   return (
     <SurveyTemplate disableNext={false} hasProgressBar={false}>
@@ -21,4 +21,4 @@ const FoundPath = () => {
   );
 };
 
-export default FoundPath;
+export default ChannelSurvey;
