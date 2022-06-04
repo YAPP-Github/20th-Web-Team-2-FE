@@ -1,14 +1,9 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import Path from '@/router/Path';
-import Test from '@/components/base/Test';
-import AuthMail from '@/pages/AuthMail';
-import Survey from '@/pages/Survey';
-import NotFound from '@/pages/NotFound';
-import styled from 'styled-components';
-import LandingPage from '@/pages/LandingPage';
-import TypeOfMeetingSurvey from '@/pages/TypeOfMeetingSurvey';
-import FoundPath from '@/pages/FoundPath';
+import { Test } from '@/components/base';
+import { AuthMail, Survey, NotFound, LandingPage, TypeOfMeetingSurvey, FoundPath } from '@/pages';
 
 function Routing() {
   return (
