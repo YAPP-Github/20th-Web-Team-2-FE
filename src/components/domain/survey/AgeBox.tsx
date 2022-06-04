@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { SubTitle } from '@/lib/styles/styledComponents';
-import { SimpleRangeSlider } from '@/components/base';
-import { Ranges } from '@/components/base/SimpleRangeSlider';
+import SimpleRangeSlider, { Ranges } from '@/components/base/SimpleRangeSlider';
 
 interface AgeBoxProps {
   setAgeOption: React.Dispatch<React.SetStateAction<number>>;
@@ -13,7 +12,7 @@ export const MIN_AGE = 20;
 export const MAX_AGE = 35;
 
 const AgeBox = ({ setAgeOption, children }: AgeBoxProps) => {
-  const handleChange = ({ _, max }: Ranges) => {
+  const handleChange = ({ max }: Ranges) => {
     setAgeOption(max);
   };
 
