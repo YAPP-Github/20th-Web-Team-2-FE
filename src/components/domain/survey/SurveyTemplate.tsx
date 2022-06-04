@@ -61,7 +61,7 @@ export const Logo = styled(Link)`
 
 const NavigationWrapper = styled.div`
   position: absolute;
-  width: calc(100% - 32px);
+  width: 100%;
   bottom: 38px;
 `;
 
