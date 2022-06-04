@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --watch",
-    "preview": "vite preview"
+    "build-watch": "tsc && vite build --watch",
+    "preview": "vite preview",
+    "build": "tsc && vite build"
   },
   "dependencies": {
     "@types/styled-components": "^5.1.25",
