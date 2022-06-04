@@ -5,7 +5,7 @@ import TypeOfMeetingBox from '@/components/domain/survey/TypeOfMeetingBox';
 
 export type ChoiceOptions = 'oneByOne' | 'twoByTwo' | 'threeByThree' | 'fourByFour';
 
-const TypeOfMeeting = () => {
+const TypeOfMeetingSurvey = () => {
   const [checkedOption, setCheckedOption] = useState<ChoiceOptions>('oneByOne');
 
   return (
@@ -20,4 +20,4 @@ const TypeOfMeeting = () => {
   );
 };
 
-export default TypeOfMeeting;
+export default TypeOfMeetingSurvey;

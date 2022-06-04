@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ChoiceButton } from '@/components/base';
-import { ChoiceOptions } from '@/pages/TypeOfMeeting';
+import { ChoiceOptions } from '@/pages/TypeOfMeetingSurvey';
 import { SubTitle } from '@/lib/styles/styledComponents';
 
 interface TypeOfMeetingProps {
