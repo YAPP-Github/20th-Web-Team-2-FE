@@ -4,15 +4,26 @@ import { DivisionLineStyled } from '@/pages/AgreementSurvey';
 import React from 'react';
 import styled from 'styled-components';
 import { HeaderWrapper, Logo } from '../survey/SurveyTemplate';
-
+const LINKS: { text: string; link: string }[] = [
+  { text: '자주 묻는 질문', link: 'https://charmed-hyacinth-41c.notion.site/45e4a91845e2474da8fdb55a6e5f6a50' },
+  { text: '연락처', link: 'https://charmed-hyacinth-41c.notion.site/45f2555e41a1433eb48b5bc16557feee' },
+  { text: '개인정보 처리방침', link: 'https://charmed-hyacinth-41c.notion.site/8f1e211d74774e7288ca3352c54566a0' },
+  { text: '이용약관', link: 'https://charmed-hyacinth-41c.notion.site/0861ec794c8f43a0b466c20e82f12de7' },
+];
 function LandingFooter() {
   return (
     <FooterLayout>
       <FooterContents>
-        <li>자주 묻는 질문</li>
-        <li>연락처</li>
-        <li>개인정보 처리방침</li>
-        <li> 이용약관</li>
+        {LINKS.map(({ text, link }) => (
+          <li
+            key={link}
+            onClick={() => {
+              window.open(link as string, '_blank');
+            }}
+          >
+            {text}
+          </li>
+        ))}
       </FooterContents>
       <DivisionLineStyled />
       <FooterLogo>
@@ -44,6 +55,9 @@ const FooterContents = styled.ul`
   justify-content: space-between;
   color: ${palette.grayDarker};
   margin-bottom: 16px;
+  li {
+    cursor: pointer;
+  }
 `;
 
 const FaintLogo = styled(Logo)`
