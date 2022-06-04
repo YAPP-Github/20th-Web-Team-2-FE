@@ -21,12 +21,12 @@ import {
   GenderAverageAgeSurvey,
   OurUniversitiesSurvey,
   MyDepartmentMindset,
+  MyMbtiHeight,
+  MyBodySmoke,
+  MyDateCount,
+  PreferDepartmentCharacter,
 } from '@/pages';
 import Test from '@/components/base/Test';
-import MyMbtiHeight from '@/pages/MyMbtiHeight';
-import MyBodySmoke from '@/pages/MyBodySmoke';
-import MyDateCount from '@/pages/MyDateCount';
-import PreferDepartmentCharacter from '@/pages/PreferDepartmentCharacter';
 
 function Routing() {
   return (
