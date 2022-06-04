@@ -24,7 +24,7 @@ const HeightBox = ({ setHeightOption, setMultiHeightOption, children, isMulti = 
   }
 
   const handleSimpleChange = useCallback(
-    ({ _, max }: Ranges) => {
+    ({ max }: Ranges) => {
       if (!isMulti && setHeightOption) {
         setHeightOption(max);
       }
