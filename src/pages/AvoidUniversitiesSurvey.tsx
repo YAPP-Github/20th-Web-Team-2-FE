@@ -1,7 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { SurveyTemplate } from '@/components/domain/survey';
+import { Title } from '@/lib/styles/styledComponents';
+import SearchSelector from '@/components/domain/survey/SearchSelector';
+import { schools } from '@/mock/schools';
+import styled from 'styled-components';
+import Path from '@/router/Path';
+import useMeetingNavigate from '@/hooks/common/useMeetingNavigate';
 
 const AvoidUniversitiesSurvey = () => {
-  return <div>AvoidUniversities</div>;
+  const meetingNavigate = useMeetingNavigate();
+  const [avoidUniversities, setAvoidUniversities] = useState<number[]>([]);
+
+  return (
+    <SurveyTemplate
+      disableNext={false}
+      hasProgressBar={true}
+      totalStep={15}
+      currStep={5}
+      handlePrevClick={() => meetingNavigate(Path.OurDepartmentsAverageHeightSurvey)}
+      handleNextClick={() => meetingNavigate(Path.PreferUniversitiesSurvey)}
+    >
+      <Title>
+        <strong>기피하는 학교</strong>를<br />
+        모두 입력해주세요.
+      </Title>
+      <SearchSelector
+        placeholder="학교를 검색하세요.(없을 시 ‘기타’ 입력)"
+        searchData={schools}
+        selectedResults={avoidUniversities}
+        setSelectedResults={setAvoidUniversities}
+      />
+      <Description>
+        ※ 참여 인원이 부족할 경우 기피학교와
+        <br />
+        매칭될 수 있습니다.
+      </Description>
+    </SurveyTemplate>
+  );
 };
+
+const Description = styled.p`
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  bottom: 163px;
+`;
 
 export default AvoidUniversitiesSurvey;

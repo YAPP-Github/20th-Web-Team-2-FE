@@ -1,35 +1,58 @@
-import React, { ChangeEvent, useRef, useState } from 'react';
-import { schools } from '@/mock/schools';
+import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { DeleteIcon, SearchIcon } from '@/assets/img';
 
-const SchoolSearch = () => {
+export interface SearchData {
+  name: string;
+  id: number;
+}
+
+interface SearchSelectorProps {
+  placeholder: string;
+  searchData: SearchData[];
+  selectedResults: number[];
+  setSelectedResults: React.Dispatch<React.SetStateAction<number[]>>;
+}
+
+const MAX = 4;
+
+const SearchSelector = ({ placeholder, searchData, selectedResults, setSelectedResults }: SearchSelectorProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [selectedSchools, setSelectedSchools] = useState<string[]>([]);
+  const [selectedSchools, setSelectedSchools] = useState<string[]>([]); // 렌더링될 NAME 데이터
+
+  const findId = useCallback((value: string) => Number(searchData.find((data) => data.name === value)?.id), [searchData]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    if (!schools.map(({ name }: { name: string }) => name).includes(value)) return;
-    setSelectedSchools((prev) => [...prev, value]);
+    const id = findId(value);
+
     if (inputRef.current) inputRef.current.value = '';
+    const noMatchData = !searchData.map(({ id }) => id).includes(id);
+    const overMaxLimit = selectedResults.length >= MAX;
+    if (noMatchData || overMaxLimit) return;
+
+    setSelectedResults((prev) => [...prev, id]);
+    setSelectedSchools((prev) => [...prev, value]);
+    console.log(selectedResults);
   };
 
   const handleDeleteClick = (value: string) => {
-    setSelectedSchools((prev) => prev.filter((val) => val !== value));
+    setSelectedSchools((prev) => prev.filter((name) => name !== value));
+    setSelectedResults((prev) => prev.filter((id) => id !== findId(value)));
   };
 
   return (
-    <div>
+    <>
       <SearchWrapper>
-        <SearchInput ref={inputRef} list="schools" placeholder="학교를 검색하세요." onChange={handleInputChange} />
+        <SearchInput ref={inputRef} list="schools" placeholder={placeholder} onChange={handleInputChange} />
+        <datalist id="schools">
+          {searchData.map(({ name, id }) => (
+            <option key={id} value={name} />
+          ))}
+        </datalist>
         <SearchIconWrapper icon={SearchIcon} />
       </SearchWrapper>
-      <datalist id="schools">
-        {schools.map(({ name }, index) => (
-          <option key={index} value={name} />
-        ))}
-      </datalist>
       <SchoolWrapper>
         {selectedSchools.map((value, index) => (
           <School key={value + index}>
@@ -38,21 +61,22 @@ const SchoolSearch = () => {
           </School>
         ))}
       </SchoolWrapper>
-    </div>
+    </>
   );
 };
 
 const SearchWrapper = styled.div`
   position: relative;
-  margin-bottom: 18px;
+  margin: 45px 0 18px;
 `;
 
 const SearchInput = styled.input`
   height: 38px;
   width: 100%;
+  font-size: 14px;
   background-color: ${({ theme }) => theme.palette.grayLight};
   border-radius: 100px;
-  padding: 10px 40px;
+  padding: 10px 0 10px 40px;
   outline: none;
 
   &::-webkit-calendar-picker-indicator {
@@ -93,4 +117,4 @@ const School = styled.li`
   font-size: 14px;
 `;
 
-export default SchoolSearch;
+export default SearchSelector;
