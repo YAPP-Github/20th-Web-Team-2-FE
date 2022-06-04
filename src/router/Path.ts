@@ -24,6 +24,7 @@ enum Path {
   MyBodySmoke = 'my-body-smoke',
   MyDateCount = 'my-date-count',
   PreferDepartmentCharacter = 'prefer-department-character',
+  OauthKakao = '/oauth/kakao',
 }
 
 export default Path;
