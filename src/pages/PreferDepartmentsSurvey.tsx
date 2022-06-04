@@ -6,7 +6,6 @@ import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox
 
 const PreferDepartmentsSurvey = () => {
   const [checkedMultiOption, setMultiCheckedOption] = useState<ChooseFourBoxItemProps[]>(ITEMS);
-  console.log(checkedMultiOption, 'checkedMultiOption');
 
   return (
     <SurveyTemplate disableNext={!checkedMultiOption} currStep={3} totalStep={10}>
@@ -17,8 +16,8 @@ const PreferDepartmentsSurvey = () => {
           모두 알려주세요.
         </strong>
       </Title>
-      <ChooseFourBox isMulti items={ITEMS} checkedMultiOption={checkedMultiOption} setMultiCheckedOption={setMultiCheckedOption}>
-        학과를 선택해주세요
+      <ChooseFourBox isMulti items={ITEMS} checkedMultiOption={checkedMultiOption} setMultiCheckedOption={setMultiCheckedOption} top={97}>
+        복수 선택이 가능합니다.
       </ChooseFourBox>
     </SurveyTemplate>
   );
