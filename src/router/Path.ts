@@ -2,7 +2,7 @@ enum Path {
   LandingPage = '/',
   Component = '/component', // FIXME: 컴포넌트 모아두는 곳 (개발완료 후 삭제)
   AuthMail = '/auth-mail',
-  TypeOfMeetingSurvey = 'type-of-meeting',
+  TypeOfMeetingSurvey = '/type-of-meeting',
   GenderAverageAgeSurvey = 'gender-age',
   OurUniversitiesSurvey = 'our-univ',
   OurDepartmentsAverageHeightSurvey = 'our-dprt-height',

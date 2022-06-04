@@ -29,12 +29,11 @@ function Routing() {
       <PageLayout>
         <PageWrapper>
           <Routes>
-            <Route path="*" element={<NotFound />} />
             <Route path={Path.LandingPage} element={<LandingPage />} />
             <Route path={Path.Component} element={<Test />} />
             <Route path={Path.AuthMail} element={<AuthMail />} />
+            <Route path={Path.TypeOfMeetingSurvey} element={<TypeOfMeetingSurvey />} />
             <Route path={'/meeting'} element={<Outlet />}>
-              <Route path={Path.TypeOfMeetingSurvey} element={<TypeOfMeetingSurvey />} />
               <Route path={Path.GenderAverageAgeSurvey} element={<GenderAverageAgeSurvey />} />
               <Route path={Path.OurUniversitiesSurvey} element={<OurUniversitiesSurvey />} />
               <Route path={Path.OurDepartmentsAverageHeightSurvey} element={<OurDepartmentsAverageHeightSurvey />} />
@@ -49,6 +48,20 @@ function Routing() {
               <Route path={Path.AgreementSurvey} element={<AgreementSurvey />} />
               <Route path={Path.KakaoIdSurvey} element={<KakaoIdSurvey />} />
             </Route>
+            <Route path={'/dating'} element={<Outlet />}>
+              <Route path={Path.GenderAverageAgeSurvey} element={<GenderAverageAgeSurvey />} />
+              {/*MyDepartmentMindset my-department-mindset*/}
+              {/*MyMbtiHeight my-mbti-height*/}
+              {/**/}
+              <Route path={Path.AvoidUniversitiesSurvey} element={<AvoidUniversitiesSurvey />} />
+              <Route path={Path.PreferUniversitiesSurvey} element={<PreferUniversitiesSurvey />} />
+              {/*선호나이/키 페이지 추가*/}
+
+              <Route path={Path.ChannelSurvey} element={<ChannelSurvey />} />
+              <Route path={Path.AgreementSurvey} element={<AgreementSurvey />} />
+              <Route path={Path.KakaoIdSurvey} element={<KakaoIdSurvey />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </PageWrapper>
       </PageLayout>

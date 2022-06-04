@@ -6,10 +6,12 @@ import styled from 'styled-components';
 import { MIN_AGE, MAX_AGE } from '@/components/domain/survey/AgeBox';
 import useMeetingNavigate from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
+import { useNavigate } from 'react-router-dom';
 
 export type GenderOptions = 'female' | 'male';
 
 const MeetingSurvey5 = () => {
+  const navigate = useNavigate();
   const meetingNavigate = useMeetingNavigate();
   const [genderOption, setGenderOption] = useState<GenderOptions>('female');
   const [ageOption, setAgeOption] = useState(Math.floor((MIN_AGE + MAX_AGE) / 2));
@@ -19,7 +21,7 @@ const MeetingSurvey5 = () => {
       disableNext={!ageOption && !genderOption}
       currStep={3}
       totalStep={10}
-      handlePrevClick={() => meetingNavigate(Path.TypeOfMeetingSurvey)}
+      handlePrevClick={() => navigate(Path.TypeOfMeetingSurvey)}
       handleNextClick={() => meetingNavigate(Path.GenderAverageAgeSurvey)}
     >
       <StyledTitle>
