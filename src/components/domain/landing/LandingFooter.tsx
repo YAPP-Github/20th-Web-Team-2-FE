@@ -1,9 +1,9 @@
 import { InstagramIcon, KakaoIcon } from '@/assets/img';
-import { HeaderWrapper, Logo } from '@/components/survey/SurveyTemplate';
 import { palette } from '@/lib/styles/palette';
 import { DivisionLineStyled } from '@/pages/Agreement';
 import React from 'react';
 import styled from 'styled-components';
+import { HeaderWrapper, Logo } from '../survey/SurveyTemplate';
 
 function LandingFooter() {
   return (

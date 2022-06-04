@@ -1,12 +1,9 @@
 import styled from 'styled-components';
 import { SurveyTemplate } from '@/components/domain/survey';
 import { useState } from 'react';
-import { Button, SimpleRangeSlider } from '@/components/base';
-import MultiRangeSlider from '@/components/base/MultiRangeSlider';
-import SchoolSearch from '@/components/base/SchoolSearch';
 
 const Survey = () => {
-  const [canMoveNext, setCanMoveNext] = useState(true);
+  const [canMoveNext] = useState(true);
 
   return (
     <SurveyTemplate disableNext={canMoveNext} currStep={3} totalStep={10}>

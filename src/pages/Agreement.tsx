@@ -1,5 +1,5 @@
 import CheckBox from '@/components/base/CheckBox';
-import SurveyTemplate from '@/components/survey/SurveyTemplate';
+import { SurveyTemplate } from '@/components/domain/survey';
 import useAgreementCheck from '@/hooks/agreement/useAgreementCheck';
 import { palette } from '@/lib/styles/palette';
 import { Title } from '@/lib/styles/styledComponents';
@@ -29,7 +29,7 @@ const Agreement = () => {
   );
 };
 
-const DivisionLineStyled = styled.div`
+export const DivisionLineStyled = styled.div`
   border: 0.75px solid ${palette.grayLight};
 `;
 

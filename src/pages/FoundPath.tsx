@@ -1,9 +1,8 @@
-import SurveyTemplate from '@/components/survey/SurveyTemplate';
 import { Title } from '@/lib/styles/styledComponents';
 import CheckBox from '@/components/base/CheckBox';
 import { FormWrapper } from './AuthMail';
 import useFoundPathCheck from '@/hooks/agreement/useFoundPathCheck';
-
+import { SurveyTemplate } from '@/components/domain/survey';
 
 const FoundPath = () => {
   const { pathCheckList, onChangeCheck } = useFoundPathCheck();
