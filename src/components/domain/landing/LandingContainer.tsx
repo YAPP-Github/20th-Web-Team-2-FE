@@ -21,7 +21,7 @@ function LandingContainer() {
       {!isLogin ? (
         <BtnBox>
           <BtnTextStyled>간단하게 로그인하고 인연을 찾아보세요.</BtnTextStyled>
-          <LandingBtn size="medium" fontWeight={700} fullWidth variant={'kakao'}>
+          <LandingBtn size="medium" fontWeight={700} fullWidth variant={'kakao'} onClick={onToggleModal}>
             카카오 로그인
           </LandingBtn>
         </BtnBox>
@@ -39,9 +39,9 @@ function LandingContainer() {
         <Modal
           width={200}
           height={140}
-          bottonName="기다리기"
-          title="프로젝트 준비중입니다!"
-          text="잠시만 기다려주세요"
+          bottonName="확인"
+          title="런칭 준비중입니다!"
+          text="조금만 더 기다려주세요 😔"
           onToggleModal={onToggleModal}
           onClick={() => {
             console.log('안녕하세요');
