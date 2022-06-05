@@ -6,13 +6,14 @@ import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
 import useMeetingNavigate from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
+import { Abroad } from '@/types/data';
 
 const IsAbroadSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
-  const [isAbroad, setIsAbroad] = useState('domestic');
+  const [isAbroad, setIsAbroad] = useState<Abroad>(Abroad.domestic);
   const onChangeOption = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id } = e.target;
-    setIsAbroad(id);
+    setIsAbroad(id as Abroad);
   };
   return (
     <SurveyTemplate
