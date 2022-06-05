@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { SurveyTemplate } from '@/components/domain/survey';
-import { GenderBox, AgeBox } from '@/components/domain/survey';
+import { SurveyTemplate, AgeBox } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import styled from 'styled-components';
 import { MIN_AGE, MAX_AGE } from '@/components/domain/survey/AgeBox';
+import ChooseTwoBox from '@/components/domain/survey/ChooseTwoBox';
 import useMeetingNavigate from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +15,10 @@ const MeetingSurvey5 = () => {
   const meetingNavigate = useMeetingNavigate();
   const [genderOption, setGenderOption] = useState<GenderOptions>('female');
   const [ageOption, setAgeOption] = useState(Math.floor((MIN_AGE + MAX_AGE) / 2));
-
+  const onChangeOption = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id } = e.target;
+    setGenderOption(id as GenderOptions);
+  };
   return (
     <SurveyTemplate
       disableNext={!ageOption && !genderOption}
@@ -31,9 +34,9 @@ const MeetingSurvey5 = () => {
         <br />
         바로 매칭해드릴게요!
       </StyledTitle>
-      <GenderBox genderOption={genderOption} setGenderOption={setGenderOption}>
+      <ChooseTwoBox items={ITEMS} selectedOption={genderOption} onChangeOption={onChangeOption}>
         성별을 선택해주세요.
-      </GenderBox>
+      </ChooseTwoBox>
       <AgeBox setAgeOption={setAgeOption}>참여자의 평균 나이를 알려주세요.</AgeBox>
     </SurveyTemplate>
   );
@@ -42,5 +45,18 @@ const MeetingSurvey5 = () => {
 const StyledTitle = styled(Title)`
   font-weight: 400;
 `;
+
+const ITEMS = [
+  {
+    id: 'FEMAIL',
+    text: '여자',
+    name: 'gender',
+  },
+  {
+    id: 'MAIL',
+    text: '남자',
+    name: 'gender',
+  },
+];
 
 export default MeetingSurvey5;
