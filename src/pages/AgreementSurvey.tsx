@@ -6,7 +6,7 @@ import { Title } from '@/lib/styles/styledComponents';
 import React from 'react';
 import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
-import useMeetingNavigate from '@/hooks/common/useMeetingNavigate';
+import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
 
 const AgreementSurvey = () => {
