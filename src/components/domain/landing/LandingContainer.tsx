@@ -11,6 +11,15 @@ function LandingContainer() {
    */
   const [isLogin, setIsLogin] = useState(false);
   const [isModal, onToggleModal] = useToggle();
+
+  const handleKakaoLoginClick = () => {
+    const clientId = import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY;
+    const redirectUri = encodeURI(`${window.location.origin}/oauth/kakao`);
+
+    const loginUrl = import.meta.env.VITE_KAKAO_OPEN_URL.replace('{clientId}', clientId).replace('{redirectUri}', redirectUri);
+    window.location.href = loginUrl;
+  };
+
   return (
     <Container>
       <MainIconBox>
@@ -21,7 +30,7 @@ function LandingContainer() {
       {!isLogin ? (
         <BtnBox>
           <BtnTextStyled>간단하게 로그인하고 인연을 찾아보세요.</BtnTextStyled>
-          <LandingBtn size="medium" fontWeight={700} fullWidth variant={'kakao'} onClick={onToggleModal}>
+          <LandingBtn size="medium" fontWeight={700} fullWidth variant={'kakao'} onClick={handleKakaoLoginClick}>
             카카오 로그인
           </LandingBtn>
         </BtnBox>
