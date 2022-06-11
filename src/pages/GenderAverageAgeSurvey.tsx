@@ -8,12 +8,12 @@ import useMeetingNavigate from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
 import { useNavigate } from 'react-router-dom';
 
-export type GenderOptions = 'female' | 'male';
+export type GenderOptions = 'FEMAIL' | 'MALE';
 
-const MeetingSurvey5 = () => {
+const GenderAverageAgeSurvey = () => {
   const navigate = useNavigate();
   const meetingNavigate = useMeetingNavigate();
-  const [genderOption, setGenderOption] = useState<GenderOptions>('female');
+  const [genderOption, setGenderOption] = useState<GenderOptions>('FEMAIL');
   const [ageOption, setAgeOption] = useState(Math.floor((MIN_AGE + MAX_AGE) / 2));
   const onChangeOption = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id } = e.target;
@@ -59,4 +59,4 @@ const ITEMS = [
   },
 ];
 
-export default MeetingSurvey5;
+export default GenderAverageAgeSurvey;
