@@ -20,7 +20,7 @@ enum Path {
   KakaoIdSurvey = 'kakao-id',
 
   MyGenderAge = 'my-gender-age',
-  MyDepartmentMindset = 'my-department-mindset',
+  MyDepartmentCharacter = 'my-department-character',
   MyMbtiHeight = 'my-mbti-height',
   MyBodySmoke = 'my-body-smoke',
   MyDateCount = 'my-date-count',

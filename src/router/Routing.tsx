@@ -22,7 +22,7 @@ import {
   KakaoIdSurvey,
   GenderAverageAgeSurvey,
   OurUniversitiesSurvey,
-  MyDepartmentMindset,
+  MyDepartmentCharacter,
   MyMbtiHeight,
   MyBodySmoke,
   MyDateCount,
@@ -60,7 +60,7 @@ function Routing() {
             </Route>
             <Route path={'/dating'} element={<Outlet />}>
               <Route path={Path.MyGenderAge} element={<MyGenderAge />} />
-              <Route path={Path.MyDepartmentMindset} element={<MyDepartmentMindset />} />
+              <Route path={Path.MyDepartmentCharacter} element={<MyDepartmentCharacter />} />
               <Route path={Path.MyMbtiHeight} element={<MyMbtiHeight />} />
               <Route path={Path.MyBodySmoke} element={<MyBodySmoke />} />
               <Route path={Path.MyDateCount} element={<MyDateCount />} />
