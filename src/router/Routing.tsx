@@ -28,6 +28,7 @@ import {
   MyDateCount,
   PreferDepartmentCharacter,
   MyGenderAge,
+  OauthKakao,
 } from '@/pages';
 import Test from '@/components/base/Test';
 
@@ -41,6 +42,7 @@ function Routing() {
             <Route path={Path.Component} element={<Test />} />
             <Route path={Path.AuthMail} element={<AuthMail />} />
             <Route path={Path.TypeOfMeetingSurvey} element={<TypeOfMeetingSurvey />} />
+            <Route path={Path.OauthKakao} element={<OauthKakao />} />
             <Route path={'/meeting'} element={<Outlet />}>
               <Route path={Path.GenderAverageAgeSurvey} element={<GenderAverageAgeSurvey />} />
               <Route path={Path.OurUniversitiesSurvey} element={<OurUniversitiesSurvey />} />
