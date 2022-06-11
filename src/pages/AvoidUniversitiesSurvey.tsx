@@ -5,18 +5,20 @@ import SearchSelector from '@/components/domain/survey/SearchSelector';
 import { schools } from '@/mock/schools';
 import styled from 'styled-components';
 import Path from '@/router/Path';
-import useMeetingNavigate from '@/hooks/common/useMeetingNavigate';
+import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useMatch } from 'react-router-dom';
 
 const AvoidUniversitiesSurvey = () => {
-  const meetingNavigate = useMeetingNavigate();
+  const matchMeeting = useMatch('/meeting/*');
+  const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
   const [avoidUniversities, setAvoidUniversities] = useState<number[]>([]);
 
   return (
     <SurveyTemplate
       disableNext={false}
       hasProgressBar={true}
-      totalStep={15}
-      currStep={5}
+      totalStep={matchMeeting ? 15 : 12}
+      currStep={matchMeeting ? 5 : 7}
       handlePrevClick={() => meetingNavigate(Path.OurDepartmentsAverageHeightSurvey)}
       handleNextClick={() => meetingNavigate(Path.PreferUniversitiesSurvey)}
     >
