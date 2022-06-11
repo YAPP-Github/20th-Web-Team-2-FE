@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SurveyTemplate } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import { ChooseFourBox } from '@/components/domain/survey';
+import styled from 'styled-components';
 
 const MyDepartmentCharacter = () => {
   const [checkedDepartmentOption, setDepartmentCheckedOption] = useState<DepartmentOptions | string>('LIBERAL');
@@ -14,10 +15,10 @@ const MyDepartmentCharacter = () => {
         <br />
         선택해주세요.
       </Title>
-      <ChooseFourBox items={DEPARTMENT_ITEMS} checkedOption={checkedDepartmentOption} setCheckedOption={setDepartmentCheckedOption}>
+      <ChooseFourBox top={34} items={DEPARTMENT_ITEMS} checkedOption={checkedDepartmentOption} setCheckedOption={setDepartmentCheckedOption}>
         학과를 선택해주세요
       </ChooseFourBox>
-      <ChooseFourBox items={CHARACTER_ITEMS} checkedOption={checkedCharacterOption} setCheckedOption={setCharacterCheckedOption}>
+      <ChooseFourBox top={31} items={CHARACTER_ITEMS} checkedOption={checkedCharacterOption} setCheckedOption={setCharacterCheckedOption}>
         본인의 성격을 선택해주세요
       </ChooseFourBox>
     </SurveyTemplate>
