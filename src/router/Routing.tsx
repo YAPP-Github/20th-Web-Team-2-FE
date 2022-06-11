@@ -27,6 +27,7 @@ import {
   MyBodySmoke,
   MyDateCount,
   PreferDepartmentCharacter,
+  MyGenderAge,
 } from '@/pages';
 import Test from '@/components/base/Test';
 
@@ -58,7 +59,7 @@ function Routing() {
               <Route path={Path.KakaoIdSurvey} element={<KakaoIdSurvey />} />
             </Route>
             <Route path={'/dating'} element={<Outlet />}>
-              <Route path={Path.GenderAverageAgeSurvey} element={<GenderAverageAgeSurvey />} />
+              <Route path={Path.MyGenderAge} element={<MyGenderAge />} />
               <Route path={Path.MyDepartmentMindset} element={<MyDepartmentMindset />} />
               <Route path={Path.MyMbtiHeight} element={<MyMbtiHeight />} />
               <Route path={Path.MyBodySmoke} element={<MyBodySmoke />} />
