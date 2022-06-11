@@ -25,7 +25,6 @@ export default defineConfig({
     svgr({ keepEmittedAssets: true }),
     createHtmlPlugin({
       minify: true,
-      template: 'public/index.html',
     }),
   ],
 });
