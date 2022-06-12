@@ -20,6 +20,8 @@ interface ChooseFourBoxProps {
   isMulti?: boolean;
   items: ChooseFourBoxItemProps[];
   top?: 45 | 97;
+  width?: number;
+  height?: 38 | 48 | 70 | 72 | 100;
 }
 
 const ChooseFourBox = ({
@@ -31,6 +33,8 @@ const ChooseFourBox = ({
   isMulti = false,
   items,
   top,
+  width,
+  height,
 }: ChooseFourBoxProps) => {
   if (isMulti && !setMultiCheckedOption) {
     throw new Error('setMultiCheckedOption is required');
@@ -56,10 +60,22 @@ const ChooseFourBox = ({
   return (
     <Container top={top}>
       <SubTitle>{children}</SubTitle>
-      <ButtonWrapper>
+      <ButtonWrapper gridSet={width || 999}>
         {isMulti
           ? checkedMultiOption?.map(({ name, id, text, checked }) => (
-              <ChoiceButton isMultiple name={name} size="medium" variant="grayBlack" id={id} onChange={handleMultiChange} key={id} checked={checked}>
+              <ChoiceButton
+                isMultiple
+                width={width}
+                height={height}
+                name={name}
+                size="medium"
+                variant="grayBlack"
+                id={id}
+                onChange={handleMultiChange}
+                key={id}
+                checked={checked}
+                invisible={id === 'INVISIVLE' ? true : false}
+              >
                 {text}
               </ChoiceButton>
             ))
@@ -78,10 +94,10 @@ const Container = styled.section<{ top?: number }>`
   margin-top: ${({ top }) => (top ? `${top}px` : '45px')};
 `;
 
-const ButtonWrapper = styled.div`
+const ButtonWrapper = styled.div<{ gridSet: number }>`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: ${({ gridSet }) => (gridSet > 100 ? `repeat(2, 1fr)` : `repeat(4, 1fr)`)};
   gap: 8px;
 `;
 
-export default React.memo(ChooseFourBox);
+export default ChooseFourBox;
