@@ -4,7 +4,7 @@ import { Title } from '@/lib/styles/styledComponents';
 import styled from 'styled-components';
 import { MIN_AGE, MAX_AGE } from '@/components/domain/survey/AgeBox';
 import ChooseTwoBox from '@/components/domain/survey/ChooseTwoBox';
-import useMeetingNavigate from '@/hooks/common/useMeetingNavigate';
+import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
 import { useNavigate } from 'react-router-dom';
 

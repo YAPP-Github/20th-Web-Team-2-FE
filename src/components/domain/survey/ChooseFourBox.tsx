@@ -83,4 +83,4 @@ const ButtonWrapper = styled.div`
   gap: 8px;
 `;
 
-export default React.memo(ChooseFourBox);
+export default React.memo<any>(ChooseFourBox);
