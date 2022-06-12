@@ -5,13 +5,25 @@ import { Title } from '@/lib/styles/styledComponents';
 import styled from 'styled-components';
 import { MIN_AGE, MAX_AGE } from '@/components/domain/survey/AgeBox';
 import { MIN_HEIGHT, MAX_HEIGHT } from '@/components/domain/survey/HeightBox';
+import { useMatch } from 'react-router-dom';
+import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import Path from '@/router/Path';
 
 const PreferAverageAgeHeightSurvey = () => {
+  const matchMeeting = useMatch('/meeting/*');
+  const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
+
   const [multiAgeOption, setMultiAgeOption] = useState<number[]>([MIN_AGE, MAX_AGE]);
   const [multiHeightOption, setMultiHeightOption] = useState<number[]>([MIN_HEIGHT, MAX_HEIGHT]);
 
   return (
-    <SurveyTemplate disableNext={!multiAgeOption && !multiHeightOption} currStep={3} totalStep={10}>
+    <SurveyTemplate
+      disableNext={!multiAgeOption || !multiHeightOption}
+      totalStep={matchMeeting ? 15 : 12}
+      currStep={matchMeeting ? 8 : 9}
+      handlePrevClick={() => meetingNavigate(matchMeeting ? Path.PreferDepartmentsSurvey : Path.PreferUniversitiesSurvey)}
+      handleNextClick={() => meetingNavigate(matchMeeting ? Path.MindsetSurvey : Path.PreferDepartmentCharacter)}
+    >
       <StyledTitle>
         <strong>선호하는 범위를</strong>
         <br /> 최대한 넓게 알려주세요.
