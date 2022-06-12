@@ -20,7 +20,8 @@ export { default as PreferDepartmentsSurvey } from './PreferDepartmentsSurvey';
 export { default as PreferUniversitiesSurvey } from './PreferUniversitiesSurvey';
 export { default as PreferAverageAgeHeightSurvey } from './PreferAverageAgeHeightSurvey';
 
-export { default as MyDepartmentMindset } from './MyDepartmentMindset';
+export { default as MyGenderAge } from './MyGenderAge';
+export { default as MyDepartmentCharacter } from './MyDepartmentCharacter';
 export { default as MyMbtiHeight } from './MyMbtiHeight';
 export { default as MyBodySmoke } from './MyBodySmoke';
 export { default as MyDateCount } from './MyDateCount';

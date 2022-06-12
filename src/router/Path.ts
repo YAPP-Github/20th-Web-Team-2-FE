@@ -18,7 +18,9 @@ enum Path {
   ChannelSurvey = 'channel',
   AgreementSurvey = 'agreement',
   KakaoIdSurvey = 'kakao-id',
-  MyDepartmentMindset = 'my-department-mindset',
+
+  MyGenderAge = 'my-gender-age',
+  MyDepartmentCharacter = 'my-department-character',
   MyMbtiHeight = 'my-mbti-height',
   MyBodySmoke = 'my-body-smoke',
   MyDateCount = 'my-date-count',

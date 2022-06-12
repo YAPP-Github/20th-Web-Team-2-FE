@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ChoiceButton } from '@/components/base';
-import { ChoiceOptions } from '@/pages/TypeOfMeetingSurvey';
 import { SubTitle } from '@/lib/styles/styledComponents';
 
 export interface ChooseFourBoxItemProps {
@@ -11,20 +10,20 @@ export interface ChooseFourBoxItemProps {
   checked?: boolean;
 }
 
-interface ChooseFourBoxProps {
-  checkedOption?: ChoiceOptions;
-  setCheckedOption?: React.Dispatch<React.SetStateAction<ChoiceOptions>>;
+interface ChooseFourBoxProps<T> {
+  checkedOption?: T;
+  setCheckedOption?: React.Dispatch<React.SetStateAction<T>>;
   checkedMultiOption?: ChooseFourBoxItemProps[];
   setMultiCheckedOption?: React.Dispatch<React.SetStateAction<ChooseFourBoxItemProps[]>>;
   children: React.ReactNode;
   isMulti?: boolean;
   items: ChooseFourBoxItemProps[];
-  top?: 45 | 97;
+  top?: 31 | 34 | 45 | 97;
   width?: number;
   height?: 38 | 48 | 70 | 72 | 100;
 }
 
-const ChooseFourBox = ({
+const ChooseFourBox = <T extends string>({
   checkedOption,
   setCheckedOption,
   checkedMultiOption,
@@ -35,7 +34,7 @@ const ChooseFourBox = ({
   top,
   width,
   height,
-}: ChooseFourBoxProps) => {
+}: ChooseFourBoxProps<T | string>) => {
   if (isMulti && !setMultiCheckedOption) {
     throw new Error('setMultiCheckedOption is required');
   }
@@ -46,7 +45,7 @@ const ChooseFourBox = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isMulti && setCheckedOption) {
       const { id } = e.target;
-      setCheckedOption(id as ChoiceOptions);
+      setCheckedOption(id);
     }
   };
 
