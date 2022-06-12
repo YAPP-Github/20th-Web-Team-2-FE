@@ -22,11 +22,12 @@ import {
   KakaoIdSurvey,
   GenderAverageAgeSurvey,
   OurUniversitiesSurvey,
-  MyDepartmentMindset,
+  MyDepartmentCharacter,
   MyMbtiHeight,
   MyBodySmoke,
   MyDateCount,
   PreferDepartmentCharacter,
+  MyGenderAge,
   OauthKakao,
 } from '@/pages';
 import Test from '@/components/base/Test';
@@ -60,8 +61,8 @@ function Routing() {
               <Route path={Path.KakaoIdSurvey} element={<KakaoIdSurvey />} />
             </Route>
             <Route path={'/dating'} element={<Outlet />}>
-              <Route path={Path.GenderAverageAgeSurvey} element={<GenderAverageAgeSurvey />} />
-              <Route path={Path.MyDepartmentMindset} element={<MyDepartmentMindset />} />
+              <Route path={Path.MyGenderAge} element={<MyGenderAge />} />
+              <Route path={Path.MyDepartmentCharacter} element={<MyDepartmentCharacter />} />
               <Route path={Path.MyMbtiHeight} element={<MyMbtiHeight />} />
               <Route path={Path.MyBodySmoke} element={<MyBodySmoke />} />
               <Route path={Path.MyDateCount} element={<MyDateCount />} />

@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 export type GenderOptions = 'FEMAIL' | 'MALE';
 
-const GenderAverageAgeSurvey = () => {
+const MyGenderAge = () => {
   const navigate = useNavigate();
   const meetingNavigate = useMeetingNavigate();
   const [genderOption, setGenderOption] = useState<GenderOptions>('FEMAIL');
@@ -28,7 +28,7 @@ const GenderAverageAgeSurvey = () => {
       handleNextClick={() => meetingNavigate(Path.GenderAverageAgeSurvey)}
     >
       <StyledTitle>
-        <strong>2:2 미팅</strong>을 선택하셨어요.
+        <strong>1:1 소개팅</strong>을 선택하셨어요.
         <br />
         몇가지 질문만 대답하시면
         <br />
@@ -37,7 +37,7 @@ const GenderAverageAgeSurvey = () => {
       <ChooseTwoBox items={ITEMS} selectedOption={genderOption} onChangeOption={onChangeOption}>
         성별을 선택해주세요.
       </ChooseTwoBox>
-      <AgeBox setAgeOption={setAgeOption}>참여자의 평균 나이를 알려주세요.</AgeBox>
+      <AgeBox setAgeOption={setAgeOption}>본인의 나이를 알려주세요</AgeBox>
     </SurveyTemplate>
   );
 };
@@ -59,4 +59,4 @@ const ITEMS = [
   },
 ];
 
-export default GenderAverageAgeSurvey;
+export default MyGenderAge;

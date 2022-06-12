@@ -11,7 +11,7 @@ export type ChoiceOptions = 'ONE' | 'TWO' | 'THREE' | 'FOUR';
 const TypeOfMeetingSurvey = () => {
   const navigate = useNavigate();
   const meetingNavigate = useMeetingNavigate();
-  const [checkedOption, setCheckedOption] = useState<ChoiceOptions>('ONE');
+  const [checkedOption, setCheckedOption] = useState<ChoiceOptions | string>('ONE');
 
   const ITEMS = [
     {

@@ -10,18 +10,18 @@ export interface ChooseFourBoxItemProps {
   checked?: boolean;
 }
 
-interface ChooseFourBoxProps<CheckedOption> {
-  checkedOption?: CheckedOption;
-  setCheckedOption?: React.Dispatch<React.SetStateAction<CheckedOption>>;
+interface ChooseFourBoxProps<T> {
+  checkedOption?: T;
+  setCheckedOption?: React.Dispatch<React.SetStateAction<T>>;
   checkedMultiOption?: ChooseFourBoxItemProps[];
   setMultiCheckedOption?: React.Dispatch<React.SetStateAction<ChooseFourBoxItemProps[]>>;
   children: React.ReactNode;
   isMulti?: boolean;
   items: ChooseFourBoxItemProps[];
-  top?: 45 | 97;
+  top?: 31 | 34 | 45 | 97;
 }
 
-function ChooseFourBox<CheckedOption extends string>({
+const ChooseFourBox = <T extends string>({
   checkedOption,
   setCheckedOption,
   checkedMultiOption,
@@ -30,7 +30,7 @@ function ChooseFourBox<CheckedOption extends string>({
   isMulti = false,
   items,
   top,
-}: ChooseFourBoxProps<CheckedOption>) {
+}: ChooseFourBoxProps<T | string>) => {
   if (isMulti && !setMultiCheckedOption) {
     throw new Error('setMultiCheckedOption is required');
   }
@@ -41,7 +41,7 @@ function ChooseFourBox<CheckedOption extends string>({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isMulti && setCheckedOption) {
       const { id } = e.target;
-      setCheckedOption(id as CheckedOption);
+      setCheckedOption(id);
     }
   };
 
@@ -70,7 +70,7 @@ function ChooseFourBox<CheckedOption extends string>({
       </ButtonWrapper>
     </Container>
   );
-}
+};
 
 const Container = styled.section<{ top?: number }>`
   width: 100%;
