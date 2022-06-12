@@ -16,7 +16,7 @@ const MultiRangeSlider = ({ min, max, onChange }: MultiRangeSliderProps) => {
   const minValRef = useRef<HTMLInputElement>(null);
   const maxValRef = useRef<HTMLInputElement>(null);
   const range = useRef<HTMLDivElement>(null);
-  const sign = useRef<HTMLSpanElement>(null);
+  const sign = useRef<HTMLOutputElement>(null);
 
   const getPercent = useCallback((value: number) => Math.round(((value - min) / (max - min)) * 100), [min, max]);
   const getMidValue = useCallback(
@@ -43,7 +43,9 @@ const MultiRangeSlider = ({ min, max, onChange }: MultiRangeSliderProps) => {
         range.current.style.width = `${maxPercent - minPercent}%`;
       }
       if (sign.current) {
-        sign.current.style.left = `calc(${minPercent}% - ${sign.current.clientWidth / 2}px${minPercent < 10 ? ' + 40px' : ''})`;
+        sign.current.style.left = `calc(${minPercent}% + (${8 - minPercent * 0.15}px - ${sign.current.clientWidth / 2}px${
+          minPercent < 10 ? ' + 40px' : ''
+        })`;
       }
     }
   }, [minVal, getPercent]);
@@ -57,7 +59,9 @@ const MultiRangeSlider = ({ min, max, onChange }: MultiRangeSliderProps) => {
         range.current.style.width = `${maxPercent - minPercent}%`;
       }
       if (sign.current) {
-        sign.current.style.left = `calc(${maxPercent}% - ${sign.current.clientWidth / 2}px${maxPercent > 90 ? ' - 40px' : ''})`;
+        sign.current.style.left = `calc(${maxPercent}% + (${8 - maxPercent * 0.15}px - ${sign.current.clientWidth / 2}px)${
+          maxPercent > 90 ? ' - 40px' : ''
+        }`;
       }
     }
   }, [maxVal, getPercent]);
@@ -110,7 +114,7 @@ const SliderInput = styled.input<{ zIndex: number }>`
   position: absolute;
   height: 0;
   outline: none;
-  width: calc(100% - 2rem);
+  width: 100%;
   z-index: ${({ zIndex }) => zIndex};
   appearance: none;
 
@@ -135,11 +139,12 @@ const TrackWrapper = styled.div`
 `;
 
 const SignWrapper = styled.div`
-  display: flex;
-  justify-content: center;
+  //display: flex;
+  //justify-content: center;
+  position: relative;
 `;
 
-const Sign = styled.span`
+const Sign = styled.output`
   position: absolute;
   bottom: 16px;
   color: ${({ theme }) => theme.palette.white};
