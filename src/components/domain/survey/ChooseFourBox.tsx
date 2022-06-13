@@ -99,4 +99,4 @@ const ButtonWrapper = styled.div<{ gridSet: number }>`
   gap: 8px;
 `;
 
-export default ChooseFourBox;
+export default React.memo(ChooseFourBox);
