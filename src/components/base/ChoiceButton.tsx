@@ -45,7 +45,6 @@ const ChoiceButton = ({
   invisible,
   ...others
 }: InputBaseProps) => {
-  console.log(invisible);
   return (
     <>
       {isMultiple ? (
