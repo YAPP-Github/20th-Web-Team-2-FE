@@ -25,5 +25,5 @@ export { default as MyDepartmentCharacter } from './MyDepartmentCharacter';
 export { default as MyMbtiHeight } from './MyMbtiHeight';
 export { default as MyBodySmoke } from './MyBodySmoke';
 export { default as MyDateCount } from './MyDateCount';
-export { default as PreferDepartmentCharacter } from './PreferDepartmentCharacter';
+export { default as PreferDepartmentCharacterSurvey } from './PreferDepartmentCharacterSurvey';
 export { default as OauthKakao } from './OauthKakao';
