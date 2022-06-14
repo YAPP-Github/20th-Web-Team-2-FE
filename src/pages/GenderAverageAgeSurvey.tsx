@@ -7,6 +7,7 @@ import ChooseTwoBox from '@/components/domain/survey/ChooseTwoBox';
 import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
 import { useNavigate } from 'react-router-dom';
+import { GENDER_ITEMS } from '@/types/constant';
 
 export type GenderOptions = 'FEMAIL' | 'MALE';
 
@@ -34,7 +35,7 @@ const GenderAverageAgeSurvey = () => {
         <br />
         바로 매칭해드릴게요!
       </StyledTitle>
-      <ChooseTwoBox items={ITEMS} selectedOption={genderOption} onChangeOption={onChangeOption}>
+      <ChooseTwoBox items={GENDER_ITEMS} selectedOption={genderOption} onChangeOption={onChangeOption}>
         성별을 선택해주세요.
       </ChooseTwoBox>
       <AgeBox setAgeOption={setAgeOption}>참여자의 평균 나이를 알려주세요.</AgeBox>
@@ -45,18 +46,5 @@ const GenderAverageAgeSurvey = () => {
 const StyledTitle = styled(Title)`
   font-weight: 400;
 `;
-
-const ITEMS = [
-  {
-    id: 'FEMAIL',
-    text: '여자',
-    name: 'gender',
-  },
-  {
-    id: 'MAIL',
-    text: '남자',
-    name: 'gender',
-  },
-];
 
 export default GenderAverageAgeSurvey;

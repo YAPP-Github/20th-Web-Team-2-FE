@@ -19,7 +19,6 @@ export { default as PlaySurvey } from './PlaySurvey';
 export { default as PreferDepartmentsSurvey } from './PreferDepartmentsSurvey';
 export { default as PreferUniversitiesSurvey } from './PreferUniversitiesSurvey';
 export { default as PreferAverageAgeHeightSurvey } from './PreferAverageAgeHeightSurvey';
-
 export { default as MyGenderAge } from './MyGenderAge';
 export { default as MyDepartmentCharacter } from './MyDepartmentCharacter';
 export { default as MyMbtiHeight } from './MyMbtiHeight';
