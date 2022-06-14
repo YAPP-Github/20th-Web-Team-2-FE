@@ -4,27 +4,29 @@ import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox
 import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
 
-const PreferDepartmentCharacterSurvey = () => {
+const PreferBodyDateCountSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
   const [checkedMultiOption, setMultiCheckedOption] = useState<ChooseFourBoxItemProps[]>(DEPARTS);
-  const [checkedMultiOption2, setMultiCheckedOption2] = useState<ChooseFourBoxItemProps[]>(CHARACTER);
+  const [checkedCharacterOption, setCharacterCheckedOption] = useState<CharacterOptions | string>('VERY_QUIET');
+  console.log(checkedMultiOption);
   return (
     <SurveyTemplate
-      disableNext={!checkedMultiOption || !checkedMultiOption2}
-      currStep={9}
+      disableNext={!checkedMultiOption || !checkedCharacterOption}
+      currStep={10}
       totalStep={11}
-      handleNextClick={() => meetingNavigate(Path.PreferBodyDateCountSurvey)}
       handlePrevClick={() => meetingNavigate(Path.PreferAgeHeightSurvey)}
     >
-      <ChooseFourBox isMulti items={DEPARTS} checkedMultiOption={checkedMultiOption} setMultiCheckedOption={setMultiCheckedOption} top={97}>
+      <ChooseFourBox isMulti items={DEPARTS} checkedMultiOption={checkedMultiOption} setMultiCheckedOption={setMultiCheckedOption} top={31}>
         선호하는 학과를 모두 알려주세요.
       </ChooseFourBox>
-      <ChooseFourBox isMulti items={CHARACTER} checkedMultiOption={checkedMultiOption2} setMultiCheckedOption={setMultiCheckedOption2} top={97}>
-        선호하는 성격을 모두 알려주세요.
+      <ChooseFourBox items={CHARACTER} checkedOption={checkedCharacterOption} setCheckedOption={setCharacterCheckedOption} top={31}>
+        선호하는 상대방의 연애 횟수를 선택해주세요.
       </ChooseFourBox>
     </SurveyTemplate>
   );
 };
+
+type CharacterOptions = 'VERY_QUIET' | 'A_LITTLE_QUIET' | 'VERY_ACTIVE' | 'A_LITTLE_ACTIVE';
 
 const DEPARTS = [
   {
@@ -58,26 +60,22 @@ const CHARACTER = [
     id: 'VERY_QUIET',
     text: '많이 조용한',
     name: 'character',
-    checked: true,
   },
   {
     id: 'A_LITTLE_QUIET',
     text: '조금 조용한',
     name: 'character',
-    checked: true,
   },
   {
     id: 'A_LITTLE_ACTIVE',
     text: '조금 활발한',
     name: 'character',
-    checked: false,
   },
   {
     id: 'VERY_ACTIVE',
     text: '많이 활발한',
     name: 'character',
-    checked: false,
   },
 ];
 
-export default PreferDepartmentCharacterSurvey;
+export default PreferBodyDateCountSurvey;

@@ -24,7 +24,8 @@ enum Path {
   MyMbtiHeight = 'my-mbti-height',
   MyBodySmoke = 'my-body-smoke',
   MyDateCount = 'my-date-count',
-  PreferDepartmentCharacterSurvey = 'prefer-department-character',
+  PreferDepartmentCharacterSurvey = 'prefer-dprt-character',
+  PreferBodyDateCountSurvey = 'prefer-body-dcount',
   OauthKakao = '/oauth/kakao',
 }
 

@@ -29,6 +29,7 @@ import {
   PreferDepartmentCharacterSurvey,
   MyGenderAge,
   OauthKakao,
+  PreferBodyDateCountSurvey,
 } from '@/pages';
 import Test from '@/components/base/Test';
 
@@ -70,6 +71,7 @@ function Routing() {
               <Route path={Path.PreferUniversitiesSurvey} element={<PreferUniversitiesSurvey />} />
               {/*선호나이/키 페이지 추가*/}
               <Route path={Path.PreferDepartmentCharacterSurvey} element={<PreferDepartmentCharacterSurvey />} />
+              <Route path={Path.PreferBodyDateCountSurvey} element={<PreferBodyDateCountSurvey />} />
               <Route path={Path.IsAbroadSurvey} element={<IsAbroadSurvey />} />
               <Route path={Path.DomesticAreasSurvey} element={<DomesticAreasSurvey />} />
               <Route path={Path.AbroadAreasSurvey} element={<AbroadAreasSurvey />} />
