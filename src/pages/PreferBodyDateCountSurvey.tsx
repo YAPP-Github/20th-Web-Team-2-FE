@@ -15,7 +15,8 @@ const PreferBodyDateCountSurvey = () => {
       disableNext={!checkedMultiOption && !checkedCharacterOption}
       currStep={10}
       totalStep={11}
-      handlePrevClick={() => datingNavigate(Path.PreferAgeHeightSurvey)}
+      handlePrevClick={() => datingNavigate(Path.PreferDepartmentCharacterSurvey)}
+      // handleNextClick={() => datingNavigate(Path.prefer)}
     >
       <ChooseFourBox isMulti items={PREFER_BODY_ITEMS} checkedMultiOption={checkedMultiOption} setMultiCheckedOption={setMultiCheckedOption} top={31}>
         선호하는 체형을 모두 선택해주세요.
