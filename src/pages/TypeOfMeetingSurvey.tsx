@@ -5,6 +5,7 @@ import { ChooseFourBox } from '@/components/domain/survey';
 import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
 import { useNavigate } from 'react-router-dom';
+import { TYPE_OF_MEETING_ITEMS } from '@/types/constants/constant';
 
 export type ChoiceOptions = 'ONE' | 'TWO' | 'THREE' | 'FOUR';
 
@@ -12,29 +13,6 @@ const TypeOfMeetingSurvey = () => {
   const navigate = useNavigate();
   const meetingNavigate = useMeetingNavigate();
   const [checkedOption, setCheckedOption] = useState<ChoiceOptions | string>('ONE');
-
-  const ITEMS = [
-    {
-      name: 'typeOfMeeting',
-      id: 'ONE',
-      text: '1: 1 소개팅',
-    },
-    {
-      name: 'typeOfMeeting',
-      id: 'TWO',
-      text: '2: 2 미팅',
-    },
-    {
-      name: 'typeOfMeeting',
-      id: 'THREE',
-      text: '3: 3 미팅',
-    },
-    {
-      name: 'typeOfMeeting',
-      id: 'FOUR',
-      text: '4: 4 미팅',
-    },
-  ];
 
   return (
     <SurveyTemplate
@@ -49,7 +27,7 @@ const TypeOfMeetingSurvey = () => {
         <br />
         유형을 알려주세요.
       </Title>
-      <ChooseFourBox checkedOption={checkedOption} setCheckedOption={setCheckedOption} items={ITEMS} top={97}>
+      <ChooseFourBox checkedOption={checkedOption} setCheckedOption={setCheckedOption} items={TYPE_OF_MEETING_ITEMS} top={97}>
         1가지를 선택해주세요.
       </ChooseFourBox>
     </SurveyTemplate>

@@ -10,7 +10,6 @@ const PreferBodyDateCountSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
   const [checkedMultiOption, setMultiCheckedOption] = useState<ChooseFourBoxItemProps[]>(PREFER_DEPARTMENT_ITEMS);
   const [checkedCharacterOption, setCharacterCheckedOption] = useState('');
-  console.log(checkedMultiOption);
   return (
     <SurveyTemplate
       disableNext={!checkedMultiOption && !checkedCharacterOption}
