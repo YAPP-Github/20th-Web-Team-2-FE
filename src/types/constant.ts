@@ -264,3 +264,53 @@ export const PLAY_ITEMS = [
     name: 'play',
   },
 ];
+
+export const PREFER_DEPARTMENT_ITEMS = [
+  {
+    id: 'LIBERAL',
+    text: '문과',
+    name: 'ourDepartments',
+    checked: true,
+  },
+  {
+    id: 'SCIENCE',
+    text: '이과',
+    name: 'ourDepartments',
+    checked: true,
+  },
+  {
+    id: 'ATHLETIC',
+    text: '체육',
+    name: 'ourDepartments',
+    checked: false,
+  },
+  {
+    id: 'ART',
+    text: '예술',
+    name: 'ourDepartments',
+    checked: false,
+  },
+];
+
+export const PREFER_DCOUNT_ITEMS = [
+  {
+    id: 'ZERO',
+    text: '모태솔로',
+    name: 'preferDateCount ',
+  },
+  {
+    id: 'ONETWO',
+    text: '1~2회',
+    name: 'preferDateCount ',
+  },
+  {
+    id: 'THREEFOUR',
+    text: '3~4회',
+    name: 'preferDateCount ',
+  },
+  {
+    id: 'FIVE',
+    text: '5회 이상',
+    name: 'preferDateCount ',
+  },
+];
