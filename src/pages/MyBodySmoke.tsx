@@ -3,7 +3,8 @@ import { ChooseFourBox, ChooseTwoBox, SurveyTemplate } from '@/components/domain
 import Path from '@/router/Path';
 import { useDatingNavigate } from '@/hooks/common/useMeetingNavigate';
 import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';
-import { MYBODY_ITEMS, SMOKE_ITEMS } from '@/types/constant';
+import { SMOKE_ITEMS } from '@/types/constants/smoke';
+import { MYBODY_ITEMS } from '@/types/constants/body';
 
 const ids = MYBODY_ITEMS.map(({ id }) => id);
 type BodyOption = typeof ids[number];

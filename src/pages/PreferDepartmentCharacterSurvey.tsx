@@ -3,11 +3,13 @@ import { ChooseFourBox, SurveyTemplate } from '@/components/domain/survey';
 import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';
 import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
+import { PREFER_DEPARTMENT_ITEMS } from '@/types/constants/department';
+import { PREFER_CHARACTER_ITEMS } from '@/types/constants/charater';
 
 const PreferDepartmentCharacterSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
-  const [checkedMultiOption, setMultiCheckedOption] = useState<ChooseFourBoxItemProps[]>(DEPARTS);
-  const [checkedMultiOption2, setMultiCheckedOption2] = useState<ChooseFourBoxItemProps[]>(CHARACTER);
+  const [checkedMultiOption, setMultiCheckedOption] = useState<ChooseFourBoxItemProps[]>(PREFER_DEPARTMENT_ITEMS);
+  const [checkedMultiOption2, setMultiCheckedOption2] = useState<ChooseFourBoxItemProps[]>(PREFER_CHARACTER_ITEMS);
   return (
     <SurveyTemplate
       disableNext={!checkedMultiOption || !checkedMultiOption2}
@@ -16,68 +18,26 @@ const PreferDepartmentCharacterSurvey = () => {
       handleNextClick={() => meetingNavigate(Path.PreferBodyDateCountSurvey)}
       handlePrevClick={() => meetingNavigate(Path.PreferAgeHeightSurvey)}
     >
-      <ChooseFourBox isMulti items={DEPARTS} checkedMultiOption={checkedMultiOption} setMultiCheckedOption={setMultiCheckedOption} top={97}>
+      <ChooseFourBox
+        isMulti
+        items={PREFER_DEPARTMENT_ITEMS}
+        checkedMultiOption={checkedMultiOption}
+        setMultiCheckedOption={setMultiCheckedOption}
+        top={97}
+      >
         선호하는 학과를 모두 알려주세요.
       </ChooseFourBox>
-      <ChooseFourBox isMulti items={CHARACTER} checkedMultiOption={checkedMultiOption2} setMultiCheckedOption={setMultiCheckedOption2} top={97}>
+      <ChooseFourBox
+        isMulti
+        items={PREFER_DEPARTMENT_ITEMS}
+        checkedMultiOption={checkedMultiOption2}
+        setMultiCheckedOption={setMultiCheckedOption2}
+        top={97}
+      >
         선호하는 성격을 모두 알려주세요.
       </ChooseFourBox>
     </SurveyTemplate>
   );
 };
-
-const DEPARTS = [
-  {
-    id: 'LIBERAL',
-    text: '문과',
-    name: 'ourDepartments',
-    checked: true,
-  },
-  {
-    id: 'SCIENCE',
-    text: '이과',
-    name: 'ourDepartments',
-    checked: true,
-  },
-  {
-    id: 'ATHLETIC',
-    text: '체육',
-    name: 'ourDepartments',
-    checked: false,
-  },
-  {
-    id: 'ART',
-    text: '예술',
-    name: 'ourDepartments',
-    checked: false,
-  },
-];
-
-const CHARACTER = [
-  {
-    id: 'VERY_QUIET',
-    text: '많이 조용한',
-    name: 'character',
-    checked: true,
-  },
-  {
-    id: 'A_LITTLE_QUIET',
-    text: '조금 조용한',
-    name: 'character',
-    checked: true,
-  },
-  {
-    id: 'A_LITTLE_ACTIVE',
-    text: '조금 활발한',
-    name: 'character',
-    checked: false,
-  },
-  {
-    id: 'VERY_ACTIVE',
-    text: '많이 활발한',
-    name: 'character',
-    checked: false,
-  },
-];
 
 export default PreferDepartmentCharacterSurvey;

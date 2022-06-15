@@ -3,7 +3,8 @@ import { ChooseFourBox, SurveyTemplate } from '@/components/domain/survey';
 import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';
 import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
-import { PREFER_DCOUNT_ITEMS, PREFER_DEPARTMENT_ITEMS } from '@/types/constant';
+import { PREFER_DEPARTMENT_ITEMS } from '@/types/constants/department';
+import { PREFER_DCOUNT_ITEMS } from '@/types/constants/dcount';
 
 const PreferBodyDateCountSurvey = () => {
   const meetingNavigate = useMeetingNavigate();

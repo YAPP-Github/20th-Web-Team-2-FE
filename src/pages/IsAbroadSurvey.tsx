@@ -7,7 +7,7 @@ import { FormWrapper } from './AuthMail';
 import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
 import { Abroad } from '@/types/enums';
-import { COUNTRY_ITEMS } from '@/types/constant';
+import { COUNTRY_ITEMS } from '@/types/constants/area';
 
 const IsAbroadSurvey = () => {
   const meetingNavigate = useMeetingNavigate();

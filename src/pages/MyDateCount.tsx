@@ -3,9 +3,10 @@ import { useDatingNavigate } from '@/hooks/common/useMeetingNavigate';
 import { ChooseFourBox, ChooseTwoBox, SurveyTemplate } from '@/components/domain/survey';
 import Path from '@/router/Path';
 import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';
-import { DATE_COUNT_ITEMS, SMOKEOK_ITEMS } from '@/types/constant';
+import { SMOKEOK_ITEMS } from '@/types/constants/smoke';
+import { MY_DOUNT_ITEMS } from '@/types/constants/dcount';
 
-const ids = DATE_COUNT_ITEMS.map(({ id }) => id);
+const ids = MY_DOUNT_ITEMS.map(({ id }) => id);
 type BodyOption = typeof ids[number];
 type SmokeOption = 'true' | 'false' | '';
 
@@ -35,11 +36,7 @@ const MyDateCount = () => {
       handlePrevClick={() => meetingNavigate(Path.MyBodySmoke)}
       handleNextClick={() => meetingNavigate(Path.AvoidUniversitiesSurvey)}
     >
-      <ChooseFourBox
-        items={DATE_COUNT_ITEMS as unknown as ChooseFourBoxItemProps[]}
-        checkedOption={checkedOption}
-        setCheckedOption={setCheckedOption}
-      >
+      <ChooseFourBox items={MY_DOUNT_ITEMS as unknown as ChooseFourBoxItemProps[]} checkedOption={checkedOption} setCheckedOption={setCheckedOption}>
         본인의 연애 횟수를 선택해주세요.
       </ChooseFourBox>
       <ChooseTwoBox selectedOption={isSmokeOk} onChangeOption={onChangeOption} items={SMOKEOK_ITEMS}>

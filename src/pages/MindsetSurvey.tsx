@@ -3,7 +3,7 @@ import { SurveyTemplate } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import { ChoiceButton } from '@/components/base';
 import styled from 'styled-components';
-import { MINDSET_ITEMS } from '@/types/constant';
+import { MINDSET_ITEMS } from '@/types/constants/constant';
 
 export type ChoiceOptions = 'ALL' | 'FRIEND' | 'LOVE';
 

@@ -4,7 +4,7 @@ import { Title } from '@/lib/styles/styledComponents';
 import { ChooseFourBox, HeightBox } from '@/components/domain/survey';
 import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';
 import { MIN_HEIGHT, MAX_HEIGHT } from '@/components/domain/survey/HeightBox';
-import { OUR_DEPARTMENT_ITEMS } from '@/types/constant';
+import { OUR_DEPARTMENT_ITEMS } from '@/types/constants/department';
 
 const OurDepartmentsAverageHeightSurvey = () => {
   const [checkedMultiOption, setMultiCheckedOption] = useState<ChooseFourBoxItemProps[]>(OUR_DEPARTMENT_ITEMS);

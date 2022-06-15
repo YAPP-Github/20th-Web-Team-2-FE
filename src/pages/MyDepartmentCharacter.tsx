@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { SurveyTemplate } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import { ChooseFourBox } from '@/components/domain/survey';
-import { CHARACTER_ITEMS, MY_DEPARTMENT_ITEMS } from '@/types/constant';
+import { MY_DEPARTMENT_ITEMS } from '@/types/constants/department';
+import { CHARACTER_ITEMS } from '@/types/constants/charater';
 
 const MyDepartmentCharacter = () => {
   const [checkedDepartmentOption, setDepartmentCheckedOption] = useState<DepartmentOptions | string>('LIBERAL');

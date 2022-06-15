@@ -1,7 +1,7 @@
 import { ChooseFourBox, SurveyTemplate } from '@/components/domain/survey';
 import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';
 import { Title } from '@/lib/styles/styledComponents';
-import { DOMESTICAREAS_ITEMS } from '@/types/constant';
+import { DOMESTICAREAS_ITEMS } from '@/types/constants/area';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';

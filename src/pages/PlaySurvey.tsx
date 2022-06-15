@@ -3,7 +3,7 @@ import { SurveyTemplate } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import { ChoiceButton } from '@/components/base';
 import styled from 'styled-components';
-import { PLAY_ITEMS } from '@/types/constant';
+import { PLAY_ITEMS } from '@/types/constants/play';
 
 export type ChoiceOptions = 'ALL' | 'GAME' | 'TALK';
 

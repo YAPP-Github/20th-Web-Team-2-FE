@@ -7,7 +7,7 @@ import ChooseTwoBox from '@/components/domain/survey/ChooseTwoBox';
 import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
 import { useNavigate } from 'react-router-dom';
-import { GENDER_ITEMS } from '@/types/constant';
+import { GENDER_ITEMS } from '@/types/constants/constant';
 
 export type GenderOptions = 'FEMAIL' | 'MALE';
 
