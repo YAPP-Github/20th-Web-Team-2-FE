@@ -5,13 +5,14 @@ import { ChooseFourBox } from '@/components/domain/survey';
 import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
 import { useNavigate } from 'react-router-dom';
-
-export type ChoiceOptions = 'ONE' | 'TWO' | 'THREE' | 'FOUR';
+import { useMeetingState } from '@/lib/recoil/meeting';
+import { type Meeting } from '@/types/meeting';
 
 const TypeOfMeetingSurvey = () => {
   const navigate = useNavigate();
   const meetingNavigate = useMeetingNavigate();
-  const [checkedOption, setCheckedOption] = useState<ChoiceOptions | string>('ONE');
+  const [checkedOption, setCheckedOption] = useState<Meeting['typeOfMeeting'] | string>('ONE');
+  const { meetingData, setMeetingData } = useMeetingState();
 
   const ITEMS = [
     {
@@ -36,13 +37,18 @@ const TypeOfMeetingSurvey = () => {
     },
   ];
 
+  const handleNextClick = () => {
+    meetingNavigate(Path.GenderAverageAgeSurvey);
+    setMeetingData({ ...meetingData, typeOfMeeting: checkedOption as Meeting['typeOfMeeting'] });
+  };
+
   return (
     <SurveyTemplate
       disableNext={!checkedOption}
       currStep={3}
       totalStep={10}
       handlePrevClick={() => navigate(Path.AuthMail)}
-      handleNextClick={() => meetingNavigate(Path.GenderAverageAgeSurvey)}
+      handleNextClick={handleNextClick}
     >
       <Title>
         원하시는 만남의
