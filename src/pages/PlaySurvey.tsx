@@ -3,6 +3,7 @@ import { SurveyTemplate } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import { ChoiceButton } from '@/components/base';
 import styled from 'styled-components';
+import { PLAY_ITEMS } from '@/types/constants/play';
 
 export type ChoiceOptions = 'ALL' | 'GAME' | 'TALK';
 
@@ -22,7 +23,7 @@ const PlaySurvey = () => {
         알려주세요.
       </Title>
       <ChoiceButtonWrapper>
-        {ITEMS.map(({ name, id, text }) => (
+        {PLAY_ITEMS.map(({ name, id, text }) => (
           <ChoiceButton
             name={name}
             size="medium"
@@ -41,23 +42,6 @@ const PlaySurvey = () => {
   );
 };
 
-const ITEMS = [
-  {
-    id: 'ALL',
-    text: '둘 다 상관없어요',
-    name: 'play',
-  },
-  {
-    id: 'GAME',
-    text: '술게임 할래요!',
-    name: 'play',
-  },
-  {
-    id: 'TALK',
-    text: '얘기하면서 놀래요.',
-    name: 'play',
-  },
-];
 const ChoiceButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;

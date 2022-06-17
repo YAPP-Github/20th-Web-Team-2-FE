@@ -26,11 +26,11 @@ const MyMbtiHeight = () => {
       <Anchor target="_blank" href="https://types.my/quiz/create?step=5">
         나의 MBTI 알아보기
       </Anchor>
-      <Input isRequired variant="filled" isFocus height="48px" name="mbti" placeholder="나의 MBTI" maxLength={4} onChange={handleChange} />
+      <Input required variant="filled" isFocus height="48px" name="mbti" placeholder="나의 MBTI" maxLength={4} onChange={handleChange} />
       <InputWrapper>
         <StyledTitle>본인의 키를 알려주세요.</StyledTitle>
         <Description>키는 220cm 이하여야 합니다.</Description>
-        <Input isRequired variant="filled" height="48px" name="myHeight" placeholder="키(cm)" maxLength={3} onChange={handleChange} />
+        <Input required variant="filled" height="48px" name="myHeight" placeholder="키(cm)" maxLength={3} onChange={handleChange} />
       </InputWrapper>
     </SurveyTemplate>
   );

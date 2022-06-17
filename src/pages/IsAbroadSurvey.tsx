@@ -6,7 +6,8 @@ import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
 import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
-import { Abroad } from '@/types/data';
+import { Abroad } from '@/types/enums';
+import { COUNTRY_ITEMS } from '@/types/constants/area';
 
 const IsAbroadSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
@@ -29,7 +30,7 @@ const IsAbroadSurvey = () => {
         해외이신가요?
       </Title>
       <BtnWrapper>
-        <ChooseTwoBox height={100} items={ITEMS} selectedOption={isAbroad} onChangeOption={onChangeOption} />
+        <ChooseTwoBox height={100} items={COUNTRY_ITEMS} selectedOption={isAbroad} onChangeOption={onChangeOption} />
       </BtnWrapper>
     </SurveyTemplate>
   );
@@ -38,16 +39,5 @@ const IsAbroadSurvey = () => {
 const BtnWrapper = styled(FormWrapper)`
   display: flex;
 `;
-const ITEMS = [
-  {
-    id: 'domestic',
-    text: '국내',
-    name: 'isAbroad',
-  },
-  {
-    id: 'abroad',
-    text: '해외',
-    name: 'isAbroad',
-  },
-];
+
 export default IsAbroadSurvey;

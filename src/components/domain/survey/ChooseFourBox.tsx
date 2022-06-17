@@ -73,7 +73,7 @@ const ChooseFourBox = <T extends string>({
                 onChange={handleMultiChange}
                 key={id}
                 checked={checked}
-                invisible={id === 'INVISIVLE' ? true : false}
+                invisible={id === 'INVISIVLE'}
               >
                 {text}
               </ChoiceButton>
