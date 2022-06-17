@@ -70,6 +70,7 @@ function Routing() {
               <Route path={Path.AvoidUniversitiesSurvey} element={<AvoidUniversitiesSurvey />} />
               <Route path={Path.PreferUniversitiesSurvey} element={<PreferUniversitiesSurvey />} />
               {/*선호나이/키 페이지 추가*/}
+              <Route path={Path.PreferAgeHeightSurvey} element={<PreferAverageAgeHeightSurvey />} />
               <Route path={Path.PreferDepartmentCharacterSurvey} element={<PreferDepartmentCharacterSurvey />} />
               <Route path={Path.PreferBodyDateCountSurvey} element={<PreferBodyDateCountSurvey />} />
               <Route path={Path.IsAbroadSurvey} element={<IsAbroadSurvey />} />
