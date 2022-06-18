@@ -11,7 +11,7 @@ type BodyOption = typeof ids[number];
 type SmokeOption = 'true' | 'false' | '';
 
 const MyBodySmoke = () => {
-  const meetingNavigate = useDatingNavigate();
+  const datingNavigate = useDatingNavigate();
   const [disableNext, setDisableNext] = useState(true);
 
   const [checkedOption, setCheckedOption] = useState<BodyOption | ''>('');
@@ -33,8 +33,8 @@ const MyBodySmoke = () => {
       hasProgressBar={true}
       totalStep={12}
       currStep={5}
-      handlePrevClick={() => meetingNavigate(Path.MyMbtiHeight)}
-      handleNextClick={() => meetingNavigate(Path.MyDateCount)}
+      handlePrevClick={() => datingNavigate(Path.MyMbtiHeight)}
+      handleNextClick={() => datingNavigate(Path.MyDateCount)}
     >
       <ChooseFourBox items={MYBODY_ITEMS as unknown as ChooseFourBoxItemProps[]} checkedOption={checkedOption} setCheckedOption={setCheckedOption}>
         본인의 체형을 선택해주세요

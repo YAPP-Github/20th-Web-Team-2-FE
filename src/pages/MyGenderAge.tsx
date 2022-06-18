@@ -4,7 +4,7 @@ import { Title } from '@/lib/styles/styledComponents';
 import styled from 'styled-components';
 import { MIN_AGE, MAX_AGE } from '@/components/domain/survey/AgeBox';
 import ChooseTwoBox from '@/components/domain/survey/ChooseTwoBox';
-import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useDatingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
 import { useNavigate } from 'react-router-dom';
 import { GENDER_ITEMS } from '@/types/constants/constant';
@@ -13,7 +13,7 @@ export type GenderOptions = 'FEMAIL' | 'MALE';
 
 const MyGenderAge = () => {
   const navigate = useNavigate();
-  const meetingNavigate = useMeetingNavigate();
+  const datingNavigate = useDatingNavigate();
   const [genderOption, setGenderOption] = useState<GenderOptions>('FEMAIL');
   const [ageOption, setAgeOption] = useState(Math.floor((MIN_AGE + MAX_AGE) / 2));
   const onChangeOption = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,10 +23,10 @@ const MyGenderAge = () => {
   return (
     <SurveyTemplate
       disableNext={!ageOption && !genderOption}
-      currStep={3}
-      totalStep={10}
+      currStep={2}
+      totalStep={12}
       handlePrevClick={() => navigate(Path.TypeOfMeetingSurvey)}
-      handleNextClick={() => meetingNavigate(Path.GenderAverageAgeSurvey)}
+      handleNextClick={() => datingNavigate(Path.MyDepartmentCharacter)}
     >
       <StyledTitle>
         <strong>1:1 소개팅</strong>을 선택하셨어요.
