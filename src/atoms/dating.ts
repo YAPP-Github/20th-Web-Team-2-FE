@@ -7,7 +7,7 @@ const { persistAtom } = recoilPersist({
   storage: sessionStorage,
 });
 
-const initialState: Dating = {
+const INITIAL_DATING_STATE: Dating = {
   gender: 'FEMALE',
   age: 28,
   myDepartment: 'LIBERAL',
@@ -36,7 +36,7 @@ const initialState: Dating = {
 
 const datingState = atom<Dating>({
   key: 'dating/datingState',
-  default: initialState,
+  default: INITIAL_DATING_STATE,
   effects_UNSTABLE: [persistAtom],
 });
 

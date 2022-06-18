@@ -7,11 +7,11 @@ const { persistAtom } = recoilPersist({
   storage: sessionStorage,
 });
 
-const initialState: Meeting = {
+const INITIAL_MEETING_STATE: Meeting = {
   typeOfMeeting: 'ONE',
   gender: 'FEMALE',
   averageAge: 28,
-  ourUniversities: [], // 학교 목록 API response로 (학교id, 학교이름)
+  ourUniversities: [],
   ourDepartments: ['LIBERAL', 'SCIENCE'],
   averageHeight: [140, 180],
   avoidUniversities: [],
@@ -31,7 +31,7 @@ const initialState: Meeting = {
 
 const meetingState = atom<Meeting>({
   key: 'meeting/meetingState',
-  default: initialState,
+  default: INITIAL_MEETING_STATE,
   effects_UNSTABLE: [persistAtom],
 });
 
