@@ -32,6 +32,8 @@ import {
   PreferBodyDateCountSurvey,
 } from '@/pages';
 import Test from '@/components/base/Test';
+import MatchingPage from '@/pages/MatchingPage';
+import UserHeader from '@/components/domain/matching/UserHeader';
 
 function Routing() {
   return (
@@ -44,6 +46,9 @@ function Routing() {
             <Route path={Path.AuthMail} element={<AuthMail />} />
             <Route path={Path.TypeOfMeetingSurvey} element={<TypeOfMeetingSurvey />} />
             <Route path={Path.OauthKakao} element={<OauthKakao />} />
+            <Route path={'/'} element={<UserHeader />}>
+              <Route path={Path.Matching} element={<MatchingPage />} />
+            </Route>
             <Route path={'/meeting'} element={<Outlet />}>
               <Route path={Path.GenderAverageAgeSurvey} element={<GenderAverageAgeSurvey />} />
               <Route path={Path.OurUniversitiesSurvey} element={<OurUniversitiesSurvey />} />

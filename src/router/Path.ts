@@ -18,7 +18,6 @@ enum Path {
   ChannelSurvey = 'channel',
   AgreementSurvey = 'agreement',
   KakaoIdSurvey = 'kakao-id',
-
   MyGenderAge = 'my-gender-age',
   MyDepartmentCharacter = 'my-department-character',
   MyMbtiHeight = 'my-mbti-height',
@@ -27,6 +26,7 @@ enum Path {
   PreferDepartmentCharacterSurvey = 'prefer-dprt-character',
   PreferBodyDateCountSurvey = 'prefer-body-dcount',
   OauthKakao = '/oauth/kakao',
+  Matching = 'matching',
 }
 
 export default Path;
