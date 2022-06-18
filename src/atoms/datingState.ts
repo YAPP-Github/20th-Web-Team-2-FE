@@ -14,7 +14,7 @@ const INITIAL_DATING_STATE: Dating = {
   character: 'A_LITTLE_ACTIVE',
   mbti: '',
   myHeight: 0,
-  myBody: 'CHUBBY',
+  myBody: 'SKINNY',
   mySmoke: true,
   myDateCount: 'ZERO',
   isSmokeOk: true,
