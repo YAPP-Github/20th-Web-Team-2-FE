@@ -3,47 +3,10 @@ import { ChooseFourBox, ChooseTwoBox, SurveyTemplate } from '@/components/domain
 import Path from '@/router/Path';
 import { useDatingNavigate } from '@/hooks/common/useMeetingNavigate';
 import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';
+import { SMOKE_ITEMS } from '@/types/constants/smoke';
+import { MYBODY_ITEMS } from '@/types/constants/body';
 
-const BODY_ITEMS = [
-  {
-    id: 'SKINNY',
-    text: '마른 편',
-    name: 'myBody',
-    checked: false,
-  },
-  {
-    id: 'SLIM',
-    text: '슬림 탄탄',
-    name: 'myBody',
-    checked: false,
-  },
-  {
-    id: 'MUSCULAR',
-    text: '근육',
-    name: 'myBody',
-    checked: false,
-  },
-  {
-    id: 'CHUBBY',
-    text: '통통한',
-    name: 'myBody',
-    checked: false,
-  },
-] as const;
-const SMOKE_ITEMS = [
-  {
-    id: 'true',
-    text: '예',
-    name: 'isSmoke',
-  },
-  {
-    id: 'false',
-    text: '아니오',
-    name: 'isSmoke',
-  },
-];
-
-const ids = BODY_ITEMS.map(({ id }) => id);
+const ids = MYBODY_ITEMS.map(({ id }) => id);
 type BodyOption = typeof ids[number];
 type SmokeOption = 'true' | 'false' | '';
 
@@ -73,7 +36,7 @@ const MyBodySmoke = () => {
       handlePrevClick={() => meetingNavigate(Path.MyMbtiHeight)}
       handleNextClick={() => meetingNavigate(Path.MyDateCount)}
     >
-      <ChooseFourBox items={BODY_ITEMS as unknown as ChooseFourBoxItemProps[]} checkedOption={checkedOption} setCheckedOption={setCheckedOption}>
+      <ChooseFourBox items={MYBODY_ITEMS as unknown as ChooseFourBoxItemProps[]} checkedOption={checkedOption} setCheckedOption={setCheckedOption}>
         본인의 체형을 선택해주세요
       </ChooseFourBox>
       <ChooseTwoBox selectedOption={isSmoke} onChangeOption={onChangeOption} items={SMOKE_ITEMS}>
