@@ -31,7 +31,7 @@ const Progress = styled.span<ProgressBarProps>`
   position: absolute;
   top: 0;
   left: 0;
-  width: ${({ currStep, totalStep }) => `calc((100vw * ${currStep}) / ${totalStep})`};
+  width: ${({ currStep, totalStep }) => `calc((100% * ${currStep}) / ${totalStep})`};
   border: 3px solid ${({ theme }) => theme.palette.primary};
   border-radius: 20px;
   transition: all 0.5s ease-in-out;

@@ -17,8 +17,8 @@ const TypeOfMeetingSurvey = () => {
   return (
     <SurveyTemplate
       disableNext={!checkedOption}
-      currStep={3}
-      totalStep={10}
+      currStep={1}
+      totalStep={14}
       handlePrevClick={() => navigate(Path.AuthMail)}
       handleNextClick={() => meetingNavigate(Path.GenderAverageAgeSurvey)}
     >
