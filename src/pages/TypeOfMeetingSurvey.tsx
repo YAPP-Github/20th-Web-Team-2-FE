@@ -5,7 +5,7 @@ import { ChooseFourBox } from '@/components/domain/survey';
 import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
 import { useNavigate } from 'react-router-dom';
-import { useMeetingState } from '@/atoms/meeting';
+import { useMeetingState } from '@/atoms/meetingState';
 import { type Meeting } from '@/types/meeting';
 import { TYPE_OF_MEETING_ITEMS } from '@/types/constants/constant';
 
