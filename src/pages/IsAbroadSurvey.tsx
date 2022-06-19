@@ -18,12 +18,12 @@ const IsAbroadSurvey = () => {
   };
   return (
     <SurveyTemplate
-      disableNext={true}
+      disableNext={false}
       hasProgressBar={true}
-      currStep={3}
-      totalStep={15}
+      currStep={11}
+      totalStep={14}
       handlePrevClick={() => meetingNavigate(Path.PlaySurvey)}
-      handleNextClick={() => meetingNavigate(Path.DomesticAreasSurvey)}
+      handleNextClick={() => meetingNavigate(isAbroad === Abroad.abroad ? Path.AbroadAreasSurvey : Path.DomesticAreasSurvey)}
     >
       <Title>
         지금 한국이신가요? <br />

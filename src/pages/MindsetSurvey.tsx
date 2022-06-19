@@ -4,10 +4,13 @@ import { Title } from '@/lib/styles/styledComponents';
 import { ChoiceButton } from '@/components/base';
 import styled from 'styled-components';
 import { MINDSET_ITEMS } from '@/types/constants/constant';
+import Path from '@/router/Path';
+import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 
 export type ChoiceOptions = 'ALL' | 'FRIEND' | 'LOVE';
 
 const MindsetSurvey = () => {
+  const meetingNavigate = useMeetingNavigate();
   const [checkedOption, setCheckedOption] = useState<ChoiceOptions>('ALL');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +19,13 @@ const MindsetSurvey = () => {
   };
 
   return (
-    <SurveyTemplate disableNext={!checkedOption} currStep={3} totalStep={10}>
+    <SurveyTemplate
+      disableNext={!checkedOption}
+      currStep={9}
+      totalStep={14}
+      handlePrevClick={() => meetingNavigate(Path.PreferAgeHeightSurvey)}
+      handleNextClick={() => meetingNavigate(Path.PlaySurvey)}
+    >
       <Title>
         <strong>미팅의 마인드셋</strong>을
         <br />

@@ -4,12 +4,21 @@ import { Title } from '@/lib/styles/styledComponents';
 import { ChooseFourBox } from '@/components/domain/survey';
 import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';
 import { PREFER_DEPARTMENT_ITEMS } from '@/types/constants/department';
+import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import Path from '@/router/Path';
 
 const PreferDepartmentsSurvey = () => {
+  const meetingNavigate = useMeetingNavigate();
   const [checkedMultiOption, setMultiCheckedOption] = useState<ChooseFourBoxItemProps[]>(PREFER_DEPARTMENT_ITEMS);
 
   return (
-    <SurveyTemplate disableNext={!checkedMultiOption} currStep={3} totalStep={10}>
+    <SurveyTemplate
+      disableNext={!checkedMultiOption}
+      currStep={7}
+      totalStep={14}
+      handlePrevClick={() => meetingNavigate(Path.PreferUniversitiesSurvey)}
+      handleNextClick={() => meetingNavigate(Path.PreferAgeHeightSurvey)}
+    >
       <Title>
         <strong>
           선호하는 학과를

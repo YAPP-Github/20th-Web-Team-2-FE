@@ -17,7 +17,7 @@ const AvoidUniversitiesSurvey = () => {
     <SurveyTemplate
       disableNext={false}
       hasProgressBar={true}
-      totalStep={matchMeeting ? 15 : 12}
+      totalStep={matchMeeting ? 14 : 12}
       currStep={matchMeeting ? 5 : 7}
       handlePrevClick={() => meetingNavigate(Path.OurDepartmentsAverageHeightSurvey)}
       handleNextClick={() => meetingNavigate(Path.PreferUniversitiesSurvey)}

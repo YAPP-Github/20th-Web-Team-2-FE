@@ -23,10 +23,10 @@ const GenderAverageAgeSurvey = () => {
   return (
     <SurveyTemplate
       disableNext={!ageOption && !genderOption}
-      currStep={3}
-      totalStep={10}
+      currStep={2}
+      totalStep={14}
       handlePrevClick={() => navigate(Path.TypeOfMeetingSurvey)}
-      handleNextClick={() => meetingNavigate(Path.GenderAverageAgeSurvey)}
+      handleNextClick={() => meetingNavigate(Path.OurUniversitiesSurvey)}
     >
       <StyledTitle>
         <strong>2:2 미팅</strong>을 선택하셨어요.
