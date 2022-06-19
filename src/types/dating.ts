@@ -15,8 +15,8 @@ export interface Dating {
   mySmoke: boolean;
   myDateCount: DateCount;
   isSmokeOk: boolean;
-  avoidUniversities: string[];
-  preferUniversities: string[];
+  avoidUniversities: number[];
+  preferUniversities: number[];
   preferAge: number[];
   preferHeight: number[];
   preferDepartments: Departments[];
