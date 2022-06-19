@@ -6,7 +6,7 @@
     "dev": "vite",
     "build-watch": "tsc && vite build --watch",
     "preview": "vite preview",
-    "build": "tsc && vite build"
+    "build": "vite build"
   },
   "dependencies": {
     "@types/styled-components": "^5.1.25",
