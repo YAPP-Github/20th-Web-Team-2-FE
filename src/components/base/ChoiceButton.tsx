@@ -13,9 +13,10 @@ interface CommonProps {
   fontWeight?: 300 | 400 | 600 | 700;
   fullWidth?: boolean;
   width?: number;
-  height?: 38 | 48 | 70 | 100;
+  height?: 38 | 48 | 70 | 72 | 100;
   variant?: ChoiceButtonVariants;
   size?: ButtonSizes;
+  invisible?: boolean;
 }
 interface InputBaseProps extends CommonProps, Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'color' | 'children' | 'height' | 'width'> {
   isMultiple?: boolean;
@@ -41,6 +42,7 @@ const ChoiceButton = ({
   width,
   height,
   fontWeight,
+  invisible,
   ...others
 }: InputBaseProps) => {
   return (
@@ -61,6 +63,7 @@ const ChoiceButton = ({
         fullWidth={fullWidth}
         width={width}
         height={height}
+        invisible={invisible}
       >
         {children}
       </Label>
@@ -123,6 +126,11 @@ const Label = styled.label<ChoiceButtonBlockProps>`
     props.boxShadow &&
     css`
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    `};
+  ${(props) =>
+    props.invisible &&
+    css`
+      visibility: hidden;
     `};
 `;
 

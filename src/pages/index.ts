@@ -19,9 +19,12 @@ export { default as PlaySurvey } from './PlaySurvey';
 export { default as PreferDepartmentsSurvey } from './PreferDepartmentsSurvey';
 export { default as PreferUniversitiesSurvey } from './PreferUniversitiesSurvey';
 export { default as PreferAverageAgeHeightSurvey } from './PreferAverageAgeHeightSurvey';
-
-export { default as MyDepartmentMindset } from './MyDepartmentMindset';
+export { default as MyGenderAge } from './MyGenderAge';
+export { default as MyDepartmentCharacter } from './MyDepartmentCharacter';
 export { default as MyMbtiHeight } from './MyMbtiHeight';
 export { default as MyBodySmoke } from './MyBodySmoke';
 export { default as MyDateCount } from './MyDateCount';
-export { default as PreferDepartmentCharacter } from './PreferDepartmentCharacter';
+export { default as PreferDepartmentCharacterSurvey } from './PreferDepartmentCharacterSurvey';
+export { default as PreferBodyDateCountSurvey } from './PreferBodyDateCountSurvey';
+
+export { default as OauthKakao } from './OauthKakao';

@@ -4,13 +4,24 @@ import useToggle from '@/hooks/common/useToggle';
 import { palette } from '@/lib/styles/palette';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 function LandingContainer() {
   /**
    * 로그인 되었는지 안되었는지는 나중에 리코일에서 꺼내기
    */
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true); // FIXME: 임시 콘텐츠 연결을 위한 처리
   const [isModal, onToggleModal] = useToggle();
+  const navigate = useNavigate();
+
+  const handleKakaoLoginClick = () => {
+    const clientId = import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY;
+    const redirectUri = encodeURI(`${window.location.origin}/oauth/kakao`);
+
+    const loginUrl = import.meta.env.VITE_KAKAO_OPEN_URL.replace('{clientId}', clientId).replace('{redirectUri}', redirectUri);
+    window.location.href = loginUrl;
+  };
+
   return (
     <Container>
       <MainIconBox>
@@ -21,18 +32,27 @@ function LandingContainer() {
       {!isLogin ? (
         <BtnBox>
           <BtnTextStyled>간단하게 로그인하고 인연을 찾아보세요.</BtnTextStyled>
-          <LandingBtn size="medium" fontWeight={700} fullWidth variant={'kakao'} onClick={onToggleModal}>
+          <LandingBtn size="medium" fontWeight={700} fullWidth variant={'kakao'} onClick={handleKakaoLoginClick}>
             카카오 로그인
           </LandingBtn>
         </BtnBox>
       ) : (
         <BtnBox>
-          <LandingBtn size="medium" fontWeight={700} fullWidth variant={'default'} onClick={() => setIsLogin((prev) => !prev)}>
+          <LandingBtn
+            size="medium"
+            fontWeight={700}
+            fullWidth
+            variant={'default'}
+            onClick={() => {
+              // setIsLogin((prev) => !prev);
+              navigate('/type-of-meeting');
+            }}
+          >
             시작하기
           </LandingBtn>
-          <LandingBtn size="medium" fontWeight={700} fullWidth variant={'grayBlack'} onClick={() => setIsLogin((prev) => !prev)}>
-            응답 수정하기
-          </LandingBtn>
+          {/*<LandingBtn size="medium" fontWeight={700} fullWidth variant={'grayBlack'} onClick={() => setIsLogin((prev) => !prev)}>*/}
+          {/*  응답 수정하기*/}
+          {/*</LandingBtn>*/}
         </BtnBox>
       )}
       {isModal && (

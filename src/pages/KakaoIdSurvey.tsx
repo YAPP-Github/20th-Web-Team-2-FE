@@ -6,13 +6,24 @@ import { Title } from '@/lib/styles/styledComponents';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
+import Path from '@/router/Path';
+import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 
 const KakaoIdSurvey = () => {
+  const meetingNavigate = useMeetingNavigate();
   const [isModal, onToggleModal] = useToggle();
   const [kakaoID, setkakaoID] = useState('');
+
   return (
     <>
-      <SurveyTemplate disableNext={false} hasProgressBar={false}>
+      <SurveyTemplate
+        disableNext={false}
+        hasProgressBar={true}
+        currStep={14}
+        totalStep={14}
+        handlePrevClick={() => meetingNavigate(Path.AgreementSurvey)}
+        handleNextClick={() => alert('설문이 완료되었습니다. 정식 출시가 되면 매칭을 시작할 수 있습니다. 조금만 기다려 주세요.')}
+      >
         <Title>
           카톡 아이디를 <br />
           알려주세요.

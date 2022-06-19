@@ -3,7 +3,7 @@ import CheckBox from '@/components/base/CheckBox';
 import { FormWrapper } from './AuthMail';
 import useFoundPathCheck from '@/hooks/agreement/useFoundPathCheck';
 import { SurveyTemplate } from '@/components/domain/survey';
-import useMeetingNavigate from '@/hooks/common/useMeetingNavigate';
+import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
 
 const ChannelSurvey = () => {
@@ -13,8 +13,10 @@ const ChannelSurvey = () => {
   return (
     <SurveyTemplate
       disableNext={false}
-      hasProgressBar={false}
-      handlePrevClick={() => meetingNavigate(Path.AbroadAreasSurvey)}
+      hasProgressBar={true}
+      currStep={13}
+      totalStep={14}
+      handlePrevClick={() => meetingNavigate(Path.IsAbroadSurvey)}
       handleNextClick={() => meetingNavigate(Path.AgreementSurvey)}
     >
       <Title>

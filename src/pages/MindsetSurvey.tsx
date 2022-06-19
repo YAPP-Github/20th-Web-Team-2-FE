@@ -3,10 +3,14 @@ import { SurveyTemplate } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import { ChoiceButton } from '@/components/base';
 import styled from 'styled-components';
+import { MINDSET_ITEMS } from '@/types/constants/constant';
+import Path from '@/router/Path';
+import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 
 export type ChoiceOptions = 'ALL' | 'FRIEND' | 'LOVE';
 
 const MindsetSurvey = () => {
+  const meetingNavigate = useMeetingNavigate();
   const [checkedOption, setCheckedOption] = useState<ChoiceOptions>('ALL');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,14 +19,20 @@ const MindsetSurvey = () => {
   };
 
   return (
-    <SurveyTemplate disableNext={!checkedOption} currStep={3} totalStep={10}>
+    <SurveyTemplate
+      disableNext={!checkedOption}
+      currStep={9}
+      totalStep={14}
+      handlePrevClick={() => meetingNavigate(Path.PreferAgeHeightSurvey)}
+      handleNextClick={() => meetingNavigate(Path.PlaySurvey)}
+    >
       <Title>
         <strong>미팅의 마인드셋</strong>을
         <br />
         알려주세요.
       </Title>
       <ChoiceButtonWrapper>
-        {ITEMS.map(({ name, id, text }) => (
+        {MINDSET_ITEMS.map(({ name, id, text }) => (
           <ChoiceButton
             name={name}
             size="medium"
@@ -41,23 +51,6 @@ const MindsetSurvey = () => {
   );
 };
 
-const ITEMS = [
-  {
-    id: 'ALL',
-    text: '둘 다 상관없어요',
-    name: 'mindset',
-  },
-  {
-    id: 'FRIEND',
-    text: '친구랑 노는 느낌',
-    name: 'mindset',
-  },
-  {
-    id: 'LOVE',
-    text: '설레는 느낌',
-    name: 'mindset',
-  },
-];
 const ChoiceButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
