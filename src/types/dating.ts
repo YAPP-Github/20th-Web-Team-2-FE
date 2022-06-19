@@ -17,14 +17,14 @@ export interface Dating {
   isSmokeOk: boolean;
   avoidUniversities: string[];
   preferUniversities: string[];
-  preferAge: number[]; // FIXME: 숫자배열이여야 함
+  preferAge: number[];
   preferHeight: number[];
   preferDepartments: Departments[];
   preferCharacteristics: Characteristic[];
   preferBodies: Body[];
   preferDateCount: DateCount;
   isAbroad: boolean;
-  domesticAreas: DomesticAreas[]; // FIXME: 배열이여야 함
+  domesticAreas: DomesticAreas[];
   abroadAreas: string[];
   channel: Channel;
   agreement: boolean;
