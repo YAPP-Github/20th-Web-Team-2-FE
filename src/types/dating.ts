@@ -1,6 +1,6 @@
 import { type Gender, Departments, DomesticAreas, Channel } from './meeting';
 
-export type Character = 'VERY_QUIET' | 'A_LITTLE_QUIET' | 'VERY_ACTIVE' | 'A_LITTLE_ACTIVE';
+export type Characteristic = 'VERY_QUIET' | 'A_LITTLE_QUIET' | 'VERY_ACTIVE' | 'A_LITTLE_ACTIVE';
 export type Body = 'SKINNY' | 'SLIM' | 'MUSCULAR' | 'CHUBBY';
 export type DateCount = 'ZERO' | 'ONETWO' | 'THREEFOUR' | 'FIVE';
 
@@ -8,7 +8,7 @@ export interface Dating {
   gender: Gender;
   age: number;
   myDepartment: Departments;
-  character: Character;
+  characteristic: Characteristic;
   mbti: string;
   myHeight: number;
   myBody: Body;
@@ -20,7 +20,7 @@ export interface Dating {
   preferAge: number[]; // FIXME: 숫자배열이여야 함
   preferHeight: number[];
   preferDepartments: Departments[];
-  preferCharacters: Character[];
+  preferCharacteristics: Characteristic[];
   preferBodies: Body[];
   preferDateCount: DateCount;
   isAbroad: boolean;
