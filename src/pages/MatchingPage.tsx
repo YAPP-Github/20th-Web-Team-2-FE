@@ -3,57 +3,51 @@ import { Title } from '@/lib/styles/styledComponents';
 import React from 'react';
 
 const MatchingPage = () => {
-  const TempData = { state: 'waiting' };
+  const TempData = { state: 'none' };
   return (
     <>
-      <MatchingTemplete IsDisable={false}>
+      <MatchingTemplete IsDisable={false} btnName={'설문하러 가기'}>
         <Title>
-          <>
-            {(function () {
-              switch (TempData.state) {
-                case 'none':
-                  return (
-                    <>
-                      성사시킬
-                      <br />
-                      매칭이 없습니다.
-                    </>
-                  );
-                case 'waiting':
-                  return (
-                    <>
-                      매칭을
-                      <br />
-                      성사시키는 중입니다...
-                    </>
-                  );
+          {
+            {
+              none: (
+                <strong>
+                  성사시킬 매칭이
+                  <br />
+                  없습니다.
+                </strong>
+              ),
+              waiting: (
+                <strong>
+                  성사시킬
+                  <br />
+                  매칭이 없습니다.
+                </strong>
+              ),
+              success: (
+                <strong>
+                  매칭이
+                  <br />
+                  성사되었습니다!
+                </strong>
+              ),
+              pay: (
+                <strong>
+                  결제가
+                  <br />
+                  완료되었습니다!
+                </strong>
+              ),
 
-                case 'success':
-                  <>
-                    매칭이
-                    <br />
-                    성사되었습니다!
-                  </>;
-                  break;
-                case 'pay':
-                  <>
-                    결제가
-                    <br />
-                    완료되었습니다!
-                  </>;
-                  break;
-                case 'end':
-                  <>
-                    매칭이
-                    <br />
-                    완료되었습니다!
-                  </>;
-                  break;
-                default:
-                  break;
-              }
-            })()}
-          </>
+              end: (
+                <strong>
+                  매칭이
+                  <br />
+                  완료되었습니다!
+                </strong>
+              ),
+            }[TempData.state]
+          }
         </Title>
       </MatchingTemplete>
     </>

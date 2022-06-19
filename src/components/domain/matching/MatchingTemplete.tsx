@@ -8,8 +8,9 @@ interface MatchingTemplateProps {
   children: ReactNode;
   handleClick?: MouseEventHandler<HTMLButtonElement>;
   IsDisable: boolean;
+  btnName: string;
 }
-const MatchingTemplete = ({ children, handleClick, IsDisable }: MatchingTemplateProps) => {
+const MatchingTemplete = ({ children, handleClick, IsDisable, btnName }: MatchingTemplateProps) => {
   const location = useLocation();
   const [type, setType] = useState('meeting');
   useEffect(() => {
@@ -37,7 +38,7 @@ const MatchingTemplete = ({ children, handleClick, IsDisable }: MatchingTemplate
             variant={IsDisable ? 'gray' : 'default'}
             fontWeight={IsDisable ? 400 : 700}
           >
-            다음
+            {btnName}
           </Button>
         </ButtonWrapper>
       </NavigationWrapper>
@@ -56,10 +57,9 @@ const NavigationWrapper = styled.div`
 `;
 const ButtonWrapper = styled.div`
   display: flex;
-  gap: 8px;
 `;
 const TypeButton = styled(Button)`
-  margin: 4px;
+  margin: 25px 4px 4px 4px;
   width: 80px;
   height: 38px;
 `;
