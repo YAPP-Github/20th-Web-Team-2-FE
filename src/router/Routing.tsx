@@ -30,9 +30,9 @@ import {
   MyGenderAge,
   OauthKakao,
   PreferBodyDateCountSurvey,
+  MatchingPage,
 } from '@/pages';
 import Test from '@/components/base/Test';
-import MatchingPage from '@/pages/MatchingPage';
 import UserHeader from '@/components/domain/matching/UserHeader';
 
 function Routing() {
@@ -46,9 +46,6 @@ function Routing() {
             <Route path={Path.AuthMail} element={<AuthMail />} />
             <Route path={Path.TypeOfMeetingSurvey} element={<TypeOfMeetingSurvey />} />
             <Route path={Path.OauthKakao} element={<OauthKakao />} />
-            <Route path={'/'} element={<UserHeader />}>
-              <Route path={Path.Matching} element={<MatchingPage />} />
-            </Route>
             <Route path={'/meeting'} element={<Outlet />}>
               <Route path={Path.GenderAverageAgeSurvey} element={<GenderAverageAgeSurvey />} />
               <Route path={Path.OurUniversitiesSurvey} element={<OurUniversitiesSurvey />} />
@@ -84,6 +81,9 @@ function Routing() {
               <Route path={Path.ChannelSurvey} element={<ChannelSurvey />} />
               <Route path={Path.AgreementSurvey} element={<AgreementSurvey />} />
               <Route path={Path.KakaoIdSurvey} element={<KakaoIdSurvey />} />
+            </Route>
+            <Route path={'/matching'} element={<Outlet />}>
+              <Route path={Path.MatchingMeeting} element={<MatchingPage />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
