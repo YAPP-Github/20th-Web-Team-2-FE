@@ -31,6 +31,8 @@ const useAgreementCheck = () => {
     return checkedList.every((item) => item.checked) && checkedChoiceList.every((item) => item.checked);
   }, [checkedList, checkedChoiceList]);
 
+  const isEssentialChecked = useMemo(() => checkedList.every((item) => item.checked), [checkedList]);
+
   const onCheckAll = () => {
     setCheckedList(checkedList.map((item) => ({ ...item, checked: !isAllchecked })));
     setCheckedChoiceList(checkedChoiceList.map((item) => ({ ...item, checked: !isAllchecked })));
@@ -46,6 +48,7 @@ const useAgreementCheck = () => {
   };
 
   return {
+    isEssentialChecked,
     isAllchecked,
     checkedList,
     checkedChoiceList,

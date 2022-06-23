@@ -11,10 +11,10 @@ import Path from '@/router/Path';
 
 const AgreementSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
-  const { checkedList, checkedChoiceList, onChangeCheck, onChangeChoiceCheck, onCheckAll, isAllchecked } = useAgreementCheck();
+  const { checkedList, checkedChoiceList, onChangeCheck, onChangeChoiceCheck, onCheckAll, isEssentialChecked, isAllchecked } = useAgreementCheck();
   return (
     <SurveyTemplate
-      disableNext={!isAllchecked}
+      disableNext={!isEssentialChecked}
       hasProgressBar={false}
       handlePrevClick={() => meetingNavigate(Path.ChannelSurvey)}
       handleNextClick={() => meetingNavigate(Path.KakaoIdSurvey)}
