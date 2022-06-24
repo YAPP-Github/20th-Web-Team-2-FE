@@ -4,10 +4,13 @@ import { Title } from '@/lib/styles/styledComponents';
 import { ChoiceButton } from '@/components/base';
 import styled from 'styled-components';
 import { PLAY_ITEMS } from '@/types/constants/play';
+import Path from '@/router/Path';
+import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 
 export type ChoiceOptions = 'ALL' | 'GAME' | 'TALK';
 
 const PlaySurvey = () => {
+  const meetingNavigate = useMeetingNavigate();
   const [checkedOption, setCheckedOption] = useState<ChoiceOptions>('ALL');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +19,13 @@ const PlaySurvey = () => {
   };
 
   return (
-    <SurveyTemplate disableNext={!checkedOption} currStep={3} totalStep={10}>
+    <SurveyTemplate
+      disableNext={!checkedOption}
+      currStep={10}
+      totalStep={14}
+      handlePrevClick={() => meetingNavigate(Path.MindsetSurvey)}
+      handleNextClick={() => meetingNavigate(Path.IsAbroadSurvey)}
+    >
       <Title>
         <strong>술게임 여부</strong>를
         <br />

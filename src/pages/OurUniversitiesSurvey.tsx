@@ -14,7 +14,7 @@ const OurUniversitiesSurvey = () => {
     <SurveyTemplate
       disableNext={false}
       hasProgressBar={true}
-      totalStep={15}
+      totalStep={14}
       currStep={3}
       handlePrevClick={() => meetingNavigate(Path.GenderAverageAgeSurvey)}
       handleNextClick={() => meetingNavigate(Path.OurDepartmentsAverageHeightSurvey)}

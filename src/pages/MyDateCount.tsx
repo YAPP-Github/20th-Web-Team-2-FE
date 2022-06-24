@@ -11,7 +11,7 @@ type BodyOption = typeof ids[number];
 type SmokeOption = 'true' | 'false' | '';
 
 const MyDateCount = () => {
-  const meetingNavigate = useDatingNavigate();
+  const datingNavigate = useDatingNavigate();
   const [disableNext, setDisableNext] = useState(true);
 
   const [checkedOption, setCheckedOption] = useState<BodyOption | ''>('');
@@ -33,8 +33,8 @@ const MyDateCount = () => {
       hasProgressBar={true}
       totalStep={12}
       currStep={6}
-      handlePrevClick={() => meetingNavigate(Path.MyBodySmoke)}
-      handleNextClick={() => meetingNavigate(Path.AvoidUniversitiesSurvey)}
+      handlePrevClick={() => datingNavigate(Path.MyBodySmoke)}
+      handleNextClick={() => datingNavigate(Path.AvoidUniversitiesSurvey)}
     >
       <ChooseFourBox items={MY_DOUNT_ITEMS as unknown as ChooseFourBoxItemProps[]} checkedOption={checkedOption} setCheckedOption={setCheckedOption}>
         본인의 연애 횟수를 선택해주세요.

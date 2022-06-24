@@ -5,13 +5,22 @@ import { ChooseFourBox, HeightBox } from '@/components/domain/survey';
 import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';
 import { MIN_HEIGHT, MAX_HEIGHT } from '@/components/domain/survey/HeightBox';
 import { OUR_DEPARTMENT_ITEMS } from '@/types/constants/department';
+import Path from '@/router/Path';
+import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 
 const OurDepartmentsAverageHeightSurvey = () => {
+  const meetingNavigate = useMeetingNavigate();
   const [checkedMultiOption, setMultiCheckedOption] = useState<ChooseFourBoxItemProps[]>(OUR_DEPARTMENT_ITEMS);
   const [heightOption, setHeightOption] = useState(Math.floor((MIN_HEIGHT + MAX_HEIGHT) / 2));
 
   return (
-    <SurveyTemplate disableNext={!checkedMultiOption && !heightOption} currStep={3} totalStep={10}>
+    <SurveyTemplate
+      disableNext={!checkedMultiOption && !heightOption}
+      currStep={4}
+      totalStep={14}
+      handlePrevClick={() => meetingNavigate(Path.OurUniversitiesSurvey)}
+      handleNextClick={() => meetingNavigate(Path.AvoidUniversitiesSurvey)}
+    >
       <Title>
         <strong>참여자의 학과</strong>를
         <br />

@@ -5,11 +5,21 @@ import { DOMESTICAREAS_ITEMS } from '@/types/constants/area';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
+import Path from '@/router/Path';
+import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 
 const DomesticAreasSurvey = () => {
+  const meetingNavigate = useMeetingNavigate();
   const [checkedMultiOption, setMultiCheckedOption] = useState<ChooseFourBoxItemProps[]>(DOMESTICAREAS_ITEMS);
+
   return (
-    <SurveyTemplate disableNext={true} currStep={3} totalStep={10}>
+    <SurveyTemplate
+      disableNext={!checkedMultiOption.length}
+      currStep={12}
+      totalStep={14}
+      handlePrevClick={() => meetingNavigate(Path.IsAbroadSurvey)}
+      handleNextClick={() => meetingNavigate(Path.ChannelSurvey)}
+    >
       <Title>
         <strong>미팅이 가능한 지역</strong>을
         <br />

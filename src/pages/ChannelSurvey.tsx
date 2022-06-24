@@ -13,8 +13,10 @@ const ChannelSurvey = () => {
   return (
     <SurveyTemplate
       disableNext={false}
-      hasProgressBar={false}
-      handlePrevClick={() => meetingNavigate(Path.AbroadAreasSurvey)}
+      hasProgressBar={true}
+      currStep={13}
+      totalStep={14}
+      handlePrevClick={() => meetingNavigate(Path.IsAbroadSurvey)}
       handleNextClick={() => meetingNavigate(Path.AgreementSurvey)}
     >
       <Title>

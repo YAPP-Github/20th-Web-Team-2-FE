@@ -4,8 +4,11 @@ import { SurveyTemplate } from '@/components/domain/survey';
 import { Input } from '@/components/base';
 import styled from 'styled-components';
 import { palette } from '@/lib/styles/palette';
+import Path from '@/router/Path';
+import { useDatingNavigate } from '@/hooks/common/useMeetingNavigate';
 
 const MyMbtiHeight = () => {
+  const datingNavigate = useDatingNavigate();
   const [mbtiOption, setMbtiOption] = useState<string>('');
   const [myHeight, setMyHeight] = useState<number>(0);
 
@@ -21,7 +24,13 @@ const MyMbtiHeight = () => {
   };
 
   return (
-    <SurveyTemplate disableNext={!mbtiOption || myHeight <= 0} currStep={3} totalStep={10}>
+    <SurveyTemplate
+      disableNext={!mbtiOption || myHeight <= 0}
+      currStep={4}
+      totalStep={12}
+      handlePrevClick={() => datingNavigate(Path.MyDepartmentCharacter)}
+      handleNextClick={() => datingNavigate(Path.MyBodySmoke)}
+    >
       <StyledTitle>본인의 MBTI를 알려주세요.</StyledTitle>
       <Anchor target="_blank" href="https://types.my/quiz/create?step=5">
         나의 MBTI 알아보기
