@@ -5,3 +5,7 @@ export { default as SearchIcon } from './SearchIcon.png';
 export { default as DeleteIcon } from './DeleteIcon.png';
 export { default as KakaoIcon } from './KakaoIcon.png';
 export { default as InstagramIcon } from './InstagramIcon.png';
+export { default as MatchingFail } from './MatchingFail.png';
+export { default as MatchingSuccess } from './MatchingSuccess.png';
+export { default as Waiting } from './Waiting.png';
+export { default as Complete } from './Complete.png';
