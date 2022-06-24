@@ -3,24 +3,26 @@ import styled from 'styled-components';
 import { Button } from '@/components/base';
 import UserHeader from './UserHeader';
 import { useLocation } from 'react-router-dom';
+import { Title } from '@/lib/styles/styledComponents';
 
 interface MatchingTemplateProps {
   children: ReactNode;
   handleClick?: MouseEventHandler<HTMLButtonElement>;
   IsDisable: boolean;
+  title: ReactNode;
   btnName: string;
 }
-const MatchingTemplete = ({ children, handleClick, IsDisable, btnName }: MatchingTemplateProps) => {
+const MatchingTemplete = ({ children, handleClick, IsDisable, btnName, title }: MatchingTemplateProps) => {
   const location = useLocation();
   const [type, setType] = useState('meeting');
   useEffect(() => {
     location.pathname.includes('meeting') ? setType('meeting') : setType('dating');
-  }, [location]);
+  }, [location.pathname]);
 
   return (
     <TemplateBlock>
       <UserHeader />
-      {children}
+      <Title>{title}</Title>
       <ButtonWrapper>
         <TypeButton onClick={handleClick} size="medium" variant={type === 'meeting' ? 'default' : 'gray'} fontWeight={type === 'dating' ? 700 : 400}>
           미팅
@@ -29,6 +31,7 @@ const MatchingTemplete = ({ children, handleClick, IsDisable, btnName }: Matchin
           소개팅
         </TypeButton>
       </ButtonWrapper>
+      <div>{children}</div>
       <NavigationWrapper>
         <ButtonWrapper>
           <Button
@@ -45,9 +48,11 @@ const MatchingTemplete = ({ children, handleClick, IsDisable, btnName }: Matchin
     </TemplateBlock>
   );
 };
+
 const TemplateBlock = styled.section`
   position: relative;
   height: 100%;
+  margin: 0 8px;
 `;
 
 const NavigationWrapper = styled.div`
