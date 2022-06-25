@@ -45,51 +45,59 @@ export const sizes = ({ fontSize, fontWeight, height }: Pick<ButtonProps, 'fontW
 export const getVariant = (variant: ButtonVariants, isDisabled?: boolean) => css`
   border: none;
 
-  ${variant === 'default' &&
-  css`
-    background-color: ${palette.primary};
-    color: ${palette.white};
-    font-weight: 600;
-
-    &:hover {
-      background-color: ${palette.darkPrimary};
-    }
-    ${isDisabled &&
+  ${
+    variant === 'default' &&
     css`
-      font-weight: 300;
-      background-color: ${palette.grayLight};
-      color: rgba(0, 0, 0, 0.6);
-      cursor: not-allowed;
-    `}
-  `}
+      background-color: ${palette.primary};
+      color: ${palette.white};
+      font-weight: 600;
 
-  ${variant === 'gray' &&
-  css`
+      &:hover {
+        background-color: ${palette.darkPrimary};
+      }
+      ${isDisabled &&
+      css`
+        font-weight: 300;
+        background-color: ${palette.grayLight};
+        color: rgba(0, 0, 0, 0.6);
+        cursor: not-allowed;
+      `}
+    `
+  }
+
+  ${
+    variant === 'gray' &&
+    css`
     background-color: ${palette.grayLight};
     color: rgba(0, 0, 0, 0.6);
     font-weight: 400;
 
     &:hover {
       background-color: ${palette.grayLightHover};
-  `}
-
-${variant === 'grayBlack' &&
+  `
+  }
+  }
+${
+  variant === 'grayBlack' &&
   css`
     background-color: ${palette.grayLight};
     color: ${palette.black};
     font-weight: 400;
-  `}
+  `
+}
 
 
   &:focus {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   }
-  ${variant === 'kakao' &&
-  css`
-    background-color: ${palette.kakao};
-    color: ${palette.black};
-    font-weight: 700;
-  `}
+  ${
+    variant === 'kakao' &&
+    css`
+      background-color: ${palette.kakao};
+      color: ${palette.black};
+      font-weight: 700;
+    `
+  }
 
   &:focus {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
