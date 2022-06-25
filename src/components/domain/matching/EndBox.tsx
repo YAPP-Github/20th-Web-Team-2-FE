@@ -94,19 +94,11 @@ function EndBox() {
       </MatchingInfoBox>
       <KakaoCopyBox kakaoId={kakaoId} />
       <EtcBox>
-        <EtcEle
-          onClick={() => {
-            window.open('https://docs.google.com/forms/d/e/1FAIpQLSeSnI-tB9acPtCepl-FM8cCTF-uezGOJ5SjwFOdQ6DT92xjmQ/viewform', '_blank');
-          }}
-        >
+        <EtcEle href="https://docs.google.com/forms/d/e/1FAIpQLSeSnI-tB9acPtCepl-FM8cCTF-uezGOJ5SjwFOdQ6DT92xjmQ/viewform" target="_blank">
           후기작성
         </EtcEle>
         |
-        <EtcEle
-          onClick={() => {
-            window.open('https://docs.google.com/forms/d/e/1FAIpQLSfTSBwk6bb0ywTBoHu4cZM1gV8DN0OjMB4jVFvdzbYDrjnJdg/viewform', '_blank');
-          }}
-        >
+        <EtcEle href="https://docs.google.com/forms/d/e/1FAIpQLSfTSBwk6bb0ywTBoHu4cZM1gV8DN0OjMB4jVFvdzbYDrjnJdg/viewform" target="_blank">
           신고하기
         </EtcEle>
       </EtcBox>
@@ -151,7 +143,7 @@ const EtcBox = styled.div`
   align-items: center;
   color: ${palette.explanationColor};
 `;
-const EtcEle = styled.div`
+const EtcEle = styled.a`
   font-size: 12px;
   display: flex;
   width: 100%;
