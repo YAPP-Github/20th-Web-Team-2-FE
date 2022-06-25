@@ -1,30 +1,24 @@
 import styled from 'styled-components';
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 
-export interface Ranges {
+interface SimpleRangeSliderProps {
   min: number;
   max: number;
+  ageOption: number;
   isStep5?: boolean;
+  onChange?: (rangeValues: OnChangeProps) => void;
 }
 
-interface SimpleRangeSliderProps extends Ranges {
-  onChange?: (rangeValues: Ranges) => void;
-}
+export type OnChangeProps = Omit<SimpleRangeSliderProps, 'ageOption' | 'onChange'>;
 
-const SimpleRangeSlider = ({ min, max, isStep5 = false, onChange }: SimpleRangeSliderProps) => {
-  const [maxVal, setMaxVal] = useState(Math.ceil((min + max) / 2));
+const SimpleRangeSlider = ({ min, max, ageOption, isStep5 = false, onChange }: SimpleRangeSliderProps) => {
+  const [maxVal, setMaxVal] = useState(ageOption);
   const maxValRef = useRef<HTMLInputElement>(null);
   const range = useRef<HTMLDivElement>(null);
   const sign = useRef<HTMLSpanElement>(null);
 
   const getPercent = useCallback((value: number) => Math.round(((value - min) / (max - min)) * 100), [min, max]);
   const getMidValue = useCallback(
-    (midLevel: 1 | 2) => {
-      return min + Math.floor((max - min) / 3) * midLevel;
-    },
-    [min, max],
-  );
-  const getMidValueWith5Steps = useCallback(
     (midLevel: 1 | 2) => {
       return min + Math.floor((max - min) / 3) * midLevel;
     },

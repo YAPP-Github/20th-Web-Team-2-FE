@@ -2,9 +2,10 @@ import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { SubTitle } from '@/lib/styles/styledComponents';
 import { SimpleRangeSlider, MultiRangeSlider } from '@/components/base';
-import { Ranges } from '@/components/base/SimpleRangeSlider';
+import { OnChangeProps } from '@/components/base/SimpleRangeSlider';
 
 interface AgeBoxProps {
+  ageOption: number;
   setAgeOption?: React.Dispatch<React.SetStateAction<number>>;
   setMultiAgeOption?: React.Dispatch<React.SetStateAction<number[]>>;
   children: React.ReactNode;
@@ -14,9 +15,9 @@ interface AgeBoxProps {
 export const MIN_AGE = 20;
 export const MAX_AGE = 35;
 
-const AgeBox = ({ setAgeOption, setMultiAgeOption, children, isMulti = false }: AgeBoxProps) => {
+const AgeBox = ({ ageOption, setAgeOption, setMultiAgeOption, children, isMulti = false }: AgeBoxProps) => {
   const handleSimpleChange = useCallback(
-    ({ max }: Ranges) => {
+    ({ max }: OnChangeProps) => {
       if (!isMulti && setAgeOption) {
         setAgeOption(max);
       }
@@ -25,7 +26,7 @@ const AgeBox = ({ setAgeOption, setMultiAgeOption, children, isMulti = false }: 
   );
 
   const handleMultiChange = useCallback(
-    ({ min, max }: Ranges) => {
+    ({ min, max }: OnChangeProps) => {
       if (isMulti && setMultiAgeOption) {
         setMultiAgeOption([min, max]);
       }
@@ -40,7 +41,7 @@ const AgeBox = ({ setAgeOption, setMultiAgeOption, children, isMulti = false }: 
         {isMulti ? (
           <MultiRangeSlider min={MIN_AGE} max={MAX_AGE} onChange={handleMultiChange} />
         ) : (
-          <SimpleRangeSlider min={MIN_AGE} max={MAX_AGE} onChange={handleSimpleChange} />
+          <SimpleRangeSlider min={MIN_AGE} max={MAX_AGE} ageOption={ageOption} onChange={handleSimpleChange} />
         )}
       </RangeWrapper>
     </Container>
