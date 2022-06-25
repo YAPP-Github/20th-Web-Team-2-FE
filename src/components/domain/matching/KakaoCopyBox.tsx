@@ -14,8 +14,9 @@ function KakaoCopyBox({ kakaoId }: CopyBoxPorps) {
   const handleCopy = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      onToggleModal();
     } catch (error) {
+      console.log(error);
+    } finally {
       onToggleModal();
     }
   };
