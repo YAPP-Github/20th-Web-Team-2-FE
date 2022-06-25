@@ -6,16 +6,25 @@ import styled from 'styled-components';
 import { PLAY_ITEMS } from '@/types/constants/play';
 import Path from '@/router/Path';
 import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
-
-export type ChoiceOptions = 'ALL' | 'GAME' | 'TALK';
+import { useMeetingSessionState } from '@/hooks/common';
+import { type Play } from '@/types/meeting';
 
 const PlaySurvey = () => {
   const meetingNavigate = useMeetingNavigate();
-  const [checkedOption, setCheckedOption] = useState<ChoiceOptions>('ALL');
+  const { initMeetingState, setMeetingData } = useMeetingSessionState();
+  const [checkedOption, setCheckedOption] = useState<Play>(initMeetingState.play);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id } = e.target;
-    setCheckedOption(id as ChoiceOptions);
+    setCheckedOption(id as Play);
+  };
+
+  const handleNextClick = () => {
+    if (initMeetingState) {
+      setMeetingData({ ...initMeetingState, play: checkedOption });
+    }
+
+    meetingNavigate(Path.IsAbroadSurvey);
   };
 
   return (
@@ -24,7 +33,7 @@ const PlaySurvey = () => {
       currStep={10}
       totalStep={14}
       handlePrevClick={() => meetingNavigate(Path.MindsetSurvey)}
-      handleNextClick={() => meetingNavigate(Path.IsAbroadSurvey)}
+      handleNextClick={handleNextClick}
     >
       <Title>
         <strong>술게임 여부</strong>를
