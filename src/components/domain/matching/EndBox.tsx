@@ -1,9 +1,9 @@
-import { CopyIcon } from '@/assets/img';
 import { palette } from '@/lib/styles/palette';
 import { schools } from '@/mock/schools';
 import { Meeting } from '@/types/meeting';
 import React from 'react';
 import styled from 'styled-components';
+import KakaoCopyBox from './KakaoCopyBox';
 
 const TempData: Meeting = {
   averageHeight: [170, 175],
@@ -28,15 +28,7 @@ const TempData: Meeting = {
 };
 function EndBox() {
   const { kakaoId, averageAge, averageHeight, mindset, ourDepartments, ourUniversities, play } = TempData;
-  console.log(schools[ourUniversities[1]]);
-  const handleCopy = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      alert('복사 성공!');
-    } catch (error) {
-      alert('복사 실패!');
-    }
-  };
+
   return (
     <div>
       <MatchingInfoBox>
@@ -97,11 +89,7 @@ function EndBox() {
           <InfoText>{{ ALL: '술게임, 얘기하면서 둘 다', GAME: '술게임 할래요!', TALK: '얘기하면서 놀래요.' }[play]}</InfoText>
         </FlexLine>
       </MatchingInfoBox>
-      <KakaoIdBox onClick={() => handleCopy(kakaoId)}>
-        <img src={CopyIcon} alt="복사" />
-        <KakaoLabel>상대 카톡아이디:</KakaoLabel>
-        <b> {kakaoId}</b>
-      </KakaoIdBox>
+      <KakaoCopyBox kakaoId={kakaoId} />
     </div>
   );
 }
@@ -112,14 +100,6 @@ const MatchingInfoBox = styled.div`
   border-radius: 4px;
   font-size: 12px;
   margin: 8px 0;
-`;
-const KakaoIdBox = styled(MatchingInfoBox)`
-  padding: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
-  cursor: pointer;
 `;
 
 const InfoLabel = styled.div`
@@ -146,7 +126,4 @@ const FlexLine = styled.div`
   justify-content: left;
 `;
 
-const KakaoLabel = styled.p`
-  margin: 0 4px;
-`;
-export default EndBox;
+export default React.memo(EndBox);
