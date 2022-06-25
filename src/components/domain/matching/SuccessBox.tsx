@@ -5,7 +5,7 @@ import { MarginTopEle, MatchingImg, StringEle } from './WaitingBox';
 function SuccessBox() {
   return (
     <>
-      <MatchingImg src={MatchingSuccess} alt="" />
+      <MatchingImg src={MatchingSuccess} alt="매칭 성공 이미지" />
       <StringEle>
         <strong>5월 3일 22시</strong>까지 <strong>1,0000</strong>원을 결제해주시면
         <br />

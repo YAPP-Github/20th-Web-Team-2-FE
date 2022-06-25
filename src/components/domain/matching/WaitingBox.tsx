@@ -5,7 +5,7 @@ import styled from 'styled-components';
 function WaitingBox() {
   return (
     <>
-      <MatchingImg src={Waiting} alt="" />
+      <MatchingImg src={Waiting} alt="매칭 대기 이미지" />
       <StringEle>
         <strong>매칭은 매일밤 11시에 이루어집니다.</strong>
         <br />
