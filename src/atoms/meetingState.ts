@@ -30,7 +30,7 @@ const INITIAL_MEETING_STATE: Meeting = {
 };
 
 const meetingState = atom<Meeting>({
-  key: 'meeting/meetingState',
+  key: 'meetingState',
   default: INITIAL_MEETING_STATE,
   effects_UNSTABLE: [persistAtom],
 });
