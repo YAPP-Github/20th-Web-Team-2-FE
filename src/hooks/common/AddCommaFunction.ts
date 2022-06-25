@@ -1,14 +1,14 @@
 const AddCommaFunction = () => {
-  const AddComma = (index: number) => {
+  const addComma = (index: number) => {
     if (index === 0) return;
     else return ',';
   };
-  const AddTailComma = (arrayLength: number, index: number) => {
+  const addTailComma = (arrayLength: number, index: number) => {
     if (index === arrayLength - 1) return;
     else return ',';
   };
 
-  return { AddComma, AddTailComma };
+  return { addComma, addTailComma };
 };
 
 export default AddCommaFunction;

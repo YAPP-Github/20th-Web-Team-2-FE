@@ -29,7 +29,7 @@ const TempData: Meeting = {
 };
 function EndBox() {
   const { kakaoId, averageAge, averageHeight, mindset, ourDepartments, ourUniversities, play } = TempData;
-  const { AddComma, AddTailComma } = AddCommaFunction();
+  const { addComma, addTailComma } = AddCommaFunction();
   return (
     <div>
       <MatchingInfoBox>
@@ -49,7 +49,7 @@ function EndBox() {
             {ourUniversities.map((univ, index) => (
               <p key={univ}>
                 {schools[univ].name}
-                {AddTailComma(ourUniversities.length, index)}
+                {addTailComma(ourUniversities.length, index)}
               </p>
             ))}
           </InfoText>
@@ -59,7 +59,7 @@ function EndBox() {
           <InfoFlexText>
             {ourDepartments.map((department, index) => (
               <p key={`${department}_${index}`}>
-                {AddComma(index)}
+                {addComma(index)}
                 {{ LIBERAL: '문과', SCIENCE: '이과', ATHLETIC: '체육', ART: '예술' }[department]}
               </p>
             ))}
@@ -71,14 +71,14 @@ function EndBox() {
             {TempData.abroadAreas &&
               TempData.abroadAreas.map((area, index) => (
                 <div key={area}>
-                  {AddComma(index)}
+                  {addComma(index)}
                   {area}
                 </div>
               ))}
           </InfoFlexText>
           {TempData.domesticAreas?.map((area, index) => (
             <InfoFlexText key={`${area}_${index}`}>
-              {AddComma(index)}
+              {addComma(index)}
               {{ ICN: '인천', SNW: '서북', SNE: '동북', SSW: '서남', SSE: '동서', GN: '경기 북부', GS: '경기 남부' }[area]},
             </InfoFlexText>
           ))}
