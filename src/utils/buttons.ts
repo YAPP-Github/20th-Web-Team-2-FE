@@ -52,7 +52,7 @@ export const getVariant = (variant: ButtonVariants, isDisabled?: boolean) => css
     font-weight: 600;
 
     &:hover {
-      background-color: ${palette.gray};
+      background-color: ${palette.darkPrimary};
     }
     ${isDisabled &&
     css`
@@ -68,11 +68,9 @@ export const getVariant = (variant: ButtonVariants, isDisabled?: boolean) => css
     background-color: ${palette.grayLight};
     color: rgba(0, 0, 0, 0.6);
     font-weight: 400;
+
     &:hover {
-      background-color: ${palette.primary};
-      color: ${palette.white};
-      font-weight: 600;
-    }
+      background-color: ${palette.grayLightHover};
   `}
 
 ${variant === 'grayBlack' &&
