@@ -1,4 +1,5 @@
 import { palette } from '@/lib/styles/palette';
+import { schools } from '@/mock/schools';
 import { Meeting } from '@/types/meeting';
 import React from 'react';
 import styled from 'styled-components';
@@ -6,7 +7,7 @@ import styled from 'styled-components';
 const TempData: Meeting = {
   averageHeight: [170, 175],
   averageAge: 22,
-  ourUniversities: [1, 2],
+  ourUniversities: [1, 2, 11],
   ourDepartments: ['ATHLETIC', 'SCIENCE'],
   abroadAreas: [1, 2, 3],
   domesticAreas: [],
@@ -14,11 +15,11 @@ const TempData: Meeting = {
   play: 'ALL',
   typeOfMeeting: 'ONE',
   gender: 'FEMALE',
-  avoidUniversities: [],
-  preferUniversities: [],
-  preferAge: [],
-  preferHeight: [],
-  preferDepartments: [],
+  avoidUniversities: [1, 2, 3, 4],
+  preferUniversities: [5, 6, 7, 8],
+  preferAge: [20, 25],
+  preferHeight: [170, 180],
+  preferDepartments: ['ATHLETIC', 'SCIENCE'],
   isAbroad: false,
   channel: 'FRIEND',
   agreement: false,
@@ -26,6 +27,7 @@ const TempData: Meeting = {
 };
 function EndBox() {
   const { averageAge, averageHeight, mindset, ourDepartments, ourUniversities, play } = TempData;
+  console.log(schools[ourUniversities[1]]);
   return (
     <MatchingInfoBox>
       <FlexLine>
@@ -40,34 +42,41 @@ function EndBox() {
       </FlexLine>
       <FlexLine>
         <InfoLabel>학교</InfoLabel>
-        <InfoFlexText>
-          {ourUniversities.map((univ) => (
-            <div key={univ}>{univ},</div>
+        <InfoText>
+          {ourUniversities.map((univ, index) => (
+            <p key={univ}>
+              {schools[univ].name}
+              {index === ourUniversities.length - 1 ? '' : ','}
+            </p>
           ))}
-        </InfoFlexText>
+        </InfoText>
       </FlexLine>
       <FlexLine>
         <InfoLabel>학과</InfoLabel>
         <InfoFlexText>
           {ourDepartments.map((department, index) => (
-            <div key={`${department}_${index}`}>
+            <p key={`${department}_${index}`}>
               {index === 0 ? '' : ','}
               {{ LIBERAL: '문과', SCIENCE: '이과', ATHLETIC: '체육', ART: '예술' }[department]}
-            </div>
+            </p>
           ))}
         </InfoFlexText>
       </FlexLine>
       <FlexLine>
         <InfoLabel>지역</InfoLabel>
-        <InfoFlexText>
-          {/* {TempData.abroadAreas.length !== 0
-            ? TempData.abroadAreas.map((area) => <div key={area}>{area},</div>)
-            : TempData.domesticAreas?.map((area) => (
-                <div key={area}>
-                  {{ ICN: '인천', SNW: '서북', SNE: '동북', SSW: '서남', SSE: '동서', GN: '경기 북부', GS: '경기 남부' }[TempData.domesticAreas]},
-                </div>
-              ))} */}
-        </InfoFlexText>
+        {TempData.abroadAreas &&
+          TempData.abroadAreas.map((area, index) => (
+            <InfoFlexText key={area}>
+              {index === 0 ? '' : ','}
+              {area}
+            </InfoFlexText>
+          ))}
+        {TempData.domesticAreas?.map((area, index) => (
+          <InfoFlexText key={`${area}_${index}`}>
+            {index === 0 ? '' : ','}
+            {{ ICN: '인천', SNW: '서북', SNE: '동북', SSW: '서남', SSE: '동서', GN: '경기 북부', GS: '경기 남부' }[area]},
+          </InfoFlexText>
+        ))}
       </FlexLine>
       <FlexLine>
         <InfoLabel>마인드셋</InfoLabel>
@@ -82,7 +91,7 @@ function EndBox() {
 }
 const MatchingInfoBox = styled.div`
   width: 100%;
-  padding: 20px 20px 5px 20px;
+  padding: 20px 0px 5px 20px;
   background-color: ${palette.grayLight};
   border-radius: 4px;
   font-size: 12px;
@@ -90,14 +99,16 @@ const MatchingInfoBox = styled.div`
 
 const InfoLabel = styled.div`
   font-weight: 700;
-  padding: 2px 17px 10px 6px;
-  width: 70px;
+  padding: 2px 2px 10px 6px;
+  min-width: 60px;
   text-align: left;
 `;
 
 const InfoText = styled.div`
   font-weight: 400;
   padding-top: 2px;
+  line-height: 16px;
+  text-align: left;
 `;
 const InfoFlexText = styled(InfoText)`
   display: flex;
@@ -107,4 +118,5 @@ const FlexLine = styled.div`
   display: flex;
   justify-content: left;
 `;
+
 export default EndBox;
