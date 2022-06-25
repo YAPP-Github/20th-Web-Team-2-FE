@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { DeleteIcon, SearchIcon } from '@/assets/img';
 
@@ -22,6 +22,12 @@ const SearchSelector = ({ placeholder, searchData, selectedResults, setSelectedR
   const [selectedSchools, setSelectedSchools] = useState<string[]>([]); // 렌더링될 NAME 데이터
 
   const findId = useCallback((value: string) => Number(searchData.find((data) => data.name === value)?.id), [searchData]);
+
+  useEffect(() => {
+    selectedResults.map((id) => {
+      setSelectedSchools(() => searchData.filter((name) => name.id === id).map(({ name }) => name));
+    });
+  }, []);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
