@@ -67,13 +67,15 @@ function EndBox() {
         </FlexLine>
         <FlexLine>
           <InfoLabel>지역</InfoLabel>
-          {TempData.abroadAreas &&
-            TempData.abroadAreas.map((area, index) => (
-              <InfoFlexText key={area}>
-                {AddComma(index)}
-                {area}
-              </InfoFlexText>
-            ))}
+          <InfoFlexText>
+            {TempData.abroadAreas &&
+              TempData.abroadAreas.map((area, index) => (
+                <div key={area}>
+                  {AddComma(index)}
+                  {area}
+                </div>
+              ))}
+          </InfoFlexText>
           {TempData.domesticAreas?.map((area, index) => (
             <InfoFlexText key={`${area}_${index}`}>
               {AddComma(index)}
