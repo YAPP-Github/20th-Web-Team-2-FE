@@ -5,7 +5,8 @@ import { MultiRangeSlider, SimpleRangeSlider } from '@/components/base';
 import { OnChangeProps } from '@/components/base/SimpleRangeSlider';
 
 interface HeightBoxProps {
-  heightOption: number;
+  heightOption?: number;
+  multiHeightOption?: number[];
   setHeightOption?: React.Dispatch<React.SetStateAction<number>>;
   setMultiHeightOption?: React.Dispatch<React.SetStateAction<number[]>>;
   children: React.ReactNode;
@@ -15,7 +16,7 @@ interface HeightBoxProps {
 export const MIN_HEIGHT = 120;
 export const MAX_HEIGHT = 220;
 
-const HeightBox = ({ heightOption, setHeightOption, setMultiHeightOption, children, isMulti = false }: HeightBoxProps) => {
+const HeightBox = ({ heightOption, setHeightOption, multiHeightOption, setMultiHeightOption, children, isMulti = false }: HeightBoxProps) => {
   if (isMulti && !setMultiHeightOption) {
     throw new Error('setMultiHeightOption is required when isMulti is true');
   }
@@ -47,9 +48,14 @@ const HeightBox = ({ heightOption, setHeightOption, setMultiHeightOption, childr
       <SubTitle>{children}</SubTitle>
       <RangeWrapper>
         {isMulti ? (
-          <MultiRangeSlider min={MIN_HEIGHT} max={MAX_HEIGHT} onChange={handleMultiChange} />
+          <MultiRangeSlider
+            initValue={multiHeightOption ?? [MIN_HEIGHT, MAX_HEIGHT]}
+            min={MIN_HEIGHT}
+            max={MAX_HEIGHT}
+            onChange={handleMultiChange}
+          />
         ) : (
-          <SimpleRangeSlider min={MIN_HEIGHT} max={MAX_HEIGHT} initValue={heightOption} onChange={handleSimpleChange} />
+          <SimpleRangeSlider min={MIN_HEIGHT} max={MAX_HEIGHT} initValue={heightOption ?? MAX_HEIGHT} onChange={handleSimpleChange} />
         )}
       </RangeWrapper>
     </Container>
