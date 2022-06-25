@@ -3,6 +3,7 @@ export type TypeOfMeeting = 'ONE' | 'TWO' | 'THREE' | 'FOUR';
 export type Departments = 'LIBERAL' | 'SCIENCE' | 'ART' | 'ATHLETIC';
 export type MindSet = 'ALL' | 'FRIEND' | 'LOVE';
 export type Play = 'ALL' | 'GAME' | 'TALK';
+export type Location = 'ABROAD' | 'DOMESTIC';
 export type DomesticAreas = 'ICN' | 'SNW' | 'SNE' | 'SSW' | 'SSE' | 'GN' | 'GS';
 export type Channel = 'FACEBOOK' | 'INSTAGRAM' | 'KAKAOROOM' | 'KAKAOPLUS' | 'FRIEND' | 'COMMUNITY';
 
