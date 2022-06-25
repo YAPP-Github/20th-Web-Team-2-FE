@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { MouseEventHandler, ReactNode } from 'react';
+import React, { MouseEventHandler, ReactNode } from 'react';
 import { Button } from '@/components/base';
 import ProgressBar, { ProgressBarProps } from '@/components/base/ProgressBar';
 
@@ -80,4 +80,4 @@ const ButtonWrapper = styled.div`
   gap: 8px;
 `;
 
-export default SurveyTemplate;
+export default React.memo(SurveyTemplate);

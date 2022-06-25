@@ -62,4 +62,5 @@ export const schools: SearchData[] = [
   { id: 59, name: 'Massasoit Community College' },
   { id: 60, name: 'Lawrence Memorial/ Regis College Nursing Program' },
   { id: 61, name: 'Hellenic College and Holy Cross Greek Orthodox School Of Theology' },
+  { id: 62, name: 'Other' },
 ];
