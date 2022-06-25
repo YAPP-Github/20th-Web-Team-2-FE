@@ -16,10 +16,11 @@ const TypeOfMeetingSurvey = () => {
   const [checkedOption, setCheckedOption] = useState<Meeting['typeOfMeeting'] | string>(initMeetingState?.typeOfMeeting);
 
   const handleNextClick = () => {
-    meetingNavigate(Path.GenderAverageAgeSurvey);
     if (initMeetingState) {
       setMeetingData({ ...initMeetingState, typeOfMeeting: checkedOption as Meeting['typeOfMeeting'] });
     }
+
+    meetingNavigate(Path.GenderAverageAgeSurvey);
   };
 
   return (
