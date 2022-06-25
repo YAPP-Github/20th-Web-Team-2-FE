@@ -4,15 +4,15 @@ import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 interface SimpleRangeSliderProps {
   min: number;
   max: number;
-  ageOption: number;
+  initValue: number;
   isStep5?: boolean;
   onChange?: (rangeValues: OnChangeProps) => void;
 }
 
-export type OnChangeProps = Omit<SimpleRangeSliderProps, 'ageOption' | 'onChange'>;
+export type OnChangeProps = Omit<SimpleRangeSliderProps, 'initValue' | 'onChange'>;
 
-const SimpleRangeSlider = ({ min, max, ageOption, isStep5 = false, onChange }: SimpleRangeSliderProps) => {
-  const [maxVal, setMaxVal] = useState(ageOption);
+const SimpleRangeSlider = ({ min, max, initValue, isStep5 = false, onChange }: SimpleRangeSliderProps) => {
+  const [maxVal, setMaxVal] = useState(initValue);
   const maxValRef = useRef<HTMLInputElement>(null);
   const range = useRef<HTMLDivElement>(null);
   const sign = useRef<HTMLSpanElement>(null);

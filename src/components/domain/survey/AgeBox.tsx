@@ -41,7 +41,7 @@ const AgeBox = ({ ageOption, setAgeOption, setMultiAgeOption, children, isMulti 
         {isMulti ? (
           <MultiRangeSlider min={MIN_AGE} max={MAX_AGE} onChange={handleMultiChange} />
         ) : (
-          <SimpleRangeSlider min={MIN_AGE} max={MAX_AGE} ageOption={ageOption} onChange={handleSimpleChange} />
+          <SimpleRangeSlider min={MIN_AGE} max={MAX_AGE} initValue={ageOption} onChange={handleSimpleChange} />
         )}
       </RangeWrapper>
     </Container>

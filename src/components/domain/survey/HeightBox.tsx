@@ -2,9 +2,10 @@ import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { SubTitle } from '@/lib/styles/styledComponents';
 import { MultiRangeSlider, SimpleRangeSlider } from '@/components/base';
-import { Ranges } from '@/components/base/SimpleRangeSlider';
+import { OnChangeProps } from '@/components/base/SimpleRangeSlider';
 
 interface HeightBoxProps {
+  heightOption: number;
   setHeightOption?: React.Dispatch<React.SetStateAction<number>>;
   setMultiHeightOption?: React.Dispatch<React.SetStateAction<number[]>>;
   children: React.ReactNode;
@@ -14,7 +15,7 @@ interface HeightBoxProps {
 export const MIN_HEIGHT = 120;
 export const MAX_HEIGHT = 220;
 
-const HeightBox = ({ setHeightOption, setMultiHeightOption, children, isMulti = false }: HeightBoxProps) => {
+const HeightBox = ({ heightOption, setHeightOption, setMultiHeightOption, children, isMulti = false }: HeightBoxProps) => {
   if (isMulti && !setMultiHeightOption) {
     throw new Error('setMultiHeightOption is required when isMulti is true');
   }
@@ -24,7 +25,7 @@ const HeightBox = ({ setHeightOption, setMultiHeightOption, children, isMulti = 
   }
 
   const handleSimpleChange = useCallback(
-    ({ max }: Ranges) => {
+    ({ max }: OnChangeProps) => {
       if (!isMulti && setHeightOption) {
         setHeightOption(max);
       }
@@ -33,7 +34,7 @@ const HeightBox = ({ setHeightOption, setMultiHeightOption, children, isMulti = 
   );
 
   const handleMultiChange = useCallback(
-    ({ min, max }: Ranges) => {
+    ({ min, max }: OnChangeProps) => {
       if (isMulti && setMultiHeightOption) {
         setMultiHeightOption([min, max]);
       }
@@ -48,7 +49,7 @@ const HeightBox = ({ setHeightOption, setMultiHeightOption, children, isMulti = 
         {isMulti ? (
           <MultiRangeSlider min={MIN_HEIGHT} max={MAX_HEIGHT} onChange={handleMultiChange} />
         ) : (
-          <SimpleRangeSlider min={MIN_HEIGHT} max={MAX_HEIGHT} onChange={handleSimpleChange} />
+          <SimpleRangeSlider min={MIN_HEIGHT} max={MAX_HEIGHT} initValue={heightOption} onChange={handleSimpleChange} />
         )}
       </RangeWrapper>
     </Container>
