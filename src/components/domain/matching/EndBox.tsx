@@ -1,7 +1,7 @@
+import React from 'react';
 import { palette } from '@/lib/styles/palette';
 import { schools } from '@/mock/schools';
 import { Meeting } from '@/types/meeting';
-import React from 'react';
 import styled from 'styled-components';
 import KakaoCopyBox from './KakaoCopyBox';
 
@@ -90,6 +90,23 @@ function EndBox() {
         </FlexLine>
       </MatchingInfoBox>
       <KakaoCopyBox kakaoId={kakaoId} />
+      <EtcBox>
+        <EtcEle
+          onClick={() => {
+            window.open('https://docs.google.com/forms/d/e/1FAIpQLSeSnI-tB9acPtCepl-FM8cCTF-uezGOJ5SjwFOdQ6DT92xjmQ/viewform', '_blank');
+          }}
+        >
+          후기작성
+        </EtcEle>
+        |
+        <EtcEle
+          onClick={() => {
+            window.open('https://docs.google.com/forms/d/e/1FAIpQLSfTSBwk6bb0ywTBoHu4cZM1gV8DN0OjMB4jVFvdzbYDrjnJdg/viewform', '_blank');
+          }}
+        >
+          신고하기
+        </EtcEle>
+      </EtcBox>
     </div>
   );
 }
@@ -99,7 +116,7 @@ const MatchingInfoBox = styled.div`
   background-color: ${palette.grayLight};
   border-radius: 4px;
   font-size: 12px;
-  margin: 8px 0;
+  margin-bottom: 8px;
 `;
 
 const InfoLabel = styled.div`
@@ -125,5 +142,19 @@ const FlexLine = styled.div`
   display: flex;
   justify-content: left;
 `;
-
+const EtcBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${palette.explanationColor};
+`;
+const EtcEle = styled.div`
+  font-size: 12px;
+  display: flex;
+  width: 100%;
+  height: 28px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
 export default React.memo(EndBox);
