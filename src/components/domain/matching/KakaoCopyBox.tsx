@@ -11,13 +11,13 @@ interface CopyBoxPorps {
 
 function KakaoCopyBox({ kakaoId }: CopyBoxPorps) {
   const [isModal, onToggleModal] = useToggle();
+  const [isErrorModal, onToggleErrorModal] = useToggle();
   const handleCopy = async (text: string) => {
     try {
+      onToggleModal();
       await navigator.clipboard.writeText(text);
     } catch (error) {
-      console.log(error);
-    } finally {
-      onToggleModal();
+      onToggleErrorModal();
     }
   };
   return (
@@ -35,6 +35,19 @@ function KakaoCopyBox({ kakaoId }: CopyBoxPorps) {
           title="알림"
           text="복사완료!"
           onToggleModal={onToggleModal}
+          onClick={() => {
+            void 0;
+          }}
+        />
+      )}
+      {isErrorModal && (
+        <Modal
+          width={200}
+          height={140}
+          bottonName="확인"
+          title="알림"
+          text="복사중 에러가 발생했습니다😭 다시한번 시도해 주세요!"
+          onToggleModal={onToggleErrorModal}
           onClick={() => {
             void 0;
           }}
@@ -63,5 +76,4 @@ const KakaoIdBox = styled(MatchingInfoBox)`
   font-size: 14px;
   cursor: pointer;
 `;
-
 export default React.memo(KakaoCopyBox);
