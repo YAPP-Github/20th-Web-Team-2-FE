@@ -27,6 +27,7 @@ export const StringEle = styled.p`
 `;
 export const MarginTopEle = styled.p`
   margin-top: 50px;
+  line-height: 22px;
 `;
 
 export default WaitingBox;
