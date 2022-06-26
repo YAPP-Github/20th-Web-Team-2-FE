@@ -34,12 +34,12 @@ const SearchSelector = ({ placeholder, searchData, selectedResults, setSelectedR
     const id = findId(value);
 
     const noMatchData = !searchData.map(({ id }) => id).includes(id);
+    const existSelected = selectedResults.includes(id);
     const overMaxLimit = selectedResults.length >= MAX;
-    if (noMatchData || overMaxLimit) return;
+    if (noMatchData || existSelected || overMaxLimit) return;
 
     setSelectedResults((prev) => [...prev, id]);
     setSelectedSchools((prev) => [...prev, value]);
-    console.log(selectedResults);
   };
 
   const handleDeleteClick = (value: string) => {
