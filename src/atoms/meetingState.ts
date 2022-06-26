@@ -13,7 +13,7 @@ const INITIAL_MEETING_STATE: Meeting = {
   averageAge: 28,
   ourUniversities: [],
   ourDepartments: ['LIBERAL', 'SCIENCE'],
-  averageHeight: [140, 180],
+  averageHeight: 170,
   avoidUniversities: [],
   preferUniversities: [],
   preferAge: [20, 25],
@@ -30,7 +30,7 @@ const INITIAL_MEETING_STATE: Meeting = {
 };
 
 const meetingState = atom<Meeting>({
-  key: 'meeting/meetingState',
+  key: 'meetingState',
   default: INITIAL_MEETING_STATE,
   effects_UNSTABLE: [persistAtom],
 });

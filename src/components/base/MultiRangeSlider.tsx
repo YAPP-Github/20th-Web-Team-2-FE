@@ -1,18 +1,18 @@
 import styled from 'styled-components';
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 
-export interface Ranges {
+export interface MultiRangeSliderProps {
+  initValue: number[];
   min: number;
   max: number;
+  onChange?: (rangeValues: OnChangeProps) => void;
 }
 
-interface MultiRangeSliderProps extends Ranges {
-  onChange?: (rangeValues: Ranges) => void;
-}
+export type OnChangeProps = Omit<MultiRangeSliderProps, 'initValue' | 'onChange'>;
 
-const MultiRangeSlider = ({ min, max, onChange }: MultiRangeSliderProps) => {
-  const [minVal, setMinVal] = useState(min);
-  const [maxVal, setMaxVal] = useState(max);
+const MultiRangeSlider = ({ initValue, min, max, onChange }: MultiRangeSliderProps) => {
+  const [minVal, setMinVal] = useState(initValue[0]);
+  const [maxVal, setMaxVal] = useState(initValue[1]);
   const minValRef = useRef<HTMLInputElement>(null);
   const maxValRef = useRef<HTMLInputElement>(null);
   const range = useRef<HTMLDivElement>(null);

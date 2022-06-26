@@ -6,16 +6,28 @@ import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
 import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
-import { Abroad } from '@/types/enums';
 import { COUNTRY_ITEMS } from '@/types/constants/area';
+import { useMeetingSessionState } from '@/hooks/common';
+import { type Location } from '@/types/meeting';
 
 const IsAbroadSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
-  const [isAbroad, setIsAbroad] = useState<Abroad>(Abroad.domestic);
+  const { initMeetingState, setMeetingData } = useMeetingSessionState();
+  const [isAbroad, setIsAbroad] = useState<Location>(initMeetingState.isAbroad ? 'ABROAD' : 'DOMESTIC');
+
   const onChangeOption = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id } = e.target;
-    setIsAbroad(id as Abroad);
+    setIsAbroad(id as Location);
   };
+
+  const handleNextClick = () => {
+    if (initMeetingState) {
+      setMeetingData({ ...initMeetingState, isAbroad: isAbroad === 'ABROAD' ? true : false });
+    }
+
+    meetingNavigate(isAbroad === 'ABROAD' ? Path.AbroadAreasSurvey : Path.DomesticAreasSurvey);
+  };
+
   return (
     <SurveyTemplate
       disableNext={false}
@@ -23,7 +35,7 @@ const IsAbroadSurvey = () => {
       currStep={11}
       totalStep={14}
       handlePrevClick={() => meetingNavigate(Path.PlaySurvey)}
-      handleNextClick={() => meetingNavigate(isAbroad === Abroad.abroad ? Path.AbroadAreasSurvey : Path.DomesticAreasSurvey)}
+      handleNextClick={handleNextClick}
     >
       <Title>
         지금 한국이신가요? <br />
