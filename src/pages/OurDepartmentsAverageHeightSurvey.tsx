@@ -40,7 +40,7 @@ const OurDepartmentsAverageHeightSurvey = () => {
 
   return (
     <SurveyTemplate
-      disableNext={!checkedMultiOption && !heightOption}
+      disableNext={!checkedMultiOption || !heightOption}
       currStep={4}
       totalStep={14}
       handlePrevClick={() => meetingNavigate(Path.OurUniversitiesSurvey)}
