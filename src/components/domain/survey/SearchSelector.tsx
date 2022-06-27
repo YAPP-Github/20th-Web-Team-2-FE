@@ -27,7 +27,6 @@ const SearchSelector = ({ placeholder, searchData, selectedResults, setSelectedR
     const { value } = e.target;
     const id = findId(value);
 
-    if (inputRef.current) inputRef.current.value = '';
     const noMatchData = !searchData.map(({ id }) => id).includes(id);
     const overMaxLimit = selectedResults.length >= MAX;
     if (noMatchData || overMaxLimit) return;

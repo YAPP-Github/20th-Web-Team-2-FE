@@ -23,12 +23,12 @@ export const TYPE_OF_MEETING_ITEMS = [
 
 export const GENDER_ITEMS = [
   {
-    id: 'FEMAIL',
+    id: 'FEMALE',
     text: '여자',
     name: 'gender',
   },
   {
-    id: 'MAIL',
+    id: 'MALE',
     text: '남자',
     name: 'gender',
   },

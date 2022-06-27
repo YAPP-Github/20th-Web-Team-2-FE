@@ -8,11 +8,11 @@ import Path from '@/router/Path';
 
 const ChannelSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
-  const { pathCheckList, onChangeCheck } = useFoundPathCheck();
+  const { pathCheckList, onChangeCheck, isChecked } = useFoundPathCheck();
 
   return (
     <SurveyTemplate
-      disableNext={false}
+      disableNext={!isChecked}
       hasProgressBar={true}
       currStep={13}
       totalStep={14}

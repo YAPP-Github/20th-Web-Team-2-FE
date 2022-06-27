@@ -6,16 +6,25 @@ import styled from 'styled-components';
 import { MINDSET_ITEMS } from '@/types/constants/constant';
 import Path from '@/router/Path';
 import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
-
-export type ChoiceOptions = 'ALL' | 'FRIEND' | 'LOVE';
+import { useMeetingSessionState } from '@/hooks/common';
+import { type MindSet } from '@/types/meeting';
 
 const MindsetSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
-  const [checkedOption, setCheckedOption] = useState<ChoiceOptions>('ALL');
+  const { initMeetingState, setMeetingData } = useMeetingSessionState();
+  const [checkedOption, setCheckedOption] = useState<MindSet>(initMeetingState.mindset);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id } = e.target;
-    setCheckedOption(id as ChoiceOptions);
+    setCheckedOption(id as MindSet);
+  };
+
+  const handleNextClick = () => {
+    if (initMeetingState) {
+      setMeetingData({ ...initMeetingState, mindset: checkedOption });
+    }
+
+    meetingNavigate(Path.PlaySurvey);
   };
 
   return (
@@ -24,7 +33,7 @@ const MindsetSurvey = () => {
       currStep={9}
       totalStep={14}
       handlePrevClick={() => meetingNavigate(Path.PreferAgeHeightSurvey)}
-      handleNextClick={() => meetingNavigate(Path.PlaySurvey)}
+      handleNextClick={handleNextClick}
     >
       <Title>
         <strong>미팅의 마인드셋</strong>을

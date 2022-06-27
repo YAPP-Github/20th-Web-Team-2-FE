@@ -1,25 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { SurveyTemplate } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import { ChooseFourBox, HeightBox } from '@/components/domain/survey';
 import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';
-import { MIN_HEIGHT, MAX_HEIGHT } from '@/components/domain/survey/HeightBox';
 import { OUR_DEPARTMENT_ITEMS } from '@/types/constants/department';
 import Path from '@/router/Path';
 import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useMeetingSessionState } from '@/hooks/common';
+import { type Departments } from '@/types/meeting';
+
+export interface ChooseFourDepartmentProps extends ChooseFourBoxItemProps {
+  id: Departments;
+}
 
 const OurDepartmentsAverageHeightSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
-  const [checkedMultiOption, setMultiCheckedOption] = useState<ChooseFourBoxItemProps[]>(OUR_DEPARTMENT_ITEMS);
-  const [heightOption, setHeightOption] = useState(Math.floor((MIN_HEIGHT + MAX_HEIGHT) / 2));
+  const { initMeetingState, setMeetingData } = useMeetingSessionState();
+  const getInitDepartments = OUR_DEPARTMENT_ITEMS.map((item) => {
+    return { ...item, checked: initMeetingState.ourDepartments.some((initState) => initState === item.id) };
+  });
+  const initDepartments = useMemo(() => getInitDepartments, [OUR_DEPARTMENT_ITEMS, initMeetingState]);
+  const [checkedMultiOption, setMultiCheckedOption] = useState<ChooseFourBoxItemProps[]>(initDepartments);
+  const getOurDepartments = checkedMultiOption.reduce<Departments[]>((prev, cur) => {
+    if (cur.checked) {
+      prev.push(cur.id as Departments);
+    }
+    return prev;
+  }, []);
+  const ourDepartments = useMemo(() => getOurDepartments, [checkedMultiOption]);
+  const [heightOption, setHeightOption] = useState(initMeetingState.averageHeight);
+
+  const handleNextClick = () => {
+    if (initMeetingState) {
+      setMeetingData({ ...initMeetingState, ourDepartments: ourDepartments ?? [], averageHeight: heightOption });
+    }
+
+    meetingNavigate(Path.AvoidUniversitiesSurvey);
+  };
 
   return (
     <SurveyTemplate
-      disableNext={!checkedMultiOption && !heightOption}
+      disableNext={!checkedMultiOption || !heightOption}
       currStep={4}
       totalStep={14}
       handlePrevClick={() => meetingNavigate(Path.OurUniversitiesSurvey)}
-      handleNextClick={() => meetingNavigate(Path.AvoidUniversitiesSurvey)}
+      handleNextClick={handleNextClick}
     >
       <Title>
         <strong>참여자의 학과</strong>를
@@ -29,9 +54,11 @@ const OurDepartmentsAverageHeightSurvey = () => {
       <ChooseFourBox isMulti items={OUR_DEPARTMENT_ITEMS} checkedMultiOption={checkedMultiOption} setMultiCheckedOption={setMultiCheckedOption}>
         학과를 선택해주세요
       </ChooseFourBox>
-      <HeightBox setHeightOption={setHeightOption}>평균 키를 알려주세요.</HeightBox>
+      <HeightBox heightOption={heightOption} setHeightOption={setHeightOption}>
+        평균 키를 알려주세요.
+      </HeightBox>
     </SurveyTemplate>
   );
 };
 
-export default OurDepartmentsAverageHeightSurvey;
+export default React.memo(OurDepartmentsAverageHeightSurvey);

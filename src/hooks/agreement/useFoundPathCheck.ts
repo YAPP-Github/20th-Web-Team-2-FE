@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 const useFoundPathCheck = () => {
   const [pathCheckList, setPathCheckList] = useState<{ text: string; name: string; checked: boolean }[]>([
@@ -15,7 +15,9 @@ const useFoundPathCheck = () => {
     setPathCheckList(pathCheckList.map((item) => (item.name === name ? { ...item, checked: !item.checked } : item)));
   };
 
-  return { pathCheckList, onChangeCheck };
+  const isChecked = useMemo(() => pathCheckList.some((item) => item.checked), [pathCheckList]);
+
+  return { pathCheckList, onChangeCheck, isChecked };
 };
 
 export default useFoundPathCheck;

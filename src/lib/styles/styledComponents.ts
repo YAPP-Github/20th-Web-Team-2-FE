@@ -15,3 +15,8 @@ export const SubTitle = styled.h2`
   color: rgba(0, 0, 0, 0.8);
   padding-bottom: 18px;
 `;
+
+export const Contents = styled.section`
+  margin: 0 auto;
+  text-align: center;
+`;

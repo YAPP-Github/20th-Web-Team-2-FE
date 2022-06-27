@@ -5,21 +5,22 @@ import { ChooseFourBox } from '@/components/domain/survey';
 import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
 import { useNavigate } from 'react-router-dom';
-import { useMeetingState } from '@/atoms/meetingState';
 import { type Meeting } from '@/types/meeting';
 import { TYPE_OF_MEETING_ITEMS } from '@/types/constants/constant';
-
-export type ChoiceOptions = 'ONE' | 'TWO' | 'THREE' | 'FOUR';
+import { useMeetingSessionState } from '@/hooks/common';
 
 const TypeOfMeetingSurvey = () => {
   const navigate = useNavigate();
   const meetingNavigate = useMeetingNavigate();
-  const [checkedOption, setCheckedOption] = useState<Meeting['typeOfMeeting'] | string>('ONE');
-  const { meetingData, setMeetingData } = useMeetingState();
+  const { initMeetingState, setMeetingData } = useMeetingSessionState();
+  const [checkedOption, setCheckedOption] = useState<Meeting['typeOfMeeting'] | string>(initMeetingState?.typeOfMeeting);
 
   const handleNextClick = () => {
+    if (initMeetingState) {
+      setMeetingData({ ...initMeetingState, typeOfMeeting: checkedOption as Meeting['typeOfMeeting'] });
+    }
+
     meetingNavigate(Path.GenderAverageAgeSurvey);
-    setMeetingData({ ...meetingData, typeOfMeeting: checkedOption as Meeting['typeOfMeeting'] });
   };
 
   return (
