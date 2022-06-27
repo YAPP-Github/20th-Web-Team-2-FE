@@ -15,6 +15,7 @@ const KakaoIdSurvey = () => {
   const [isModal, onToggleModal] = useToggle();
   const [kakaoId, setkakaoId] = useState('');
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
+  const [isConfirm, setConfirm] = useState(false);
 
   const handleNextClick = () => {
     alert('설문이 완료되었습니다. 정식 출시가 되면 매칭을 시작할 수 있습니다. 조금만 기다려 주세요.');
@@ -26,7 +27,7 @@ const KakaoIdSurvey = () => {
   return (
     <>
       <SurveyTemplate
-        disableNext={!kakaoId}
+        disableNext={!isConfirm}
         hasProgressBar={true}
         currStep={14}
         totalStep={14}
@@ -53,8 +54,8 @@ const KakaoIdSurvey = () => {
             }}
           />
           <Explane>※'카톡 ID 검색 허용'으로 되어있어야 합니다.</Explane>
-          <Button width={100} onClick={onToggleModal}>
-            (임시 버튼)
+          <Button width={100} onClick={onToggleModal} disabled={!kakaoId}>
+            카톡 ID 확인
           </Button>
         </InputWrapper>
       </SurveyTemplate>
@@ -66,9 +67,7 @@ const KakaoIdSurvey = () => {
           title={kakaoId}
           text="　카톡아이디를 확인해 주세요.　상대에게 보여질 아아디입니다!"
           onToggleModal={onToggleModal}
-          onClick={() => {
-            console.log('안녕하세용');
-          }}
+          onClick={() => setConfirm(true)}
         />
       )}
     </>
