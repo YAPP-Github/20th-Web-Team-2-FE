@@ -24,9 +24,8 @@ const SearchSelector = ({ placeholder, searchData, selectedResults, setSelectedR
   const findId = useCallback((value: string) => Number(searchData.find((data) => data.name === value)?.id), [searchData]);
 
   useEffect(() => {
-    selectedResults.map((id) => {
-      setSelectedSchools(() => searchData.filter((name) => name.id === id).map(({ name }) => name));
-    });
+    const result = selectedResults.flatMap((id) => searchData.filter((item) => item.id === id)).map(({ name }) => name);
+    setSelectedSchools(result);
   }, []);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
