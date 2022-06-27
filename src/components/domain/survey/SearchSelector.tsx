@@ -47,10 +47,16 @@ const SearchSelector = ({ placeholder, searchData, selectedResults, setSelectedR
     setSelectedResults((prev) => prev.filter((id) => id !== findId(value)));
   };
 
+  const resetClick = () => {
+    if (inputRef.current) {
+      inputRef.current.value = '';
+    }
+  };
+
   return (
     <>
       <SearchWrapper>
-        <SearchInput ref={inputRef} list="schools" placeholder={placeholder} onChange={handleInputChange} />
+        <SearchInput ref={inputRef} list="schools" placeholder={placeholder} onChange={handleInputChange} onClick={resetClick} />
         <datalist id="schools">
           {searchData.map(({ name, id }) => (
             <option key={id} value={name} />
