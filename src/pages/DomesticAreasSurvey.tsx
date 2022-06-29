@@ -1,24 +1,47 @@
+import React, { useState, useMemo } from 'react';
 import { ChooseFourBox, SurveyTemplate } from '@/components/domain/survey';
 import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';
 import { Title } from '@/lib/styles/styledComponents';
 import { DOMESTICAREAS_ITEMS } from '@/types/constants/area';
-import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
 import Path from '@/router/Path';
 import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useMeetingSessionState } from '@/hooks/common';
+import { type DomesticAreas } from '@/types/meeting';
 
 const DomesticAreasSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
-  const [checkedMultiOption, setMultiCheckedOption] = useState<ChooseFourBoxItemProps[]>(DOMESTICAREAS_ITEMS);
+  const { initMeetingState, setMeetingData } = useMeetingSessionState();
+  const getInitDomesticAreas = DOMESTICAREAS_ITEMS.map((item) => {
+    return { ...item, checked: initMeetingState.domesticAreas.some((initState) => initState === item.id) };
+  });
+  const initDomesticAreas = useMemo(() => getInitDomesticAreas, [DOMESTICAREAS_ITEMS, initMeetingState]);
+  const [checkedMultiOption, setMultiCheckedOption] = useState<ChooseFourBoxItemProps[]>(initDomesticAreas);
+  const isChecked = useMemo(() => checkedMultiOption.some(({ checked }) => checked), [checkedMultiOption]);
+  const getDomesticAreas = checkedMultiOption.reduce<DomesticAreas[]>((prev, cur) => {
+    if (cur.checked) {
+      prev.push(cur.id as DomesticAreas);
+    }
+    return prev;
+  }, []);
+  const domesticAreas = useMemo(() => getDomesticAreas, [checkedMultiOption]);
+
+  const handleNextClick = () => {
+    if (initMeetingState) {
+      setMeetingData({ ...initMeetingState, domesticAreas: domesticAreas ?? [] });
+    }
+
+    meetingNavigate(Path.ChannelSurvey);
+  };
 
   return (
     <SurveyTemplate
-      disableNext={!checkedMultiOption.length}
+      disableNext={!isChecked}
       currStep={12}
       totalStep={14}
       handlePrevClick={() => meetingNavigate(Path.IsAbroadSurvey)}
-      handleNextClick={() => meetingNavigate(Path.ChannelSurvey)}
+      handleNextClick={handleNextClick}
     >
       <Title>
         <strong>미팅이 가능한 지역</strong>을

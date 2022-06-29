@@ -56,10 +56,10 @@ export const getVariant = (variant: ButtonVariants, isDisabled?: boolean) => css
     }
     ${isDisabled &&
     css`
-      font-weight: 300;
-      background-color: ${palette.grayLight};
-      color: rgba(0, 0, 0, 0.6);
-      cursor: not-allowed;
+      font-weight: 300 !important;
+      background-color: ${palette.grayLight} !important;
+      color: rgba(0, 0, 0, 0.6) !important;
+      cursor: not-allowed !important;
     `}
   `}
 
