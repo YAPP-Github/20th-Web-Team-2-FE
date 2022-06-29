@@ -1,7 +1,7 @@
 import React, { MouseEventHandler, ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button } from '@/components/base';
-import UserHeader from './UserHeader';
+import UserHeader from '../../header/UserHeader';
 import { useLocation } from 'react-router-dom';
 import { Title } from '@/lib/styles/styledComponents';
 import CompleteButton from './buttons/CompleteButton';

@@ -1,7 +1,7 @@
 import { TripleLineMenu } from '@/assets/img';
 import React from 'react';
 import styled from 'styled-components';
-import { HeaderWrapper, Logo } from '../survey/SurveyTemplate';
+import { HeaderWrapper, Logo } from '../domain/survey/SurveyTemplate';
 
 const UserHeader = () => {
   return (
