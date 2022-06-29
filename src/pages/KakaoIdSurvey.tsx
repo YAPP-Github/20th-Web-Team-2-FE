@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
 import Path from '@/router/Path';
-import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 
 const KakaoIdSurvey = () => {

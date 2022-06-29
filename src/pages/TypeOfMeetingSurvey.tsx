@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SurveyTemplate } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import { ChooseFourBox } from '@/components/domain/survey';
-import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import Path from '@/router/Path';
 import { useNavigate } from 'react-router-dom';
 import { type Meeting } from '@/types/meeting';

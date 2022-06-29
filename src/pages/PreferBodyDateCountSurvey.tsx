@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ChooseFourBox, SurveyTemplate } from '@/components/domain/survey';
 import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';
-import { useDatingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useDatingNavigate } from '@/hooks/common/useNavigate';
 import Path from '@/router/Path';
 import { PREFER_DCOUNT_ITEMS } from '@/types/constants/dcount';
 import { PREFER_BODY_ITEMS } from '@/types/constants/body';

@@ -4,7 +4,7 @@ import { Title } from '@/lib/styles/styledComponents';
 import { ChooseFourBox } from '@/components/domain/survey';
 import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';
 import { PREFER_DEPARTMENT_ITEMS } from '@/types/constants/department';
-import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import Path from '@/router/Path';
 
 const PreferDepartmentsSurvey = () => {

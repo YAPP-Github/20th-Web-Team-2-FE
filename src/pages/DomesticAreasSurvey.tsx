@@ -6,7 +6,7 @@ import { DOMESTICAREAS_ITEMS } from '@/types/constants/area';
 import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
 import Path from '@/router/Path';
-import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 import { type DomesticAreas } from '@/types/meeting';
 

@@ -6,7 +6,7 @@ import SearchSelector from '@/components/domain/survey/SearchSelector';
 import { schools } from '@/mock/schools';
 import styled from 'styled-components';
 import Path from '@/router/Path';
-import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 
 const AvoidUniversitiesSurvey = () => {

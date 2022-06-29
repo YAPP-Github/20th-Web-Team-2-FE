@@ -5,7 +5,7 @@ import { Input } from '@/components/base';
 import styled from 'styled-components';
 import { palette } from '@/lib/styles/palette';
 import Path from '@/router/Path';
-import { useDatingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useDatingNavigate } from '@/hooks/common/useNavigate';
 
 const MyMbtiHeight = () => {
   const datingNavigate = useDatingNavigate();

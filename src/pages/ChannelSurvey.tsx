@@ -3,7 +3,7 @@ import { CheckBox } from '@/components/base';
 import { FormWrapper } from './AuthMail';
 import useChannelCheck from '@/hooks/agreement/useChannelCheck';
 import { SurveyTemplate } from '@/components/domain/survey';
-import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import Path from '@/router/Path';
 import { useMeetingSessionState } from '@/hooks/common';
 import { CHANNEL_ITEMS } from '@/types/constants/channel';

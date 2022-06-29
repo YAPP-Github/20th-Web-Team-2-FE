@@ -4,7 +4,7 @@ import { SurveyTemplate } from '@/components/domain/survey';
 import SearchSelector from '@/components/domain/survey/SearchSelector';
 import { schools } from '@/mock/schools';
 import Path from '@/router/Path';
-import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 
 const OurUniversitiesSurvey = () => {

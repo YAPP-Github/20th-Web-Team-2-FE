@@ -4,7 +4,7 @@ import { Title } from '@/lib/styles/styledComponents';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
-import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import Path from '@/router/Path';
 import { COUNTRY_ITEMS } from '@/types/constants/area';
 import { useMeetingSessionState } from '@/hooks/common';

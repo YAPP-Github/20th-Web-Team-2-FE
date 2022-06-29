@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDatingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useDatingNavigate } from '@/hooks/common/useNavigate';
 import { ChooseFourBox, ChooseTwoBox, SurveyTemplate } from '@/components/domain/survey';
 import Path from '@/router/Path';
 import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMatch } from 'react-router-dom';
-import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { SurveyTemplate } from '@/components/domain/survey';
 import Path from '@/router/Path';
 import { Title } from '@/lib/styles/styledComponents';

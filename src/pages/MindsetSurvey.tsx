@@ -5,7 +5,7 @@ import { ChoiceButton } from '@/components/base';
 import styled from 'styled-components';
 import { MINDSET_ITEMS } from '@/types/constants/constant';
 import Path from '@/router/Path';
-import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 import { type MindSet } from '@/types/meeting';
 

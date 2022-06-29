@@ -4,7 +4,7 @@ import { AgeBox, HeightBox } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import styled from 'styled-components';
 import { useMatch } from 'react-router-dom';
-import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 import Path from '@/router/Path';
 

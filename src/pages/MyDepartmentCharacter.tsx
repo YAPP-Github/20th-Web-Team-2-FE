@@ -5,7 +5,7 @@ import { ChooseFourBox } from '@/components/domain/survey';
 import { MY_DEPARTMENT_ITEMS } from '@/types/constants/department';
 import { CHARACTER_ITEMS } from '@/types/constants/charater';
 import Path from '@/router/Path';
-import { useDatingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useDatingNavigate } from '@/hooks/common/useNavigate';
 
 const MyDepartmentCharacter = () => {
   const datingNavigate = useDatingNavigate();

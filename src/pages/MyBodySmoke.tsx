@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ChooseFourBox, ChooseTwoBox, SurveyTemplate } from '@/components/domain/survey';
 import Path from '@/router/Path';
-import { useDatingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useDatingNavigate } from '@/hooks/common/useNavigate';
 import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';
 import { SMOKE_ITEMS } from '@/types/constants/smoke';
 import { MYBODY_ITEMS } from '@/types/constants/body';

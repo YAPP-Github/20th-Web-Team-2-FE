@@ -4,7 +4,7 @@ import { SurveyTemplate } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import SearchSelector from '@/components/domain/survey/SearchSelector';
 import { schools } from '@/mock/schools';
-import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
 import Path from '@/router/Path';
 import { useMeetingSessionState } from '@/hooks/common';
 
