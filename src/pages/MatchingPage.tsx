@@ -9,10 +9,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MatchingPage = () => {
-  const TempData = { state: 'end' };
+  const TempData = { state: 'pay' };
   return (
     <>
-      <MatchingTemplete IsDisable={false} btnName={'설문하러 가기'} title={MatchingStateTitle(TempData.state)}>
+      <MatchingTemplete btnName={TempData.state} title={MatchingStateTitle(TempData.state)}>
         <MatchingContents>
           {
             {
