@@ -1,45 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDatingNavigate } from '@/hooks/common/useNavigate';
 import { ChooseFourBox, ChooseTwoBox, SurveyTemplate } from '@/components/domain/survey';
 import Path from '@/router/Path';
-import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';
-import { SMOKEOK_ITEMS } from '@/types/constants/smoke';
 import { MY_DOUNT_ITEMS } from '@/types/constants/dcount';
-
-const ids = MY_DOUNT_ITEMS.map(({ id }) => id);
-type BodyOption = typeof ids[number];
-type SmokeOption = 'true' | 'false' | '';
+import { SMOKEOK_ITEMS } from '@/types/constants/smoke';
+import { useDatingSessionState } from '@/hooks/common';
+import { type DateCount } from '@/types/dating';
 
 const MyDateCount = () => {
   const datingNavigate = useDatingNavigate();
-  const [disableNext, setDisableNext] = useState(true);
-
-  const [checkedOption, setCheckedOption] = useState<BodyOption | ''>('');
-  const [isSmokeOk, setIsSmokeOk] = useState<SmokeOption>('');
+  const { initDatingState, setDatingData } = useDatingSessionState();
+  const [myDateCount, setMyDateCount] = useState<DateCount | string>(initDatingState.myDateCount);
+  const [isSmokeOk, setIsSmokeOk] = useState(initDatingState.isSmokeOk);
 
   const onChangeOption = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id } = e.target;
-    setIsSmokeOk(id as SmokeOption);
+    setIsSmokeOk(id === 'true' ? true : false);
   };
 
-  useEffect(() => {
-    if (checkedOption === '' || isSmokeOk === '') return;
-    setDisableNext(false);
-  }, [checkedOption, isSmokeOk]);
+  const handleNextClick = () => {
+    if (initDatingState) {
+      setDatingData({ ...initDatingState, myDateCount: myDateCount as DateCount, isSmokeOk });
+    }
+
+    datingNavigate(Path.AvoidUniversitiesSurvey);
+  };
 
   return (
     <SurveyTemplate
-      disableNext={disableNext}
+      disableNext={!myDateCount}
       hasProgressBar={true}
       totalStep={12}
       currStep={6}
       handlePrevClick={() => datingNavigate(Path.MyBodySmoke)}
-      handleNextClick={() => datingNavigate(Path.AvoidUniversitiesSurvey)}
+      handleNextClick={handleNextClick}
     >
-      <ChooseFourBox items={MY_DOUNT_ITEMS as unknown as ChooseFourBoxItemProps[]} checkedOption={checkedOption} setCheckedOption={setCheckedOption}>
+      <ChooseFourBox items={MY_DOUNT_ITEMS} checkedOption={myDateCount} setCheckedOption={setMyDateCount}>
         본인의 연애 횟수를 선택해주세요.
       </ChooseFourBox>
-      <ChooseTwoBox selectedOption={isSmokeOk} onChangeOption={onChangeOption} items={SMOKEOK_ITEMS}>
+      <ChooseTwoBox selectedOption={isSmokeOk ? 'true' : 'false'} onChangeOption={onChangeOption} items={SMOKEOK_ITEMS}>
         상대가 흡연자여도 괜찮나요?
       </ChooseTwoBox>
     </SurveyTemplate>
