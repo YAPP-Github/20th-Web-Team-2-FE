@@ -1,7 +1,6 @@
 import React, { MouseEventHandler, ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button } from '@/components/base';
-import UserHeader from '../../header/UserHeader';
 import { useLocation } from 'react-router-dom';
 import { Title } from '@/lib/styles/styledComponents';
 import CompleteButton from './buttons/CompleteButton';
@@ -25,7 +24,6 @@ const MatchingTemplete = ({ children, handleClick, btnName, title }: MatchingTem
 
   return (
     <TemplateBlock>
-      <UserHeader />
       <Title>{title}</Title>
       <ButtonWrapper>
         <TypeButton onClick={handleClick} size="medium" variant={type === 'meeting' ? 'default' : 'gray'} fontWeight={type === 'dating' ? 700 : 400}>
@@ -55,7 +53,7 @@ const MatchingTemplete = ({ children, handleClick, btnName, title }: MatchingTem
 
 const TemplateBlock = styled.section`
   position: relative;
-  height: 100%;
+  height: calc(100% - 56px);
   margin: 0 8px;
 `;
 
