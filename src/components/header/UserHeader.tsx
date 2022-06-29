@@ -1,15 +1,22 @@
 import { TripleLineMenu } from '@/assets/img';
+import { useToggle } from '@/hooks/common';
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { HeaderWrapper, Logo } from '../domain/survey/SurveyTemplate';
+import MenuBlock from './MenuBlock';
 
 const UserHeader = () => {
+  const [isMenu, onToggleMenu] = useToggle();
   return (
-    <HeaderLayout>
-      <Logo to="/">외딴썸</Logo>
-      {/* 유저 정보 불러오고 햄버거 매뉴 만들어야함! */}
-      <img src={TripleLineMenu} alt="메뉴 이미지" />
-    </HeaderLayout>
+    <>
+      <HeaderLayout>
+        <Logo to="/">외딴썸</Logo>
+        <img src={TripleLineMenu} alt="메뉴 이미지" onClick={onToggleMenu} />
+      </HeaderLayout>
+      <MenuBlock isMenu={isMenu} onToggleMenu={onToggleMenu} />
+      <Outlet />
+    </>
   );
 };
 
