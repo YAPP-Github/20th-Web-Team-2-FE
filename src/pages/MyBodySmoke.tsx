@@ -1,45 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ChooseFourBox, ChooseTwoBox, SurveyTemplate } from '@/components/domain/survey';
 import Path from '@/router/Path';
 import { useDatingNavigate } from '@/hooks/common/useNavigate';
-import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';
 import { SMOKE_ITEMS } from '@/types/constants/smoke';
 import { MYBODY_ITEMS } from '@/types/constants/body';
-
-const ids = MYBODY_ITEMS.map(({ id }) => id);
-type BodyOption = typeof ids[number];
-type SmokeOption = 'true' | 'false' | '';
+import { useDatingSessionState } from '@/hooks/common';
+import { type Body } from '@/types/dating';
 
 const MyBodySmoke = () => {
   const datingNavigate = useDatingNavigate();
-  const [disableNext, setDisableNext] = useState(true);
-
-  const [checkedOption, setCheckedOption] = useState<BodyOption | ''>('');
-  const [isSmoke, setIsSmoke] = useState<SmokeOption>('');
+  const { initDatingState, setDatingData } = useDatingSessionState();
+  const [myBody, setMyBody] = useState<Body | string>(initDatingState.myBody);
+  const [mySmoke, setMySmoke] = useState(initDatingState.mySmoke);
 
   const onChangeOption = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id } = e.target;
-    setIsSmoke(id as SmokeOption);
+    setMySmoke(id === 'true' ? true : false);
   };
 
-  useEffect(() => {
-    if (checkedOption === '' || isSmoke === '') return;
-    setDisableNext(false);
-  }, [checkedOption, isSmoke]);
+  const handleNextClick = () => {
+    if (initDatingState) {
+      setDatingData({ ...initDatingState, myBody: myBody as Body, mySmoke });
+    }
+
+    datingNavigate(Path.MyDateCount);
+  };
 
   return (
     <SurveyTemplate
-      disableNext={disableNext}
+      disableNext={!myBody}
       hasProgressBar={true}
       totalStep={12}
       currStep={5}
       handlePrevClick={() => datingNavigate(Path.MyMbtiHeight)}
-      handleNextClick={() => datingNavigate(Path.MyDateCount)}
+      handleNextClick={handleNextClick}
     >
-      <ChooseFourBox items={MYBODY_ITEMS as unknown as ChooseFourBoxItemProps[]} checkedOption={checkedOption} setCheckedOption={setCheckedOption}>
+      <ChooseFourBox items={MYBODY_ITEMS} checkedOption={myBody} setCheckedOption={setMyBody}>
         본인의 체형을 선택해주세요
       </ChooseFourBox>
-      <ChooseTwoBox selectedOption={isSmoke} onChangeOption={onChangeOption} items={SMOKE_ITEMS}>
+      <ChooseTwoBox selectedOption={mySmoke ? 'true' : 'false'} onChangeOption={onChangeOption} items={SMOKE_ITEMS}>
         혹시 흡연자이신가요?
       </ChooseTwoBox>
     </SurveyTemplate>
