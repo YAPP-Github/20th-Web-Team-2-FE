@@ -6,17 +6,25 @@ import SearchSelector from '@/components/domain/survey/SearchSelector';
 import { schools } from '@/mock/schools';
 import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
 import Path from '@/router/Path';
-import { useMeetingSessionState } from '@/hooks/common';
+import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 
 const PreferUniversitiesSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
   const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
+  const { initDatingState, setDatingData } = useDatingSessionState();
   const [preferUniversities, setPreferUniversities] = useState<number[]>(initMeetingState.preferUniversities);
+  const [preferDatingUniversities, setPreferDatingUniversities] = useState<number[]>(initDatingState.avoidUniversities);
+
+  const handlePrevClick = () => {
+    meetingNavigate(Path.AvoidUniversitiesSurvey);
+  };
 
   const handleNextClick = () => {
     if (initMeetingState) {
-      setMeetingData({ ...initMeetingState, preferUniversities });
+      matchMeeting
+        ? setMeetingData({ ...initMeetingState, preferUniversities })
+        : setDatingData({ ...initDatingState, preferUniversities: preferDatingUniversities });
     }
 
     meetingNavigate(Path.PreferAgeHeightSurvey);
@@ -28,7 +36,7 @@ const PreferUniversitiesSurvey = () => {
       hasProgressBar={true}
       totalStep={matchMeeting ? 14 : 12}
       currStep={matchMeeting ? 6 : 8}
-      handlePrevClick={() => meetingNavigate(Path.AvoidUniversitiesSurvey)}
+      handlePrevClick={handlePrevClick}
       handleNextClick={handleNextClick}
     >
       <Title>
@@ -38,8 +46,8 @@ const PreferUniversitiesSurvey = () => {
       <SearchSelector
         placeholder="학교를 검색하세요.(없을 시 ‘other’ 입력)"
         searchData={schools}
-        selectedResults={preferUniversities}
-        setSelectedResults={setPreferUniversities}
+        selectedResults={matchMeeting ? preferUniversities : preferDatingUniversities}
+        setSelectedResults={matchMeeting ? setPreferUniversities : setPreferDatingUniversities}
       />
     </SurveyTemplate>
   );
