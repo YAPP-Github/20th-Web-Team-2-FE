@@ -14,10 +14,10 @@ const PreferDepartmentsSurvey = () => {
   return (
     <SurveyTemplate
       disableNext={!checkedMultiOption}
-      currStep={7}
+      currStep={8}
       totalStep={14}
-      handlePrevClick={() => meetingNavigate(Path.PreferUniversitiesSurvey)}
-      handleNextClick={() => meetingNavigate(Path.PreferAgeHeightSurvey)}
+      handlePrevClick={() => meetingNavigate(Path.PreferAgeHeightSurvey)}
+      handleNextClick={() => meetingNavigate(Path.MindsetSurvey)}
     >
       <Title>
         <strong>

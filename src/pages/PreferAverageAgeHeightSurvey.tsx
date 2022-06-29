@@ -21,14 +21,14 @@ const PreferAverageAgeHeightSurvey = () => {
       setMeetingData({ ...initMeetingState, preferAge: multiAgeOption, preferHeight: multiHeightOption });
     }
 
-    meetingNavigate(matchMeeting ? Path.MindsetSurvey : Path.PreferDepartmentCharacterSurvey);
+    meetingNavigate(matchMeeting ? Path.PreferDepartmentsSurvey : Path.PreferDepartmentCharacterSurvey);
   };
 
   return (
     <SurveyTemplate
       disableNext={!multiAgeOption || !multiHeightOption}
       totalStep={matchMeeting ? 14 : 12}
-      currStep={matchMeeting ? 8 : 9}
+      currStep={matchMeeting ? 7 : 9}
       handlePrevClick={() => meetingNavigate(Path.PreferUniversitiesSurvey)}
       handleNextClick={handleNextClick}
     >

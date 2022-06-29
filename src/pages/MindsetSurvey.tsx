@@ -32,7 +32,7 @@ const MindsetSurvey = () => {
       disableNext={!checkedOption}
       currStep={9}
       totalStep={14}
-      handlePrevClick={() => meetingNavigate(Path.PreferAgeHeightSurvey)}
+      handlePrevClick={() => meetingNavigate(Path.PreferDepartmentsSurvey)}
       handleNextClick={handleNextClick}
     >
       <Title>
