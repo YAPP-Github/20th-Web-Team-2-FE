@@ -1,32 +1,41 @@
 import React, { useState } from 'react';
+import Path from '@/router/Path';
+import { useNavigate } from 'react-router-dom';
 import { SurveyTemplate, AgeBox } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import styled from 'styled-components';
-import { MIN_AGE, MAX_AGE } from '@/components/domain/survey/AgeBox';
 import ChooseTwoBox from '@/components/domain/survey/ChooseTwoBox';
 import { useDatingNavigate } from '@/hooks/common/useNavigate';
-import Path from '@/router/Path';
-import { useNavigate } from 'react-router-dom';
+import { useDatingSessionState } from '@/hooks/common';
 import { GENDER_ITEMS } from '@/types/constants/constant';
-
-export type GenderOptions = 'FEMAIL' | 'MALE';
+import { type Gender } from '@/types/meeting';
 
 const MyGenderAge = () => {
   const navigate = useNavigate();
   const datingNavigate = useDatingNavigate();
-  const [genderOption, setGenderOption] = useState<GenderOptions>('FEMAIL');
-  const [ageOption, setAgeOption] = useState(Math.floor((MIN_AGE + MAX_AGE) / 2));
-  const onChangeOption = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { initDatingState, setDatingData } = useDatingSessionState();
+  const [gender, setGender] = useState(initDatingState.gender);
+  const [age, setAge] = useState(initDatingState.age);
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id } = e.target;
-    setGenderOption(id as GenderOptions);
+    setGender(id as Gender);
   };
+  const handleNextClick = () => {
+    if (initDatingState) {
+      setDatingData({ ...initDatingState, gender, age });
+    }
+
+    datingNavigate(Path.MyDepartmentCharacter);
+  };
+
   return (
     <SurveyTemplate
-      disableNext={!ageOption && !genderOption}
+      disableNext={!age && !gender}
       currStep={2}
       totalStep={12}
       handlePrevClick={() => navigate(Path.TypeOfMeetingSurvey)}
-      handleNextClick={() => datingNavigate(Path.MyDepartmentCharacter)}
+      handleNextClick={handleNextClick}
     >
       <StyledTitle>
         <strong>1:1 소개팅</strong>을 선택하셨어요.
@@ -35,10 +44,12 @@ const MyGenderAge = () => {
         <br />
         바로 매칭해드릴게요!
       </StyledTitle>
-      <ChooseTwoBox items={GENDER_ITEMS} selectedOption={genderOption} onChangeOption={onChangeOption}>
+      <ChooseTwoBox items={GENDER_ITEMS} selectedOption={gender} onChangeOption={onChange}>
         성별을 선택해주세요.
       </ChooseTwoBox>
-      <AgeBox setAgeOption={setAgeOption}>본인의 나이를 알려주세요</AgeBox>
+      <AgeBox ageOption={age} setAgeOption={setAge}>
+        본인의 나이를 알려주세요
+      </AgeBox>
     </SurveyTemplate>
   );
 };
