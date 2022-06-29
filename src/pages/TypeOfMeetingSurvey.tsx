@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SurveyTemplate } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import { ChooseFourBox } from '@/components/domain/survey';
-import { useMeetingNavigate } from '@/hooks/common/useNavigate';
+import { useMeetingNavigate, useDatingNavigate } from '@/hooks/common/useNavigate';
 import Path from '@/router/Path';
 import { useNavigate } from 'react-router-dom';
 import { type Meeting } from '@/types/meeting';
@@ -12,6 +12,7 @@ import { useMeetingSessionState } from '@/hooks/common';
 const TypeOfMeetingSurvey = () => {
   const navigate = useNavigate();
   const meetingNavigate = useMeetingNavigate();
+  const datingNavigate = useDatingNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const [checkedOption, setCheckedOption] = useState<Meeting['typeOfMeeting'] | string>(initMeetingState?.typeOfMeeting);
 
@@ -20,7 +21,19 @@ const TypeOfMeetingSurvey = () => {
       setMeetingData({ ...initMeetingState, typeOfMeeting: checkedOption as Meeting['typeOfMeeting'] });
     }
 
-    meetingNavigate(Path.GenderAverageAgeSurvey);
+    switch (checkedOption) {
+      case 'ONE':
+        datingNavigate(Path.MyGenderAge);
+        break;
+      case 'TWO':
+        meetingNavigate(Path.GenderAverageAgeSurvey);
+        break;
+      case 'THREE':
+        meetingNavigate(Path.GenderAverageAgeSurvey);
+        break;
+      case 'FOUR':
+        meetingNavigate(Path.GenderAverageAgeSurvey);
+    }
   };
 
   return (
