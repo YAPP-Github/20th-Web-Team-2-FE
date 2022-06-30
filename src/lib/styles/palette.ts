@@ -4,6 +4,7 @@ export const palette = {
   grayLight: '#E8E8E8',
   grayLightHover: '#E3E3E3',
   gray: '#e4e5ed',
+  grayDark: '#888888',
   grayDarker: '#6F6F6F',
   explanationColor: 'rgba(0, 0, 0, 0.6)',
   disableColor: 'rgba(0, 0, 0, 0.2)',
