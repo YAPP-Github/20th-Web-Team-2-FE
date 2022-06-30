@@ -7,20 +7,23 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
 import Path from '@/router/Path';
-import { useMeetingNavigate } from '@/hooks/common/useNavigate';
-import { useMeetingSessionState } from '@/hooks/common';
+import { useMatch } from 'react-router-dom';
+import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
+import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 
 const KakaoIdSurvey = () => {
-  const meetingNavigate = useMeetingNavigate();
-  const [isModal, onToggleModal] = useToggle();
-  const [kakaoId, setkakaoId] = useState('');
+  const matchMeeting = useMatch('/meeting/*');
+  const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
+  const { initDatingState, setDatingData } = useDatingSessionState();
+  const [isModal, onToggleModal] = useToggle();
+  const [kakaoId, setkakaoId] = useState(matchMeeting ? initMeetingState.kakaoId : initDatingState.kakaoId);
   const [isConfirm, setConfirm] = useState(false);
 
   const handleNextClick = () => {
     alert('설문이 완료되었습니다. 정식 출시가 되면 매칭을 시작할 수 있습니다. 조금만 기다려 주세요.');
     if (initMeetingState) {
-      setMeetingData({ ...initMeetingState, kakaoId });
+      matchMeeting ? setMeetingData({ ...initMeetingState, kakaoId }) : setDatingData({ ...initDatingState, kakaoId });
     }
   };
 
