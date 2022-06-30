@@ -15,7 +15,7 @@ const OurDepartmentsAverageHeightSurvey = () => {
   const getInitDepartments = OUR_DEPARTMENT_ITEMS.map((item) => {
     return { ...item, checked: initMeetingState.ourDepartments.some((initState) => initState === item.id) };
   });
-  const initDepartments = useMemo(() => getInitDepartments, [OUR_DEPARTMENT_ITEMS, initMeetingState]);
+  const initDepartments = useMemo(() => getInitDepartments, [OUR_DEPARTMENT_ITEMS, initMeetingState.ourDepartments]);
   const [checkedMultiOption, setMultiCheckedOption] = useState<ChooseFourBoxItemProps[]>(initDepartments);
   const getOurDepartments = checkedMultiOption.reduce<Departments[]>((prev, cur) => {
     if (cur.checked) {
