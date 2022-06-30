@@ -18,7 +18,7 @@ export interface Meeting {
   preferUniversities: number[];
   preferAge: number[];
   preferHeight: number[];
-  preferDepartments: string[];
+  preferDepartments: Departments[];
   mindset: MindSet;
   play: Play;
   isAbroad: boolean;
