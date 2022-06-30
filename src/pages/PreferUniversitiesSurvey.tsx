@@ -14,7 +14,7 @@ const PreferUniversitiesSurvey = () => {
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const { initDatingState, setDatingData } = useDatingSessionState();
   const [preferUniversities, setPreferUniversities] = useState<number[]>(initMeetingState.preferUniversities);
-  const [preferDatingUniversities, setPreferDatingUniversities] = useState<number[]>(initDatingState.avoidUniversities);
+  const [preferDatingUniversities, setPreferDatingUniversities] = useState<number[]>(initDatingState.preferUniversities);
 
   const handlePrevClick = () => {
     meetingNavigate(Path.AvoidUniversitiesSurvey);
