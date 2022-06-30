@@ -3,7 +3,7 @@ import { SurveyTemplate } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import { ChooseFourBox } from '@/components/domain/survey';
 import { MY_DEPARTMENT_ITEMS } from '@/types/constants/department';
-import { CHARACTER_ITEMS } from '@/types/constants/charater';
+import { CHARACTER_ITEMS } from '@/types/constants/characteristic';
 import Path from '@/router/Path';
 import { useDatingNavigate } from '@/hooks/common/useNavigate';
 import { useDatingSessionState } from '@/hooks/common';
