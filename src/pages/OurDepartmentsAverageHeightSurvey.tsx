@@ -9,10 +9,6 @@ import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 import { type Departments } from '@/types/meeting';
 
-export interface ChooseFourDepartmentProps extends ChooseFourBoxItemProps {
-  id: Departments;
-}
-
 const OurDepartmentsAverageHeightSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
