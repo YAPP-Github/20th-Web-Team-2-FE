@@ -17,7 +17,9 @@ const DomesticAreasSurvey = () => {
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const { initDatingState, setDatingData } = useDatingSessionState();
   const getInitDomesticAreas = DOMESTICAREAS_ITEMS.map((item) => {
-    return { ...item, checked: initMeetingState.domesticAreas.some((initState) => initState === item.id) };
+    return matchMeeting
+      ? { ...item, checked: initMeetingState.domesticAreas.some((initState) => initState === item.id) }
+      : { ...item, checked: initDatingState.domesticAreas.some((initState) => initState === item.id) };
   });
   const initDomesticAreas = useMemo(() => getInitDomesticAreas, [DOMESTICAREAS_ITEMS, initMeetingState]);
   const [checkedMultiOption, setMultiCheckedOption] = useState<ChooseFourBoxItemProps[]>(initDomesticAreas);
