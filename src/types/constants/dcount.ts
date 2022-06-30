@@ -4,6 +4,7 @@ export interface MY_DOUNT_ITEM {
   id: DateCount;
   text: '0회' | '1~2회' | '3~4회' | '5회 이상';
   name: 'myDateCount';
+  checked?: boolean;
 }
 
 export const MY_DOUNT_ITEMS: Readonly<MY_DOUNT_ITEM>[] = [
