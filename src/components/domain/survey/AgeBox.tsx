@@ -2,10 +2,12 @@ import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { SubTitle } from '@/lib/styles/styledComponents';
 import { SimpleRangeSlider, MultiRangeSlider } from '@/components/base';
-import { Ranges } from '@/components/base/SimpleRangeSlider';
+import { OnChangeProps } from '@/components/base/SimpleRangeSlider';
 
 interface AgeBoxProps {
+  ageOption?: number;
   setAgeOption?: React.Dispatch<React.SetStateAction<number>>;
+  multiAgeOption: number[];
   setMultiAgeOption?: React.Dispatch<React.SetStateAction<number[]>>;
   children: React.ReactNode;
   isMulti?: boolean;
@@ -14,9 +16,9 @@ interface AgeBoxProps {
 export const MIN_AGE = 20;
 export const MAX_AGE = 35;
 
-const AgeBox = ({ setAgeOption, setMultiAgeOption, children, isMulti = false }: AgeBoxProps) => {
+const AgeBox = ({ ageOption, setAgeOption, multiAgeOption, setMultiAgeOption, children, isMulti = false }: AgeBoxProps) => {
   const handleSimpleChange = useCallback(
-    ({ max }: Ranges) => {
+    ({ max }: OnChangeProps) => {
       if (!isMulti && setAgeOption) {
         setAgeOption(max);
       }
@@ -25,7 +27,7 @@ const AgeBox = ({ setAgeOption, setMultiAgeOption, children, isMulti = false }: 
   );
 
   const handleMultiChange = useCallback(
-    ({ min, max }: Ranges) => {
+    ({ min, max }: OnChangeProps) => {
       if (isMulti && setMultiAgeOption) {
         setMultiAgeOption([min, max]);
       }
@@ -38,9 +40,9 @@ const AgeBox = ({ setAgeOption, setMultiAgeOption, children, isMulti = false }: 
       <SubTitle>{children}</SubTitle>
       <RangeWrapper>
         {isMulti ? (
-          <MultiRangeSlider min={MIN_AGE} max={MAX_AGE} onChange={handleMultiChange} />
+          <MultiRangeSlider min={MIN_AGE} max={MAX_AGE} initValue={multiAgeOption ?? [MIN_AGE, MAX_AGE]} onChange={handleMultiChange} />
         ) : (
-          <SimpleRangeSlider min={MIN_AGE} max={MAX_AGE} onChange={handleSimpleChange} />
+          <SimpleRangeSlider min={MIN_AGE} max={MAX_AGE} initValue={ageOption ?? MAX_AGE} onChange={handleSimpleChange} />
         )}
       </RangeWrapper>
     </Container>

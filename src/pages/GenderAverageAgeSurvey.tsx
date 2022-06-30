@@ -2,31 +2,39 @@ import React, { useState } from 'react';
 import { SurveyTemplate, AgeBox } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import styled from 'styled-components';
-import { MIN_AGE, MAX_AGE } from '@/components/domain/survey/AgeBox';
 import ChooseTwoBox from '@/components/domain/survey/ChooseTwoBox';
 import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
 import { useNavigate } from 'react-router-dom';
 import { GENDER_ITEMS } from '@/types/constants/constant';
-
-export type GenderOptions = 'FEMAIL' | 'MALE';
+import { useMeetingSessionState } from '@/hooks/common';
+import { type Gender } from '@/types/meeting';
 
 const GenderAverageAgeSurvey = () => {
   const navigate = useNavigate();
   const meetingNavigate = useMeetingNavigate();
-  const [genderOption, setGenderOption] = useState<GenderOptions>('FEMAIL');
-  const [ageOption, setAgeOption] = useState(Math.floor((MIN_AGE + MAX_AGE) / 2));
+  const { initMeetingState, setMeetingData } = useMeetingSessionState();
+  const [genderOption, setGenderOption] = useState(initMeetingState.gender);
+  const [ageOption, setAgeOption] = useState(initMeetingState.averageAge);
   const onChangeOption = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id } = e.target;
-    setGenderOption(id as GenderOptions);
+    setGenderOption(id as Gender);
   };
+  const handleNextClick = () => {
+    if (initMeetingState) {
+      setMeetingData({ ...initMeetingState, gender: genderOption, averageAge: ageOption });
+    }
+
+    meetingNavigate(Path.OurUniversitiesSurvey);
+  };
+
   return (
     <SurveyTemplate
-      disableNext={!ageOption && !genderOption}
+      disableNext={!ageOption || !genderOption}
       currStep={2}
       totalStep={14}
       handlePrevClick={() => navigate(Path.TypeOfMeetingSurvey)}
-      handleNextClick={() => meetingNavigate(Path.OurUniversitiesSurvey)}
+      handleNextClick={handleNextClick}
     >
       <StyledTitle>
         <strong>2:2 미팅</strong>을 선택하셨어요.
@@ -38,7 +46,9 @@ const GenderAverageAgeSurvey = () => {
       <ChooseTwoBox items={GENDER_ITEMS} selectedOption={genderOption} onChangeOption={onChangeOption}>
         성별을 선택해주세요.
       </ChooseTwoBox>
-      <AgeBox setAgeOption={setAgeOption}>참여자의 평균 나이를 알려주세요.</AgeBox>
+      <AgeBox setAgeOption={setAgeOption} ageOption={ageOption}>
+        참여자의 평균 나이를 알려주세요.
+      </AgeBox>
     </SurveyTemplate>
   );
 };

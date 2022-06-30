@@ -1,3 +1,5 @@
+import { ChooseFourDepartmentProps } from '@/pages/OurDepartmentsAverageHeightSurvey';
+
 export const MY_DEPARTMENT_ITEMS = [
   {
     id: 'LIBERAL',
@@ -21,7 +23,7 @@ export const MY_DEPARTMENT_ITEMS = [
   },
 ];
 
-export const OUR_DEPARTMENT_ITEMS = [
+export const OUR_DEPARTMENT_ITEMS: ChooseFourDepartmentProps[] = [
   {
     id: 'LIBERAL',
     text: '문과',
