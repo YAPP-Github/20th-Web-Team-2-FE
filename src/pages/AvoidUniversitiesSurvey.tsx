@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useMatch } from 'react-router-dom';
 import { SurveyTemplate } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import SearchSelector from '@/components/domain/survey/SearchSelector';
@@ -6,12 +7,21 @@ import { schools } from '@/mock/schools';
 import styled from 'styled-components';
 import Path from '@/router/Path';
 import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
-import { useMatch } from 'react-router-dom';
+import { useMeetingSessionState } from '@/hooks/common';
 
 const AvoidUniversitiesSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
   const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
-  const [avoidUniversities, setAvoidUniversities] = useState<number[]>([]);
+  const { initMeetingState, setMeetingData } = useMeetingSessionState();
+  const [avoidUniversities, setAvoidUniversities] = useState<number[]>(initMeetingState.avoidUniversities);
+
+  const handleNextClick = () => {
+    if (initMeetingState) {
+      setMeetingData({ ...initMeetingState, avoidUniversities });
+    }
+
+    meetingNavigate(Path.PreferUniversitiesSurvey);
+  };
 
   return (
     <SurveyTemplate
@@ -20,7 +30,7 @@ const AvoidUniversitiesSurvey = () => {
       totalStep={matchMeeting ? 14 : 12}
       currStep={matchMeeting ? 5 : 7}
       handlePrevClick={() => meetingNavigate(Path.OurDepartmentsAverageHeightSurvey)}
-      handleNextClick={() => meetingNavigate(Path.PreferUniversitiesSurvey)}
+      handleNextClick={handleNextClick}
     >
       <Title>
         <strong>기피하는 학교</strong>를<br />

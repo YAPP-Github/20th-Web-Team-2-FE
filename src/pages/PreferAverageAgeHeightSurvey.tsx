@@ -29,7 +29,7 @@ const PreferAverageAgeHeightSurvey = () => {
       disableNext={!multiAgeOption || !multiHeightOption}
       totalStep={matchMeeting ? 14 : 12}
       currStep={matchMeeting ? 8 : 9}
-      handlePrevClick={() => meetingNavigate(matchMeeting ? Path.PreferDepartmentsSurvey : Path.PreferUniversitiesSurvey)}
+      handlePrevClick={() => meetingNavigate(Path.PreferUniversitiesSurvey)}
       handleNextClick={handleNextClick}
     >
       <StyledTitle>
