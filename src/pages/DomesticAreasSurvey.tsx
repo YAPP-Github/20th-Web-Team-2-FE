@@ -6,13 +6,16 @@ import { DOMESTICAREAS_ITEMS } from '@/types/constants/area';
 import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
 import Path from '@/router/Path';
-import { useMeetingNavigate } from '@/hooks/common/useNavigate';
-import { useMeetingSessionState } from '@/hooks/common';
+import { useMeetingNavigate, useDatingNavigate } from '@/hooks/common/useNavigate';
+import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 import { type DomesticAreas } from '@/types/meeting';
+import { useMatch } from 'react-router-dom';
 
 const DomesticAreasSurvey = () => {
-  const meetingNavigate = useMeetingNavigate();
+  const matchMeeting = useMatch('/meeting/*');
+  const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
+  const { initDatingState, setDatingData } = useDatingSessionState();
   const getInitDomesticAreas = DOMESTICAREAS_ITEMS.map((item) => {
     return { ...item, checked: initMeetingState.domesticAreas.some((initState) => initState === item.id) };
   });
@@ -29,7 +32,9 @@ const DomesticAreasSurvey = () => {
 
   const handleNextClick = () => {
     if (initMeetingState) {
-      setMeetingData({ ...initMeetingState, domesticAreas: domesticAreas ?? [] });
+      matchMeeting
+        ? setMeetingData({ ...initMeetingState, domesticAreas: domesticAreas ?? [] })
+        : setDatingData({ ...initDatingState, domesticAreas: domesticAreas ?? [] });
     }
 
     meetingNavigate(Path.ChannelSurvey);
@@ -38,8 +43,8 @@ const DomesticAreasSurvey = () => {
   return (
     <SurveyTemplate
       disableNext={!isChecked}
-      currStep={12}
-      totalStep={14}
+      currStep={matchMeeting ? 12 : 13}
+      totalStep={matchMeeting ? 14 : 16}
       handlePrevClick={() => meetingNavigate(Path.IsAbroadSurvey)}
       handleNextClick={handleNextClick}
     >
