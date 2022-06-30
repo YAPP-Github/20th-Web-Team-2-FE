@@ -28,7 +28,7 @@ const MyDepartmentCharacter = () => {
     <SurveyTemplate
       disableNext={!myDepartment && !characteristic}
       currStep={3}
-      totalStep={12}
+      totalStep={16}
       handlePrevClick={() => datingNavigate(Path.MyGenderAge)}
       handleNextClick={handleNextClick}
     >

@@ -30,7 +30,7 @@ const MyDateCount = () => {
     <SurveyTemplate
       disableNext={!myDateCount}
       hasProgressBar={true}
-      totalStep={12}
+      totalStep={16}
       currStep={6}
       handlePrevClick={() => datingNavigate(Path.MyBodySmoke)}
       handleNextClick={handleNextClick}

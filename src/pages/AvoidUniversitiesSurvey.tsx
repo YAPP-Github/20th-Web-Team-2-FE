@@ -35,7 +35,7 @@ const AvoidUniversitiesSurvey = () => {
     <SurveyTemplate
       disableNext={false}
       hasProgressBar={true}
-      totalStep={matchMeeting ? 14 : 12}
+      totalStep={matchMeeting ? 14 : 16}
       currStep={matchMeeting ? 5 : 7}
       handlePrevClick={handlePrevClick}
       handleNextClick={handleNextClick}

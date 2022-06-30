@@ -37,7 +37,7 @@ const MyMbtiHeight = () => {
     <SurveyTemplate
       disableNext={!mbti || myHeight <= 0}
       currStep={4}
-      totalStep={12}
+      totalStep={16}
       handlePrevClick={() => datingNavigate(Path.MyDepartmentCharacter)}
       handleNextClick={handleNextClick}
     >

@@ -38,8 +38,8 @@ const PreferBodyDateCountSurvey = () => {
   return (
     <SurveyTemplate
       disableNext={!preferBodies && !preferDateCount}
-      currStep={10}
-      totalStep={11}
+      currStep={11}
+      totalStep={16}
       handlePrevClick={() => datingNavigate(Path.PreferDepartmentCharacterSurvey)}
       handleNextClick={handleNextClick}
     >

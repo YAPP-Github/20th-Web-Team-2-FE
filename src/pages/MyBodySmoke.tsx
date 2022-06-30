@@ -30,7 +30,7 @@ const MyBodySmoke = () => {
     <SurveyTemplate
       disableNext={!myBody}
       hasProgressBar={true}
-      totalStep={12}
+      totalStep={16}
       currStep={5}
       handlePrevClick={() => datingNavigate(Path.MyMbtiHeight)}
       handleNextClick={handleNextClick}

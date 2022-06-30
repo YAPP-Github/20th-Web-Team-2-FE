@@ -50,8 +50,8 @@ const PreferDepartmentCharacterSurvey = () => {
   return (
     <SurveyTemplate
       disableNext={!preferDepartments || !preferCharacteristics}
-      currStep={9}
-      totalStep={11}
+      currStep={10}
+      totalStep={16}
       handlePrevClick={() => datingNavigate(Path.PreferAgeHeightSurvey)}
       handleNextClick={handleNextClick}
     >

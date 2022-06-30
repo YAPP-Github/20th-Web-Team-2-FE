@@ -33,7 +33,7 @@ const MyGenderAge = () => {
     <SurveyTemplate
       disableNext={!age && !gender}
       currStep={2}
-      totalStep={12}
+      totalStep={16}
       handlePrevClick={() => navigate(Path.TypeOfMeetingSurvey)}
       handleNextClick={handleNextClick}
     >

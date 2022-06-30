@@ -27,7 +27,7 @@ const PreferAverageAgeHeightSurvey = () => {
   return (
     <SurveyTemplate
       disableNext={!multiAgeOption || !multiHeightOption}
-      totalStep={matchMeeting ? 14 : 12}
+      totalStep={matchMeeting ? 14 : 16}
       currStep={matchMeeting ? 7 : 9}
       handlePrevClick={() => meetingNavigate(Path.PreferUniversitiesSurvey)}
       handleNextClick={handleNextClick}
