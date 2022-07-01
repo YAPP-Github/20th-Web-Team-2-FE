@@ -126,7 +126,7 @@ const NavBarBlock = styled.section<{ isMenu: boolean }>`
   transition: all 0.2s ease-in-out;
   transform: translateX(${({ isMenu }) => (isMenu ? '0px' : '300px')});
 `;
-const SidebarHeader = styled.header`
+const SidebarHeader = styled.div`
   display: flex;
   margin-bottom: 20px;
 `;
