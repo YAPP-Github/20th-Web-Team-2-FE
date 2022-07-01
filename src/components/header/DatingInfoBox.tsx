@@ -7,17 +7,59 @@ interface DatingInfoProps {
   dating: Dating;
 }
 const DatingInfoBox = ({ dating }: DatingInfoProps) => {
-  const { age } = dating;
+  const {
+    age,
+    myDepartment,
+    mbti,
+    myHeight,
+    myBody,
+    myDateCount,
+    mySmoke,
+    characteristic,
+    domesticAreas,
+    abroadAreas,
+    gender,
+    // 여까지 내정보
+    preferAge,
+    preferBodies,
+    preferCharacteristics,
+    preferDateCount,
+    preferDepartments,
+    preferHeight,
+    preferUniversities,
+  } = dating;
   // const { addComma } = AddCommaFunction();
   return (
     <div>
-      <GroupLabel>Team</GroupLabel>
+      <GroupLabel>Me</GroupLabel>
       <InfoLabel>나의 정보</InfoLabel>
       <InfoBox>
         <InfoEle>{age}살</InfoEle>
-        <InfoEle></InfoEle>
+        <InfoEle>{myDepartment}</InfoEle>
+        <InfoEle>{mbti}</InfoEle>
+        <InfoEle>{myDateCount}</InfoEle>
+        <InfoEle>{myHeight}cm</InfoEle>
+        <InfoEle>{myBody}</InfoEle>
+        <InfoEle>{mySmoke ? '흡연' : '비흡연'}</InfoEle>
+        <InfoEle>{characteristic}</InfoEle>
+        {domesticAreas && <InfoEle>{domesticAreas}</InfoEle>}
+        <InfoEle>{abroadAreas}</InfoEle>
+        <InfoEle>{gender}</InfoEle>
       </InfoBox>
       <InfoLabel>선호 조건</InfoLabel>
+      <InfoBox>
+        <InfoEle>
+          {preferAge[0]}~{preferAge[1]}살
+        </InfoEle>
+        <InfoEle>{preferBodies}</InfoEle>
+        <InfoEle>{preferCharacteristics}</InfoEle>
+        <InfoEle>{preferDateCount}</InfoEle>
+        <InfoEle>{preferDepartments}</InfoEle>
+        <InfoEle>
+          {preferHeight[0]}~{preferHeight[1]}
+        </InfoEle>
+        <InfoEle>{preferUniversities}</InfoEle>
+      </InfoBox>
     </div>
   );
 };
