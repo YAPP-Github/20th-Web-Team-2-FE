@@ -24,6 +24,7 @@ const HeaderLayout = styled(HeaderWrapper)`
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+  padding: 20px 10px;
 `;
 
 export default UserHeader;
