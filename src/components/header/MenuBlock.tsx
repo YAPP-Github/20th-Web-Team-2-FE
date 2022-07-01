@@ -1,14 +1,70 @@
 import { Logo } from '@/assets/img';
 import { palette } from '@/lib/styles/palette';
+import { Dating } from '@/types/dating';
+import { Meeting } from '@/types/meeting';
 import React from 'react';
 import styled from 'styled-components';
+import DatingInfoBox from './DatingInfoBox';
+import MeetingInfoBox from './MeetingInfoBox';
 
 interface MenuBlockProps {
   isMenu: boolean;
   onToggleMenu: () => void;
 }
+/**
+ * 임시 유저 데이터
+ */
 const TempUserData = {
   email: 'coffee123@naver.com',
+  univ: 'Boston University',
+};
+
+const TempMeetingData: Meeting = {
+  typeOfMeeting: 'ONE',
+  gender: 'FEMALE',
+  averageAge: 28,
+  ourUniversities: [],
+  ourDepartments: ['LIBERAL', 'SCIENCE'],
+  averageHeight: 170,
+  avoidUniversities: [],
+  preferUniversities: [],
+  preferAge: [20, 25],
+  preferHeight: [140, 180],
+  preferDepartments: ['LIBERAL', 'SCIENCE'],
+  mindset: 'ALL',
+  play: 'ALL',
+  isAbroad: false,
+  domesticAreas: ['SNW', 'SNE', 'SSW', 'SSE'],
+  abroadAreas: [],
+  channel: 'FACEBOOK',
+  agreement: true,
+  kakaoId: '',
+};
+const TempDatingData: Dating = {
+  gender: 'FEMALE',
+  age: 28,
+  myDepartment: 'LIBERAL',
+  characteristic: 'A_LITTLE_ACTIVE',
+  mbti: 'INFP',
+  myHeight: 0,
+  myBody: 'SKINNY',
+  mySmoke: true,
+  myDateCount: 'ZERO',
+  isSmokeOk: true,
+  avoidUniversities: [],
+  preferUniversities: [],
+  preferAge: [20, 28],
+  preferHeight: [140, 180],
+  preferDepartments: ['LIBERAL', 'SCIENCE'],
+  preferCharacteristics: ['VERY_QUIET', 'A_LITTLE_QUIET'],
+  preferBodies: ['SKINNY', 'SLIM'],
+  preferDateCount: 'ZERO',
+  isAbroad: false,
+  domesticAreas: ['SNW', 'SNE', 'SSW', 'SSE'],
+  abroadAreas: [],
+  channel: 'FACEBOOK',
+  agreement: true,
+  kakaoId: '',
 };
 function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
   return (
@@ -18,9 +74,11 @@ function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
           <SiteLogo src={Logo} alt="사이트 로고" />
           <UserBox>
             <div>{TempUserData.email}</div>
-            <div className="univ">Boston University</div>
+            <div className="univ">{TempUserData.univ}</div>
           </UserBox>
         </SidebarHeader>
+        <MeetingInfoBox meeting={TempMeetingData} />
+        <DatingInfoBox dating={TempDatingData} />
       </NavBarBlock>
       <NavBackground onClick={onToggleMenu} isMenu={isMenu} />
     </>
@@ -40,6 +98,7 @@ const NavBackground = styled.div<{ isMenu: boolean }>`
 `;
 
 const NavBarBlock = styled.section<{ isMenu: boolean }>`
+  overflow-y: scroll;
   width: 100%;
   max-width: 300px;
   position: fixed;
@@ -75,4 +134,5 @@ const UserBox = styled.div`
     color: ${palette.grayDark};
   }
 `;
+
 export default MenuBlock;
