@@ -95,11 +95,21 @@ function Routing() {
 const PageLayout = styled.div`
   background-color: ${palette.backgroundColor};
   height: 100%;
+  position: relative;
 `;
 const PageWrapper = styled.main`
   margin: 0 auto;
-  max-width: 344px;
+  max-width: 650px;
+  width: 100%;
+  /* 이부분 상의후 변경 */
   height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  overflow: hidden;
 `;
 
 export default Routing;

@@ -99,18 +99,32 @@ const NavBackground = styled.div<{ isMenu: boolean }>`
 
 const NavBarBlock = styled.section<{ isMenu: boolean }>`
   overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: ${palette.white};
+    border-radius: 0px 10px 10px 0;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${palette.grayLight};
+    border-radius: 12px;
+    background-clip: padding-box;
+    border: 1px solid transparent;
+  }
   width: 100%;
   max-width: 300px;
-  position: fixed;
+  position: absolute;
   height: 100vh;
   top: 0;
-  left: 0;
+  right: 0;
   background: ${palette.white};
-  z-index: 9000;
+  z-index: 1000;
   padding: 16px;
   ${({ isMenu }) => (isMenu ? 'visibility: visible' : 'visibility : hidden')};
   transition: all 0.2s ease-in-out;
-  transform: translateX(${({ isMenu }) => (isMenu ? 'calc(100vw - 300px)' : '100vw')});
+  transform: translateX(${({ isMenu }) => (isMenu ? '0px' : '300px')});
 `;
 const SidebarHeader = styled.header`
   display: flex;
