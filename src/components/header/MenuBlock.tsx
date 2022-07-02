@@ -87,9 +87,9 @@ function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
 
 const NavBackground = styled.div<{ isMenu: boolean }>`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: black;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   z-index: 800;
@@ -115,7 +115,7 @@ const NavBarBlock = styled.section<{ isMenu: boolean }>`
   }
   width: 100%;
   max-width: 300px;
-  position: absolute;
+  position: fixed;
   height: 100vh;
   top: 0;
   right: 0;
@@ -124,7 +124,7 @@ const NavBarBlock = styled.section<{ isMenu: boolean }>`
   padding: 16px;
   ${({ isMenu }) => (isMenu ? 'visibility: visible' : 'visibility : hidden')};
   transition: all 0.2s ease-in-out;
-  transform: translateX(${({ isMenu }) => (isMenu ? '0px' : '300px')});
+  transform: translateX(${({ isMenu }) => (isMenu ? 'calc(100vw-300px)' : '100vw')});
 `;
 const SidebarHeader = styled.div`
   display: flex;
