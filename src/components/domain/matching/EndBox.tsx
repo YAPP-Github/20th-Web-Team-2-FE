@@ -7,7 +7,7 @@ import KakaoCopyBox from './KakaoCopyBox';
 import AddCommaFunction from '@/hooks/common/AddCommaFunction';
 
 const TempData: Meeting = {
-  averageHeight: [170, 175],
+  averageHeight: 175,
   averageAge: 22,
   ourUniversities: [1, 2, 11],
   ourDepartments: ['ATHLETIC', 'SCIENCE'],
@@ -39,9 +39,7 @@ function EndBox() {
         </FlexLine>
         <FlexLine>
           <InfoLabel>평균키</InfoLabel>
-          <InfoText>
-            {averageHeight[0]} ~ {averageHeight[1]}
-          </InfoText>
+          <InfoText>{averageHeight}</InfoText>
         </FlexLine>
         <FlexLine>
           <InfoLabel>학교</InfoLabel>

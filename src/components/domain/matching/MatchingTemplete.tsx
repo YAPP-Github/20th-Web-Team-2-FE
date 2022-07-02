@@ -1,18 +1,21 @@
 import React, { MouseEventHandler, ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button } from '@/components/base';
-import UserHeader from './UserHeader';
 import { useLocation } from 'react-router-dom';
 import { Title } from '@/lib/styles/styledComponents';
+import CompleteButton from './buttons/CompleteButton';
+import EndButton from './buttons/EndButton';
+import NoneButton from './buttons/NoneButton';
+import WaitingButton from './buttons/WaitingButton';
+import SuccessButton from './buttons/SuccessButton';
 
 interface MatchingTemplateProps {
   children: ReactNode;
   handleClick?: MouseEventHandler<HTMLButtonElement>;
-  IsDisable: boolean;
   title: ReactNode;
   btnName: string;
 }
-const MatchingTemplete = ({ children, handleClick, IsDisable, btnName, title }: MatchingTemplateProps) => {
+const MatchingTemplete = ({ children, handleClick, btnName, title }: MatchingTemplateProps) => {
   const location = useLocation();
   const [type, setType] = useState('meeting');
   useEffect(() => {
@@ -21,7 +24,6 @@ const MatchingTemplete = ({ children, handleClick, IsDisable, btnName, title }: 
 
   return (
     <TemplateBlock>
-      <UserHeader />
       <Title>{title}</Title>
       <ButtonWrapper>
         <TypeButton onClick={handleClick} size="medium" variant={type === 'meeting' ? 'default' : 'gray'} fontWeight={type === 'dating' ? 700 : 400}>
@@ -34,15 +36,15 @@ const MatchingTemplete = ({ children, handleClick, IsDisable, btnName, title }: 
       <div>{children}</div>
       <NavigationWrapper>
         <ButtonWrapper>
-          <Button
-            onClick={handleClick}
-            size="medium"
-            disabled={IsDisable}
-            variant={IsDisable ? 'gray' : 'default'}
-            fontWeight={IsDisable ? 400 : 700}
-          >
-            {btnName}
-          </Button>
+          {
+            {
+              none: <NoneButton />,
+              waiting: <WaitingButton />,
+              success: <SuccessButton />,
+              pay: <CompleteButton />,
+              end: <EndButton />,
+            }[btnName]
+          }
         </ButtonWrapper>
       </NavigationWrapper>
     </TemplateBlock>
@@ -51,7 +53,7 @@ const MatchingTemplete = ({ children, handleClick, IsDisable, btnName, title }: 
 
 const TemplateBlock = styled.section`
   position: relative;
-  height: 100%;
+  height: calc(100% - 56px);
   margin: 0 8px;
 `;
 

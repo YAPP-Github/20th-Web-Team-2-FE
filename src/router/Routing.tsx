@@ -33,6 +33,8 @@ import {
   MatchingPage,
 } from '@/pages';
 import Test from '@/components/base/Test';
+import UserHeader from '@/components/header/UserHeader';
+import { palette } from '@/lib/styles/palette';
 
 function Routing() {
   return (
@@ -80,7 +82,7 @@ function Routing() {
               <Route path={Path.AgreementSurvey} element={<AgreementSurvey />} />
               <Route path={Path.KakaoIdSurvey} element={<KakaoIdSurvey />} />
             </Route>
-            <Route path={'/matching'} element={<Outlet />}>
+            <Route path={'/matching'} element={<UserHeader />}>
               <Route path={Path.MatchingMeeting} element={<MatchingPage />} />
             </Route>
             <Route path="*" element={<NotFound />} />
@@ -91,12 +93,22 @@ function Routing() {
   );
 }
 const PageLayout = styled.div`
-  margin: 0 auto;
-  max-width: 344px;
+  background-color: ${palette.backgroundColor};
   height: 100%;
+  /* position: relative; */
 `;
 const PageWrapper = styled.main`
+  margin: 0 auto;
+  max-width: 344px;
+  width: 100%;
   height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  /* overflow: hidden; */
+  /* position: absolute; */
 `;
 
 export default Routing;
