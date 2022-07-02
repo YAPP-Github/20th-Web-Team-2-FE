@@ -6,18 +6,34 @@ import { Title } from '@/lib/styles/styledComponents';
 import React from 'react';
 import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
-import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
+import { useMatch } from 'react-router-dom';
+import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
+import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 
 const AgreementSurvey = () => {
-  const meetingNavigate = useMeetingNavigate();
+  const matchMeeting = useMatch('/meeting/*');
+  const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
+  const { initMeetingState, setMeetingData } = useMeetingSessionState();
+  const { initDatingState, setDatingData } = useDatingSessionState();
   const { checkedList, checkedChoiceList, onChangeCheck, onChangeChoiceCheck, onCheckAll, isEssentialChecked, isAllchecked } = useAgreementCheck();
+
+  const handleNextClick = () => {
+    if (initMeetingState) {
+      matchMeeting
+        ? setMeetingData({ ...initMeetingState, agreement: isAllchecked })
+        : setDatingData({ ...initDatingState, agreement: isAllchecked });
+    }
+
+    meetingNavigate(Path.KakaoIdSurvey);
+  };
+
   return (
     <SurveyTemplate
       disableNext={!isEssentialChecked}
       hasProgressBar={false}
       handlePrevClick={() => meetingNavigate(Path.ChannelSurvey)}
-      handleNextClick={() => meetingNavigate(Path.KakaoIdSurvey)}
+      handleNextClick={handleNextClick}
     >
       <Title>
         약관동의를 <br />

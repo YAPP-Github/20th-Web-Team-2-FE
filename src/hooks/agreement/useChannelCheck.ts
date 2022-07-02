@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { type Channel } from '@/types/meeting';
 
-const useChannelCheck = (isMulti: boolean) => {
+const useChannelCheck = (isMulti: boolean, initData: Channel) => {
   const [channelMultiCheckList, setChannelMultiCheckList] = useState<{ text: string; name: Channel; checked: boolean }[]>([
     { text: '페이스북', name: 'FACEBOOK', checked: false },
     { text: '인스타그램', name: 'INSTAGRAM', checked: false },
@@ -11,7 +11,7 @@ const useChannelCheck = (isMulti: boolean) => {
     { text: '기타 커뮤니티', name: 'COMMUNITY', checked: false },
   ]);
 
-  const [channelCheck, setChannelCheck] = useState<Channel>('FACEBOOK');
+  const [channelCheck, setChannelCheck] = useState<Channel>(initData);
 
   if (isMulti) {
     const onChangeMultiCheck = (e: React.ChangeEvent<HTMLInputElement>) => {

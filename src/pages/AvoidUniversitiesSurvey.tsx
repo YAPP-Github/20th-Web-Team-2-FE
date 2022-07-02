@@ -6,18 +6,26 @@ import SearchSelector from '@/components/domain/survey/SearchSelector';
 import { schools } from '@/mock/schools';
 import styled from 'styled-components';
 import Path from '@/router/Path';
-import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
-import { useMeetingSessionState } from '@/hooks/common';
+import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
+import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 
 const AvoidUniversitiesSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
   const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
-  const [avoidUniversities, setAvoidUniversities] = useState<number[]>(initMeetingState.avoidUniversities);
+  const { initDatingState, setDatingData } = useDatingSessionState();
+  const [avoidUniversities, setAvoidUniversities] = useState(initMeetingState.avoidUniversities);
+  const [avoidDatingUniversities, setAvoidDatingUniversities] = useState(initDatingState.avoidUniversities);
+
+  const handlePrevClick = () => {
+    meetingNavigate(matchMeeting ? Path.OurDepartmentsAverageHeightSurvey : Path.MyDateCount);
+  };
 
   const handleNextClick = () => {
     if (initMeetingState) {
-      setMeetingData({ ...initMeetingState, avoidUniversities });
+      matchMeeting
+        ? setMeetingData({ ...initMeetingState, avoidUniversities })
+        : setDatingData({ ...initDatingState, avoidUniversities: avoidDatingUniversities });
     }
 
     meetingNavigate(Path.PreferUniversitiesSurvey);
@@ -27,9 +35,9 @@ const AvoidUniversitiesSurvey = () => {
     <SurveyTemplate
       disableNext={false}
       hasProgressBar={true}
-      totalStep={matchMeeting ? 14 : 12}
+      totalStep={matchMeeting ? 14 : 16}
       currStep={matchMeeting ? 5 : 7}
-      handlePrevClick={() => meetingNavigate(Path.OurDepartmentsAverageHeightSurvey)}
+      handlePrevClick={handlePrevClick}
       handleNextClick={handleNextClick}
     >
       <Title>
@@ -39,8 +47,8 @@ const AvoidUniversitiesSurvey = () => {
       <SearchSelector
         placeholder="학교를 검색하세요.(없을 시 ‘other’ 입력)"
         searchData={schools}
-        selectedResults={avoidUniversities}
-        setSelectedResults={setAvoidUniversities}
+        selectedResults={matchMeeting ? avoidUniversities : avoidDatingUniversities}
+        setSelectedResults={matchMeeting ? setAvoidUniversities : setAvoidDatingUniversities}
       />
       <Description>
         ※ 참여 인원이 부족할 경우 기피학교와

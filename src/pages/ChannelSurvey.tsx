@@ -3,21 +3,32 @@ import { CheckBox } from '@/components/base';
 import { FormWrapper } from './AuthMail';
 import useChannelCheck from '@/hooks/agreement/useChannelCheck';
 import { SurveyTemplate } from '@/components/domain/survey';
-import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
-import { useMeetingSessionState } from '@/hooks/common';
+import { useMatch } from 'react-router-dom';
+import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
+import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 import { CHANNEL_ITEMS } from '@/types/constants/channel';
+import { Channel } from '@/types/meeting';
 
 const ChannelSurvey = () => {
-  const meetingNavigate = useMeetingNavigate();
+  const matchMeeting = useMatch('/meeting/*');
+  const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
-  const { channelCheck: channel, onChangeCheck, isChecked } = useChannelCheck(false);
+  const { initDatingState, setDatingData } = useDatingSessionState();
+  const { channelCheck: channel, onChangeCheck, isChecked } = useChannelCheck(false, initMeetingState.channel);
+  const {
+    channelCheck: channelDating,
+    onChangeCheck: onChangeCheckDating,
+    isChecked: isCheckedDating,
+  } = useChannelCheck(false, initDatingState.channel);
+
+  const isSameChannel = (name: string) => (matchMeeting ? name === channel : name === channelDating);
 
   const handleNextClick = () => {
     if (!channel) return;
 
     if (initMeetingState) {
-      setMeetingData({ ...initMeetingState, channel });
+      matchMeeting ? setMeetingData({ ...initMeetingState, channel }) : setDatingData({ ...initDatingState, channel: channelDating as Channel });
     }
 
     meetingNavigate(Path.AgreementSurvey);
@@ -25,10 +36,10 @@ const ChannelSurvey = () => {
 
   return (
     <SurveyTemplate
-      disableNext={!isChecked}
+      disableNext={matchMeeting ? !isChecked : !isCheckedDating}
       hasProgressBar={true}
-      currStep={13}
-      totalStep={14}
+      currStep={matchMeeting ? 13 : 14}
+      totalStep={matchMeeting ? 14 : 16}
       handlePrevClick={() => meetingNavigate(Path.IsAbroadSurvey)}
       handleNextClick={handleNextClick}
     >
@@ -42,10 +53,10 @@ const ChannelSurvey = () => {
             isMulti={false}
             key={text}
             text={text}
-            checked={name === channel}
-            onChange={onChangeCheck}
+            checked={isSameChannel(name)}
+            onChange={matchMeeting ? onChangeCheck : onChangeCheckDating}
             name={name}
-            impotrant={name === channel ? true : false}
+            impotrant={isSameChannel(name) ? true : false}
           />
         ))}
       </FormWrapper>

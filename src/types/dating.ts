@@ -25,7 +25,7 @@ export interface Dating {
   preferDateCount: DateCount;
   isAbroad: boolean;
   domesticAreas: DomesticAreas[];
-  abroadAreas: string[];
+  abroadAreas: number[];
   channel: Channel;
   agreement: boolean;
   kakaoId: string;
