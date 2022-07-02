@@ -4,7 +4,7 @@ import { schools } from '@/mock/schools';
 import { Meeting } from '@/types/meeting';
 import styled from 'styled-components';
 import KakaoCopyBox from './KakaoCopyBox';
-import AddCommaFunction from '@/hooks/common/AddCommaFunction';
+import addCommaFunction from '@/utils/AddCommaFunction';
 
 const TempData: Meeting = {
   averageHeight: 175,
@@ -29,7 +29,7 @@ const TempData: Meeting = {
 };
 function EndBox() {
   const { kakaoId, averageAge, averageHeight, mindset, ourDepartments, ourUniversities, play } = TempData;
-  const { addComma, addTailComma } = AddCommaFunction();
+  const { addComma, addTailComma } = addCommaFunction();
   return (
     <div>
       <MatchingInfoBox>

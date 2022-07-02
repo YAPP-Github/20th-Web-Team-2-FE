@@ -1,4 +1,4 @@
-const AddCommaFunction = () => {
+const addCommaFunction = () => {
   const addComma = (index: number) => {
     if (index === 0) return;
     else return ',';
@@ -11,4 +11,4 @@ const AddCommaFunction = () => {
   return { addComma, addTailComma };
 };
 
-export default AddCommaFunction;
+export default addCommaFunction;
