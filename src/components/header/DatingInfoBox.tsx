@@ -1,12 +1,14 @@
 import { palette } from '@/lib/styles/palette';
 import { Dating } from '@/types/dating';
 import addCommaFunction from '@/utils/addCommaFunction';
-import { conversionBody } from '@/utils/converson/conversionBody';
-import { conversionCharacter } from '@/utils/converson/conversionCharacter';
-import { conversionDateCount } from '@/utils/converson/conversionDateCount';
-import { conversionDepartment } from '@/utils/converson/conversionDepartment';
-import { conversionDomesticArea } from '@/utils/converson/conversionDomesticArea';
-import { conversionGender } from '@/utils/converson/conversionGender';
+import {
+  conversionBody,
+  conversionCharacter,
+  conversionDateCount,
+  conversionDepartment,
+  conversionDomesticArea,
+  conversionGender,
+} from '@/utils/converson';
 import React from 'react';
 import styled from 'styled-components';
 

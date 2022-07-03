@@ -1,12 +1,14 @@
+import React from 'react';
 import { Meeting } from '@/types/meeting';
 import addCommaFunction from '@/utils/addCommaFunction';
-import { conversionDepartment } from '@/utils/converson/conversionDepartment';
-import { conversionDomesticArea } from '@/utils/converson/conversionDomesticArea';
-import { conversionGender } from '@/utils/converson/conversionGender';
-import { conversionMindset } from '@/utils/converson/conversionMindset';
-import { conversionPlay } from '@/utils/converson/conversionPlay';
-import { conversionTypeOfMeeting } from '@/utils/converson/conversionTypeOfMeeting';
-import React from 'react';
+import {
+  conversionDepartment,
+  conversionDomesticArea,
+  conversionGender,
+  conversionMindset,
+  conversionPlay,
+  conversionTypeOfMeeting,
+} from '@/utils/converson';
 import { FlexEle, GroupLabel, InfoBox, InfoEle, InfoLabel } from './DatingInfoBox';
 
 interface MeetingInfoProps {
