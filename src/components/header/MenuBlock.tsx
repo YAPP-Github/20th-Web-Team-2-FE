@@ -23,7 +23,7 @@ const TempMeetingData: Meeting = {
   typeOfMeeting: 'ONE',
   gender: 'FEMALE',
   averageAge: 28,
-  ourUniversities: [],
+  ourUniversities: [1, 21, 3],
   ourDepartments: ['LIBERAL', 'SCIENCE'],
   averageHeight: 170,
   avoidUniversities: [],

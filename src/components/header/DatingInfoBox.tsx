@@ -53,16 +53,14 @@ const DatingInfoBox = ({ dating }: DatingInfoProps) => {
         <InfoEle>{conversionBody(myBody)}</InfoEle>
         <InfoEle>{mySmoke ? '흡연' : '비흡연'}</InfoEle>
         <InfoEle>{conversionCharacter(characteristic)}</InfoEle>
-        {domesticAreas && (
-          <FlexEle>
-            {domesticAreas.map((area, index) => (
-              <div className="longEle" key={area + domesticAreas}>
-                {addComma(index)}
-                {conversionDomesticArea(area)}
-              </div>
-            ))}
-          </FlexEle>
-        )}
+        <FlexEle>
+          {domesticAreas?.map((area, index) => (
+            <div key={area + domesticAreas}>
+              {addComma(index)}
+              {conversionDomesticArea(area)}
+            </div>
+          ))}
+        </FlexEle>
         <InfoEle>{abroadAreas.length === 0 ? '기피지역 : 없음' : abroadAreas}</InfoEle>
         <InfoEle>해외여부 : {isAbroad ? '예' : '아니요'}</InfoEle>
       </InfoBox>
@@ -97,7 +95,7 @@ const DatingInfoBox = ({ dating }: DatingInfoProps) => {
           ))}
         </FlexEle>
         <InfoEle>
-          {preferHeight[0]}~{preferHeight[1]}
+          {preferHeight[0]}~{preferHeight[1]}cm
         </InfoEle>
         {/* <InfoEle>{preferUniversities}</InfoEle> */}
         <InfoEle>흡연 : {isSmokeOk ? '괜찮아요' : '싫어요'}</InfoEle>
