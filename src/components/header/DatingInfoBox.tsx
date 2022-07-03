@@ -1,6 +1,6 @@
 import { palette } from '@/lib/styles/palette';
 import { Dating } from '@/types/dating';
-import addCommaFunction from '@/utils/addCommaFunction';
+import { addComma } from '@/utils/addComma';
 import {
   conversionBody,
   conversionCharacter,
@@ -39,7 +39,6 @@ const DatingInfoBox = ({ dating }: DatingInfoProps) => {
     abroadAreas,
     //여까지 선호 조건
   } = dating;
-  const { addComma } = addCommaFunction();
   console.log(abroadAreas);
   return (
     <div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Meeting } from '@/types/meeting';
-import addCommaFunction from '@/utils/addCommaFunction';
 import {
   conversionDepartment,
   conversionDomesticArea,
@@ -10,6 +9,7 @@ import {
   conversionTypeOfMeeting,
 } from '@/utils/converson';
 import { FlexEle, GroupLabel, InfoBox, InfoEle, InfoLabel } from './DatingInfoBox';
+import { addComma } from '@/utils/addComma';
 
 interface MeetingInfoProps {
   meeting: Meeting;
@@ -29,7 +29,6 @@ function MeetingInfoBox({ meeting }: MeetingInfoProps) {
     preferDepartments,
     preferHeight,
   } = meeting;
-  const { addComma } = addCommaFunction();
   return (
     <div>
       <GroupLabel>Team</GroupLabel>
