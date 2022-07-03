@@ -1,5 +1,12 @@
 import { palette } from '@/lib/styles/palette';
 import { Dating } from '@/types/dating';
+import addCommaFunction from '@/utils/addCommaFunction';
+import { conversionBody } from '@/utils/converson/conversionBody';
+import { conversionCharacter } from '@/utils/converson/conversionCharacter';
+import { conversionDateCount } from '@/utils/converson/conversionDateCount';
+import { conversionDepartment } from '@/utils/converson/conversionDepartment';
+import { conversionDomesticArea } from '@/utils/converson/conversionDomesticArea';
+import { conversionGender } from '@/utils/converson/conversionGender';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -17,7 +24,6 @@ const DatingInfoBox = ({ dating }: DatingInfoProps) => {
     mySmoke,
     characteristic,
     domesticAreas,
-    abroadAreas,
     gender,
     // 여까지 내정보
     preferAge,
@@ -26,39 +32,75 @@ const DatingInfoBox = ({ dating }: DatingInfoProps) => {
     preferDateCount,
     preferDepartments,
     preferHeight,
-    preferUniversities,
+    isSmokeOk,
+    isAbroad,
+    abroadAreas,
+    //여까지 선호 조건
   } = dating;
-  // const { addComma } = AddCommaFunction();
+  const { addComma } = addCommaFunction();
+  console.log(abroadAreas);
   return (
     <div>
       <GroupLabel>Me</GroupLabel>
       <InfoLabel>나의 정보</InfoLabel>
       <InfoBox>
         <InfoEle>{age}살</InfoEle>
-        <InfoEle>{myDepartment}</InfoEle>
+        <InfoEle>{conversionGender(gender)}</InfoEle>
+        <InfoEle>{conversionDepartment(myDepartment)}</InfoEle>
         <InfoEle>{mbti}</InfoEle>
-        <InfoEle>{myDateCount}</InfoEle>
+        <InfoEle>연애 횟수 : {conversionDateCount(myDateCount)}</InfoEle>
         <InfoEle>{myHeight}cm</InfoEle>
-        <InfoEle>{myBody}</InfoEle>
+        <InfoEle>{conversionBody(myBody)}</InfoEle>
         <InfoEle>{mySmoke ? '흡연' : '비흡연'}</InfoEle>
-        <InfoEle>{characteristic}</InfoEle>
-        {domesticAreas && <InfoEle>{domesticAreas}</InfoEle>}
-        <InfoEle>{abroadAreas}</InfoEle>
-        <InfoEle>{gender}</InfoEle>
+        <InfoEle>{conversionCharacter(characteristic)}</InfoEle>
+        {domesticAreas && (
+          <FlexEle>
+            {domesticAreas.map((area, index) => (
+              <div className="longEle" key={area + domesticAreas}>
+                {addComma(index)}
+                {conversionDomesticArea(area)}
+              </div>
+            ))}
+          </FlexEle>
+        )}
+        <InfoEle>{abroadAreas.length === 0 ? '기피지역 : 없음' : abroadAreas}</InfoEle>
+        <InfoEle>해외여부 : {isAbroad ? '예' : '아니요'}</InfoEle>
       </InfoBox>
       <InfoLabel>선호 조건</InfoLabel>
       <InfoBox>
         <InfoEle>
           {preferAge[0]}~{preferAge[1]}살
         </InfoEle>
-        <InfoEle>{preferBodies}</InfoEle>
-        <InfoEle>{preferCharacteristics}</InfoEle>
-        <InfoEle>{preferDateCount}</InfoEle>
-        <InfoEle>{preferDepartments}</InfoEle>
+        <FlexEle>
+          {preferBodies?.map((body, index) => (
+            <div key={body + preferBodies}>
+              {addComma(index)}
+              {conversionBody(body)}
+            </div>
+          ))}
+        </FlexEle>
+        <FlexEle>
+          {preferCharacteristics?.map((charator, index) => (
+            <div key={charator + preferCharacteristics}>
+              {addComma(index)}
+              {conversionCharacter(charator)}
+            </div>
+          ))}
+        </FlexEle>
+        <InfoEle>{conversionDateCount(preferDateCount)}</InfoEle>
+        <FlexEle>
+          {preferDepartments?.map((department, index) => (
+            <div key={department + preferDepartments}>
+              {addComma(index)}
+              {conversionDepartment(department)}
+            </div>
+          ))}
+        </FlexEle>
         <InfoEle>
           {preferHeight[0]}~{preferHeight[1]}
         </InfoEle>
-        <InfoEle>{preferUniversities}</InfoEle>
+        {/* <InfoEle>{preferUniversities}</InfoEle> */}
+        <InfoEle>흡연 : {isSmokeOk ? '괜찮아요' : '싫어요'}</InfoEle>
       </InfoBox>
     </div>
   );
@@ -90,6 +132,10 @@ export const InfoEle = styled.li`
   font-size: 12px;
   overflow-x: hidden;
   text-overflow: ellipsis;
+`;
+
+export const FlexEle = styled(InfoEle)`
+  display: flex;
 `;
 
 export default DatingInfoBox;

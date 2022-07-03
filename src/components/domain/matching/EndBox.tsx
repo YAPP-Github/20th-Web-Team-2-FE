@@ -4,7 +4,10 @@ import { schools } from '@/mock/schools';
 import { Meeting } from '@/types/meeting';
 import styled from 'styled-components';
 import KakaoCopyBox from './KakaoCopyBox';
-import addCommaFunction from '@/utils/AddCommaFunction';
+import addCommaFunction from '@/utils/addCommaFunction';
+import { conversionMindset } from '@/utils/converson/conversionMindset';
+import { conversionPlay } from '@/utils/converson/conversionPlay';
+import { conversionDepartment } from '@/utils/converson/conversionDepartment';
 
 const TempData: Meeting = {
   averageHeight: 175,
@@ -58,7 +61,7 @@ function EndBox() {
             {ourDepartments.map((department, index) => (
               <p key={`${department}_${index}`}>
                 {addComma(index)}
-                {{ LIBERAL: '문과', SCIENCE: '이과', ATHLETIC: '체육', ART: '예술' }[department]}
+                {conversionDepartment(department)}
               </p>
             ))}
           </InfoFlexText>
@@ -77,17 +80,17 @@ function EndBox() {
           {TempData.domesticAreas?.map((area, index) => (
             <InfoFlexText key={`${area}_${index}`}>
               {addComma(index)}
-              {{ ICN: '인천', SNW: '서북', SNE: '동북', SSW: '서남', SSE: '동서', GN: '경기 북부', GS: '경기 남부' }[area]},
+              {conversionPlay(area)},
             </InfoFlexText>
           ))}
         </FlexLine>
         <FlexLine>
           <InfoLabel>마인드셋</InfoLabel>
-          <InfoText>{{ ALL: '친구랑 노는, 설레는 둘 다', FRIEND: '친구랑 노는 느낌', LOVE: '설레는 느낌' }[mindset]}</InfoText>
+          <InfoText>{conversionMindset(mindset)}</InfoText>
         </FlexLine>
         <FlexLine>
           <InfoLabel>술게임</InfoLabel>
-          <InfoText>{{ ALL: '술게임, 얘기하면서 둘 다', GAME: '술게임 할래요!', TALK: '얘기하면서 놀래요.' }[play]}</InfoText>
+          <InfoText>{conversionPlay(play)}</InfoText>
         </FlexLine>
       </MatchingInfoBox>
       <KakaoCopyBox kakaoId={kakaoId} />
