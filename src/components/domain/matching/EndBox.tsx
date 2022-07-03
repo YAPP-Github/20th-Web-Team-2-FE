@@ -4,10 +4,9 @@ import { schools } from '@/mock/schools';
 import { Meeting } from '@/types/meeting';
 import styled from 'styled-components';
 import KakaoCopyBox from './KakaoCopyBox';
-import addCommaFunction from '@/utils/addCommaFunction';
-import { conversionMindset } from '@/utils/converson/conversionMindset';
-import { conversionPlay } from '@/utils/converson/conversionPlay';
-import { conversionDepartment } from '@/utils/converson/conversionDepartment';
+import { conversionDepartment, conversionDomesticArea, conversionMindset, conversionPlay } from '@/utils/converson';
+import { addComma } from '@/utils/addComma';
+import { addCommaTail } from '@/utils/addCommaTail';
 
 const TempData: Meeting = {
   averageHeight: 175,
@@ -32,7 +31,6 @@ const TempData: Meeting = {
 };
 function EndBox() {
   const { kakaoId, averageAge, averageHeight, mindset, ourDepartments, ourUniversities, play } = TempData;
-  const { addComma, addTailComma } = addCommaFunction();
   return (
     <div>
       <MatchingInfoBox>
@@ -50,7 +48,7 @@ function EndBox() {
             {ourUniversities.map((univ, index) => (
               <p key={univ}>
                 {schools[univ].name}
-                {addTailComma(ourUniversities.length, index)}
+                {addCommaTail(ourUniversities.length, index)}
               </p>
             ))}
           </InfoText>
@@ -80,7 +78,7 @@ function EndBox() {
           {TempData.domesticAreas?.map((area, index) => (
             <InfoFlexText key={`${area}_${index}`}>
               {addComma(index)}
-              {conversionPlay(area)},
+              {conversionDomesticArea(area)},
             </InfoFlexText>
           ))}
         </FlexLine>
