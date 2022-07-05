@@ -1,4 +1,4 @@
-import { Button, Input, Modal } from '@/components/base';
+import { Input, Modal } from '@/components/base';
 import { SurveyTemplate } from '@/components/domain/survey';
 import useToggle from '@/hooks/common/useToggle';
 import { palette } from '@/lib/styles/palette';
@@ -8,11 +8,13 @@ import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
 import Path from '@/router/Path';
 import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useNavigate } from 'react-router-dom';
 
 const KakaoIdSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
   const [isModal, onToggleModal] = useToggle();
   const [kakaoID, setkakaoID] = useState('');
+  const navigate = useNavigate();
 
   return (
     <>
@@ -22,7 +24,7 @@ const KakaoIdSurvey = () => {
         currStep={14}
         totalStep={14}
         handlePrevClick={() => meetingNavigate(Path.AgreementSurvey)}
-        handleNextClick={() => alert('설문이 완료되었습니다. 정식 출시가 되면 매칭을 시작할 수 있습니다. 조금만 기다려 주세요.')}
+        handleNextClick={onToggleModal}
       >
         <Title>
           카톡 아이디를 <br />
@@ -44,9 +46,6 @@ const KakaoIdSurvey = () => {
             }}
           />
           <Explane>※'카톡 ID 검색 허용'으로 되어있어야 합니다.</Explane>
-          <Button width={100} onClick={onToggleModal}>
-            (임시 버튼)
-          </Button>
         </InputWrapper>
       </SurveyTemplate>
       {isModal && (
@@ -58,7 +57,7 @@ const KakaoIdSurvey = () => {
           text="　카톡아이디를 확인해 주세요.　상대에게 보여질 아아디입니다!"
           onToggleModal={onToggleModal}
           onClick={() => {
-            console.log('안녕하세용');
+            navigate(Path.MatchingMeeting);
           }}
         />
       )}
