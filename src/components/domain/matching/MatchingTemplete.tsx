@@ -1,23 +1,25 @@
-import React, { MouseEventHandler, ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button } from '@/components/base';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Title } from '@/lib/styles/styledComponents';
 import CompleteButton from './buttons/CompleteButton';
 import EndButton from './buttons/EndButton';
 import NoneButton from './buttons/NoneButton';
 import WaitingButton from './buttons/WaitingButton';
 import SuccessButton from './buttons/SuccessButton';
+import Path from '@/router/Path';
 
 interface MatchingTemplateProps {
   children: ReactNode;
-  handleClick?: MouseEventHandler<HTMLButtonElement>;
   title: ReactNode;
   btnName: string;
 }
-const MatchingTemplete = ({ children, handleClick, btnName, title }: MatchingTemplateProps) => {
+const MatchingTemplete = ({ children, btnName, title }: MatchingTemplateProps) => {
   const location = useLocation();
   const [type, setType] = useState('meeting');
+  const navigate = useNavigate();
+
   useEffect(() => {
     location.pathname.includes('meeting') ? setType('meeting') : setType('dating');
   }, [location.pathname]);
@@ -26,10 +28,20 @@ const MatchingTemplete = ({ children, handleClick, btnName, title }: MatchingTem
     <TemplateBlock>
       <Title>{title}</Title>
       <ButtonWrapper>
-        <TypeButton onClick={handleClick} size="medium" variant={type === 'meeting' ? 'default' : 'gray'} fontWeight={type === 'dating' ? 700 : 400}>
+        <TypeButton
+          onClick={() => navigate(Path.MatchingMeeting)}
+          size="medium"
+          variant={type === 'meeting' ? 'default' : 'gray'}
+          fontWeight={type === 'dating' ? 700 : 400}
+        >
           미팅
         </TypeButton>
-        <TypeButton onClick={handleClick} size="medium" variant={type === 'dating' ? 'default' : 'gray'} fontWeight={type === 'dating' ? 700 : 400}>
+        <TypeButton
+          onClick={() => navigate(Path.MatchingDating)}
+          size="medium"
+          variant={type === 'dating' ? 'default' : 'gray'}
+          fontWeight={type === 'dating' ? 700 : 400}
+        >
           소개팅
         </TypeButton>
       </ButtonWrapper>
