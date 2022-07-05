@@ -39,7 +39,6 @@ const ChooseTwoBox = ({ selectedOption, onChangeOption, children, items, size = 
 
 const Container = styled.section`
   width: 100%;
-  margin-top: 67px;
 `;
 
 const ButtonWrapper = styled.div`
