@@ -31,7 +31,6 @@ const Input = ({ width = '100%', height = '38px', focusColor = palette.primary, 
 
   useEffect(() => {
     if (inputRef.current && isFocus) {
-      console.log(isFocus, 'isFocus');
       inputRef.current.focus();
     }
   }, [isFocus]);

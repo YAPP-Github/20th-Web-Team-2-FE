@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { DeleteIcon, SearchIcon } from '@/assets/img';
 
@@ -23,17 +23,22 @@ const SearchSelector = ({ placeholder, searchData, selectedResults, setSelectedR
 
   const findId = useCallback((value: string) => Number(searchData.find((data) => data.name === value)?.id), [searchData]);
 
+  useEffect(() => {
+    const result = selectedResults.flatMap((id) => searchData.filter((item) => item.id === id)).map(({ name }) => name);
+    setSelectedSchools(result);
+  }, []);
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     const id = findId(value);
 
     const noMatchData = !searchData.map(({ id }) => id).includes(id);
+    const existSelected = selectedResults.includes(id);
     const overMaxLimit = selectedResults.length >= MAX;
-    if (noMatchData || overMaxLimit) return;
+    if (noMatchData || existSelected || overMaxLimit) return;
 
     setSelectedResults((prev) => [...prev, id]);
     setSelectedSchools((prev) => [...prev, value]);
-    console.log(selectedResults);
   };
 
   const handleDeleteClick = (value: string) => {
@@ -41,10 +46,16 @@ const SearchSelector = ({ placeholder, searchData, selectedResults, setSelectedR
     setSelectedResults((prev) => prev.filter((id) => id !== findId(value)));
   };
 
+  const resetClick = () => {
+    if (inputRef.current) {
+      inputRef.current.value = '';
+    }
+  };
+
   return (
     <>
       <SearchWrapper>
-        <SearchInput ref={inputRef} list="schools" placeholder={placeholder} onChange={handleInputChange} />
+        <SearchInput ref={inputRef} list="schools" placeholder={placeholder} onChange={handleInputChange} onClick={resetClick} />
         <datalist id="schools">
           {searchData.map(({ name, id }) => (
             <option key={id} value={name} />

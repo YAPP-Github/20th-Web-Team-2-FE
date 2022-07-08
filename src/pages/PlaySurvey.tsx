@@ -5,7 +5,7 @@ import { ChoiceButton } from '@/components/base';
 import styled from 'styled-components';
 import { PLAY_ITEMS } from '@/types/constants/play';
 import Path from '@/router/Path';
-import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 import { type Play } from '@/types/meeting';
 

@@ -3,7 +3,7 @@ import { SurveyTemplate, AgeBox } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import styled from 'styled-components';
 import ChooseTwoBox from '@/components/domain/survey/ChooseTwoBox';
-import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import Path from '@/router/Path';
 import { useNavigate } from 'react-router-dom';
 import { GENDER_ITEMS } from '@/types/constants/constant';

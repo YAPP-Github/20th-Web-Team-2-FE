@@ -35,7 +35,7 @@ const INITIAL_DATING_STATE: Dating = {
 };
 
 const datingState = atom<Dating>({
-  key: 'dating/datingState',
+  key: 'datingState',
   default: INITIAL_DATING_STATE,
   effects_UNSTABLE: [persistAtom],
 });
