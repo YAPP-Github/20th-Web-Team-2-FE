@@ -29,7 +29,7 @@ const INITIAL_MEETING_STATE: Meeting = {
   kakaoId: '',
 };
 
-const meetingState = atom<Meeting>({
+export const meetingState = atom<Meeting>({
   key: 'meetingState',
   default: INITIAL_MEETING_STATE,
   effects_UNSTABLE: [persistAtom],
