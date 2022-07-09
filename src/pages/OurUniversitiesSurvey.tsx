@@ -4,16 +4,14 @@ import { SurveyTemplate } from '@/components/domain/survey';
 import SearchSelector from '@/components/domain/survey/SearchSelector';
 import { schools } from '@/mock/schools';
 import Path from '@/router/Path';
-import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 
 const OurUniversitiesSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
-  const [ourUniversities, setOurUniversities] = useState<number[]>([]);
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
+  const [ourUniversities, setOurUniversities] = useState<number[]>(initMeetingState.ourUniversities);
 
-  // @TODO: SearchSelector에서 id, name으로 구분하지 않고 상위에서 구분해야 함.
-  // selectedResults를 상위에서 받아서 초기화해야 하는데 문자열로 받아지게 되어 있음.
   const handleNextClick = () => {
     if (initMeetingState) {
       setMeetingData({ ...initMeetingState, ourUniversities });

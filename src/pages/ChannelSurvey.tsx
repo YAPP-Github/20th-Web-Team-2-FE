@@ -1,31 +1,63 @@
 import { Title } from '@/lib/styles/styledComponents';
-import CheckBox from '@/components/base/CheckBox';
+import { CheckBox } from '@/components/base';
 import { FormWrapper } from './AuthMail';
-import useFoundPathCheck from '@/hooks/agreement/useFoundPathCheck';
+import useChannelCheck from '@/hooks/agreement/useChannelCheck';
 import { SurveyTemplate } from '@/components/domain/survey';
-import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
 import Path from '@/router/Path';
+import { useMatch } from 'react-router-dom';
+import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
+import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
+import { CHANNEL_ITEMS } from '@/types/constants/channel';
+import { Channel } from '@/types/meeting';
 
 const ChannelSurvey = () => {
-  const meetingNavigate = useMeetingNavigate();
-  const { pathCheckList, onChangeCheck, isChecked } = useFoundPathCheck();
+  const matchMeeting = useMatch('/meeting/*');
+  const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
+  const { initMeetingState, setMeetingData } = useMeetingSessionState();
+  const { initDatingState, setDatingData } = useDatingSessionState();
+  const { channelCheck: channel, onChangeCheck, isChecked } = useChannelCheck(false, initMeetingState.channel);
+  const {
+    channelCheck: channelDating,
+    onChangeCheck: onChangeCheckDating,
+    isChecked: isCheckedDating,
+  } = useChannelCheck(false, initDatingState.channel);
+
+  const isSameChannel = (name: string) => (matchMeeting ? name === channel : name === channelDating);
+
+  const handleNextClick = () => {
+    if (!channel) return;
+
+    if (initMeetingState) {
+      matchMeeting ? setMeetingData({ ...initMeetingState, channel }) : setDatingData({ ...initDatingState, channel: channelDating as Channel });
+    }
+
+    meetingNavigate(Path.AgreementSurvey);
+  };
 
   return (
     <SurveyTemplate
-      disableNext={!isChecked}
+      disableNext={matchMeeting ? !isChecked : !isCheckedDating}
       hasProgressBar={true}
-      currStep={13}
-      totalStep={14}
+      currStep={matchMeeting ? 13 : 14}
+      totalStep={matchMeeting ? 14 : 16}
       handlePrevClick={() => meetingNavigate(Path.IsAbroadSurvey)}
-      handleNextClick={() => meetingNavigate(Path.AgreementSurvey)}
+      handleNextClick={handleNextClick}
     >
       <Title>
         외딴썸을 처음 알게 된 <br />
         경로를 알려주세요.
       </Title>
       <FormWrapper>
-        {pathCheckList.map(({ text, checked, name }) => (
-          <CheckBox key={text} text={text} checked={checked} onChange={onChangeCheck} name={name} impotrant={checked ? true : false} />
+        {CHANNEL_ITEMS.map(({ text, name }) => (
+          <CheckBox
+            isMulti={false}
+            key={text}
+            text={text}
+            checked={isSameChannel(name)}
+            onChange={matchMeeting ? onChangeCheck : onChangeCheckDating}
+            name={name}
+            impotrant={isSameChannel(name) ? true : false}
+          />
         ))}
       </FormWrapper>
     </SurveyTemplate>
