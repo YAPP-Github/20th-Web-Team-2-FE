@@ -26,7 +26,8 @@ enum Path {
   PreferDepartmentCharacterSurvey = 'prefer-dprt-character',
   PreferBodyDateCountSurvey = 'prefer-body-dcount',
   OauthKakao = '/oauth/kakao',
-  MatchingMeeting = 'meeting',
+  MatchingMeeting = '/matching/meeting',
+  MatchingDating = '/matching/dating',
 }
 
 export default Path;

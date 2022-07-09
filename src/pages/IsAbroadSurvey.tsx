@@ -61,6 +61,7 @@ const IsAbroadSurvey = () => {
 
 const BtnWrapper = styled(FormWrapper)`
   display: flex;
+  margin-top: 0px;
 `;
 
 export default IsAbroadSurvey;

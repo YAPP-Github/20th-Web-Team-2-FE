@@ -1,4 +1,4 @@
-import { Button, Input, Modal } from '@/components/base';
+import { Input, Modal } from '@/components/base';
 import { SurveyTemplate } from '@/components/domain/survey';
 import useToggle from '@/hooks/common/useToggle';
 import { palette } from '@/lib/styles/palette';
@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
 import Path from '@/router/Path';
-import { useMatch } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router-dom';
 import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 
@@ -24,6 +24,7 @@ const KakaoIdSurvey = () => {
     alert('설문이 완료되었습니다. 정식 출시가 되면 매칭을 시작할 수 있습니다. 조금만 기다려 주세요.');
     if (initMeetingState) {
       matchMeeting ? setMeetingData({ ...initMeetingState, kakaoId }) : setDatingData({ ...initDatingState, kakaoId });
+      navigate(Path.MatchingMeeting);
     }
   };
 
@@ -57,6 +58,7 @@ const KakaoIdSurvey = () => {
             }}
           />
           <Explane>※'카톡 ID 검색 허용'으로 되어있어야 합니다.</Explane>
+
           <Button width={100} onClick={onToggleModal} disabled={!kakaoId}>
             카톡 ID 확인
           </Button>

@@ -84,6 +84,7 @@ function Routing() {
             </Route>
             <Route path={'/matching'} element={<UserHeader />}>
               <Route path={Path.MatchingMeeting} element={<MatchingPage />} />
+              <Route path={Path.MatchingDating} element={<MatchingPage />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

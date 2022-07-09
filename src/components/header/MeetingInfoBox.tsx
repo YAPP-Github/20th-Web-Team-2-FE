@@ -1,44 +1,79 @@
-import { Meeting } from '@/types/meeting';
 import React from 'react';
-import { GroupLabel, InfoBox, InfoEle, InfoLabel } from './DatingInfoBox';
+import { Meeting } from '@/types/meeting';
+import {
+  conversionDepartment,
+  conversionDomesticArea,
+  conversionGender,
+  conversionMindset,
+  conversionPlay,
+  conversionTypeOfMeeting,
+} from '@/utils/converson';
+import { FlexEle, GroupLabel, InfoBox, InfoEle, InfoLabel } from './DatingInfoBox';
+import { addComma } from '@/utils/addComma';
 
 interface MeetingInfoProps {
   meeting: Meeting;
 }
 function MeetingInfoBox({ meeting }: MeetingInfoProps) {
   const {
-    ourUniversities,
     ourDepartments,
     domesticAreas,
     averageAge,
     averageHeight,
     play,
     typeOfMeeting,
+    mindset,
+    gender,
     // 여까지 우리팀정보
     preferAge,
     preferDepartments,
     preferHeight,
-    preferUniversities,
   } = meeting;
   return (
     <div>
       <GroupLabel>Team</GroupLabel>
       <InfoLabel>우리 팀 정보</InfoLabel>
+
       <InfoBox>
-        <InfoEle>{ourUniversities}</InfoEle>
-        <InfoEle>{typeOfMeeting}</InfoEle>
-        <InfoEle>{ourDepartments}</InfoEle>
-        <InfoEle>{averageAge}</InfoEle>
-        <InfoEle>{averageHeight}cm</InfoEle>
-        <InfoEle>{play}</InfoEle>
-        {domesticAreas && <InfoEle>{domesticAreas}</InfoEle>}
+        <InfoEle>{conversionGender(gender)}</InfoEle>
+        <InfoEle>{conversionTypeOfMeeting(typeOfMeeting)}</InfoEle>
+        <FlexEle>
+          {ourDepartments?.map((department, index) => (
+            <div key={department + ourDepartments}>
+              {addComma(index)}
+              {conversionDepartment(department)}
+            </div>
+          ))}
+        </FlexEle>
+        <InfoEle>평균나이 : {averageAge}살</InfoEle>
+        <InfoEle>평균 키 : {averageHeight}cm</InfoEle>
+        <InfoEle>{conversionPlay(play)}</InfoEle>
+        <FlexEle>
+          {domesticAreas?.map((area, index) => (
+            <div key={area + domesticAreas}>
+              {addComma(index)}
+              {conversionDomesticArea(area)}
+            </div>
+          ))}
+        </FlexEle>
+        <InfoEle>{conversionMindset(mindset)}</InfoEle>
       </InfoBox>
       <InfoLabel>선호 조건</InfoLabel>
       <InfoBox>
-        <InfoEle>{preferAge}살</InfoEle>
-        <InfoEle>{preferDepartments}</InfoEle>
-        <InfoEle>{preferHeight}</InfoEle>
-        <InfoEle>{preferUniversities}</InfoEle>
+        <InfoEle>
+          {preferAge[0]}~{preferAge[1]}살
+        </InfoEle>
+        <FlexEle>
+          {preferDepartments?.map((department, index) => (
+            <div key={department + preferDepartments}>
+              {addComma(index)}
+              {conversionDepartment(department)}
+            </div>
+          ))}
+        </FlexEle>
+        <InfoEle>
+          {preferHeight[0]}~{preferHeight[1]}cm
+        </InfoEle>
       </InfoBox>
     </div>
   );
