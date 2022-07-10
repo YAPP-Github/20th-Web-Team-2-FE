@@ -10,7 +10,7 @@ function LandingContainer() {
   /**
    * 로그인 되었는지 안되었는지는 나중에 리코일에서 꺼내기
    */
-  const [isLogin, setIsLogin] = useState(true); // FIXME: 임시 콘텐츠 연결을 위한 처리
+  const [isLogin, setIsLogin] = useState(false); // FIXME: 임시 콘텐츠 연결을 위한 처리
   const [isModal, onToggleModal] = useToggle();
   const navigate = useNavigate();
 
@@ -27,6 +27,17 @@ function LandingContainer() {
   return (
     <Container>
       <MainIconBox>
+        <LandingBtn
+          size="medium"
+          fontWeight={700}
+          fullWidth
+          variant={'kakao'}
+          onClick={() => {
+            setIsLogin((prev) => !prev);
+          }}
+        >
+          테스트용 로그인 토글버튼
+        </LandingBtn>
         <Icon src={RadiousLogo} />
         <MainNameStyled src={StringLogo} alt="외딴썸" />
         <TextStyled>유학생을 위한 미팅/소개팅</TextStyled>
