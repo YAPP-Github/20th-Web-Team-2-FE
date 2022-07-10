@@ -9,7 +9,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MatchingPage = () => {
-  const TempData = { state: 'pay' };
+  const TempData = { state: 'success' };
   return (
     <>
       <MatchingTemplete btnName={TempData.state} title={MatchingStateTitle(TempData.state)}>
