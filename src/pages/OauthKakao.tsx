@@ -9,7 +9,7 @@ const OauthKakao = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const getToken = async () => {
-      const response = await client.get(`/oauth/kakao?code=${code}`);
+      const response = await client.get(`/api/oauth/kakao?code=${code}`);
       setToken(response.data);
       // setToken을 세션에 넣는 로직으로 변경
     };
