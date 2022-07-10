@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 interface AuthCodeFormProps {
   email: string;
-  onCheckAuthCode: () => void;
+  onCheckAuthCode: (authCode: string) => void;
 }
 
 const AuthCodeForm = ({ email, onCheckAuthCode }: AuthCodeFormProps) => {
@@ -20,7 +20,7 @@ const AuthCodeForm = ({ email, onCheckAuthCode }: AuthCodeFormProps) => {
     onSubmit: async () => {
       try {
         console.log('try submit authCode');
-        onCheckAuthCode();
+        onCheckAuthCode(values.authCode);
       } catch (e) {
         console.error('Modal 띄워야 할 듯');
       }
