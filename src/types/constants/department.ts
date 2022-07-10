@@ -1,6 +1,13 @@
-import { ChooseFourDepartmentProps } from '@/pages/OurDepartmentsAverageHeightSurvey';
+import { type Departments } from '@/types/meeting';
 
-export const MY_DEPARTMENT_ITEMS = [
+export interface DEPARTMENT_ITEM {
+  id: Departments;
+  text: '문과' | '이과' | '체육' | '예술';
+  name: 'myDepartment' | 'ourDepartments' | 'preferDepartments';
+  checked?: boolean;
+}
+
+export const MY_DEPARTMENT_ITEMS: Readonly<DEPARTMENT_ITEM>[] = [
   {
     id: 'LIBERAL',
     text: '문과',
@@ -23,56 +30,48 @@ export const MY_DEPARTMENT_ITEMS = [
   },
 ];
 
-export const OUR_DEPARTMENT_ITEMS: ChooseFourDepartmentProps[] = [
+export const OUR_DEPARTMENT_ITEMS: Readonly<DEPARTMENT_ITEM>[] = [
   {
     id: 'LIBERAL',
     text: '문과',
     name: 'ourDepartments',
-    checked: true,
   },
   {
     id: 'SCIENCE',
     text: '이과',
     name: 'ourDepartments',
-    checked: true,
   },
   {
     id: 'ATHLETIC',
     text: '체육',
     name: 'ourDepartments',
-    checked: false,
   },
   {
     id: 'ART',
     text: '예술',
     name: 'ourDepartments',
-    checked: false,
   },
 ];
 
-export const PREFER_DEPARTMENT_ITEMS = [
+export const PREFER_DEPARTMENT_ITEMS: Readonly<DEPARTMENT_ITEM>[] = [
   {
     id: 'LIBERAL',
     text: '문과',
     name: 'preferDepartments',
-    checked: true,
   },
   {
     id: 'SCIENCE',
     text: '이과',
     name: 'preferDepartments',
-    checked: true,
   },
   {
     id: 'ATHLETIC',
     text: '체육',
     name: 'preferDepartments',
-    checked: false,
   },
   {
     id: 'ART',
     text: '예술',
     name: 'preferDepartments',
-    checked: false,
   },
 ];

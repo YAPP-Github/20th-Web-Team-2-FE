@@ -3,12 +3,15 @@ import { SurveyTemplate, AgeBox } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import styled from 'styled-components';
 import ChooseTwoBox from '@/components/domain/survey/ChooseTwoBox';
-import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import Path from '@/router/Path';
 import { useNavigate } from 'react-router-dom';
 import { GENDER_ITEMS } from '@/types/constants/constant';
 import { useMeetingSessionState } from '@/hooks/common';
 import { type Gender } from '@/types/meeting';
+import { useRecoilValue } from 'recoil';
+import { meetingState } from '@/atoms/meetingState';
+import { conversionTypeOfMeeting } from '@/utils/converson';
 
 const GenderAverageAgeSurvey = () => {
   const navigate = useNavigate();
@@ -16,6 +19,8 @@ const GenderAverageAgeSurvey = () => {
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const [genderOption, setGenderOption] = useState(initMeetingState.gender);
   const [ageOption, setAgeOption] = useState(initMeetingState.averageAge);
+  const meetingData = useRecoilValue(meetingState);
+  const { typeOfMeeting } = meetingData;
   const onChangeOption = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id } = e.target;
     setGenderOption(id as Gender);
@@ -37,7 +42,7 @@ const GenderAverageAgeSurvey = () => {
       handleNextClick={handleNextClick}
     >
       <StyledTitle>
-        <strong>2:2 미팅</strong>을 선택하셨어요.
+        <strong>{conversionTypeOfMeeting(typeOfMeeting)}</strong>을 선택하셨어요.
         <br />
         몇가지 질문만 대답하시면
         <br />

@@ -4,7 +4,7 @@ import { AgeBox, HeightBox } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import styled from 'styled-components';
 import { useMatch } from 'react-router-dom';
-import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 import Path from '@/router/Path';
 
@@ -21,15 +21,15 @@ const PreferAverageAgeHeightSurvey = () => {
       setMeetingData({ ...initMeetingState, preferAge: multiAgeOption, preferHeight: multiHeightOption });
     }
 
-    meetingNavigate(matchMeeting ? Path.MindsetSurvey : Path.PreferDepartmentCharacterSurvey);
+    meetingNavigate(matchMeeting ? Path.PreferDepartmentsSurvey : Path.PreferDepartmentCharacterSurvey);
   };
 
   return (
     <SurveyTemplate
       disableNext={!multiAgeOption || !multiHeightOption}
-      totalStep={matchMeeting ? 14 : 12}
-      currStep={matchMeeting ? 8 : 9}
-      handlePrevClick={() => meetingNavigate(matchMeeting ? Path.PreferDepartmentsSurvey : Path.PreferUniversitiesSurvey)}
+      totalStep={matchMeeting ? 14 : 16}
+      currStep={matchMeeting ? 7 : 9}
+      handlePrevClick={() => meetingNavigate(Path.PreferUniversitiesSurvey)}
       handleNextClick={handleNextClick}
     >
       <StyledTitle>

@@ -5,13 +5,9 @@ import { ChooseFourBox, HeightBox } from '@/components/domain/survey';
 import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';
 import { OUR_DEPARTMENT_ITEMS } from '@/types/constants/department';
 import Path from '@/router/Path';
-import { useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
+import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 import { type Departments } from '@/types/meeting';
-
-export interface ChooseFourDepartmentProps extends ChooseFourBoxItemProps {
-  id: Departments;
-}
 
 const OurDepartmentsAverageHeightSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
@@ -19,7 +15,7 @@ const OurDepartmentsAverageHeightSurvey = () => {
   const getInitDepartments = OUR_DEPARTMENT_ITEMS.map((item) => {
     return { ...item, checked: initMeetingState.ourDepartments.some((initState) => initState === item.id) };
   });
-  const initDepartments = useMemo(() => getInitDepartments, [OUR_DEPARTMENT_ITEMS, initMeetingState]);
+  const initDepartments = useMemo(() => getInitDepartments, [OUR_DEPARTMENT_ITEMS, initMeetingState.ourDepartments]);
   const [checkedMultiOption, setMultiCheckedOption] = useState<ChooseFourBoxItemProps[]>(initDepartments);
   const getOurDepartments = checkedMultiOption.reduce<Departments[]>((prev, cur) => {
     if (cur.checked) {

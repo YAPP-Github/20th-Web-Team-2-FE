@@ -1,26 +1,44 @@
 import React, { useState } from 'react';
+import { useMatch } from 'react-router-dom';
 import { SurveyTemplate } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import SearchSelector from '@/components/domain/survey/SearchSelector';
 import { schools } from '@/mock/schools';
 import styled from 'styled-components';
 import Path from '@/router/Path';
-import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useMeetingNavigate';
-import { useMatch } from 'react-router-dom';
+import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
+import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 
 const AvoidUniversitiesSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
   const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
-  const [avoidUniversities, setAvoidUniversities] = useState<number[]>([]);
+  const { initMeetingState, setMeetingData } = useMeetingSessionState();
+  const { initDatingState, setDatingData } = useDatingSessionState();
+  const [avoidUniversities, setAvoidUniversities] = useState(initMeetingState.avoidUniversities);
+  const [avoidDatingUniversities, setAvoidDatingUniversities] = useState(initDatingState.avoidUniversities);
+
+  const handlePrevClick = () => {
+    meetingNavigate(matchMeeting ? Path.OurDepartmentsAverageHeightSurvey : Path.MyDateCount);
+  };
+
+  const handleNextClick = () => {
+    if (initMeetingState) {
+      matchMeeting
+        ? setMeetingData({ ...initMeetingState, avoidUniversities })
+        : setDatingData({ ...initDatingState, avoidUniversities: avoidDatingUniversities });
+    }
+
+    meetingNavigate(Path.PreferUniversitiesSurvey);
+  };
 
   return (
     <SurveyTemplate
       disableNext={false}
       hasProgressBar={true}
-      totalStep={matchMeeting ? 14 : 12}
+      totalStep={matchMeeting ? 14 : 16}
       currStep={matchMeeting ? 5 : 7}
-      handlePrevClick={() => meetingNavigate(Path.OurDepartmentsAverageHeightSurvey)}
-      handleNextClick={() => meetingNavigate(Path.PreferUniversitiesSurvey)}
+      handlePrevClick={handlePrevClick}
+      handleNextClick={handleNextClick}
     >
       <Title>
         <strong>기피하는 학교</strong>를<br />
@@ -29,8 +47,8 @@ const AvoidUniversitiesSurvey = () => {
       <SearchSelector
         placeholder="학교를 검색하세요.(없을 시 ‘other’ 입력)"
         searchData={schools}
-        selectedResults={avoidUniversities}
-        setSelectedResults={setAvoidUniversities}
+        selectedResults={matchMeeting ? avoidUniversities : avoidDatingUniversities}
+        setSelectedResults={matchMeeting ? setAvoidUniversities : setAvoidDatingUniversities}
       />
       <Description>
         ※ 참여 인원이 부족할 경우 기피학교와

@@ -4,17 +4,22 @@ import styled from 'styled-components';
 
 interface CheckBoxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   text: string;
-
+  isMulti?: boolean;
   /**
    * important: 전체동의에서 쓸것, true일시 글씨크기,fontweight커짐
    */
   impotrant?: boolean;
 }
 
-function CheckBox({ text, impotrant = false, ...rest }: CheckBoxProps) {
-  return (
+function CheckBox({ isMulti = true, text, impotrant = false, ...rest }: CheckBoxProps) {
+  return isMulti ? (
     <StyledLabel htmlFor={text}>
       <StyledInput type="checkbox" id={text} name={text} {...rest} />
+      <StyleText impotrant={impotrant}>{text}</StyleText>
+    </StyledLabel>
+  ) : (
+    <StyledLabel htmlFor={text}>
+      <StyledInput type="radio" id={text} name={text} {...rest} />
       <StyleText impotrant={impotrant}>{text}</StyleText>
     </StyledLabel>
   );

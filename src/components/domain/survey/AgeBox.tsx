@@ -7,7 +7,7 @@ import { OnChangeProps } from '@/components/base/SimpleRangeSlider';
 interface AgeBoxProps {
   ageOption?: number;
   setAgeOption?: React.Dispatch<React.SetStateAction<number>>;
-  multiAgeOption: number[];
+  multiAgeOption?: number[];
   setMultiAgeOption?: React.Dispatch<React.SetStateAction<number[]>>;
   children: React.ReactNode;
   isMulti?: boolean;
