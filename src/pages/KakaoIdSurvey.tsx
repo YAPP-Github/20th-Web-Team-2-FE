@@ -74,9 +74,7 @@ const KakaoIdSurvey = () => {
           title={kakaoId}
           text="　카톡아이디를 확인해 주세요.　상대에게 보여질 아아디입니다!"
           onToggleModal={onToggleModal}
-          onClick={() => {
-            setConfirm(true);
-          }}
+          onClick={() => setConfirm(true)}
         />
       )}
     </>
