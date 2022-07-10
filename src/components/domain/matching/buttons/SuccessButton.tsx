@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/base';
-import { PAYMENT_URL } from '@/lib/constants';
+import { getPartnerAuth } from '@/lib/api/payment';
 
 declare global {
   interface Window {
@@ -10,6 +10,8 @@ declare global {
 }
 
 function SuccessButton() {
+  const [payResult, setPayResult] = useState({});
+
   window.onpopstate = (e) => {
     if (e) {
       window.MainBodyAction('close');
@@ -17,9 +19,6 @@ function SuccessButton() {
   };
 
   const getPaymentResult = (res: any) => {
-    console.log(res, 'res');
-    const [payResult, setPayResult] = useState({});
-
     if (res.PCD_PAY_RST === 'success') {
       setPayResult({ ...res });
       // 전달받은 데이터를 서버에 보내기
@@ -27,6 +26,13 @@ function SuccessButton() {
   };
 
   const handleClick = async () => {
+    const data = await getPartnerAuth();
+    if (data?.result !== 'success') {
+      console.error(data?.result_msg);
+      return;
+    }
+    const { AuthKey, return_url } = data;
+    console.log(data, 'res');
     const payload = {
       PCD_PAY_TYPE: 'card',
       PCD_PAY_WORK: 'PAY',
@@ -43,20 +49,20 @@ function SuccessButton() {
       PCD_PAY_ISTAX: 'Y',
       PCD_PAY_TAXTOTAL: 10,
 
-      PCD_AUTH_KEY: 'E3421H3J42K8274293J4H3J3',
-      /* 파트너 인증시 받은 return_url 값 입력  */
-      PCD_PAY_URL: PAYMENT_URL,
-      PCD_RST_URL: '/index.html',
+      /* 파트너 인증시 받은 값 입력  */
+      PCD_AUTH_KEY: AuthKey,
+      PCD_PAY_URL: return_url,
+      PCD_RST_URL: 'matching/meeting',
       callbackFunction: getPaymentResult,
     };
 
-    try {
-      // 가맹점 인증 api 응답 결과 success 시
-      const res = await window.PaypleCpayAuthCheck(payload);
-      return res;
-    } catch (e) {
-      console.error(e, 'requestPatmentAPI error');
-    }
+    // try {
+    //   // 가맹점 인증 api 응답 결과 success 시
+    //   const res = await window.PaypleCpayAuthCheck(payload);
+    //   return res;
+    // } catch (e) {
+    //   console.error(e, 'requestPatmentAPI error');
+    // }
   };
 
   return (
