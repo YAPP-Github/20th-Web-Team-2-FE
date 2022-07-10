@@ -6,14 +6,19 @@ import { Title } from '@/lib/styles/styledComponents';
 import { palette } from '@/lib/styles/palette';
 import { EmailForm, AuthCodeForm } from '@/components/authMail';
 import { Link } from 'react-router-dom';
+import client from '@/lib/api';
 
 const AuthMail = () => {
   const [cantMoveNext, setCantMoveNext] = useState(true);
   const [email, setEmail] = useState('');
 
-  const onSubmitAuthCode = (email: string) => {
+  const postEmail = async (email) => {
+    await client.post(`/api/email`, { email });
+  };
+
+  const onSubmitAuthCode = async (email: string) => {
     try {
-      console.log('인증번호 보내는 로직', email);
+      await postEmail(email);
       setEmail(email);
     } catch (e) {
       console.error('에러 모달');
