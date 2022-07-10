@@ -20,6 +20,8 @@ function LandingContainer() {
 
     const loginUrl = import.meta.env.VITE_KAKAO_OPEN_URL.replace('{clientId}', clientId).replace('{redirectUri}', redirectUri);
     window.location.href = loginUrl;
+    // const code = new URL(window.location.href).searchParams.get('code');
+    // console.log(code);
   };
 
   return (
@@ -50,9 +52,9 @@ function LandingContainer() {
           >
             시작하기
           </LandingBtn>
-          {/*<LandingBtn size="medium" fontWeight={700} fullWidth variant={'grayBlack'} onClick={() => setIsLogin((prev) => !prev)}>*/}
-          {/*  응답 수정하기*/}
-          {/*</LandingBtn>*/}
+          <LandingBtn size="medium" fontWeight={700} fullWidth variant={'grayBlack'} onClick={() => setIsLogin((prev) => !prev)}>
+            응답 수정하기
+          </LandingBtn>
         </BtnBox>
       )}
       {isModal && (
