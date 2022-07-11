@@ -12,6 +12,7 @@ import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigat
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 // import { useRecoilValue } from 'recoil';
 // import { meetingState } from '@/atoms/meetingState';
+import client from '@/lib/api';
 
 const KakaoIdSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
@@ -24,10 +25,19 @@ const KakaoIdSurvey = () => {
   const [isConfirm, setConfirm] = useState(false);
   // const meetingData = useRecoilValue(meetingState); 나중에 이걸로 data post
 
-  const handleNextClick = () => {
+  const handleNextClick = async () => {
     if (initMeetingState) {
       matchMeeting ? setMeetingData({ ...initMeetingState, kakaoId }) : setDatingData({ ...initDatingState, kakaoId });
+      await postMeetingSurvey();
       navigate(Path.MatchingMeeting);
+    }
+  };
+
+  const postMeetingSurvey = async () => {
+    try {
+      await client.post('/api/meeting/survey', matchMeeting ? { ...initMeetingState, kakaoId } : { ...initDatingState, kakaoId });
+    } catch (e) {
+      console.error(e);
     }
   };
 
