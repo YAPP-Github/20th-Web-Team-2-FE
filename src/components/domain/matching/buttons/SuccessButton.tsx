@@ -19,6 +19,7 @@ function SuccessButton() {
   };
 
   const getPaymentResult = (res: any) => {
+    console.log(res, 'res');
     if (res.PCD_PAY_RST === 'success') {
       setPayResult({ ...res });
       // 전달받은 데이터를 서버에 보내기
@@ -56,13 +57,13 @@ function SuccessButton() {
       callbackFunction: getPaymentResult,
     };
 
-    // try {
-    //   // 가맹점 인증 api 응답 결과 success 시
-    //   const res = await window.PaypleCpayAuthCheck(payload);
-    //   return res;
-    // } catch (e) {
-    //   console.error(e, 'requestPatmentAPI error');
-    // }
+    try {
+      // 가맹점 인증 api 응답 결과 success 시
+      const res = await window.PaypleCpayAuthCheck(payload);
+      return res;
+    } catch (e) {
+      console.error(e, 'requestPatmentAPI error');
+    }
   };
 
   return (
