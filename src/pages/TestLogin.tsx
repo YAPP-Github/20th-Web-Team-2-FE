@@ -18,6 +18,8 @@ const TestLogin = () => {
       if (response) {
         const { accessToken } = response;
         Cookies.set('AccessToken', accessToken);
+        alert('로그인 성공');
+        navigate('/type-of-meeting');
       }
     } catch (e) {
       alert(e.message);
@@ -38,7 +40,7 @@ const TestLogin = () => {
         <Title>
           <strong>로그인해주세요.</strong>
         </Title>
-        <Description>임시 로그인 계정: test1</Description>
+        <Description>임시 로그인 계정: test2</Description>
         <FormWrapper>
           <LoginForm onSubmitAuthCode={onSubmitAuthCode} />
         </FormWrapper>
