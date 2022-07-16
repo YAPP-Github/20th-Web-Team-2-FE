@@ -1,5 +1,4 @@
-import React from 'react';
-import { Meeting } from '@/types/meeting';
+import React, { useEffect } from 'react';
 import {
   conversionDepartment,
   conversionDomesticArea,
@@ -10,11 +9,11 @@ import {
 } from '@/utils/converson';
 import { FlexEle, GroupLabel, InfoBox, InfoEle, InfoLabel } from './DatingInfoBox';
 import { addComma } from '@/utils/addComma';
+import { getMeetingSurvey } from '@/lib/api/meeting';
+import { useMeetingSessionState } from '@/hooks/common';
 
-interface MeetingInfoProps {
-  meeting: Meeting;
-}
-function MeetingInfoBox({ meeting }: MeetingInfoProps) {
+function MeetingInfoBox() {
+  const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const {
     ourDepartments,
     domesticAreas,
@@ -28,7 +27,23 @@ function MeetingInfoBox({ meeting }: MeetingInfoProps) {
     preferAge,
     preferDepartments,
     preferHeight,
-  } = meeting;
+  } = initMeetingState;
+
+  const getMeetingData = async () => {
+    try {
+      const res = await getMeetingSurvey();
+      if (res) {
+        setMeetingData(res);
+      }
+    } catch (e) {
+      alert(e.message);
+    }
+  };
+
+  useEffect(() => {
+    getMeetingData();
+  }, []);
+
   return (
     <div>
       <GroupLabel>Team</GroupLabel>
@@ -79,4 +94,4 @@ function MeetingInfoBox({ meeting }: MeetingInfoProps) {
   );
 }
 
-export default MeetingInfoBox;
+export default React.memo(MeetingInfoBox);

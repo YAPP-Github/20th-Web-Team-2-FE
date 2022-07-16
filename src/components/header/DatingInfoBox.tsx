@@ -1,5 +1,5 @@
+import React, { useEffect } from 'react';
 import { palette } from '@/lib/styles/palette';
-import { Dating } from '@/types/dating';
 import { addComma } from '@/utils/addComma';
 import {
   conversionBody,
@@ -9,13 +9,12 @@ import {
   conversionDomesticArea,
   conversionGender,
 } from '@/utils/converson';
-import React from 'react';
 import styled from 'styled-components';
+import { getDatingSurvey } from '@/lib/api/dating';
+import { useDatingSessionState } from '@/hooks/common';
 
-interface DatingInfoProps {
-  dating: Dating;
-}
-const DatingInfoBox = ({ dating }: DatingInfoProps) => {
+const DatingInfoBox = () => {
+  const { initDatingState, setDatingData } = useDatingSessionState();
   const {
     age,
     myDepartment,
@@ -38,7 +37,23 @@ const DatingInfoBox = ({ dating }: DatingInfoProps) => {
     isAbroad,
     abroadAreas,
     //여까지 선호 조건
-  } = dating;
+  } = initDatingState;
+
+  const getDatingData = async () => {
+    try {
+      const res = await getDatingSurvey();
+      if (res) {
+        setDatingData(res);
+      }
+    } catch (e) {
+      alert(e.message);
+    }
+  };
+
+  useEffect(() => {
+    getDatingData();
+  }, []);
+
   return (
     <div>
       <GroupLabel>Me</GroupLabel>

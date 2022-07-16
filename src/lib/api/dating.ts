@@ -10,3 +10,12 @@ export const postDatingSurvey = async (payload: Dating) => {
     alert(e.message);
   }
 };
+
+export const getDatingSurvey = async () => {
+  try {
+    const res = await apiClient.get<Dating>('/dating/survey');
+    return res.data;
+  } catch (e) {
+    alert(e.message);
+  }
+};

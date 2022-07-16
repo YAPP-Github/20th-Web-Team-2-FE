@@ -10,3 +10,12 @@ export const postMeetingSurvey = async (payload: Meeting) => {
     alert(e.message);
   }
 };
+
+export const getMeetingSurvey = async () => {
+  try {
+    const res = await apiClient.get<Meeting>('/meeting/survey');
+    return res.data;
+  } catch (e) {
+    alert(e.message);
+  }
+};
