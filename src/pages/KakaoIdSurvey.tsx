@@ -10,9 +10,9 @@ import Path from '@/router/Path';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
+import apiClient from '@/lib/api';
 // import { useRecoilValue } from 'recoil';
 // import { meetingState } from '@/atoms/meetingState';
-import client from '@/lib/api';
 
 const KakaoIdSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
@@ -35,7 +35,7 @@ const KakaoIdSurvey = () => {
 
   const postMeetingSurvey = async () => {
     try {
-      await client.post('/api/meeting/survey', matchMeeting ? { ...initMeetingState, kakaoId } : { ...initDatingState, kakaoId });
+      await apiClient.post('/api/meeting/survey', matchMeeting ? { ...initMeetingState, kakaoId } : { ...initDatingState, kakaoId });
     } catch (e) {
       console.error(e);
     }

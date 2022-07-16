@@ -17,10 +17,9 @@ function LandingContainer() {
   const handleKakaoLoginClick = () => {
     const clientId = import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY;
     const redirectUri = encodeURI(`${window.location.origin}/oauth/kakao`);
-
     const loginUrl = import.meta.env.VITE_KAKAO_OPEN_URL.replace('{clientId}', clientId).replace('{redirectUri}', redirectUri);
     window.location.href = loginUrl;
-    // const code = new URL(window.location.href).searchParams.get('code');
+
     // console.log(code);
   };
 
