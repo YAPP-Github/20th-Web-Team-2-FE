@@ -14,9 +14,9 @@ function MatchingStateTitle(state: string) {
           ),
           waiting: (
             <strong>
-              성사시킬
+              매칭을
               <br />
-              매칭이 없습니다.
+              성사시키는 중입니다...
             </strong>
           ),
           success: (

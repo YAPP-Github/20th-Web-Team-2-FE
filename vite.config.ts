@@ -6,17 +6,6 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  server: {
-    hmr: true,
-    proxy: {
-      '/api': {
-        target: 'http://192.168.123.168:8080/',
-        changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
-  },
   plugins: [
     react({
       babel: {
