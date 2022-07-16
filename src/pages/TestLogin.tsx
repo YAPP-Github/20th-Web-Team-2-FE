@@ -17,7 +17,7 @@ const TestLogin = () => {
 
       if (response) {
         const { accessToken } = response;
-        Cookies.set('accessToken', accessToken);
+        Cookies.set('AccessToken', accessToken);
       }
     } catch (e) {
       alert(e.message);

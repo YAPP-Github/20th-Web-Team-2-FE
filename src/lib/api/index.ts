@@ -4,9 +4,9 @@ import Cookies from 'js-cookie';
 
 const apiClient = axios.create({
   baseURL: SERVER_URL,
-  // withCredentials: true,
+  withCredentials: false,
   headers: {
-    Authorization: Cookies.get('accessToken') ?? '',
+    Authorization: Cookies.get('AccessToken') ?? '',
   },
 });
 export default apiClient;
