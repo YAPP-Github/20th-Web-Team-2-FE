@@ -1,6 +1,6 @@
 export interface LoginRequest {
-  password: 'string';
-  userName: 'string';
+  password: 'string' | '';
+  userName: 'string' | '';
 }
 
 export interface LoginResponse {

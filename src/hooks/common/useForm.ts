@@ -7,13 +7,13 @@ export interface InitialValues {
   authCode?: string;
 }
 
-interface UseFormProps {
-  initialValues: InitialValues;
+interface UseFormProps<T> {
+  initialValues: T;
   onSubmit: () => void;
   validate: (arg: InitialValues) => InitialValues;
 }
 
-const useForm = ({ initialValues, onSubmit, validate }: UseFormProps) => {
+const useForm = <T>({ initialValues, onSubmit, validate }: UseFormProps<T>) => {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState<Record<string, never> | InitialValues>({});
   const [isLoading, setIsLoading] = useState(false);

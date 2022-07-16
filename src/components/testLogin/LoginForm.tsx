@@ -11,7 +11,7 @@ interface LoginFormProps {
 
 const LoginForm = ({ onSubmitAuthCode }: LoginFormProps) => {
   const [onFocus, setFocus] = useState(true);
-  const { values, errors, handleSubmit, handleChange } = useForm({
+  const { values, errors, handleSubmit, handleChange } = useForm<LoginRequest>({
     initialValues: {
       userName: '',
       password: '',

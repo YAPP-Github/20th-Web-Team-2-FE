@@ -13,7 +13,6 @@ export const postLogin = async (payload: LoginRequest): Promise<LoginResponse | 
     if (res.status !== 200 && res.status !== 201) {
       throw new Error(res.data.message);
     }
-    console.log(res, 'res');
     return res.data;
   } catch (e) {
     console.error(e);
