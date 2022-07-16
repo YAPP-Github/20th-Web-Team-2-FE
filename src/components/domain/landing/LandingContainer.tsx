@@ -47,6 +47,9 @@ function LandingContainer() {
           <LandingBtn size="medium" fontWeight={700} fullWidth variant={'kakao'} onClick={handleKakaoLoginClick}>
             카카오 로그인
           </LandingBtn>
+          <Button size="medium" fontWeight={700} fullWidth onClick={() => navigate('/test-login')}>
+            일반 로그인
+          </Button>
         </BtnBox>
       ) : (
         <BtnBox>

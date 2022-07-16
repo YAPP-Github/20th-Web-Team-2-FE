@@ -41,7 +41,7 @@ const TypeOfMeetingSurvey = () => {
       disableNext={!checkedOption}
       currStep={1}
       totalStep={14}
-      handlePrevClick={() => navigate(Path.AuthMail)}
+      handlePrevClick={() => navigate(Path.LandingPage)}
       handleNextClick={handleNextClick}
     >
       <Title>

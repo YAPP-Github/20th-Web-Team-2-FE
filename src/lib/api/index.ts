@@ -1,14 +1,12 @@
 import axios from 'axios';
+import { SERVER_URL } from '@/lib/constants';
 import Cookies from 'js-cookie';
 
-const host = import.meta.env.VITE_SERVER_URL;
-
 const apiClient = axios.create({
-  baseURL: host,
+  baseURL: SERVER_URL,
   withCredentials: false,
   headers: {
-    Authorization: Cookies.get('AccessToken') || '',
-  },
+    Authorization: Cookies.get('AccessToken') ?? '',
 });
 
 export default apiClient;
