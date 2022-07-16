@@ -7,6 +7,7 @@ const apiClient = axios.create({
   withCredentials: false,
   headers: {
     Authorization: Cookies.get('AccessToken') ?? '',
+  },
 });
 
 export default apiClient;
