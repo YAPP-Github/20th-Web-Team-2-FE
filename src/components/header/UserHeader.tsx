@@ -12,7 +12,9 @@ const UserHeader = () => {
     <>
       <HeaderLayout>
         <Logo to="/">외딴썸</Logo>
-        <img src={TripleLineMenu} alt="메뉴 이미지" onClick={onToggleMenu} />
+        <Menu>
+          <img src={TripleLineMenu} alt="메뉴 이미지" onClick={onToggleMenu} />
+        </Menu>
       </HeaderLayout>
       <MenuBlock isMenu={isMenu} onToggleMenu={onToggleMenu} />
       <Outlet />
@@ -25,6 +27,13 @@ const HeaderLayout = styled(HeaderWrapper)`
   justify-content: space-between;
   margin-bottom: 10px;
   padding: 20px 10px;
+`;
+
+const Menu = styled.button`
+  & > img {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 export default UserHeader;
