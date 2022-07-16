@@ -28,9 +28,13 @@ const TestLogin = () => {
     navigate('/type-of-meeting');
   };
 
+  const handlePrevClick = () => {
+    navigate('/');
+  };
+
   return (
     <>
-      <SurveyTemplate disableNext={false} hasProgressBar={false} handleNextClick={handleNextClick}>
+      <SurveyTemplate disableNext={false} hasProgressBar={false} handleNextClick={handleNextClick} handlePrevClick={handlePrevClick}>
         <Title>
           <strong>로그인해주세요.</strong>
         </Title>

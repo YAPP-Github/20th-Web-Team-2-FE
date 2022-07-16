@@ -1,5 +1,6 @@
 enum Path {
   LandingPage = '/',
+  TestLogin = '/test-login',
   Component = '/component', // FIXME: 컴포넌트 모아두는 곳 (개발완료 후 삭제)
   AuthMail = '/auth-mail',
   TypeOfMeetingSurvey = '/type-of-meeting',
@@ -26,7 +27,6 @@ enum Path {
   PreferDepartmentCharacterSurvey = 'prefer-dprt-character',
   PreferBodyDateCountSurvey = 'prefer-body-dcount',
   OauthKakao = '/oauth/kakao',
-  TestLogin = '/test-login',
   MatchingMeeting = '/matching/meeting',
   MatchingDating = '/matching/dating',
 }
