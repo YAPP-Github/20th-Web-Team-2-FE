@@ -10,4 +10,5 @@ const apiClient = axios.create({
     Authorization: Cookies.get('AccessToken') || '',
   },
 });
+
 export default apiClient;
