@@ -31,6 +31,7 @@ import {
   OauthKakao,
   PreferBodyDateCountSurvey,
   MatchingPage,
+  TestLogin,
 } from '@/pages';
 import Test from '@/components/base/Test';
 import UserHeader from '@/components/header/UserHeader';
@@ -42,7 +43,8 @@ function Routing() {
       <PageLayout>
         <PageWrapper>
           <Routes>
-            <Route path={Path.LandingPage} element={<LandingPage />} />
+            <Route path={Path.LandingPage} element={<TestLogin />} />
+            {/* <Route path={Path.LandingPage} element={<LandingPage />} /> */}
             <Route path={Path.Component} element={<Test />} />
             <Route path={Path.AuthMail} element={<AuthMail />} />
             <Route path={Path.TypeOfMeetingSurvey} element={<TypeOfMeetingSurvey />} />

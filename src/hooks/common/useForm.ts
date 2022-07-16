@@ -2,6 +2,8 @@ import { useState, useCallback, useEffect } from 'react';
 
 export interface InitialValues {
   email?: string;
+  userName?: string;
+  password?: string;
   authCode?: string;
 }
 
@@ -18,13 +20,14 @@ const useForm = ({ initialValues, onSubmit, validate }: UseFormProps) => {
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
+    setValues((prevValues) => {
+      return { ...prevValues, [name]: value };
+    });
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
     e.preventDefault();
-    console.log(Object.values(errors), 'auth');
     await onSubmit();
     setIsLoading(false);
   };
