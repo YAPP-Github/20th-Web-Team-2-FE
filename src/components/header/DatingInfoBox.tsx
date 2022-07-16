@@ -39,7 +39,6 @@ const DatingInfoBox = ({ dating }: DatingInfoProps) => {
     abroadAreas,
     //여까지 선호 조건
   } = dating;
-  console.log(abroadAreas);
   return (
     <div>
       <GroupLabel>Me</GroupLabel>

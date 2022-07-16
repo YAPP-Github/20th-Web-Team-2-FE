@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { SurveyTemplate } from '@/components/domain/survey';
 import { Button } from '@/components/base';
@@ -11,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 const TestLogin = () => {
   const navigate = useNavigate();
+  const [isLogin, setLogin] = useState(false);
   const onSubmitAuthCode = async (values: LoginRequest) => {
     try {
       const response = await postLogin(values);
@@ -19,6 +21,7 @@ const TestLogin = () => {
         const { accessToken } = response;
         Cookies.set('AccessToken', accessToken);
         alert('로그인 성공');
+        setLogin(true);
         navigate('/type-of-meeting');
       }
     } catch (e) {
@@ -36,7 +39,7 @@ const TestLogin = () => {
 
   return (
     <>
-      <SurveyTemplate disableNext={false} hasProgressBar={false} handleNextClick={handleNextClick} handlePrevClick={handlePrevClick}>
+      <SurveyTemplate disableNext={!isLogin} hasProgressBar={false} handleNextClick={handleNextClick} handlePrevClick={handlePrevClick}>
         <Title>
           <strong>로그인해주세요.</strong>
         </Title>
