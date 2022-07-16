@@ -5,7 +5,7 @@ const host = import.meta.env.VITE_SERVER_URL;
 
 const apiClient = axios.create({
   baseURL: host,
-  withCredentials: true,
+  withCredentials: false,
   headers: {
     Authorization: Cookies.get('AccessToken') || '',
   },
