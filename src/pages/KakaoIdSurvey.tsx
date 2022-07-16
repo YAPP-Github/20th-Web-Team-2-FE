@@ -10,6 +10,7 @@ import Path from '@/router/Path';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
+import apiClient from '@/lib/api';
 // import { useRecoilValue } from 'recoil';
 // import { meetingState } from '@/atoms/meetingState';
 
@@ -24,10 +25,19 @@ const KakaoIdSurvey = () => {
   const [isConfirm, setConfirm] = useState(false);
   // const meetingData = useRecoilValue(meetingState); 나중에 이걸로 data post
 
-  const handleNextClick = () => {
+  const handleNextClick = async () => {
     if (initMeetingState) {
       matchMeeting ? setMeetingData({ ...initMeetingState, kakaoId }) : setDatingData({ ...initDatingState, kakaoId });
+      await postMeetingSurvey();
       navigate(Path.MatchingMeeting);
+    }
+  };
+
+  const postMeetingSurvey = async () => {
+    try {
+      await apiClient.post('/api/meeting/survey', matchMeeting ? { ...initMeetingState, kakaoId } : { ...initDatingState, kakaoId });
+    } catch (e) {
+      console.error(e);
     }
   };
 
