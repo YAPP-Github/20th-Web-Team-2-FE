@@ -43,7 +43,7 @@ const TestLogin = () => {
         <Title>
           <strong>로그인해주세요.</strong>
         </Title>
-        <Description>임시 로그인 계정: test2</Description>
+        <Description>임시 로그인 계정: test4</Description>
         <FormWrapper>
           <LoginForm onSubmitAuthCode={onSubmitAuthCode} />
         </FormWrapper>
