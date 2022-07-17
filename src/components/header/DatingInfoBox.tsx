@@ -39,18 +39,18 @@ const DatingInfoBox = () => {
     //여까지 선호 조건
   } = initDatingState;
 
-  const getDatingData = async () => {
-    try {
-      const res = await getDatingSurvey();
-      if (res) {
-        setDatingData(res);
-      }
-    } catch (e) {
-      alert(e.message);
-    }
-  };
-
   useEffect(() => {
+    const getDatingData = async () => {
+      try {
+        const res = await getDatingSurvey();
+        if (res) {
+          setDatingData(res);
+        }
+      } catch (e) {
+        alert(e.message);
+      }
+    };
+
     getDatingData();
   }, []);
 
