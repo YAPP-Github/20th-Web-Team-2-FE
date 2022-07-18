@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { Title } from '@/lib/styles/styledComponents';
 import { SurveyTemplate } from '@/components/domain/survey';
 import SearchSelector from '@/components/domain/survey/SearchSelector';
-import { schools } from '@/mock/schools';
 import Path from '@/router/Path';
 import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
+import useUnivLoad from '@/hooks/common/useUnivLoad';
 
 const OurUniversitiesSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
+  const { univs } = useUnivLoad();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const [ourUniversities, setOurUniversities] = useState<number[]>(initMeetingState.ourUniversities);
 
@@ -35,7 +36,7 @@ const OurUniversitiesSurvey = () => {
       </Title>
       <SearchSelector
         placeholder="학교를 검색하세요.(없을 시 ‘other’ 입력)"
-        searchData={schools}
+        searchData={univs}
         selectedResults={ourUniversities}
         setSelectedResults={setOurUniversities}
       />

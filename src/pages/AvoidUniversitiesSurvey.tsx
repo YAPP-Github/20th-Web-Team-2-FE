@@ -3,14 +3,15 @@ import { useMatch } from 'react-router-dom';
 import { SurveyTemplate } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import SearchSelector from '@/components/domain/survey/SearchSelector';
-import { schools } from '@/mock/schools';
 import styled from 'styled-components';
 import Path from '@/router/Path';
 import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
+import useUnivLoad from '@/hooks/common/useUnivLoad';
 
 const AvoidUniversitiesSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
+  const { univs } = useUnivLoad();
   const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const { initDatingState, setDatingData } = useDatingSessionState();
@@ -46,7 +47,7 @@ const AvoidUniversitiesSurvey = () => {
       </Title>
       <SearchSelector
         placeholder="학교를 검색하세요.(없을 시 ‘other’ 입력)"
-        searchData={schools}
+        searchData={univs}
         selectedResults={matchMeeting ? avoidUniversities : avoidDatingUniversities}
         setSelectedResults={matchMeeting ? setAvoidUniversities : setAvoidDatingUniversities}
       />
