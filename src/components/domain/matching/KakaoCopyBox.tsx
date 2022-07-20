@@ -16,7 +16,7 @@ function KakaoCopyBox({ kakaoId }: CopyBoxPorps) {
     try {
       onToggleModal();
       await navigator.clipboard.writeText(text);
-    } catch (error) {
+    } catch (e) {
       onToggleErrorModal();
     }
   };

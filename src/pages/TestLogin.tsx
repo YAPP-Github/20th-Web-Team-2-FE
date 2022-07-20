@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { SurveyTemplate } from '@/components/domain/survey';
-import { Button } from '@/components/base';
+import { Button, Modal } from '@/components/base';
 import { Title } from '@/lib/styles/styledComponents';
 import { palette } from '@/lib/styles/palette';
 import { LoginForm } from '@/components/testLogin';
@@ -9,10 +9,12 @@ import { LoginRequest } from '@/types/user';
 import { postLogin } from '@/lib/api/login';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import { useToggle } from '@/hooks/common';
 
 const TestLogin = () => {
   const navigate = useNavigate();
   const [isLogin, setLogin] = useState(false);
+  const [isErrorModal, onToggleErrorModal] = useToggle();
   const onSubmitAuthCode = async (values: LoginRequest) => {
     try {
       const response = await postLogin(values);
@@ -48,6 +50,19 @@ const TestLogin = () => {
           <LoginForm onSubmitAuthCode={onSubmitAuthCode} />
         </FormWrapper>
       </SurveyTemplate>
+      {isErrorModal && (
+        <Modal
+          width={200}
+          height={140}
+          bottonName="확인"
+          title="알림"
+          text="에러가 발생했습니다😭 다시한번 시도해 주세요!"
+          onToggleModal={onToggleErrorModal}
+          onClick={() => {
+            void 0;
+          }}
+        />
+      )}
     </>
   );
 };

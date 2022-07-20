@@ -19,21 +19,30 @@ const KakaoIdSurvey = () => {
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const { initDatingState, setDatingData } = useDatingSessionState();
   const [isModal, onToggleModal] = useToggle();
+  const [isErrorModal, onToggleErrorModal] = useToggle();
   const navigate = useNavigate();
   const [kakaoId, setkakaoId] = useState(matchMeeting ? initMeetingState.kakaoId : initDatingState.kakaoId);
   const [isConfirm, setConfirm] = useState(false);
 
   const handleNextClick = async () => {
-    if (matchMeeting) {
-      const meetingData = { ...initMeetingState, kakaoId };
-      const res = await postMeetingSurvey(meetingData);
-      setMeetingData(meetingData);
-    } else {
-      const datingData = { ...initDatingState, kakaoId };
-      const res = await postDatingSurvey(datingData);
-      setDatingData(datingData);
+    try {
+      if (matchMeeting) {
+        const meetingData = { ...initMeetingState, kakaoId };
+        const res = await postMeetingSurvey(meetingData);
+        if (res.status === 200) {
+          setMeetingData(meetingData);
+        }
+      } else {
+        const datingData = { ...initDatingState, kakaoId };
+        const res = await postDatingSurvey(datingData);
+        if (res.status === 200) {
+          setDatingData(datingData);
+        }
+      }
+      navigate(Path.MatchingMeeting);
+    } catch (e) {
+      onToggleErrorModal();
     }
-    navigate(Path.MatchingMeeting);
   };
 
   return (
@@ -80,6 +89,19 @@ const KakaoIdSurvey = () => {
           text="　카톡아이디를 확인해 주세요.　상대에게 보여질 아아디입니다!"
           onToggleModal={onToggleModal}
           onClick={() => setConfirm(true)}
+        />
+      )}
+      {isErrorModal && (
+        <Modal
+          width={200}
+          height={140}
+          bottonName="확인"
+          title="알림"
+          text="에러가 발생했습니다😭 다시한번 시도해 주세요!"
+          onToggleModal={onToggleErrorModal}
+          onClick={() => {
+            void 0;
+          }}
         />
       )}
     </>
