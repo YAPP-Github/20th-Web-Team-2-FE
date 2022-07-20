@@ -11,3 +11,8 @@ export const getDatingSurvey = async () => {
   const res = await apiClient.get<Dating>('/dating/survey');
   return res.data;
 };
+
+export const postReMatchDatingSurvey = async () => {
+  const res = await apiClient.post('/dating/survey/rematch');
+  return res.data;
+};
