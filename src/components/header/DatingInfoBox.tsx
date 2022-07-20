@@ -38,6 +38,7 @@ const DatingInfoBox = () => {
     isSmokeOk,
     isAbroad,
     abroadAreas,
+    kakaoId,
     //여까지 선호 조건
   } = initDatingState;
 
@@ -55,6 +56,18 @@ const DatingInfoBox = () => {
 
     getDatingData();
   }, []);
+  console.log(initDatingState);
+  //카카오 아이디 입력 안됐으면 설문 안뜨게
+  if (kakaoId.length < 1)
+    return (
+      <div>
+        <GroupLabel>Me</GroupLabel>
+        <InfoLabel>나의 정보</InfoLabel>
+        <InfoBox>
+          <InfoEle>설문 진행 전</InfoEle>
+        </InfoBox>
+      </div>
+    );
 
   return (
     <>

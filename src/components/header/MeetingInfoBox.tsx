@@ -29,6 +29,7 @@ function MeetingInfoBox() {
     preferAge,
     preferDepartments,
     preferHeight,
+    kakaoId,
   } = initMeetingState;
 
   const getMeetingData = async () => {
@@ -45,6 +46,17 @@ function MeetingInfoBox() {
   useEffect(() => {
     getMeetingData();
   }, []);
+
+  if (kakaoId.length < 1)
+    return (
+      <div>
+        <GroupLabel>Team</GroupLabel>
+        <InfoLabel>우리 팀 정보</InfoLabel>
+        <InfoBox>
+          <InfoEle>설문 진행 전</InfoEle>
+        </InfoBox>
+      </div>
+    );
 
   return (
     <>
