@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { SurveyTemplate } from '@/components/domain/survey';
-import { Button } from '@/components/base';
+import { Button, Modal } from '@/components/base';
 import { Title } from '@/lib/styles/styledComponents';
 import { palette } from '@/lib/styles/palette';
 import { LoginForm } from '@/components/testLogin';
@@ -8,9 +9,12 @@ import { LoginRequest } from '@/types/user';
 import { postLogin } from '@/lib/api/login';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import { useToggle } from '@/hooks/common';
 
 const TestLogin = () => {
   const navigate = useNavigate();
+  const [isLogin, setLogin] = useState(false);
+  const [isErrorModal, onToggleErrorModal] = useToggle();
   const onSubmitAuthCode = async (values: LoginRequest) => {
     try {
       const response = await postLogin(values);
@@ -18,6 +22,9 @@ const TestLogin = () => {
       if (response) {
         const { accessToken } = response;
         Cookies.set('AccessToken', accessToken);
+        alert('로그인 성공');
+        setLogin(true);
+        navigate('/type-of-meeting');
       }
     } catch (e) {
       alert(e.message);
@@ -34,15 +41,28 @@ const TestLogin = () => {
 
   return (
     <>
-      <SurveyTemplate disableNext={false} hasProgressBar={false} handleNextClick={handleNextClick} handlePrevClick={handlePrevClick}>
+      <SurveyTemplate disableNext={!isLogin} hasProgressBar={false} handleNextClick={handleNextClick} handlePrevClick={handlePrevClick}>
         <Title>
           <strong>로그인해주세요.</strong>
         </Title>
-        <Description>임시 로그인 계정: test1</Description>
+        <Description>임시 로그인 계정: test4</Description>
         <FormWrapper>
           <LoginForm onSubmitAuthCode={onSubmitAuthCode} />
         </FormWrapper>
       </SurveyTemplate>
+      {isErrorModal && (
+        <Modal
+          width={200}
+          height={140}
+          bottonName="확인"
+          title="알림"
+          text="에러가 발생했습니다😭 다시한번 시도해 주세요!"
+          onToggleModal={onToggleErrorModal}
+          onClick={() => {
+            void 0;
+          }}
+        />
+      )}
     </>
   );
 };
