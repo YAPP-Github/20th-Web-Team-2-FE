@@ -6,8 +6,12 @@ function useUnivLoad() {
   const [univs, setUnivs] = useState<SearchData[]>([]);
   useEffect(() => {
     const getAllUniv = async () => {
-      const data = await getUnivAPI();
-      setUnivs(data);
+      try {
+        const data = await getUnivAPI();
+        setUnivs(data);
+      } catch (error) {
+        console.log(error);
+      }
     };
     getAllUniv();
   }, []);
