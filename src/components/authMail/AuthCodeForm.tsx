@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { Input } from '@/components/base';
+import { Input, Modal } from '@/components/base';
 import { InputsWrapper, StyledButton, ErrorMessage } from '@/pages/AuthMail';
 import useForm, { InitialValues } from '@/hooks/common/useForm';
 import useCountdown from '@/hooks/common/useCountdown';
 import styled from 'styled-components';
+import { useToggle } from '@/hooks/common';
 
 interface AuthCodeFormProps {
   email: string;
@@ -12,6 +13,7 @@ interface AuthCodeFormProps {
 
 const AuthCodeForm = ({ email, onCheckAuthCode }: AuthCodeFormProps) => {
   const { minutes, seconds, setTarget } = useCountdown(0);
+  const [isErrorModal, onToggleErrorModal] = useToggle();
   const { values, errors, handleSubmit, handleChange } = useForm({
     initialValues: {
       email,
@@ -22,7 +24,7 @@ const AuthCodeForm = ({ email, onCheckAuthCode }: AuthCodeFormProps) => {
         console.log('try submit authCode');
         onCheckAuthCode(values.authCode);
       } catch (e) {
-        console.error('Modal 띄워야 할 듯');
+        onToggleErrorModal();
       }
     },
     validate: () => {
@@ -45,18 +47,33 @@ const AuthCodeForm = ({ email, onCheckAuthCode }: AuthCodeFormProps) => {
   }, [email]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <InputsWrapper>
-        <Input isFocus={!!email} name="authCode" placeholder="인증번호" maxLength={8} onChange={handleChange} />
-        {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
-        <StyledButton disabled={!!errors.authCode}>확인</StyledButton>
-        {email && (
-          <CountDownWrapper>
-            {minutes}:{seconds}
-          </CountDownWrapper>
-        )}
-      </InputsWrapper>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <InputsWrapper>
+          <Input isFocus={!!email} name="authCode" placeholder="인증번호" maxLength={8} onChange={handleChange} />
+          {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
+          <StyledButton disabled={!!errors.authCode}>확인</StyledButton>
+          {email && (
+            <CountDownWrapper>
+              {minutes}:{seconds}
+            </CountDownWrapper>
+          )}
+        </InputsWrapper>
+      </form>
+      {isErrorModal && (
+        <Modal
+          width={200}
+          height={140}
+          bottonName="확인"
+          title="알림"
+          text="에러가 발생했습니다😭 다시한번 시도해 주세요!"
+          onToggleModal={onToggleErrorModal}
+          onClick={() => {
+            void 0;
+          }}
+        />
+      )}
+    </>
   );
 };
 

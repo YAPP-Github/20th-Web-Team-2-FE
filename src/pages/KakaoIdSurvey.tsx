@@ -10,9 +10,8 @@ import Path from '@/router/Path';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
-import apiClient from '@/lib/api';
-// import { useRecoilValue } from 'recoil';
-// import { meetingState } from '@/atoms/meetingState';
+import { postMeetingSurvey } from '@/lib/api/meeting';
+import { postDatingSurvey } from '@/lib/api/dating';
 
 const KakaoIdSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
@@ -20,24 +19,29 @@ const KakaoIdSurvey = () => {
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const { initDatingState, setDatingData } = useDatingSessionState();
   const [isModal, onToggleModal] = useToggle();
+  const [isErrorModal, onToggleErrorModal] = useToggle();
   const navigate = useNavigate();
   const [kakaoId, setkakaoId] = useState(matchMeeting ? initMeetingState.kakaoId : initDatingState.kakaoId);
   const [isConfirm, setConfirm] = useState(false);
-  // const meetingData = useRecoilValue(meetingState); 나중에 이걸로 data post
 
   const handleNextClick = async () => {
-    if (initMeetingState) {
-      matchMeeting ? setMeetingData({ ...initMeetingState, kakaoId }) : setDatingData({ ...initDatingState, kakaoId });
-      await postMeetingSurvey();
-      navigate(Path.MatchingMeeting);
-    }
-  };
-
-  const postMeetingSurvey = async () => {
     try {
-      await apiClient.post('/api/meeting/survey', matchMeeting ? { ...initMeetingState, kakaoId } : { ...initDatingState, kakaoId });
+      if (matchMeeting) {
+        const meetingData = { ...initMeetingState, kakaoId };
+        const res = await postMeetingSurvey(meetingData);
+        if (res.status === 200) {
+          setMeetingData(meetingData);
+        }
+      } else {
+        const datingData = { ...initDatingState, kakaoId };
+        const res = await postDatingSurvey(datingData);
+        if (res.status === 200) {
+          setDatingData(datingData);
+        }
+      }
+      navigate(Path.MatchingMeeting);
     } catch (e) {
-      console.error(e);
+      onToggleErrorModal();
     }
   };
 
@@ -87,6 +91,19 @@ const KakaoIdSurvey = () => {
           onClick={() => setConfirm(true)}
         />
       )}
+      {isErrorModal && (
+        <Modal
+          width={200}
+          height={140}
+          bottonName="확인"
+          title="알림"
+          text="에러가 발생했습니다😭 다시한번 시도해 주세요!"
+          onToggleModal={onToggleErrorModal}
+          onClick={() => {
+            void 0;
+          }}
+        />
+      )}
     </>
   );
 };
@@ -105,4 +122,4 @@ const InputWrapper = styled(FormWrapper)`
   margin-top: 46px;
 `;
 
-export default KakaoIdSurvey;
+export default React.memo(KakaoIdSurvey);

@@ -7,11 +7,12 @@ import { palette } from '@/lib/styles/palette';
 import { EmailForm, AuthCodeForm } from '@/components/authMail';
 import { Link } from 'react-router-dom';
 import client from '@/lib/api';
+import { useToggle } from '@/hooks/common';
 
 const AuthMail = () => {
   const [cantMoveNext, setCantMoveNext] = useState(true);
   const [email, setEmail] = useState('');
-  // const [state, setState] = useState(initState);
+  const [isErrorModal, onToggleErrorModal] = useToggle();
 
   const postEmail = async (email: string) => {
     await client.post(`/api/email`, { email });
@@ -26,8 +27,7 @@ const AuthMail = () => {
       await postEmail(email);
       setEmail(email);
     } catch (e) {
-      alert(e.message);
-      console.error('에러 모달');
+      onToggleErrorModal();
     }
   };
 
@@ -36,8 +36,7 @@ const AuthMail = () => {
       await putEmail(authCode);
       setCantMoveNext(false);
     } catch (e) {
-      alert(e.message);
-      console.error('에러 모달');
+      onToggleErrorModal();
     }
   };
 
@@ -59,17 +58,19 @@ const AuthMail = () => {
           </AddSchoolParagraph>
         </FormWrapper>
       </SurveyTemplate>
-      {/*{isModal && (*/}
-      {/*  <Modal*/}
-      {/*    width={200}*/}
-      {/*    height={140}*/}
-      {/*    bottonName="확인"*/}
-      {/*    title="ㅔ러"*/}
-      {/*    text="　카톡아이디를 확인해 주세요.　상대에게 보여질 아아디입니다!"*/}
-      {/*    onToggleModal={onToggleModal}*/}
-      {/*    onClick={() => setConfirm(true)}*/}
-      {/*  />*/}
-      {/*)}*/}
+      {isErrorModal && (
+        <Modal
+          width={200}
+          height={140}
+          bottonName="확인"
+          title="알림"
+          text="에러가 발생했습니다😭 다시한번 시도해 주세요!"
+          onToggleModal={onToggleErrorModal}
+          onClick={() => {
+            void 0;
+          }}
+        />
+      )}
     </>
   );
 };
