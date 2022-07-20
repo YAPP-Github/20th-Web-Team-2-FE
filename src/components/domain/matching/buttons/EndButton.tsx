@@ -6,8 +6,8 @@ function EndButton() {
     console.log('asd');
   };
   return (
-    <Button onClick={handleClick} size="medium" variant={'kakao'}>
-      <strong>카카오페이</strong>로 간편하고 안전하게 결제
+    <Button onClick={handleClick} size="medium" variant={'default'}>
+      다시 매칭하기
     </Button>
   );
 }
