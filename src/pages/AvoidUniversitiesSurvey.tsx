@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import Path from '@/router/Path';
 import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
-import useUnivLoad from '@/hooks/common/useUnivLoad';
+import useUnivLoad from '@/hooks/survey/useUnivLoad';
 
 const AvoidUniversitiesSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');

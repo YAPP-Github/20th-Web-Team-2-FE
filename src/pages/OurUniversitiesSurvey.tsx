@@ -5,7 +5,7 @@ import SearchSelector from '@/components/domain/survey/SearchSelector';
 import Path from '@/router/Path';
 import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
-import useUnivLoad from '@/hooks/common/useUnivLoad';
+import useUnivLoad from '@/hooks/survey/useUnivLoad';
 
 const OurUniversitiesSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
