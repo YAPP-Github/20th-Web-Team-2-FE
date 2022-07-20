@@ -5,11 +5,12 @@ import { SurveyTemplate } from '@/components/domain/survey';
 import Path from '@/router/Path';
 import { Title } from '@/lib/styles/styledComponents';
 import SearchSelector from '@/components/domain/survey/SearchSelector';
-import { schools } from '@/mock/schools';
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
+import useUnivLoad from '@/hooks/common/useUnivLoad';
 
 const AbroadAreasSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
+  const { univs } = useUnivLoad();
   const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const { initDatingState, setDatingData } = useDatingSessionState();
@@ -39,7 +40,7 @@ const AbroadAreasSurvey = () => {
       </Title>
       <SearchSelector
         placeholder="지역을 검색하세요."
-        searchData={schools}
+        searchData={univs}
         selectedResults={matchMeeting ? abroadAreas : abroadAreasDating}
         setSelectedResults={matchMeeting ? setAbroadAreas : setAbroadAreasDating}
       />
