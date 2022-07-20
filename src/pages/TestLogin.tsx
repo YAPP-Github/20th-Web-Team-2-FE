@@ -26,7 +26,7 @@ const TestLogin = () => {
         setLogin(true);
         navigate('/type-of-meeting');
       }
-    } catch (e) {
+    } catch (e: any) {
       alert(e.message);
     }
   };
