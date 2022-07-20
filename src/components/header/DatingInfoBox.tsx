@@ -1,5 +1,6 @@
+import React, { useEffect } from 'react';
+import { Modal } from '@/components/base';
 import { palette } from '@/lib/styles/palette';
-import { Dating } from '@/types/dating';
 import { addComma } from '@/utils/addComma';
 import {
   conversionBody,
@@ -9,13 +10,13 @@ import {
   conversionDomesticArea,
   conversionGender,
 } from '@/utils/converson';
-import React from 'react';
 import styled from 'styled-components';
+import { getDatingSurvey } from '@/lib/api/dating';
+import { useDatingSessionState, useToggle } from '@/hooks/common';
 
-interface DatingInfoProps {
-  dating: Dating;
-}
-const DatingInfoBox = ({ dating }: DatingInfoProps) => {
+const DatingInfoBox = () => {
+  const { initDatingState, setDatingData } = useDatingSessionState();
+  const [isErrorModal, onToggleErrorModal] = useToggle();
   const {
     age,
     myDepartment,
@@ -38,70 +39,100 @@ const DatingInfoBox = ({ dating }: DatingInfoProps) => {
     isAbroad,
     abroadAreas,
     //여까지 선호 조건
-  } = dating;
-  console.log(abroadAreas);
+  } = initDatingState;
+
+  useEffect(() => {
+    const getDatingData = async () => {
+      try {
+        const res = await getDatingSurvey();
+        if (res) {
+          setDatingData(res);
+        }
+      } catch (e) {
+        onToggleErrorModal();
+      }
+    };
+
+    getDatingData();
+  }, []);
+
   return (
-    <div>
-      <GroupLabel>Me</GroupLabel>
-      <InfoLabel>나의 정보</InfoLabel>
-      <InfoBox>
-        <InfoEle>{age}살</InfoEle>
-        <InfoEle>{conversionGender(gender)}</InfoEle>
-        <InfoEle>{conversionDepartment(myDepartment)}</InfoEle>
-        <InfoEle>{mbti}</InfoEle>
-        <InfoEle>연애 횟수 : {conversionDateCount(myDateCount)}</InfoEle>
-        <InfoEle>{myHeight}cm</InfoEle>
-        <InfoEle>{conversionBody(myBody)}</InfoEle>
-        <InfoEle>{mySmoke ? '흡연' : '비흡연'}</InfoEle>
-        <InfoEle>{conversionCharacter(characteristic)}</InfoEle>
-        <FlexEle>
-          {domesticAreas?.map((area, index) => (
-            <div key={area + domesticAreas}>
-              {addComma(index)}
-              {conversionDomesticArea(area)}
-            </div>
-          ))}
-        </FlexEle>
-        <InfoEle>{abroadAreas.length === 0 ? '기피지역 : 없음' : abroadAreas}</InfoEle>
-        <InfoEle>해외여부 : {isAbroad ? '예' : '아니요'}</InfoEle>
-      </InfoBox>
-      <InfoLabel>선호 조건</InfoLabel>
-      <InfoBox>
-        <InfoEle>
-          {preferAge[0]}~{preferAge[1]}살
-        </InfoEle>
-        <FlexEle>
-          {preferBodies?.map((body, index) => (
-            <div key={body + preferBodies}>
-              {addComma(index)}
-              {conversionBody(body)}
-            </div>
-          ))}
-        </FlexEle>
-        <FlexEle>
-          {preferCharacteristics?.map((charator, index) => (
-            <div key={charator + preferCharacteristics}>
-              {addComma(index)}
-              {conversionCharacter(charator)}
-            </div>
-          ))}
-        </FlexEle>
-        <InfoEle>{conversionDateCount(preferDateCount)}</InfoEle>
-        <FlexEle>
-          {preferDepartments?.map((department, index) => (
-            <div key={department + preferDepartments}>
-              {addComma(index)}
-              {conversionDepartment(department)}
-            </div>
-          ))}
-        </FlexEle>
-        <InfoEle>
-          {preferHeight[0]}~{preferHeight[1]}cm
-        </InfoEle>
-        {/* <InfoEle>{preferUniversities}</InfoEle> */}
-        <InfoEle>흡연 : {isSmokeOk ? '괜찮아요' : '싫어요'}</InfoEle>
-      </InfoBox>
-    </div>
+    <>
+      <div>
+        <GroupLabel>Me</GroupLabel>
+        <InfoLabel>나의 정보</InfoLabel>
+        <InfoBox>
+          <InfoEle>{age}살</InfoEle>
+          <InfoEle>{conversionGender(gender)}</InfoEle>
+          <InfoEle>{conversionDepartment(myDepartment)}</InfoEle>
+          <InfoEle>{mbti}</InfoEle>
+          <InfoEle>연애 횟수 : {conversionDateCount(myDateCount)}</InfoEle>
+          <InfoEle>{myHeight}cm</InfoEle>
+          <InfoEle>{conversionBody(myBody)}</InfoEle>
+          <InfoEle>{mySmoke ? '흡연' : '비흡연'}</InfoEle>
+          <InfoEle>{conversionCharacter(characteristic)}</InfoEle>
+          <FlexEle>
+            {domesticAreas?.map((area, index) => (
+              <div key={area + domesticAreas}>
+                {addComma(index)}
+                {conversionDomesticArea(area)}
+              </div>
+            ))}
+          </FlexEle>
+          <InfoEle>{abroadAreas.length === 0 ? '기피지역 : 없음' : abroadAreas}</InfoEle>
+          <InfoEle>해외여부 : {isAbroad ? '예' : '아니요'}</InfoEle>
+        </InfoBox>
+        <InfoLabel>선호 조건</InfoLabel>
+        <InfoBox>
+          <InfoEle>
+            {preferAge[0]}~{preferAge[1]}살
+          </InfoEle>
+          <FlexEle>
+            {preferBodies?.map((body, index) => (
+              <div key={body + preferBodies}>
+                {addComma(index)}
+                {conversionBody(body)}
+              </div>
+            ))}
+          </FlexEle>
+          <FlexEle>
+            {preferCharacteristics?.map((charator, index) => (
+              <div key={charator + preferCharacteristics}>
+                {addComma(index)}
+                {conversionCharacter(charator)}
+              </div>
+            ))}
+          </FlexEle>
+          <InfoEle>{conversionDateCount(preferDateCount)}</InfoEle>
+          <FlexEle>
+            {preferDepartments?.map((department, index) => (
+              <div key={department + preferDepartments}>
+                {addComma(index)}
+                {conversionDepartment(department)}
+              </div>
+            ))}
+          </FlexEle>
+          <InfoEle>
+            {preferHeight[0]}~{preferHeight[1]}cm
+          </InfoEle>
+          {/* <InfoEle>{preferUniversities}</InfoEle> */}
+          <InfoEle>흡연 : {isSmokeOk ? '괜찮아요' : '싫어요'}</InfoEle>
+        </InfoBox>
+      </div>
+      {isErrorModal && (
+        <Modal
+          width={200}
+          height={140}
+          bottonName="확인"
+          title="알림"
+          text="에러가 발생했습니다😭 다시한번 시도해 주세요!"
+          onToggleModal={onToggleErrorModal}
+          onClick={() => {
+            void 0;
+          }}
+        />
+      )}
+    </>
   );
 };
 export const InfoLabel = styled.div`

@@ -1,42 +1,27 @@
+import React from 'react';
 import { StringLogo, RadiousLogo } from '@/assets/img';
 import { Button, Modal } from '@/components/base';
 import useToggle from '@/hooks/common/useToggle';
 import { palette } from '@/lib/styles/palette';
-import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useLoginState } from '@/atoms/userState';
 
 function LandingContainer() {
-  /**
-   * 로그인 되었는지 안되었는지는 나중에 리코일에서 꺼내기
-   */
-  const [isLogin, setIsLogin] = useState(false); // FIXME: 임시 콘텐츠 연결을 위한 처리
   const [isModal, onToggleModal] = useToggle();
   const navigate = useNavigate();
+  const { isLogin } = useLoginState();
 
   const handleKakaoLoginClick = () => {
     const clientId = import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY;
     const redirectUri = encodeURI(`${window.location.origin}/oauth/kakao`);
     const loginUrl = import.meta.env.VITE_KAKAO_OPEN_URL.replace('{clientId}', clientId).replace('{redirectUri}', redirectUri);
     window.location.href = loginUrl;
-
-    // console.log(code);
   };
 
   return (
     <Container>
       <MainIconBox>
-        <LandingBtn
-          size="medium"
-          fontWeight={700}
-          fullWidth
-          variant={'kakao'}
-          onClick={() => {
-            setIsLogin((prev) => !prev);
-          }}
-        >
-          테스트용 로그인 토글버튼
-        </LandingBtn>
         <Icon src={RadiousLogo} />
         <MainNameStyled src={StringLogo} alt="외딴썸" />
         <TextStyled>유학생을 위한 미팅/소개팅</TextStyled>
@@ -47,6 +32,9 @@ function LandingContainer() {
           <LandingBtn size="medium" fontWeight={700} fullWidth variant={'kakao'} onClick={handleKakaoLoginClick}>
             카카오 로그인
           </LandingBtn>
+          <Button size="medium" fontWeight={700} fullWidth onClick={() => navigate('/test-login')}>
+            일반 로그인
+          </Button>
         </BtnBox>
       ) : (
         <BtnBox>
@@ -62,7 +50,7 @@ function LandingContainer() {
           >
             시작하기
           </LandingBtn>
-          <LandingBtn size="medium" fontWeight={700} fullWidth variant={'grayBlack'} onClick={() => setIsLogin((prev) => !prev)}>
+          <LandingBtn size="medium" fontWeight={700} fullWidth variant={'grayBlack'} onClick={() => console.log('응답 수정')}>
             응답 수정하기
           </LandingBtn>
         </BtnBox>

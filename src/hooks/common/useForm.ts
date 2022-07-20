@@ -2,29 +2,32 @@ import { useState, useCallback, useEffect } from 'react';
 
 export interface InitialValues {
   email?: string;
+  userName?: string;
+  password?: string;
   authCode?: string;
 }
 
-interface UseFormProps {
-  initialValues: InitialValues;
+interface UseFormProps<T> {
+  initialValues: T;
   onSubmit: () => void;
   validate: (arg: InitialValues) => InitialValues;
 }
 
-const useForm = ({ initialValues, onSubmit, validate }: UseFormProps) => {
+const useForm = <T>({ initialValues, onSubmit, validate }: UseFormProps<T>) => {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState<Record<string, never> | InitialValues>({});
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
+    setValues((prevValues) => {
+      return { ...prevValues, [name]: value };
+    });
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
     e.preventDefault();
-    console.log(Object.values(errors), 'auth');
     await onSubmit();
     setIsLoading(false);
   };

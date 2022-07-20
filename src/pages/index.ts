@@ -29,3 +29,5 @@ export { default as PreferBodyDateCountSurvey } from './PreferBodyDateCountSurve
 export { default as MatchingPage } from './MatchingPage';
 
 export { default as OauthKakao } from './OauthKakao';
+
+export { default as TestLogin } from './TestLogin';

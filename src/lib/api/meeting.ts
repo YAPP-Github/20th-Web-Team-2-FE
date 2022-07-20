@@ -1,0 +1,18 @@
+import apiClient from './index';
+import { Meeting } from '@/types/meeting';
+import { AxiosResponse } from 'axios';
+
+export const postMeetingSurvey = async (payload: Meeting) => {
+  const res = await apiClient.post<AxiosResponse>('/meeting/survey', payload);
+  return res.data;
+};
+
+export const getMeetingSurvey = async () => {
+  const res = await apiClient.get<Meeting>('/meeting/survey');
+  return res.data;
+};
+
+export const postReMathcingMettingSurvey = async () => {
+  const res = await apiClient.post('/meeting/survey/rematch');
+  return res.data;
+};
