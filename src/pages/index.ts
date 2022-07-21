@@ -31,3 +31,4 @@ export { default as MatchingPage } from './MatchingPage';
 export { default as OauthKakao } from './OauthKakao';
 
 export { default as TestLogin } from './TestLogin';
+export { default as AdminPage } from './AdminPage';
