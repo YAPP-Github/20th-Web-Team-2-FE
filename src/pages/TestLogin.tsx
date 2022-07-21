@@ -26,8 +26,8 @@ const TestLogin = () => {
         setLogin(true);
         navigate('/type-of-meeting');
       }
-    } catch (e: any) {
-      alert(e.message);
+    } catch (e) {
+      onToggleErrorModal();
     }
   };
 
