@@ -69,10 +69,7 @@ const DatingInfoBox = () => {
     return (
       <div>
         <GroupLabel>Me</GroupLabel>
-        <InfoLabel>나의 정보</InfoLabel>
-        <InfoBox>
-          <InfoEle>설문 진행 전</InfoEle>
-        </InfoBox>
+        <InfoLabel>설문 진행 전</InfoLabel>
       </div>
     );
 

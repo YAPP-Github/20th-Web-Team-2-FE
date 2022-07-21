@@ -57,10 +57,7 @@ function MeetingInfoBox() {
     return (
       <div>
         <GroupLabel>Team</GroupLabel>
-        <InfoLabel>우리 팀 정보</InfoLabel>
-        <InfoBox>
-          <InfoEle>설문 진행 전</InfoEle>
-        </InfoBox>
+        <InfoLabel>설문 진행 전</InfoLabel>
       </div>
     );
 
