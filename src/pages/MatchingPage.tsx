@@ -9,7 +9,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MatchingPage = () => {
-  const TempData = { state: 'waiting' };
+  const TempData = { state: 'end' };
+
   return (
     <>
       <MatchingTemplete btnName={TempData.state} title={MatchingStateTitle(TempData.state)}>

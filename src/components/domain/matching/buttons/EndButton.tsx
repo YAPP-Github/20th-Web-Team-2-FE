@@ -1,14 +1,40 @@
-import { Button } from '@/components/base';
+import { Button, Modal } from '@/components/base';
+import { useToggle } from '@/hooks/common';
+import { postReMatchMettingSurvey } from '@/lib/api/meeting';
+import { postReMatchDatingSurvey } from '@/lib/api/dating';
+import { useMatch } from 'react-router-dom';
 import React from 'react';
 
 function EndButton() {
-  const handleClick = () => {
-    console.log('asd');
+  const [isErrorModal, onToggleErrorModal] = useToggle();
+  const matchMeeting = useMatch('/meeting/*');
+
+  const handleClick = async () => {
+    try {
+      const res = matchMeeting ? await postReMatchMettingSurvey() : await postReMatchDatingSurvey();
+    } catch (e) {
+      onToggleErrorModal();
+    }
   };
   return (
-    <Button onClick={handleClick} size="medium" variant={'kakao'}>
-      <strong>카카오페이</strong>로 간편하고 안전하게 결제
-    </Button>
+    <>
+      <Button onClick={handleClick} size="medium">
+        다시 매칭하기
+      </Button>
+      {isErrorModal && (
+        <Modal
+          width={200}
+          height={140}
+          bottonName="확인"
+          title="알림"
+          text="에러가 발생했습니다😭 다시한번 시도해 주세요!"
+          onToggleModal={onToggleErrorModal}
+          onClick={() => {
+            void 0;
+          }}
+        />
+      )}
+    </>
   );
 }
 
