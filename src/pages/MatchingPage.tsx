@@ -5,15 +5,19 @@ import MatchingTemplete from '@/components/domain/matching/MatchingTemplete';
 import SuccessBox from '@/components/domain/matching/SuccessBox';
 import WaitingBox from '@/components/domain/matching/WaitingBox';
 import { Contents } from '@/lib/styles/styledComponents';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
+export type Status = 'none' | 'waiting' | 'success' | 'pay' | 'end';
+
 const MatchingPage = () => {
-  const TempData = { state: 'end' };
+  const [status, setStatus] = useState<Status>('waiting');
+
+  const handleStatus = (status: Status) => setStatus(status);
 
   return (
     <>
-      <MatchingTemplete btnName={TempData.state} title={MatchingStateTitle(TempData.state)}>
+      <MatchingTemplete btnName={status} title={MatchingStateTitle(status)} handleStatus={handleStatus}>
         <MatchingContents>
           {
             {
@@ -22,7 +26,7 @@ const MatchingPage = () => {
               success: <SuccessBox />,
               pay: <CompleteBox />,
               end: <EndBox />,
-            }[TempData.state]
+            }[status]
           }
         </MatchingContents>
       </MatchingTemplete>

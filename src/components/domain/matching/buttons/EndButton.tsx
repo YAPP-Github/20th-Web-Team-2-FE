@@ -4,14 +4,22 @@ import { postReMatchMettingSurvey } from '@/lib/api/meeting';
 import { postReMatchDatingSurvey } from '@/lib/api/dating';
 import { useMatch } from 'react-router-dom';
 import React from 'react';
+import { Status } from '@/pages/MatchingPage';
 
-function EndButton() {
+interface EndButtonProps {
+  handleStatus: (status: Status) => void;
+}
+
+function EndButton({ handleStatus }: EndButtonProps) {
   const [isErrorModal, onToggleErrorModal] = useToggle();
   const matchMeeting = useMatch('/meeting/*');
 
   const handleClick = async () => {
     try {
       const res = matchMeeting ? await postReMatchMettingSurvey() : await postReMatchDatingSurvey();
+      if (typeof res === 'number') {
+        handleStatus('waiting');
+      }
     } catch (e) {
       onToggleErrorModal();
     }

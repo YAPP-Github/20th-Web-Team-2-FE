@@ -9,13 +9,15 @@ import NoneButton from './buttons/NoneButton';
 import WaitingButton from './buttons/WaitingButton';
 import SuccessButton from './buttons/SuccessButton';
 import Path from '@/router/Path';
+import { Status } from '@/pages/MatchingPage';
 
 interface MatchingTemplateProps {
   children: ReactNode;
   title: ReactNode;
   btnName: string;
+  handleStatus: (status: Status) => void;
 }
-const MatchingTemplete = ({ children, btnName, title }: MatchingTemplateProps) => {
+const MatchingTemplete = ({ children, btnName, title, handleStatus }: MatchingTemplateProps) => {
   const location = useLocation();
   const [type, setType] = useState('meeting');
   const navigate = useNavigate();
@@ -54,7 +56,7 @@ const MatchingTemplete = ({ children, btnName, title }: MatchingTemplateProps) =
               waiting: <WaitingButton />,
               success: <SuccessButton />,
               pay: <CompleteButton />,
-              end: <EndButton />,
+              end: <EndButton handleStatus={handleStatus} />,
             }[btnName]
           }
         </ButtonWrapper>
