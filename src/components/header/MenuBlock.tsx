@@ -1,10 +1,12 @@
 import React from 'react';
-import { Logo } from '@/assets/img';
+import { Logo, Logout } from '@/assets/img';
 import { palette } from '@/lib/styles/palette';
 import styled from 'styled-components';
 import DatingInfoBox from './DatingInfoBox';
 import MeetingInfoBox from './MeetingInfoBox';
-
+import { postLogout } from '@/lib/api/login';
+import { useToggle } from '@/hooks/common';
+import { Modal } from '../base';
 interface MenuBlockProps {
   isMenu: boolean;
   onToggleMenu: () => void;
@@ -18,20 +20,47 @@ const TempUserData = {
 };
 
 function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
+  const [isErrorModal, onToggleErrorModal] = useToggle();
+  const handleLogout = async () => {
+    try {
+      await postLogout();
+    } catch (e) {
+      onToggleErrorModal();
+    }
+  };
+
   return (
     <>
       <NavBarBlock isMenu={isMenu}>
         <SidebarHeader>
-          <SiteLogo src={Logo} alt="사이트 로고" />
-          <UserBox>
-            <div>{TempUserData.email}</div>
-            <div className="univ">{TempUserData.univ}</div>
-          </UserBox>
+          <UserInfo>
+            <SiteLogo src={Logo} alt="사이트 로고" />
+            <UserBox>
+              <div>{TempUserData.email}</div>
+              <div className="univ">{TempUserData.univ}</div>
+            </UserBox>
+          </UserInfo>
+          <LogoutButton onClick={handleLogout}>
+            <img src={Logout} />
+          </LogoutButton>
         </SidebarHeader>
         <MeetingInfoBox />
         <DatingInfoBox />
       </NavBarBlock>
       <NavBackground onClick={onToggleMenu} isMenu={isMenu} />
+      {isErrorModal && (
+        <Modal
+          width={200}
+          height={140}
+          bottonName="확인"
+          title="알림"
+          text="에러가 발생했습니다😭 다시한번 시도해 주세요!"
+          onToggleModal={onToggleErrorModal}
+          onClick={() => {
+            void 0;
+          }}
+        />
+      )}
     </>
   );
 }
@@ -79,7 +108,12 @@ const NavBarBlock = styled.section<{ isMenu: boolean }>`
 `;
 const SidebarHeader = styled.div`
   display: flex;
+  justify-content: space-between;
   margin-bottom: 20px;
+`;
+
+const UserInfo = styled.div`
+  display: flex;
 `;
 
 const SiteLogo = styled.img`
@@ -97,6 +131,13 @@ const UserBox = styled.div`
     font-size: 14px;
     font-weight: 400;
     color: ${palette.grayDark};
+  }
+`;
+
+const LogoutButton = styled.button`
+  img {
+    width: 14px;
+    height: 14px;
   }
 `;
 

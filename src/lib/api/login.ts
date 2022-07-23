@@ -20,3 +20,9 @@ export const getKakaoId = async () => {
   const res = await apiClient.get<KakaoIdResponse>('/id');
   return res.data;
 };
+
+/* @FIXME: 나중에 user.ts로 바꾸기 */
+export const postLogout = async () => {
+  const res = await apiClient.post('/logout');
+  return res.data;
+};
