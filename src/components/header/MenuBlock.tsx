@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Logo, Logout } from '@/assets/img';
 import { palette } from '@/lib/styles/palette';
 import styled from 'styled-components';
 import DatingInfoBox from './DatingInfoBox';
 import MeetingInfoBox from './MeetingInfoBox';
-import { postLogout } from '@/lib/api/login';
+import { postLogout, postWithdrawal } from '@/lib/api/login';
 import { useToggle } from '@/hooks/common';
 import { Modal } from '../base';
 interface MenuBlockProps {
@@ -20,7 +20,10 @@ const TempUserData = {
 };
 
 function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
+  const [isModal, onToggleModal] = useToggle();
+  const [isConfirm, setConfirm] = useState(false);
   const [isErrorModal, onToggleErrorModal] = useToggle();
+
   const handleLogout = async () => {
     try {
       await postLogout();
@@ -28,6 +31,22 @@ function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
       onToggleErrorModal();
     }
   };
+
+  const handleWithdrawal = async () => {
+    try {
+      if (isConfirm) {
+        await postWithdrawal();
+      }
+    } catch (e) {
+      onToggleErrorModal();
+    }
+  };
+
+  useEffect(() => {
+    if (isConfirm) {
+      handleWithdrawal();
+    }
+  }, [isConfirm]);
 
   return (
     <>
@@ -46,8 +65,21 @@ function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
         </SidebarHeader>
         <MeetingInfoBox />
         <DatingInfoBox />
+        <WithdrawalButton onClick={onToggleModal}>탈퇴하기</WithdrawalButton>
       </NavBarBlock>
       <NavBackground onClick={onToggleMenu} isMenu={isMenu} />
+      {isModal && (
+        <Modal
+          width={200}
+          height={140}
+          bottonName="확인"
+          title="정말 탈퇴하시겠습니까?"
+          text="　탈퇴하면 모든 설문정보가 
+          사라집니다."
+          onToggleModal={onToggleModal}
+          onClick={() => setConfirm(true)}
+        />
+      )}
       {isErrorModal && (
         <Modal
           width={200}
@@ -139,6 +171,14 @@ const LogoutButton = styled.button`
     width: 14px;
     height: 14px;
   }
+`;
+
+const WithdrawalButton = styled.button`
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  font-size: 10px;
+  color: ${palette.grayDark};
 `;
 
 export default MenuBlock;
