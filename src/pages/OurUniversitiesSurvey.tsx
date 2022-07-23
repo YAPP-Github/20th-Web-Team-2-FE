@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { Title } from '@/lib/styles/styledComponents';
 import { SurveyTemplate } from '@/components/domain/survey';
-import SearchSelector from '@/components/domain/survey/SearchSelector';
+import { SearchSelector } from '@/components/domain/survey';
 import Path from '@/router/Path';
 import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';

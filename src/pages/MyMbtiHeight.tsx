@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { SubTitle } from '@/lib/styles/styledComponents';
-import { SurveyTemplate } from '@/components/domain/survey';
+import { SurveyTemplate, UnitSelector } from '@/components/domain/survey';
 import { Input } from '@/components/base';
 import { palette } from '@/lib/styles/palette';
 import Path from '@/router/Path';
@@ -41,6 +41,8 @@ const MyMbtiHeight = () => {
     datingNavigate(Path.MyBodySmoke);
   };
 
+  const mbtis = ['ISTJ', 'ISFJ', 'INFJ', 'INTJ', 'ISTP', 'ISFP', 'INFP', 'INTP', 'ESTP', 'ESFP', 'ENFP', 'ENTP', 'ESTJ', 'ESFJ', 'ENFJ', 'ENTJ'];
+
   return (
     <SurveyTemplate
       disableNext={!mbti || !myHeight}
@@ -53,7 +55,7 @@ const MyMbtiHeight = () => {
       <Anchor target="_blank" href="https://types.my/quiz/create?step=5">
         나의 MBTI 알아보기
       </Anchor>
-      <Input required variant="filled" isFocus height="48px" name="mbti" placeholder="나의 MBTI" maxLength={4} onChange={handleChange} value={mbti} />
+      <UnitSelector placeholder="MBTI를 검색하세요." searchData={mbtis} selectedResult={mbti} setSelectedResult={setMbti} />
       <InputWrapper>
         <StyledTitle>본인의 키를 알려주세요.</StyledTitle>
         <HeightError>{heightError && '키는 220cm 이하여야 합니다.'}</HeightError>
