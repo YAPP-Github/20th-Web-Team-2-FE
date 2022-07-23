@@ -51,7 +51,7 @@ function LandingContainer() {
             시작하기
           </LandingBtn>
           <LandingBtn size="medium" fontWeight={700} fullWidth variant={'grayBlack'} onClick={() => console.log('응답 수정')}>
-            응답 수정하기
+            매칭 결과 확인
           </LandingBtn>
         </BtnBox>
       )}
