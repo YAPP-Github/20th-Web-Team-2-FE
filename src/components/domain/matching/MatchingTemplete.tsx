@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Button } from '@/components/base';
+import { Button, Modal } from '@/components/base';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Title } from '@/lib/styles/styledComponents';
 import CompleteButton from './buttons/CompleteButton';
@@ -10,6 +10,9 @@ import WaitingButton from './buttons/WaitingButton';
 import SuccessButton from './buttons/SuccessButton';
 import Path from '@/router/Path';
 import { Status } from '@/pages/MatchingPage';
+import { getMeetingMatching, postMeetingMatching } from '@/lib/api/meeting';
+import { getDatingMatching, postDatingMatching } from '@/lib/api/dating';
+import { useToggle } from '@/hooks/common';
 
 interface MatchingTemplateProps {
   children: ReactNode;
@@ -21,47 +24,89 @@ const MatchingTemplete = ({ children, btnName, title, handleStatus }: MatchingTe
   const location = useLocation();
   const [type, setType] = useState('meeting');
   const navigate = useNavigate();
+  const [isErrorModal, onToggleErrorModal] = useToggle();
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     location.pathname.includes('meeting') ? setType('meeting') : setType('dating');
   }, [location.pathname]);
 
+  const requestRandomMatching = async () => {
+    try {
+      type === 'meeting' ? await postMeetingMatching() : await postDatingMatching();
+      await fetchMatchingResult();
+    } catch (e) {
+      setErrorMessage(() => (e as Error).message.toString());
+      onToggleErrorModal();
+    }
+  };
+
+  const fetchMatchingResult = async () => {
+    try {
+      const response = type === 'meeting' ? await getMeetingMatching() : await getDatingMatching();
+      if (response?.message) {
+        setErrorMessage(() => response.message.toString());
+        onToggleErrorModal();
+      } else {
+        handleStatus('pay');
+      }
+    } catch (e) {
+      setErrorMessage(() => (e as Error).message.toString());
+      onToggleErrorModal();
+    }
+  };
+
   return (
-    <TemplateBlock>
-      <Title>{title}</Title>
-      <ButtonWrapper>
-        <TypeButton
-          onClick={() => navigate(Path.MatchingMeeting)}
-          size="medium"
-          variant={type === 'meeting' ? 'default' : 'gray'}
-          fontWeight={type === 'dating' ? 700 : 400}
-        >
-          미팅
-        </TypeButton>
-        <TypeButton
-          onClick={() => navigate(Path.MatchingDating)}
-          size="medium"
-          variant={type === 'dating' ? 'default' : 'gray'}
-          fontWeight={type === 'dating' ? 700 : 400}
-        >
-          소개팅
-        </TypeButton>
-      </ButtonWrapper>
-      <div>{children}</div>
-      <NavigationWrapper>
+    <>
+      <TemplateBlock>
+        <Title>{title}</Title>
         <ButtonWrapper>
-          {
-            {
-              none: <NoneButton />,
-              waiting: <WaitingButton />,
-              success: <SuccessButton />,
-              pay: <CompleteButton />,
-              end: <EndButton handleStatus={handleStatus} />,
-            }[btnName]
-          }
+          <TypeButton
+            onClick={() => navigate(Path.MatchingMeeting)}
+            size="medium"
+            variant={type === 'meeting' ? 'default' : 'gray'}
+            fontWeight={type === 'dating' ? 700 : 400}
+          >
+            미팅
+          </TypeButton>
+          <TypeButton
+            onClick={() => navigate(Path.MatchingDating)}
+            size="medium"
+            variant={type === 'dating' ? 'default' : 'gray'}
+            fontWeight={type === 'dating' ? 700 : 400}
+          >
+            소개팅
+          </TypeButton>
         </ButtonWrapper>
-      </NavigationWrapper>
-    </TemplateBlock>
+        <div>{children}</div>
+        <NavigationWrapper>
+          <ButtonWrapper>
+            {
+              {
+                none: <NoneButton />,
+                waiting: <WaitingButton handleClick={requestRandomMatching} />,
+                success: <SuccessButton />,
+                pay: <CompleteButton />,
+                end: <EndButton handleStatus={handleStatus} />,
+              }[btnName]
+            }
+          </ButtonWrapper>
+        </NavigationWrapper>
+      </TemplateBlock>
+      {isErrorModal && (
+        <Modal
+          width={200}
+          height={140}
+          bottonName="확인"
+          title="알림"
+          text={errorMessage}
+          onToggleModal={onToggleErrorModal}
+          onClick={() => {
+            void 0;
+          }}
+        />
+      )}
+    </>
   );
 };
 
