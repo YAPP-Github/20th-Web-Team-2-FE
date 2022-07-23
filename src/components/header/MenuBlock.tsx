@@ -28,8 +28,8 @@ function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
             <div className="univ">{TempUserData.univ}</div>
           </UserBox>
         </SidebarHeader>
-        <MeetingInfoBox />
-        <DatingInfoBox />
+        {isMenu && <MeetingInfoBox />}
+        {isMenu && <DatingInfoBox />}
       </NavBarBlock>
       <NavBackground onClick={onToggleMenu} isMenu={isMenu} />
     </>
