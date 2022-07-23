@@ -63,8 +63,8 @@ function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
             <img src={Logout} />
           </LogoutButton>
         </SidebarHeader>
-        <MeetingInfoBox />
-        <DatingInfoBox />
+        {isMenu && <MeetingInfoBox />}
+        {isMenu && <DatingInfoBox />}
         <WithdrawalButton onClick={onToggleModal}>탈퇴하기</WithdrawalButton>
       </NavBarBlock>
       <NavBackground onClick={onToggleMenu} isMenu={isMenu} />
