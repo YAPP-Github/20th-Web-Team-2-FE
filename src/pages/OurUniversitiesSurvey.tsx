@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Title } from '@/lib/styles/styledComponents';
 import { SurveyTemplate } from '@/components/domain/survey';
 import SearchSelector from '@/components/domain/survey/SearchSelector';
@@ -12,6 +12,7 @@ const OurUniversitiesSurvey = () => {
   const { univs } = useUnivLoad();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const [ourUniversities, setOurUniversities] = useState<number[]>(initMeetingState.ourUniversities);
+  const { typeOfMeeting } = initMeetingState;
 
   const handleNextClick = () => {
     if (initMeetingState) {
@@ -21,9 +22,22 @@ const OurUniversitiesSurvey = () => {
     meetingNavigate(Path.OurDepartmentsAverageHeightSurvey);
   };
 
+  const maxUniv = useMemo(() => {
+    switch (typeOfMeeting) {
+      case 'ONE':
+        return 1;
+      case 'TWO':
+        return 2;
+      case 'THREE':
+        return 3;
+      case 'FOUR':
+        return 4;
+    }
+  }, [typeOfMeeting]);
+
   return (
     <SurveyTemplate
-      disableNext={false}
+      disableNext={ourUniversities.length < 1}
       hasProgressBar={true}
       totalStep={14}
       currStep={3}
@@ -39,6 +53,7 @@ const OurUniversitiesSurvey = () => {
         searchData={univs}
         selectedResults={ourUniversities}
         setSelectedResults={setOurUniversities}
+        max={maxUniv}
       />
     </SurveyTemplate>
   );
