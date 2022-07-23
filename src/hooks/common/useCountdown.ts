@@ -1,31 +1,36 @@
 import { useState, useEffect } from 'react';
 
-function useCountdown(targetSeconds: number) {
-  const [target, setTarget] = useState<number>(targetSeconds);
-  const [minutes, setMinutes] = useState('0');
-  const [seconds, setSeconds] = useState('00');
+function useCountdown(targetString: string) {
+  const [DDHHMMSS, setDDHHMMSS] = useState<[string, string, string, string]>(['00', '00', '00', '00']);
 
   useEffect(() => {
-    // @NOTE: 비동기라 1개씩 차이나서 0이 아닌 1 이상일 때만 interval
-    if (target > 1) {
-      const intervalId = setInterval(() => {
-        setTarget((prev) => prev - 1);
-      }, 1000);
-      return () => clearInterval(intervalId);
-    }
-  }, [target]);
+    const handleCountDown = () => {
+      const currentDate = new Date();
+      const targetDate = new Date(targetString).getTime();
+      const gap = targetDate - currentDate.getTime();
+      if (gap >= 0) {
+        const gapDays = Math.floor(gap / DAY);
+        const gapHours = Math.floor((gap % DAY) / HOURS);
+        const gapMinutes = Math.floor((gap % HOURS) / MINUTES);
+        const gapSeconds = Math.floor((gap % MINUTES) / SECONDS);
 
-  useEffect(() => {
-    const handleCountDown = (target: number) => {
-      const minutes = Math.floor(target / 60);
-      const seconds = Math.floor(target % 60);
-      setMinutes(String(minutes));
-      setSeconds(getLiteralTime(seconds));
+        setDDHHMMSS([getLiteralTime(gapDays), getLiteralTime(gapHours), getLiteralTime(gapMinutes), getLiteralTime(gapSeconds)]);
+      }
     };
-    handleCountDown(target - 1);
-  }, [target]);
-  return { minutes, seconds, setTarget };
+
+    const intervalId = setInterval(() => {
+      handleCountDown();
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [targetString]);
+  return DDHHMMSS;
 }
+
+const SECONDS = 1000;
+const MINUTES = SECONDS * 60;
+const HOURS = MINUTES * 60;
+const DAY = HOURS * 24;
 
 const getLiteralTime = (time: number) => {
   if (time >= 10) {

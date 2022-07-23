@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Input, Modal } from '@/components/base';
 import { InputsWrapper, StyledButton, ErrorMessage } from '@/pages/AuthMail';
 import useForm, { InitialValues } from '@/hooks/common/useForm';
-import useCountdown from '@/hooks/common/useCountdown';
+import useAuthNumber from '@/hooks/common/useAuthNumber';
 import styled from 'styled-components';
 import { useToggle } from '@/hooks/common';
 
@@ -12,7 +12,7 @@ interface AuthCodeFormProps {
 }
 
 const AuthCodeForm = ({ email, onCheckAuthCode }: AuthCodeFormProps) => {
-  const { minutes, seconds, setTarget } = useCountdown(0);
+  const { minutes, seconds, setTarget } = useAuthNumber(0);
   const [isErrorModal, onToggleErrorModal] = useToggle();
   const { values, errors, handleSubmit, handleChange } = useForm({
     initialValues: {
