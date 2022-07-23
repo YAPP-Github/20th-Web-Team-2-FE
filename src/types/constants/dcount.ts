@@ -33,7 +33,7 @@ export const MY_DOUNT_ITEMS: Readonly<MY_DOUNT_ITEM>[] = [
 export const PREFER_DCOUNT_ITEMS = [
   {
     id: 'ZERO',
-    text: '모태솔로',
+    text: '0회',
     name: 'preferDateCount ',
   },
   {
