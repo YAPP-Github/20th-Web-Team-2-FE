@@ -2,17 +2,18 @@ import React, { useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { Modal } from '@/components/base/index';
 import { useToggle } from '@/hooks/common';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const LoginCheck = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isErrorModal, onToggleErrorModal] = useToggle();
 
   useEffect(() => {
     const token = Cookies.get('AccessToken');
     const invalidToken = !token || token === 'undefined';
     invalidToken && onToggleErrorModal();
-  }, []);
+  }, [location]);
 
   return (
     <>
