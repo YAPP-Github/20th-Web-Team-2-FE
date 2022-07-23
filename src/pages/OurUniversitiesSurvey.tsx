@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Title } from '@/lib/styles/styledComponents';
 import { SurveyTemplate } from '@/components/domain/survey';
 import SearchSelector from '@/components/domain/survey/SearchSelector';
@@ -6,7 +6,6 @@ import Path from '@/router/Path';
 import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 import useUnivLoad from '@/hooks/common/useUnivLoad';
-import { type TypeOfMeeting } from '@/types/meeting';
 
 const OurUniversitiesSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
@@ -23,8 +22,10 @@ const OurUniversitiesSurvey = () => {
     meetingNavigate(Path.OurDepartmentsAverageHeightSurvey);
   };
 
-  const convertToNumber = (typeOfMeeting: TypeOfMeeting) => {
+  const maxUniv = useMemo(() => {
     switch (typeOfMeeting) {
+      case 'ONE':
+        return 1;
       case 'TWO':
         return 2;
       case 'THREE':
@@ -32,11 +33,11 @@ const OurUniversitiesSurvey = () => {
       case 'FOUR':
         return 4;
     }
-  };
+  }, [typeOfMeeting]);
 
   return (
     <SurveyTemplate
-      disableNext={false}
+      disableNext={ourUniversities.length !== maxUniv}
       hasProgressBar={true}
       totalStep={14}
       currStep={3}
@@ -52,7 +53,7 @@ const OurUniversitiesSurvey = () => {
         searchData={univs}
         selectedResults={ourUniversities}
         setSelectedResults={setOurUniversities}
-        max={convertToNumber(typeOfMeeting)}
+        max={maxUniv}
       />
     </SurveyTemplate>
   );
