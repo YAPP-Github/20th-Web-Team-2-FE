@@ -6,12 +6,14 @@ import Path from '@/router/Path';
 import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 import useUnivLoad from '@/hooks/common/useUnivLoad';
+import { type TypeOfMeeting } from '@/types/meeting';
 
 const OurUniversitiesSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
   const { univs } = useUnivLoad();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const [ourUniversities, setOurUniversities] = useState<number[]>(initMeetingState.ourUniversities);
+  const { typeOfMeeting } = initMeetingState;
 
   const handleNextClick = () => {
     if (initMeetingState) {
@@ -19,6 +21,17 @@ const OurUniversitiesSurvey = () => {
     }
 
     meetingNavigate(Path.OurDepartmentsAverageHeightSurvey);
+  };
+
+  const convertToNumber = (typeOfMeeting: TypeOfMeeting) => {
+    switch (typeOfMeeting) {
+      case 'TWO':
+        return 2;
+      case 'THREE':
+        return 3;
+      case 'FOUR':
+        return 4;
+    }
   };
 
   return (
@@ -39,6 +52,7 @@ const OurUniversitiesSurvey = () => {
         searchData={univs}
         selectedResults={ourUniversities}
         setSelectedResults={setOurUniversities}
+        max={convertToNumber(typeOfMeeting)}
       />
     </SurveyTemplate>
   );
