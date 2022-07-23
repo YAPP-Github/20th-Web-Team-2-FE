@@ -1,10 +1,12 @@
-import React from 'react';
-import { Logo } from '@/assets/img';
+import React, { useEffect, useState } from 'react';
+import { Logo, Logout } from '@/assets/img';
 import { palette } from '@/lib/styles/palette';
 import styled from 'styled-components';
 import DatingInfoBox from './DatingInfoBox';
 import MeetingInfoBox from './MeetingInfoBox';
-
+import { postLogout, postWithdrawal } from '@/lib/api/login';
+import { useToggle } from '@/hooks/common';
+import { Modal } from '../base';
 interface MenuBlockProps {
   isMenu: boolean;
   onToggleMenu: () => void;
@@ -18,20 +20,79 @@ const TempUserData = {
 };
 
 function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
+  const [isModal, onToggleModal] = useToggle();
+  const [isConfirm, setConfirm] = useState(false);
+  const [isErrorModal, onToggleErrorModal] = useToggle();
+
+  const handleLogout = async () => {
+    try {
+      await postLogout();
+    } catch (e) {
+      onToggleErrorModal();
+    }
+  };
+
+  const handleWithdrawal = async () => {
+    try {
+      if (isConfirm) {
+        await postWithdrawal();
+      }
+    } catch (e) {
+      onToggleErrorModal();
+    }
+  };
+
+  useEffect(() => {
+    if (isConfirm) {
+      handleWithdrawal();
+    }
+  }, [isConfirm]);
+
   return (
     <>
       <NavBarBlock isMenu={isMenu}>
         <SidebarHeader>
-          <SiteLogo src={Logo} alt="사이트 로고" />
-          <UserBox>
-            <div>{TempUserData.email}</div>
-            <div className="univ">{TempUserData.univ}</div>
-          </UserBox>
+          <UserInfo>
+            <SiteLogo src={Logo} alt="사이트 로고" />
+            <UserBox>
+              <div>{TempUserData.email}</div>
+              <div className="univ">{TempUserData.univ}</div>
+            </UserBox>
+          </UserInfo>
+          <LogoutButton onClick={handleLogout}>
+            <img src={Logout} />
+          </LogoutButton>
         </SidebarHeader>
         {isMenu && <MeetingInfoBox />}
         {isMenu && <DatingInfoBox />}
+        <WithdrawalButton onClick={onToggleModal}>탈퇴하기</WithdrawalButton>
       </NavBarBlock>
       <NavBackground onClick={onToggleMenu} isMenu={isMenu} />
+      {isModal && (
+        <Modal
+          width={200}
+          height={140}
+          bottonName="확인"
+          title="정말 탈퇴하시겠습니까?"
+          text="　탈퇴하면 모든 설문정보가 
+          사라집니다."
+          onToggleModal={onToggleModal}
+          onClick={() => setConfirm(true)}
+        />
+      )}
+      {isErrorModal && (
+        <Modal
+          width={200}
+          height={140}
+          bottonName="확인"
+          title="알림"
+          text="에러가 발생했습니다😭 다시한번 시도해 주세요!"
+          onToggleModal={onToggleErrorModal}
+          onClick={() => {
+            void 0;
+          }}
+        />
+      )}
     </>
   );
 }
@@ -79,7 +140,12 @@ const NavBarBlock = styled.section<{ isMenu: boolean }>`
 `;
 const SidebarHeader = styled.div`
   display: flex;
+  justify-content: space-between;
   margin-bottom: 20px;
+`;
+
+const UserInfo = styled.div`
+  display: flex;
 `;
 
 const SiteLogo = styled.img`
@@ -98,6 +164,21 @@ const UserBox = styled.div`
     font-weight: 400;
     color: ${palette.grayDark};
   }
+`;
+
+const LogoutButton = styled.button`
+  img {
+    width: 14px;
+    height: 14px;
+  }
+`;
+
+const WithdrawalButton = styled.button`
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  font-size: 10px;
+  color: ${palette.grayDark};
 `;
 
 export default MenuBlock;

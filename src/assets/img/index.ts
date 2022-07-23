@@ -11,3 +11,4 @@ export { default as Waiting } from './Waiting.png';
 export { default as Complete } from './Complete.png';
 export { default as CopyIcon } from './CopyIcon.png';
 export { default as TripleLineMenu } from './TripleLineMenu.png';
+export { default as Logout } from './Logout.png';
