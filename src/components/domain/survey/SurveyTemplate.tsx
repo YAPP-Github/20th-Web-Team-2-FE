@@ -10,6 +10,7 @@ interface SurveyTemplateProps extends Partial<ProgressBarProps> {
   disableNext: boolean;
   handlePrevClick?: MouseEventHandler<HTMLButtonElement>;
   handleNextClick?: MouseEventHandler<HTMLButtonElement>;
+  disabledFooter?: boolean;
 }
 
 const SurveyTemplate = ({
@@ -20,6 +21,7 @@ const SurveyTemplate = ({
   totalStep = 1,
   handlePrevClick,
   handleNextClick,
+  disabledFooter = false,
 }: SurveyTemplateProps) => {
   return (
     <SurveyTemplateBlock>
@@ -29,20 +31,22 @@ const SurveyTemplate = ({
       {children}
       <NavigationWrapper>
         {hasProgressBar && <ProgressBar currStep={currStep} totalStep={totalStep} />}
-        <ButtonWrapper>
-          <Button size="medium" variant="gray" onClick={handlePrevClick}>
-            이전
-          </Button>
-          <Button
-            onClick={handleNextClick}
-            size="medium"
-            disabled={disableNext}
-            variant={disableNext ? 'gray' : 'default'}
-            fontWeight={disableNext ? 400 : 700}
-          >
-            다음
-          </Button>
-        </ButtonWrapper>
+        {!disabledFooter && (
+          <ButtonWrapper>
+            <Button size="medium" variant="gray" onClick={handlePrevClick}>
+              이전
+            </Button>
+            <Button
+              onClick={handleNextClick}
+              size="medium"
+              disabled={disableNext}
+              variant={disableNext ? 'gray' : 'default'}
+              fontWeight={disableNext ? 400 : 700}
+            >
+              다음
+            </Button>
+          </ButtonWrapper>
+        )}
       </NavigationWrapper>
     </SurveyTemplateBlock>
   );
