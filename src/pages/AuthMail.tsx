@@ -6,7 +6,6 @@ import { Title } from '@/lib/styles/styledComponents';
 import { palette } from '@/lib/styles/palette';
 import { EmailForm, AuthCodeForm } from '@/components/authMail';
 import { Link } from 'react-router-dom';
-import client from '@/lib/api';
 import { useToggle } from '@/hooks/common';
 import { postEmail, putEmail } from '@/lib/api/email';
 

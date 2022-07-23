@@ -1,10 +1,11 @@
 import { Button } from '@/components/base';
 import React from 'react';
 
-function WaitingButton() {
-  const handleClick = () => {
-    console.log('asd');
-  };
+interface WaitingButtonProps {
+  handleClick: () => Promise<void>;
+}
+
+function WaitingButton({ handleClick }: WaitingButtonProps) {
   return (
     <Button onClick={handleClick} size="medium" variant={'default'}>
       랜덤매칭
