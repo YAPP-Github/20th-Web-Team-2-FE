@@ -1,39 +1,52 @@
 import { Button } from '@/components/base';
-import { getMeetingUsers, getDatingUsers } from '@/lib/api/admin';
+import { getMeetingUsers, getDatingUsers, patchDatingPayment, patchMeetingPayment } from '@/lib/api/admin';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { type AdminUsersStatus } from '@/types/user';
 
 type UserType = 'meeting' | 'dating';
 
 const AdminPage = () => {
   const [userType, setUserType] = useState<UserType>('meeting');
-  const [datingUsers, setDatingUsers] = useState<any[]>([]);
-  const [meetingUsers, setMeetingUsers] = useState<any[]>([]);
+  const [datingUsers, setDatingUsers] = useState<AdminUsersStatus[]>([]);
+  const [meetingUsers, setMeetingUsers] = useState<AdminUsersStatus[]>([]);
 
-  // const users = userType === 'meeting' ? meetingUsers : datingUsers;
+  const users = userType === 'meeting' ? meetingUsers : datingUsers;
 
-  const users = [{ kakaoId: 1, matchStatus: 'waiting', isPaid: false }];
+  const handlePayment = async (kakaoId: string) => {
+    try {
+      if (userType === 'meeting') {
+        const res = await patchMeetingPayment(kakaoId);
+        setMeetingUsers(res);
+        return;
+      }
+      const res = await patchDatingPayment(kakaoId);
+      setDatingUsers(res);
+    } catch (e) {
+      alert(e.message);
+    }
+  };
 
   useEffect(() => {
     const getUsersInfo = async () => {
       try {
         if (userType === 'meeting') {
           const res = await getMeetingUsers();
-          res.status === 200 && setMeetingUsers(res as any);
+          setMeetingUsers(res);
           return;
         }
         const res = await getDatingUsers();
-        res.status === 200 && setDatingUsers(res as any);
+        setDatingUsers(res);
       } catch (e) {
         alert(e.message);
       }
     };
 
     getUsersInfo();
-  }, []);
+  }, [userType]);
 
   return (
-    <>
+    <AdminPageBlock>
       <ButtonWrapper>
         <TypeButton
           onClick={() => setUserType('meeting')}
@@ -62,23 +75,26 @@ const AdminPage = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map(({ kakaoId, matchStatus, isPaid }) => (
+          {users.map(({ kakaoId, matchStatus, paid }) => (
             <tr key={kakaoId}>
               <td>{kakaoId}</td>
               <td>{matchStatus}</td>
-              <PaidColumn isPaid={isPaid}>{String(isPaid)}</PaidColumn>
+              <PaidColumn paid={paid}>{String(paid)}</PaidColumn>
               <td>
-                <Button>지불하기</Button>
+                <Button onClick={() => handlePayment(kakaoId)}>지불하기</Button>
               </td>
             </tr>
           ))}
         </tbody>
       </Table>
-    </>
+    </AdminPageBlock>
   );
 };
 
-// kakaoId, status, isPaid: boolean
+const AdminPageBlock = styled.div`
+  max-width: 1024px;
+  width: 100%;
+`;
 
 const Table = styled.table`
   display: table;
@@ -114,8 +130,8 @@ const TypeButton = styled(Button)`
   height: 38px;
 `;
 
-const PaidColumn = styled.td<{ isPaid: boolean }>`
-  color: ${({ isPaid }) => (isPaid ? '#1E90FF' : '#DC143C')};
+const PaidColumn = styled.td<{ paid: boolean }>`
+  color: ${({ paid }) => (paid ? '#1E90FF' : '#DC143C')};
 `;
 
 export default AdminPage;

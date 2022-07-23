@@ -7,6 +7,10 @@ export interface LoginResponse {
   accessToken: 'string';
 }
 
-// export interface Users { 
+type MatchStatus = 'WAITING' | 'MATCHED' | 'FAILED' | 'DONE' | 'PAID';
 
-// }
+export interface AdminUsersStatus {
+  kakaoId: string;
+  matchStatus: MatchStatus;
+  paid: boolean;
+}
