@@ -13,7 +13,7 @@ export interface Meeting {
   averageAge: number;
   ourUniversities: number[];
   ourDepartments: Departments[];
-  averageHeight: number; // @FIXME: number[] -> number
+  averageHeight: number;
   avoidUniversities: number[];
   preferUniversities: number[];
   preferAge: number[];
