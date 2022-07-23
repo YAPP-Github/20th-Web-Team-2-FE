@@ -7,8 +7,9 @@ import { addComma } from '@/utils/addComma';
 import { addCommaTail } from '@/utils/addCommaTail';
 import { DatingPartnerSurvey } from '@/types/dating';
 import { memo } from 'react';
+import { Departments, MeetingPartnerSurvey, MindSet, Play } from '@/types/meeting';
 
-function DatingEndBox({ areas, averageAge, averageHeight, departments, kakaoId, mindset, play, universities }: DatingPartnerSurvey) {
+function MeetingEndBox({ areas, averageAge, averageHeight, departments, kakaoId, mindset, play, universities }: MeetingPartnerSurvey) {
   return (
     <div>
       <MatchingInfoBox>
@@ -22,19 +23,12 @@ function DatingEndBox({ areas, averageAge, averageHeight, departments, kakaoId, 
         </FlexLine>
         <FlexLine>
           <InfoLabel>학교</InfoLabel>
-          <InfoText>
-            {ourUniversities.map((univ: string, index: number) => (
-              <p key={univ}>
-                {schools[univ].name}
-                {addCommaTail(ourUniversities.length, index)}
-              </p>
-            ))}
-          </InfoText>
+          <InfoText>{universities}</InfoText>
         </FlexLine>
         <FlexLine>
           <InfoLabel>학과</InfoLabel>
           <InfoFlexText>
-            {ourDepartments.map((department, index) => (
+            {departments.map((department, index) => (
               <p key={`${department}_${index}`}>
                 {addComma(index)}
                 {conversionDepartment(department)}
@@ -45,19 +39,13 @@ function DatingEndBox({ areas, averageAge, averageHeight, departments, kakaoId, 
         <FlexLine>
           <InfoLabel>지역</InfoLabel>
           <InfoFlexText>
-            {abroadAreas?.map((area, index) => (
+            {areas?.map((area, index) => (
               <div key={area}>
                 {addComma(index)}
                 {area}
               </div>
             ))}
           </InfoFlexText>
-          {domesticAreas?.map((area, index) => (
-            <InfoFlexText key={`${area}_${index}`}>
-              {addComma(index)}
-              {conversionDomesticArea(area)},
-            </InfoFlexText>
-          ))}
         </FlexLine>
         <FlexLine>
           <InfoLabel>마인드셋</InfoLabel>
@@ -127,4 +115,4 @@ const EtcEle = styled.a`
   align-items: center;
   cursor: pointer;
 `;
-export default memo(DatingEndBox);
+export default memo(MeetingEndBox);

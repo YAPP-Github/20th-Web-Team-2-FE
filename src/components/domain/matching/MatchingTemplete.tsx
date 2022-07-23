@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button, Modal } from '@/components/base';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -13,19 +13,49 @@ import { Status } from '@/pages/MatchingPage';
 import { getMeetingMatching, postMeetingMatching } from '@/lib/api/meeting';
 import { getDatingMatching, postDatingMatching } from '@/lib/api/dating';
 import { useToggle } from '@/hooks/common';
+import { MeetingPartnerSurvey } from '@/types/meeting';
+import { DatingPartnerSurvey } from '@/types/dating';
 
 interface MatchingTemplateProps {
-  children: ReactNode;
+  meeting: (matchingResult: MeetingPartnerSurvey) => ReactNode;
+  dating: (matchingResult: DatingPartnerSurvey) => ReactNode;
   title: ReactNode;
   btnName: string;
   handleStatus: (status: Status) => void;
 }
-const MatchingTemplete = ({ children, btnName, title, handleStatus }: MatchingTemplateProps) => {
+
+const initMeetingSurvey: MeetingPartnerSurvey = {
+  areas: [],
+  averageAge: 0,
+  averageHeight: 0,
+  departments: [],
+  kakaoId: '',
+  mindset: '',
+  play: '',
+  universities: '',
+};
+
+const initDatingSurvey: DatingPartnerSurvey = {
+  age: 0,
+  areas: [],
+  body: '',
+  characteristic: '',
+  dateCount: '',
+  department: '',
+  height: 0,
+  isSmoke: false,
+  kakaoId: '',
+  university: '',
+};
+
+const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: MatchingTemplateProps) => {
   const location = useLocation();
   const [type, setType] = useState('meeting');
   const navigate = useNavigate();
   const [isErrorModal, onToggleErrorModal] = useToggle();
   const [errorMessage, setErrorMessage] = useState('');
+  const [meetingMatchingResult, setMeetingMatchingResult] = useState<MeetingPartnerSurvey>(initMeetingSurvey);
+  const [datingMatchingResult, setDatingMatchingResult] = useState<DatingPartnerSurvey>(initDatingSurvey);
 
   useEffect(() => {
     location.pathname.includes('meeting') ? setType('meeting') : setType('dating');
@@ -44,11 +74,14 @@ const MatchingTemplete = ({ children, btnName, title, handleStatus }: MatchingTe
   const fetchMatchingResult = async () => {
     try {
       const response = type === 'meeting' ? await getMeetingMatching() : await getDatingMatching();
-      if (response?.message) {
+      if (!response?.partnerSurvey) {
         setErrorMessage(() => response.message.toString());
         onToggleErrorModal();
       } else {
-        handleStatus('pay');
+        handleStatus('success');
+        type === 'meeting'
+          ? setMeetingMatchingResult(response.partnerSurvey as MeetingPartnerSurvey)
+          : setDatingMatchingResult(response.partnerSurvey as DatingPartnerSurvey);
       }
     } catch (e) {
       setErrorMessage(() => (e as Error).message.toString());
@@ -78,7 +111,8 @@ const MatchingTemplete = ({ children, btnName, title, handleStatus }: MatchingTe
             소개팅
           </TypeButton>
         </ButtonWrapper>
-        <div>{children}</div>
+        {type === 'meeting' && <>{meeting(meetingMatchingResult)}</>}
+        {type === 'dating' && <>{dating(datingMatchingResult)}</>}
         <NavigationWrapper>
           <ButtonWrapper>
             {

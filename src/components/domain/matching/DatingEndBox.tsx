@@ -1,71 +1,52 @@
 import { palette } from '@/lib/styles/palette';
-import { schools } from '@/mock/schools';
 import styled from 'styled-components';
 import KakaoCopyBox from './KakaoCopyBox';
-import { conversionDepartment, conversionDomesticArea, conversionMindset, conversionPlay } from '@/utils/converson';
-import { addComma } from '@/utils/addComma';
-import { addCommaTail } from '@/utils/addCommaTail';
 import { DatingPartnerSurvey } from '@/types/dating';
 import { memo } from 'react';
 
-function DatingEndBox({ areas, averageAge, averageHeight, departments, kakaoId, mindset, play, universities }: DatingPartnerSurvey) {
+function DatingEndBox({ age, areas, body, characteristic, dateCount, department, height, isSmoke, kakaoId, university }: DatingPartnerSurvey) {
   return (
     <div>
       <MatchingInfoBox>
         <FlexLine>
-          <InfoLabel>평균나이</InfoLabel>
-          <InfoText>{averageAge}</InfoText>
+          <InfoLabel>나이</InfoLabel>
+          <InfoText>{age}</InfoText>
         </FlexLine>
         <FlexLine>
-          <InfoLabel>평균키</InfoLabel>
-          <InfoText>{averageHeight}</InfoText>
+          <InfoLabel>키</InfoLabel>
+          <InfoText>{height}</InfoText>
         </FlexLine>
         <FlexLine>
           <InfoLabel>학교</InfoLabel>
-          <InfoText>
-            {ourUniversities.map((univ: string, index: number) => (
-              <p key={univ}>
-                {schools[univ].name}
-                {addCommaTail(ourUniversities.length, index)}
-              </p>
-            ))}
-          </InfoText>
+          <InfoText>{university}</InfoText>
         </FlexLine>
         <FlexLine>
           <InfoLabel>학과</InfoLabel>
-          <InfoFlexText>
-            {ourDepartments.map((department, index) => (
-              <p key={`${department}_${index}`}>
-                {addComma(index)}
-                {conversionDepartment(department)}
-              </p>
-            ))}
-          </InfoFlexText>
+          <InfoFlexText>{department}</InfoFlexText>
+        </FlexLine>
+        <FlexLine>
+          <InfoLabel>성격</InfoLabel>
+          <InfoText>{characteristic}</InfoText>
+        </FlexLine>
+        <FlexLine>
+          <InfoLabel>학과</InfoLabel>
+          <InfoFlexText>{department}</InfoFlexText>
         </FlexLine>
         <FlexLine>
           <InfoLabel>지역</InfoLabel>
-          <InfoFlexText>
-            {abroadAreas?.map((area, index) => (
-              <div key={area}>
-                {addComma(index)}
-                {area}
-              </div>
-            ))}
-          </InfoFlexText>
-          {domesticAreas?.map((area, index) => (
-            <InfoFlexText key={`${area}_${index}`}>
-              {addComma(index)}
-              {conversionDomesticArea(area)},
-            </InfoFlexText>
-          ))}
+          <InfoText>{areas.join(',')}</InfoText>
         </FlexLine>
         <FlexLine>
-          <InfoLabel>마인드셋</InfoLabel>
-          <InfoText>{conversionMindset(mindset)}</InfoText>
+          <InfoLabel>체형</InfoLabel>
+          <InfoText>{body}</InfoText>
         </FlexLine>
         <FlexLine>
-          <InfoLabel>술게임</InfoLabel>
-          <InfoText>{conversionPlay(play)}</InfoText>
+          <InfoLabel>흡연자 유무</InfoLabel>
+          <InfoText>{isSmoke ? '네' : '아니오'}</InfoText>
+        </FlexLine>
+        <FlexLine>
+          <InfoLabel>연애 횟수</InfoLabel>
+          <InfoText>{dateCount}</InfoText>
         </FlexLine>
       </MatchingInfoBox>
       <KakaoCopyBox kakaoId={kakaoId} />
