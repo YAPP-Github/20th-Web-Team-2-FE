@@ -39,7 +39,7 @@ const KakaoIdSurvey = () => {
           setDatingData(datingData);
         }
       }
-      navigate(Path.MatchingMeeting);
+      navigate(Path.EndSurvey);
     } catch (e) {
       onToggleErrorModal();
     }

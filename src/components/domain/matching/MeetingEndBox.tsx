@@ -1,36 +1,15 @@
-import React from 'react';
 import { palette } from '@/lib/styles/palette';
 import { schools } from '@/mock/schools';
-import { Meeting } from '@/types/meeting';
 import styled from 'styled-components';
 import KakaoCopyBox from './KakaoCopyBox';
 import { conversionDepartment, conversionDomesticArea, conversionMindset, conversionPlay } from '@/utils/converson';
 import { addComma } from '@/utils/addComma';
 import { addCommaTail } from '@/utils/addCommaTail';
+import { DatingPartnerSurvey } from '@/types/dating';
+import { memo } from 'react';
+import { Departments, MeetingPartnerSurvey, MindSet, Play } from '@/types/meeting';
 
-const TempData: Meeting = {
-  averageHeight: 175,
-  averageAge: 22,
-  ourUniversities: [1, 2, 11],
-  ourDepartments: ['ATHLETIC', 'SCIENCE'],
-  abroadAreas: [1, 2, 3],
-  domesticAreas: [],
-  mindset: 'ALL',
-  play: 'ALL',
-  typeOfMeeting: 'ONE',
-  gender: 'FEMALE',
-  avoidUniversities: [1, 2, 3, 4],
-  preferUniversities: [5, 6, 7, 8],
-  preferAge: [20, 25],
-  preferHeight: [170, 180],
-  preferDepartments: ['ATHLETIC', 'SCIENCE'],
-  isAbroad: false,
-  channel: 'FRIEND',
-  agreement: false,
-  kakaoId: 'asd321',
-};
-function EndBox() {
-  const { kakaoId, averageAge, averageHeight, mindset, ourDepartments, ourUniversities, play } = TempData;
+function MeetingEndBox({ areas, averageAge, averageHeight, departments, kakaoId, mindset, play, universities }: MeetingPartnerSurvey) {
   return (
     <div>
       <MatchingInfoBox>
@@ -44,19 +23,12 @@ function EndBox() {
         </FlexLine>
         <FlexLine>
           <InfoLabel>학교</InfoLabel>
-          <InfoText>
-            {ourUniversities.map((univ, index) => (
-              <p key={univ}>
-                {schools[univ].name}
-                {addCommaTail(ourUniversities.length, index)}
-              </p>
-            ))}
-          </InfoText>
+          <InfoText>{universities}</InfoText>
         </FlexLine>
         <FlexLine>
           <InfoLabel>학과</InfoLabel>
           <InfoFlexText>
-            {ourDepartments.map((department, index) => (
+            {departments.map((department, index) => (
               <p key={`${department}_${index}`}>
                 {addComma(index)}
                 {conversionDepartment(department)}
@@ -67,20 +39,13 @@ function EndBox() {
         <FlexLine>
           <InfoLabel>지역</InfoLabel>
           <InfoFlexText>
-            {TempData.abroadAreas &&
-              TempData.abroadAreas.map((area, index) => (
-                <div key={area}>
-                  {addComma(index)}
-                  {area}
-                </div>
-              ))}
+            {areas?.map((area, index) => (
+              <div key={area}>
+                {addComma(index)}
+                {area}
+              </div>
+            ))}
           </InfoFlexText>
-          {TempData.domesticAreas?.map((area, index) => (
-            <InfoFlexText key={`${area}_${index}`}>
-              {addComma(index)}
-              {conversionDomesticArea(area)},
-            </InfoFlexText>
-          ))}
         </FlexLine>
         <FlexLine>
           <InfoLabel>마인드셋</InfoLabel>
@@ -106,7 +71,7 @@ function EndBox() {
 }
 const MatchingInfoBox = styled.div`
   width: 100%;
-  padding: 20px 0px 5px 20px;
+  padding: 20px 0 5px 20px;
   background-color: ${palette.grayLight};
   border-radius: 4px;
   font-size: 12px;
@@ -126,7 +91,6 @@ const InfoText = styled.div`
   padding-top: 2px;
   line-height: 16px;
   text-align: left;
-  padding: 2px 0 10px 6px;
 `;
 const InfoFlexText = styled(InfoText)`
   display: flex;
@@ -151,4 +115,4 @@ const EtcEle = styled.a`
   align-items: center;
   cursor: pointer;
 `;
-export default React.memo(EndBox);
+export default memo(MeetingEndBox);

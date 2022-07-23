@@ -12,8 +12,10 @@ interface SearchSelectorProps {
   searchData: SearchData[];
   selectedResults: number[];
   setSelectedResults: React.Dispatch<React.SetStateAction<number[]>>;
-  max: number;
+  max?: number;
 }
+
+const defaultMax = 4;
 
 const SearchSelector = ({ placeholder, searchData, selectedResults, setSelectedResults, max }: SearchSelectorProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -33,7 +35,7 @@ const SearchSelector = ({ placeholder, searchData, selectedResults, setSelectedR
 
     const noMatchData = !searchData.map(({ id }) => id).includes(id);
     const existSelected = selectedResults.includes(id);
-    const overMaxLimit = selectedResults.length >= max;
+    const overMaxLimit = selectedResults.length >= (max ?? defaultMax);
     if (noMatchData || existSelected || overMaxLimit) return;
 
     setSelectedResults((prev) => [...prev, id]);

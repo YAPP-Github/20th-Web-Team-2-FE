@@ -6,6 +6,7 @@ import { SMOKE_ITEMS } from '@/types/constants/smoke';
 import { MYBODY_ITEMS } from '@/types/constants/body';
 import { useDatingSessionState } from '@/hooks/common';
 import { type Body } from '@/types/dating';
+import styled from 'styled-components';
 
 const MyBodySmoke = () => {
   const datingNavigate = useDatingNavigate();
@@ -38,11 +39,17 @@ const MyBodySmoke = () => {
       <ChooseFourBox items={MYBODY_ITEMS} checkedOption={myBody} setCheckedOption={setMyBody}>
         본인의 체형을 선택해주세요
       </ChooseFourBox>
-      <ChooseTwoBox selectedOption={mySmoke ? 'true' : 'false'} onChangeOption={onChangeOption} items={SMOKE_ITEMS}>
-        혹시 흡연자이신가요?
-      </ChooseTwoBox>
+      <BottomWrapper>
+        <ChooseTwoBox selectedOption={mySmoke ? 'true' : 'false'} onChangeOption={onChangeOption} items={SMOKE_ITEMS}>
+          혹시 흡연자이신가요?
+        </ChooseTwoBox>
+      </BottomWrapper>
     </SurveyTemplate>
   );
 };
+
+const BottomWrapper = styled.div`
+  margin-top: 46px;
+`;
 
 export default MyBodySmoke;

@@ -1,3 +1,5 @@
+import { Body, Characteristic } from '@/types/dating';
+
 export type Gender = 'MALE' | 'FEMALE';
 export type TypeOfMeeting = 'ONE' | 'TWO' | 'THREE' | 'FOUR';
 export type Departments = 'LIBERAL' | 'SCIENCE' | 'ART' | 'ATHLETIC';
@@ -13,7 +15,7 @@ export interface Meeting {
   averageAge: number;
   ourUniversities: number[];
   ourDepartments: Departments[];
-  averageHeight: number; // @FIXME: number[] -> number
+  averageHeight: number;
   avoidUniversities: number[];
   preferUniversities: number[];
   preferAge: number[];
@@ -27,4 +29,22 @@ export interface Meeting {
   channel: Channel;
   agreement: boolean;
   kakaoId: string;
+}
+
+export interface MeetingMatchingResultResponse {
+  code: number;
+  message: string;
+  partnerSurvey: MeetingPartnerSurvey;
+}
+
+export interface MeetingPartnerSurvey {
+  areas: string[];
+  averageAge: number;
+  averageHeight: number;
+  departments: Departments[];
+  kakaoId: string;
+  mindset: MindSet | '';
+  play: Play | '';
+  universities: string;
+  payDeadline: string;
 }

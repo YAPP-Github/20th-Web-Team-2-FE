@@ -6,21 +6,13 @@ import { Title } from '@/lib/styles/styledComponents';
 import { palette } from '@/lib/styles/palette';
 import { EmailForm, AuthCodeForm } from '@/components/authMail';
 import { Link } from 'react-router-dom';
-import client from '@/lib/api';
 import { useToggle } from '@/hooks/common';
+import { postEmail, putEmail } from '@/lib/api/email';
 
 const AuthMail = () => {
   const [cantMoveNext, setCantMoveNext] = useState(true);
   const [email, setEmail] = useState('');
   const [isErrorModal, onToggleErrorModal] = useToggle();
-
-  const postEmail = async (email: string) => {
-    await client.post(`/api/email`, { email });
-  };
-
-  const putEmail = async (authCode: string) => {
-    await client.put(`/api/email`, { authCode });
-  };
 
   const onSubmitAuthCode = async (email: string) => {
     try {

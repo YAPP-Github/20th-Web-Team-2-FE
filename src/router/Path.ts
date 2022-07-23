@@ -30,6 +30,7 @@ enum Path {
   OauthKakao = '/oauth/kakao',
   MatchingMeeting = '/matching/meeting',
   MatchingDating = '/matching/dating',
+  EndSurvey = '/end-survey',
 }
 
 export default Path;
