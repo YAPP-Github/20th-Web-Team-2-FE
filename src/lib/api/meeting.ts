@@ -16,3 +16,13 @@ export const postReMatchMettingSurvey = async () => {
   const res = await apiClient.post('/meeting/survey/rematch');
   return res.data;
 };
+
+export const postMeetingMatching = async () => {
+  const res = await apiClient.post('/meeting/matching');
+  return res.data;
+};
+
+export const getMeetingMatching = async () => {
+  const res = await apiClient.get('/meeting/matching');
+  return res.data;
+};

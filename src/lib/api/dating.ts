@@ -7,6 +7,11 @@ export const getDatingMatching = async () => {
   return res.data;
 };
 
+export const postDatingMatching = async () => {
+  const res = await apiClient.post('/dating/matching');
+  return res.data;
+};
+
 export const postDatingSurvey = async (payload: Dating) => {
   const res = await apiClient.post<AxiosResponse>('/dating/survey', payload);
   return res.data;
