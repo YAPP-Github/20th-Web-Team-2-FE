@@ -37,7 +37,7 @@ const OurUniversitiesSurvey = () => {
 
   return (
     <SurveyTemplate
-      disableNext={ourUniversities.length !== maxUniv}
+      disableNext={ourUniversities.length < 1}
       hasProgressBar={true}
       totalStep={14}
       currStep={3}
