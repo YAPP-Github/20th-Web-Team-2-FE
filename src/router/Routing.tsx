@@ -38,6 +38,8 @@ import {
 import Test from '@/components/base/Test';
 import UserHeader from '@/components/header/UserHeader';
 import { palette } from '@/lib/styles/palette';
+import LoginCheck from '@/components/base/LoginCheck';
+import Template from '@/components/domain/survey/Template';
 
 function Routing() {
   return (
@@ -53,7 +55,7 @@ function Routing() {
             <Route path={Path.TypeOfMeetingSurvey} element={<TypeOfMeetingSurvey />} />
             <Route path={Path.OauthKakao} element={<OauthKakao />} />
             <Route path={Path.EndSurvey} element={<EndSurvey />} />
-            <Route path={'/meeting'} element={<Outlet />}>
+            <Route path={'/meeting'} element={<Template />}>
               <Route path={Path.GenderAverageAgeSurvey} element={<GenderAverageAgeSurvey />} />
               <Route path={Path.OurUniversitiesSurvey} element={<OurUniversitiesSurvey />} />
               <Route path={Path.OurDepartmentsAverageHeightSurvey} element={<OurDepartmentsAverageHeightSurvey />} />
@@ -70,7 +72,7 @@ function Routing() {
               <Route path={Path.AgreementSurvey} element={<AgreementSurvey />} />
               <Route path={Path.KakaoIdSurvey} element={<KakaoIdSurvey />} />
             </Route>
-            <Route path={'/dating'} element={<Outlet />}>
+            <Route path={'/dating'} element={<Template />}>
               <Route path={Path.MyGenderAge} element={<MyGenderAge />} />
               <Route path={Path.MyDepartmentCharacter} element={<MyDepartmentCharacter />} />
               <Route path={Path.MyMbtiHeight} element={<MyMbtiHeight />} />

@@ -33,6 +33,7 @@ const initMeetingSurvey: MeetingPartnerSurvey = {
   mindset: '',
   play: '',
   universities: '',
+  payDeadline: '',
 };
 
 const initDatingSurvey: DatingPartnerSurvey = {
@@ -46,6 +47,7 @@ const initDatingSurvey: DatingPartnerSurvey = {
   isSmoke: false,
   kakaoId: '',
   university: '',
+  payDeadline: '',
 };
 
 const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: MatchingTemplateProps) => {
