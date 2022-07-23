@@ -122,6 +122,7 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
                 success: <SuccessButton />,
                 pay: <CompleteButton />,
                 end: <EndButton handleStatus={handleStatus} />,
+                fail: <EndButton handleStatus={handleStatus} />,
               }[btnName]
             }
           </ButtonWrapper>

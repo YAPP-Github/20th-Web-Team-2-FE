@@ -40,6 +40,13 @@ function MatchingStateTitle(state: string) {
               완료되었습니다!
             </strong>
           ),
+          fail: (
+            <strong>
+              매칭이
+              <br />
+              실패하였습니다.
+            </strong>
+          ),
         }[state]
       }
     </>

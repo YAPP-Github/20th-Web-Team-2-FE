@@ -1,20 +1,23 @@
-import CompleteBox from '@/components/domain/matching/CompleteBox';
-import MatchingStateTitle from '@/components/domain/matching/MatchingStateTitle';
-import MatchingTemplete from '@/components/domain/matching/MatchingTemplete';
-import SuccessBox from '@/components/domain/matching/SuccessBox';
-import WaitingBox from '@/components/domain/matching/WaitingBox';
-import { Contents } from '@/lib/styles/styledComponents';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import {
+  SuccessBox,
+  WaitingBox,
+  MeetingEndBox,
+  DatingEndBox,
+  CompleteBox,
+  FailBox,
+  MatchingStateTitle,
+  MatchingTemplete,
+} from '@/components/domain/matching';
+import { Contents } from '@/lib/styles/styledComponents';
 import { MeetingPartnerSurvey } from '@/types/meeting';
 import { DatingPartnerSurvey } from '@/types/dating';
-import MeetingEndBox from '@/components/domain/matching/MeetingEndBox';
-import DatingEndBox from '@/components/domain/matching/DatingEndBox';
 
-export type Status = 'none' | 'waiting' | 'success' | 'pay' | 'end';
+export type Status = 'none' | 'waiting' | 'success' | 'pay' | 'end' | 'fail';
 
 const MatchingPage = () => {
-  const [status, setStatus] = useState<Status>('waiting');
+  const [status, setStatus] = useState<Status>('fail');
 
   const handleStatus = (status: Status) => setStatus(status);
 
@@ -33,6 +36,7 @@ const MatchingPage = () => {
                 success: <SuccessBox payDeadline={matchingResult.payDeadline} />,
                 pay: <CompleteBox date={matchingResult.payDeadline} />,
                 end: <MeetingEndBox {...matchingResult} />,
+                fail: <FailBox />,
               }[status]
             }
           </MatchingContents>
@@ -46,6 +50,7 @@ const MatchingPage = () => {
                 success: <SuccessBox payDeadline={matchingResult.payDeadline} />,
                 pay: <CompleteBox date={matchingResult.payDeadline} />,
                 end: <DatingEndBox {...matchingResult} />,
+                fail: <FailBox />,
               }[status]
             }
           </MatchingContents>
