@@ -1,4 +1,4 @@
-import { type Gender, Departments, DomesticAreas, Channel } from './meeting';
+import { type Gender, Departments, DomesticAreas, Channel, Play, MindSet, TypeOfMeeting } from './meeting';
 
 export type Characteristic = 'VERY_QUIET' | 'A_LITTLE_QUIET' | 'VERY_ACTIVE' | 'A_LITTLE_ACTIVE';
 export type Body = 'SKINNY' | 'SLIM' | 'MUSCULAR' | 'CHUBBY';
@@ -29,4 +29,24 @@ export interface Dating {
   channel: Channel;
   agreement: boolean;
   kakaoId: string;
+}
+
+export interface DatingMatchingResultResponse {
+  code: number;
+  message: string;
+  partnerSurvey: DatingPartnerSurvey;
+}
+
+export interface DatingPartnerSurvey {
+  age: number;
+  areas: string[];
+  body: Body | '';
+  characteristic: Characteristic | '';
+  dateCount: TypeOfMeeting | '';
+  department: Departments | '';
+  height: number;
+  isSmoke: boolean;
+  kakaoId: string;
+  university: string;
+  payDeadline: string;
 }

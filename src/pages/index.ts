@@ -27,6 +27,7 @@ export { default as MyDateCount } from './MyDateCount';
 export { default as PreferDepartmentCharacterSurvey } from './PreferDepartmentCharacterSurvey';
 export { default as PreferBodyDateCountSurvey } from './PreferBodyDateCountSurvey';
 export { default as MatchingPage } from './MatchingPage';
+export { default as EndSurvey } from './EndSurvey';
 
 export { default as OauthKakao } from './OauthKakao';
 

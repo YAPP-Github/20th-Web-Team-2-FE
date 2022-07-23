@@ -4,7 +4,7 @@ const useAgreementCheck = () => {
   const [checkedList, setCheckedList] = useState([
     {
       name: 'over19',
-      text: '만 19세 이상입니다',
+      text: '(필수) 만 19세 이상입니다',
       checked: false,
     },
     {

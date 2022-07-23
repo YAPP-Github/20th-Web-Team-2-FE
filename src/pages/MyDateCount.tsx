@@ -6,6 +6,7 @@ import { MY_DOUNT_ITEMS } from '@/types/constants/dcount';
 import { SMOKEOK_ITEMS } from '@/types/constants/smoke';
 import { useDatingSessionState } from '@/hooks/common';
 import { type DateCount } from '@/types/dating';
+import styled from 'styled-components';
 
 const MyDateCount = () => {
   const datingNavigate = useDatingNavigate();
@@ -38,11 +39,17 @@ const MyDateCount = () => {
       <ChooseFourBox items={MY_DOUNT_ITEMS} checkedOption={myDateCount} setCheckedOption={setMyDateCount}>
         본인의 연애 횟수를 선택해주세요.
       </ChooseFourBox>
-      <ChooseTwoBox selectedOption={isSmokeOk ? 'true' : 'false'} onChangeOption={onChangeOption} items={SMOKEOK_ITEMS}>
-        상대가 흡연자여도 괜찮나요?
-      </ChooseTwoBox>
+      <BottomWrapper>
+        <ChooseTwoBox selectedOption={isSmokeOk ? 'true' : 'false'} onChangeOption={onChangeOption} items={SMOKEOK_ITEMS}>
+          상대가 흡연자여도 괜찮나요?
+        </ChooseTwoBox>
+      </BottomWrapper>
     </SurveyTemplate>
   );
 };
+
+const BottomWrapper = styled.div`
+  margin-top: 46px;
+`;
 
 export default MyDateCount;

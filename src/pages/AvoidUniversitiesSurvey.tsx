@@ -46,7 +46,7 @@ const AvoidUniversitiesSurvey = () => {
         모두 입력해주세요.
       </Title>
       <SearchSelector
-        placeholder="학교를 검색하세요.(없을 시 ‘other’ 입력)"
+        placeholder="학교를 검색하세요."
         searchData={univs}
         selectedResults={matchMeeting ? avoidUniversities : avoidDatingUniversities}
         setSelectedResults={matchMeeting ? setAvoidUniversities : setAvoidDatingUniversities}
