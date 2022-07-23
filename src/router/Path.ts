@@ -1,5 +1,6 @@
 enum Path {
   LandingPage = '/',
+  AdminPage = '/35D648E599E6DEBBA04060C6DA86C5B64A5975966C4F2D3170B0CE457BE78BE2',
   TestLogin = '/test-login',
   Component = '/component', // FIXME: 컴포넌트 모아두는 곳 (개발완료 후 삭제)
   AuthMail = '/auth-mail',

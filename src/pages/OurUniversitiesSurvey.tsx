@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Title } from '@/lib/styles/styledComponents';
 import { SurveyTemplate } from '@/components/domain/survey';
 import SearchSelector from '@/components/domain/survey/SearchSelector';
-import { schools } from '@/mock/schools';
 import Path from '@/router/Path';
 import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
+import useUnivLoad from '@/hooks/survey/useUnivLoad';
 
 const OurUniversitiesSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
+  const { univs } = useUnivLoad();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const [ourUniversities, setOurUniversities] = useState<number[]>(initMeetingState.ourUniversities);
+  const { typeOfMeeting } = initMeetingState;
 
   const handleNextClick = () => {
     if (initMeetingState) {
@@ -20,9 +22,22 @@ const OurUniversitiesSurvey = () => {
     meetingNavigate(Path.OurDepartmentsAverageHeightSurvey);
   };
 
+  const maxUniv = useMemo(() => {
+    switch (typeOfMeeting) {
+      case 'ONE':
+        return 1;
+      case 'TWO':
+        return 2;
+      case 'THREE':
+        return 3;
+      case 'FOUR':
+        return 4;
+    }
+  }, [typeOfMeeting]);
+
   return (
     <SurveyTemplate
-      disableNext={false}
+      disableNext={ourUniversities.length < 1}
       hasProgressBar={true}
       totalStep={14}
       currStep={3}
@@ -35,9 +50,10 @@ const OurUniversitiesSurvey = () => {
       </Title>
       <SearchSelector
         placeholder="학교를 검색하세요.(없을 시 ‘other’ 입력)"
-        searchData={schools}
+        searchData={univs}
         selectedResults={ourUniversities}
         setSelectedResults={setOurUniversities}
+        max={maxUniv}
       />
     </SurveyTemplate>
   );

@@ -32,6 +32,7 @@ import {
   PreferBodyDateCountSurvey,
   MatchingPage,
   TestLogin,
+  AdminPage,
 } from '@/pages';
 import Test from '@/components/base/Test';
 import UserHeader from '@/components/header/UserHeader';
@@ -44,6 +45,7 @@ function Routing() {
         <PageWrapper>
           <Routes>
             <Route path={Path.LandingPage} element={<LandingPage />} />
+            <Route path={Path.AdminPage} element={<AdminPage />} />
             <Route path={Path.TestLogin} element={<TestLogin />} />
             <Route path={Path.Component} element={<Test />} />
             <Route path={Path.AuthMail} element={<AuthMail />} />

@@ -13,6 +13,7 @@ const MyMbtiHeight = () => {
   const { initDatingState, setDatingData } = useDatingSessionState();
   const [mbti, setMbti] = useState(initDatingState.mbti);
   const [myHeight, setMyHeight] = useState(initDatingState.myHeight);
+  const [heightError, setHeightError] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -20,8 +21,15 @@ const MyMbtiHeight = () => {
       case 'mbti':
         setMbti(value);
         break;
-      case 'myHeight':
-        setMyHeight(Number(value));
+      case 'myHeight': {
+        const heightValue = Number(value);
+        if (heightValue <= 220) {
+          setMyHeight(Number(value));
+          setHeightError(false);
+          return;
+        }
+        setHeightError(true);
+      }
     }
   };
 
@@ -35,7 +43,7 @@ const MyMbtiHeight = () => {
 
   return (
     <SurveyTemplate
-      disableNext={!mbti || myHeight <= 0}
+      disableNext={!mbti || !myHeight}
       currStep={4}
       totalStep={16}
       handlePrevClick={() => datingNavigate(Path.MyDepartmentCharacter)}
@@ -48,7 +56,7 @@ const MyMbtiHeight = () => {
       <Input required variant="filled" isFocus height="48px" name="mbti" placeholder="나의 MBTI" maxLength={4} onChange={handleChange} value={mbti} />
       <InputWrapper>
         <StyledTitle>본인의 키를 알려주세요.</StyledTitle>
-        <Description>키는 220cm 이하여야 합니다.</Description>
+        <HeightError>{heightError && '키는 220cm 이하여야 합니다.'}</HeightError>
         <Input
           required
           variant="filled"
@@ -57,7 +65,7 @@ const MyMbtiHeight = () => {
           placeholder="키(cm)"
           maxLength={3}
           onChange={handleChange}
-          value={String(myHeight)}
+          value={!myHeight ? '' : String(myHeight)}
         />
       </InputWrapper>
     </SurveyTemplate>
@@ -80,8 +88,9 @@ const InputWrapper = styled.div`
   margin-top: 63px;
 `;
 
-const Description = styled.p`
+const HeightError = styled.p`
   font-size: 14px;
+  height: 14px;
   margin-bottom: 30px;
   color: ${palette.primary};
 `;

@@ -27,7 +27,7 @@ const TestLogin = () => {
         navigate('/type-of-meeting');
       }
     } catch (e) {
-      alert(e.message);
+      onToggleErrorModal();
     }
   };
 
