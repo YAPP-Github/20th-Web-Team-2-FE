@@ -1,4 +1,4 @@
-function useDateParser(date: string) {
+function useDateLabel(date: string) {
   const parseDate = new Date(date);
 
   const month = parseDate.getMonth() + 1;
@@ -8,4 +8,4 @@ function useDateParser(date: string) {
   return `${month}월 ${day}일 ${hour}시`;
 }
 
-export default useDateParser;
+export default useDateLabel;
