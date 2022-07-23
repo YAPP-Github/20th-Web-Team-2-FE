@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import KakaoCopyBox from './KakaoCopyBox';
 import { DatingPartnerSurvey } from '@/types/dating';
 import { memo } from 'react';
+import { conversionBody, conversionCharacter, conversionDateCount } from '@/utils/converson';
 
 function DatingEndBox({ age, areas, body, characteristic, dateCount, department, height, isSmoke, kakaoId, university }: DatingPartnerSurvey) {
   return (
@@ -26,7 +27,7 @@ function DatingEndBox({ age, areas, body, characteristic, dateCount, department,
         </FlexLine>
         <FlexLine>
           <InfoLabel>성격</InfoLabel>
-          <InfoText>{characteristic}</InfoText>
+          <InfoText>{conversionCharacter(characteristic)}</InfoText>
         </FlexLine>
         <FlexLine>
           <InfoLabel>학과</InfoLabel>
@@ -38,7 +39,7 @@ function DatingEndBox({ age, areas, body, characteristic, dateCount, department,
         </FlexLine>
         <FlexLine>
           <InfoLabel>체형</InfoLabel>
-          <InfoText>{body}</InfoText>
+          <InfoText>{conversionBody(body)}</InfoText>
         </FlexLine>
         <FlexLine>
           <InfoLabel>흡연자 유무</InfoLabel>
@@ -46,7 +47,7 @@ function DatingEndBox({ age, areas, body, characteristic, dateCount, department,
         </FlexLine>
         <FlexLine>
           <InfoLabel>연애 횟수</InfoLabel>
-          <InfoText>{dateCount}</InfoText>
+          <InfoText>{conversionDateCount(dateCount)}</InfoText>
         </FlexLine>
       </MatchingInfoBox>
       <KakaoCopyBox kakaoId={kakaoId} />
