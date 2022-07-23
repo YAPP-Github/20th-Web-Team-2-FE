@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useMatch } from 'react-router-dom';
 import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { SurveyTemplate } from '@/components/domain/survey';
@@ -25,9 +25,11 @@ const AbroadAreasSurvey = () => {
     meetingNavigate(Path.ChannelSurvey);
   };
 
+  const checkDisabled = useMemo(() => (matchMeeting ? abroadAreas.length === 0 : abroadAreasDating.length === 0), []);
+
   return (
     <SurveyTemplate
-      disableNext={false}
+      disableNext={checkDisabled}
       hasProgressBar={true}
       currStep={matchMeeting ? 12 : 13}
       totalStep={matchMeeting ? 14 : 16}
