@@ -1,14 +1,12 @@
 import React from 'react';
 import { StringLogo, RadiousLogo } from '@/assets/img';
-import { Button, Modal } from '@/components/base';
-import useToggle from '@/hooks/common/useToggle';
+import { Button } from '@/components/base';
 import { palette } from '@/lib/styles/palette';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useLoginState } from '@/atoms/userState';
 
 function LandingContainer() {
-  const [isModal, onToggleModal] = useToggle();
   const navigate = useNavigate();
   const { isLogin } = useLoginState();
 
@@ -44,7 +42,6 @@ function LandingContainer() {
             fullWidth
             variant={'default'}
             onClick={() => {
-              // setIsLogin((prev) => !prev);
               navigate('/type-of-meeting');
             }}
           >
@@ -54,19 +51,6 @@ function LandingContainer() {
             매칭 결과 확인
           </LandingBtn>
         </BtnBox>
-      )}
-      {isModal && (
-        <Modal
-          width={200}
-          height={140}
-          bottonName="확인"
-          title="런칭 준비중입니다!"
-          text="조금만 더 기다려주세요 😔"
-          onToggleModal={onToggleModal}
-          onClick={() => {
-            console.log('안녕하세요');
-          }}
-        />
       )}
     </Container>
   );
