@@ -80,9 +80,7 @@ const AdminPage = () => {
               <td>{kakaoId}</td>
               <td>{matchStatus}</td>
               <PaidColumn paid={paid}>{String(paid)}</PaidColumn>
-              <td>
-                <Button onClick={() => handlePayment(kakaoId)}>지불하기</Button>
-              </td>
+              <td>{matchStatus === 'MATCHED' && <Button onClick={() => handlePayment(kakaoId)}>지불하기</Button>}</td>
             </tr>
           ))}
         </tbody>
