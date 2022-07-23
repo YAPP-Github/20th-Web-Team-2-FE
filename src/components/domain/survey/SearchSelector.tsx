@@ -12,11 +12,10 @@ interface SearchSelectorProps {
   searchData: SearchData[];
   selectedResults: number[];
   setSelectedResults: React.Dispatch<React.SetStateAction<number[]>>;
+  max: number;
 }
 
-const MAX = 4;
-
-const SearchSelector = ({ placeholder, searchData, selectedResults, setSelectedResults }: SearchSelectorProps) => {
+const SearchSelector = ({ placeholder, searchData, selectedResults, setSelectedResults, max }: SearchSelectorProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [selectedSchools, setSelectedSchools] = useState<string[]>([]); // 렌더링될 NAME 데이터
@@ -34,7 +33,7 @@ const SearchSelector = ({ placeholder, searchData, selectedResults, setSelectedR
 
     const noMatchData = !searchData.map(({ id }) => id).includes(id);
     const existSelected = selectedResults.includes(id);
-    const overMaxLimit = selectedResults.length >= MAX;
+    const overMaxLimit = selectedResults.length >= max;
     if (noMatchData || existSelected || overMaxLimit) return;
 
     setSelectedResults((prev) => [...prev, id]);
