@@ -12,7 +12,7 @@ export const getMeetingSurvey = async () => {
   return res.data;
 };
 
-export const postReMathcingMettingSurvey = async () => {
+export const postReMatchMettingSurvey = async () => {
   const res = await apiClient.post('/meeting/survey/rematch');
   return res.data;
 };
