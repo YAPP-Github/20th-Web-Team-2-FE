@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal } from '@/components/base';
 import { palette } from '@/lib/styles/palette';
 import { addComma } from '@/utils/addComma';
@@ -17,6 +17,7 @@ import { useDatingSessionState, useToggle } from '@/hooks/common';
 const DatingInfoBox = () => {
   const { initDatingState, setDatingData } = useDatingSessionState();
   const [isErrorModal, onToggleErrorModal] = useToggle();
+  const [doSurvey, setDoSurvey] = useState(true);
   const {
     age,
     myDepartment,
@@ -49,12 +50,28 @@ const DatingInfoBox = () => {
           setDatingData(res);
         }
       } catch (e) {
-        onToggleErrorModal();
+        if ((e as any).request.status === 400) {
+          setDoSurvey(false);
+          return;
+        }
+        if ((e as any).request.status === 500) {
+          onToggleErrorModal();
+          return;
+        }
       }
     };
 
     getDatingData();
   }, []);
+
+  //doSurvey 안됐으면 설문 안뜨게
+  if (!doSurvey)
+    return (
+      <div>
+        <GroupLabel>Me</GroupLabel>
+        <InfoLabel>설문 진행 전</InfoLabel>
+      </div>
+    );
 
   return (
     <>

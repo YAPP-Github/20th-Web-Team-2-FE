@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal } from '@/components/base';
 import {
   conversionDepartment,
@@ -16,6 +16,7 @@ import { useMeetingSessionState, useToggle } from '@/hooks/common';
 function MeetingInfoBox() {
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const [isErrorModal, onToggleErrorModal] = useToggle();
+  const [doSurvey, setDoSurvey] = useState(true);
   const {
     ourDepartments,
     domesticAreas,
@@ -31,20 +32,34 @@ function MeetingInfoBox() {
     preferHeight,
   } = initMeetingState;
 
-  const getMeetingData = async () => {
-    try {
-      const res = await getMeetingSurvey();
-      if (res) {
-        setMeetingData(res);
-      }
-    } catch (e) {
-      onToggleErrorModal();
-    }
-  };
-
   useEffect(() => {
+    const getMeetingData = async () => {
+      try {
+        const res = await getMeetingSurvey();
+        if (res) {
+          setMeetingData(res);
+        }
+      } catch (e) {
+        if ((e as any).request.status === 400) {
+          setDoSurvey(false);
+          return;
+        }
+        if ((e as any).request.status === 500) {
+          onToggleErrorModal();
+          return;
+        }
+      }
+    };
     getMeetingData();
   }, []);
+
+  if (!doSurvey)
+    return (
+      <div>
+        <GroupLabel>Team</GroupLabel>
+        <InfoLabel>설문 진행 전</InfoLabel>
+      </div>
+    );
 
   return (
     <>

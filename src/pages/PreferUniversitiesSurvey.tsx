@@ -6,7 +6,7 @@ import SearchSelector from '@/components/domain/survey/SearchSelector';
 import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
 import Path from '@/router/Path';
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
-import useUnivLoad from '@/hooks/common/useUnivLoad';
+import useUnivLoad from '@/hooks/survey/useUnivLoad';
 
 const PreferUniversitiesSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
