@@ -5,6 +5,7 @@ import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { HeaderWrapper, Logo } from '../domain/survey/SurveyTemplate';
 import MenuBlock from './MenuBlock';
+import LoginCheck from '@/components/base/LoginCheck';
 
 const UserHeader = () => {
   const [isMenu, onToggleMenu] = useToggle();
@@ -18,6 +19,7 @@ const UserHeader = () => {
       </HeaderLayout>
       <MenuBlock isMenu={isMenu} onToggleMenu={onToggleMenu} />
       <Outlet />
+      <LoginCheck />
     </>
   );
 };
