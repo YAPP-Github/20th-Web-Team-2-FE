@@ -1,13 +1,10 @@
 import { palette } from '@/lib/styles/palette';
-import { schools } from '@/mock/schools';
 import styled from 'styled-components';
 import KakaoCopyBox from './KakaoCopyBox';
-import { conversionDepartment, conversionDomesticArea, conversionMindset, conversionPlay } from '@/utils/converson';
+import { conversionDepartment, conversionMindset, conversionPlay } from '@/utils/converson';
 import { addComma } from '@/utils/addComma';
-import { addCommaTail } from '@/utils/addCommaTail';
-import { DatingPartnerSurvey } from '@/types/dating';
 import { memo } from 'react';
-import { Departments, MeetingPartnerSurvey, MindSet, Play } from '@/types/meeting';
+import { MeetingPartnerSurvey } from '@/types/meeting';
 
 function MeetingEndBox({ areas, averageAge, averageHeight, departments, kakaoId, mindset, play, universities }: MeetingPartnerSurvey) {
   return (

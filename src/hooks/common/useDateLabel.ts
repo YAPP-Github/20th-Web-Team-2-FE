@@ -1,4 +1,4 @@
-function useDateLabel(date: string) {
+function useDateLabel(date: string): string {
   const parseDate = new Date(date);
 
   const month = parseDate.getMonth() + 1;
