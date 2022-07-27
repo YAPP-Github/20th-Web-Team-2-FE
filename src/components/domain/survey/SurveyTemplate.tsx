@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import React, { MouseEventHandler, ReactNode } from 'react';
 import { Button } from '@/components/base';
 import ProgressBar, { ProgressBarProps } from '@/components/base/ProgressBar';
+import { palette } from '@/lib/styles/palette';
 
 interface SurveyTemplateProps extends Partial<ProgressBarProps> {
   children: ReactNode;
@@ -28,7 +29,7 @@ const SurveyTemplate = ({
       <HeaderWrapper>
         <Logo to="/">외딴썸</Logo>
       </HeaderWrapper>
-      {children}
+      <ContentsWrapper>{children}</ContentsWrapper>
       <NavigationWrapper>
         {hasProgressBar && <ProgressBar currStep={currStep} totalStep={totalStep} />}
         {!disabledFooter && (
@@ -73,10 +74,17 @@ export const Logo = styled(Link)`
   color: rgba(0, 0, 0, 0.8);
 `;
 
+const ContentsWrapper = styled.div`
+  overflow: scroll;
+  height: calc(100% - 56px - 117px - 38px - 20px);
+`;
+
 const NavigationWrapper = styled.div`
+  background-color: ${palette.backgroundColor};
   position: absolute;
   width: 100%;
   bottom: 38px;
+  z-index: 1000;
 `;
 
 const ButtonWrapper = styled.div`

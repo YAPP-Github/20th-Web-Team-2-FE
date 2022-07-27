@@ -103,6 +103,7 @@ const MultiRangeSlider = ({ initValue, min, max, onChange }: MultiRangeSliderPro
 };
 
 const Container = styled.div`
+  position: relative;
   height: 50px;
   display: flex;
   align-items: center;
