@@ -5,7 +5,7 @@ import { Button, Modal } from '@/components/base';
 import { Title } from '@/lib/styles/styledComponents';
 import { palette } from '@/lib/styles/palette';
 import { EmailForm, AuthCodeForm } from '@/components/authMail';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useToggle } from '@/hooks/common';
 import { postEmail, putEmail } from '@/lib/api/email';
 
@@ -13,6 +13,7 @@ const AuthMail = () => {
   const [cantMoveNext, setCantMoveNext] = useState(true);
   const [email, setEmail] = useState('');
   const [isErrorModal, onToggleErrorModal] = useToggle();
+  const navigate = useNavigate();
 
   const onSubmitAuthCode = async (email: string) => {
     try {
@@ -26,7 +27,7 @@ const AuthMail = () => {
   const onCheckAuthCode = async (authCode: string) => {
     try {
       await putEmail(authCode);
-      setCantMoveNext(false);
+      navigate('/type-of-meeting');
     } catch (e) {
       onToggleErrorModal();
     }

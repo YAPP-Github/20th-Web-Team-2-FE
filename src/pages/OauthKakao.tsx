@@ -6,12 +6,12 @@ import Path from '@/router/Path';
 
 const OauthKakao = () => {
   const code = new URL(window.location.href).searchParams.get('code');
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     try {
       const data = getToken();
       setToken(data);
-      // navigate(Path.AuthMail);
+      navigate(Path.AuthMail);
     } catch (error) {
       console.log(error);
     }
@@ -24,8 +24,8 @@ const OauthKakao = () => {
   };
 
   const setToken = (data: any) => {
-    Cookies.set('AccessToken', data.AccessToken, { expires: data.expires_in });
-    console.log(data.AccessToken);
+    Cookies.set('AccessToken', data.accessToken, { expires: data.expires_in });
+    console.log(data.accessToken);
   };
 
   return <div></div>;
