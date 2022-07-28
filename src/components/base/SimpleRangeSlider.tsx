@@ -88,6 +88,7 @@ const SimpleRangeSlider = ({ min, max, initValue, isStep5 = false, onChange }: S
 };
 
 const Container = styled.div`
+  position: relative;
   height: 50px;
   display: flex;
   align-items: center;
