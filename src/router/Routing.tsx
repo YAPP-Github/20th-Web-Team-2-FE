@@ -90,6 +90,41 @@ function Routing() {
               <Route path={Path.AgreementSurvey} element={<AgreementSurvey />} />
               <Route path={Path.KakaoIdSurvey} element={<KakaoIdSurvey />} />
             </Route>
+            <Route path={'/updating/meeting'} element={<Outlet />}>
+              <Route path={Path.GenderAverageAgeSurvey} element={<GenderAverageAgeSurvey />} />
+              <Route path={Path.OurUniversitiesSurvey} element={<OurUniversitiesSurvey />} />
+              <Route path={Path.OurDepartmentsAverageHeightSurvey} element={<OurDepartmentsAverageHeightSurvey />} />
+              <Route path={Path.AvoidUniversitiesSurvey} element={<AvoidUniversitiesSurvey />} />
+              <Route path={Path.PreferUniversitiesSurvey} element={<PreferUniversitiesSurvey />} />
+              <Route path={Path.PreferDepartmentsSurvey} element={<PreferDepartmentsSurvey />} />
+              <Route path={Path.PreferAgeHeightSurvey} element={<PreferAverageAgeHeightSurvey />} />
+              <Route path={Path.MindsetSurvey} element={<MindsetSurvey />} />
+              <Route path={Path.PlaySurvey} element={<PlaySurvey />} />
+              <Route path={Path.IsAbroadSurvey} element={<IsAbroadSurvey />} />
+              <Route path={Path.DomesticAreasSurvey} element={<DomesticAreasSurvey />} />
+              <Route path={Path.AbroadAreasSurvey} element={<AbroadAreasSurvey />} />
+              <Route path={Path.ChannelSurvey} element={<ChannelSurvey />} />
+              <Route path={Path.AgreementSurvey} element={<AgreementSurvey />} />
+              <Route path={Path.KakaoIdSurvey} element={<KakaoIdSurvey />} />
+            </Route>
+            <Route path={'/updating/dating'} element={<Outlet />}>
+              <Route path={Path.MyGenderAge} element={<MyGenderAge />} />
+              <Route path={Path.MyDepartmentCharacter} element={<MyDepartmentCharacter />} />
+              <Route path={Path.MyMbtiHeight} element={<MyMbtiHeight />} />
+              <Route path={Path.MyBodySmoke} element={<MyBodySmoke />} />
+              <Route path={Path.MyDateCount} element={<MyDateCount />} />
+              <Route path={Path.AvoidUniversitiesSurvey} element={<AvoidUniversitiesSurvey />} />
+              <Route path={Path.PreferUniversitiesSurvey} element={<PreferUniversitiesSurvey />} />
+              <Route path={Path.PreferAgeHeightSurvey} element={<PreferAverageAgeHeightSurvey />} />
+              <Route path={Path.PreferDepartmentCharacterSurvey} element={<PreferDepartmentCharacterSurvey />} />
+              <Route path={Path.PreferBodyDateCountSurvey} element={<PreferBodyDateCountSurvey />} />
+              <Route path={Path.IsAbroadSurvey} element={<IsAbroadSurvey />} />
+              <Route path={Path.DomesticAreasSurvey} element={<DomesticAreasSurvey />} />
+              <Route path={Path.AbroadAreasSurvey} element={<AbroadAreasSurvey />} />
+              <Route path={Path.ChannelSurvey} element={<ChannelSurvey />} />
+              <Route path={Path.AgreementSurvey} element={<AgreementSurvey />} />
+              <Route path={Path.KakaoIdSurvey} element={<KakaoIdSurvey />} />
+            </Route>
             <Route path={'/matching'} element={<UserHeader />}>
               <Route path={Path.MatchingMeeting} element={<MatchingPage />} />
               <Route path={Path.MatchingDating} element={<MatchingPage />} />
