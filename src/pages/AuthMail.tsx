@@ -81,10 +81,8 @@ export const StyledButton = styled(Button)`
 `;
 
 export const FormWrapper = styled.div`
-  position: absolute;
   width: 100%;
   top: 40%;
-  transform: translateY(-50%);
   margin-top: 65px;
 `;
 
