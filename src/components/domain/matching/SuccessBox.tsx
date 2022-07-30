@@ -15,7 +15,8 @@ function SuccessBox({ payDeadline }: SuccessBoxProps) {
     <>
       <MatchingImg src={MatchingSuccess} alt="매칭 성공 이미지" />
       <StringEle>
-        <strong>{dateLabel}</strong>까지 <strong>10,000</strong>원을 결제해주시면
+        <strong>{dateLabel}</strong>까지 아래 계좌로
+        <br /> <strong>1000</strong>원을 결제해주시면
         <br />
         카톡 아이디가 전달됩니다.
       </StringEle>

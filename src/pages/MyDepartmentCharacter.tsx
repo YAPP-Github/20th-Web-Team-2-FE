@@ -9,6 +9,7 @@ import { useDatingNavigate } from '@/hooks/common/useNavigate';
 import { useDatingSessionState } from '@/hooks/common';
 import { type Departments } from '@/types/meeting';
 import { type Characteristic } from '@/types/dating';
+import { LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const MyDepartmentCharacter = () => {
   const datingNavigate = useDatingNavigate();
@@ -28,7 +29,7 @@ const MyDepartmentCharacter = () => {
     <SurveyTemplate
       disableNext={!myDepartment && !characteristic}
       currStep={3}
-      totalStep={16}
+      totalStep={LAST_DATING_STEP}
       handlePrevClick={() => datingNavigate(Path.MyGenderAge)}
       handleNextClick={handleNextClick}
     >

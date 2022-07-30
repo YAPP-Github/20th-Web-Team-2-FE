@@ -7,6 +7,7 @@ import { Title } from '@/lib/styles/styledComponents';
 import SearchSelector from '@/components/domain/survey/SearchSelector';
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 import useAboardAreaLoad from '@/hooks/survey/useAboardAreaLoad';
+import { LAST_MEETING_STEP, LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const AbroadAreasSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
@@ -32,12 +33,12 @@ const AbroadAreasSurvey = () => {
       disableNext={checkDisabled}
       hasProgressBar={true}
       currStep={matchMeeting ? 12 : 13}
-      totalStep={matchMeeting ? 14 : 16}
+      totalStep={matchMeeting ? LAST_MEETING_STEP : LAST_DATING_STEP}
       handlePrevClick={() => meetingNavigate(Path.IsAbroadSurvey)}
       handleNextClick={handleNextClick}
     >
       <Title>
-        <strong>미팅이 가능한 지역(도시명)</strong>을<br />
+        <strong>만남이 가능한 지역(도시명)</strong>을<br />
         모두 알려주세요.
       </Title>
       <SearchSelector

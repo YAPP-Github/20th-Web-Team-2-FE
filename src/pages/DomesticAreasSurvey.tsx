@@ -10,6 +10,7 @@ import { useMeetingNavigate, useDatingNavigate } from '@/hooks/common/useNavigat
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 import { type DomesticAreas } from '@/types/meeting';
 import { useMatch } from 'react-router-dom';
+import { LAST_MEETING_STEP, LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const DomesticAreasSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
@@ -46,12 +47,12 @@ const DomesticAreasSurvey = () => {
     <SurveyTemplate
       disableNext={!isChecked}
       currStep={matchMeeting ? 12 : 13}
-      totalStep={matchMeeting ? 14 : 16}
+      totalStep={matchMeeting ? LAST_MEETING_STEP : LAST_DATING_STEP}
       handlePrevClick={() => meetingNavigate(Path.IsAbroadSurvey)}
       handleNextClick={handleNextClick}
     >
       <Title>
-        <strong>미팅이 가능한 지역</strong>을
+        <strong>만남이 가능한 지역</strong>을
         <br />
         모두 알려주세요.
       </Title>

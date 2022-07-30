@@ -12,6 +12,7 @@ import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigat
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 import { goKakaoLogin } from '@/utils/goKakaoLogin';
 import { getOauthKakaoAge } from '@/lib/api/oauth';
+import { LAST_MEETING_STEP, LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 import { Modal } from '@/components/base';
 
 const AgreementSurvey = () => {
@@ -63,7 +64,8 @@ const AgreementSurvey = () => {
     <>
       <SurveyTemplate
         disableNext={!isEssentialChecked}
-        hasProgressBar={false}
+        currStep={matchMeeting ? 14 : 15}
+        totalStep={matchMeeting ? LAST_MEETING_STEP : LAST_DATING_STEP}
         handlePrevClick={() => meetingNavigate(Path.ChannelSurvey)}
         handleNextClick={handleNextClick}
       >

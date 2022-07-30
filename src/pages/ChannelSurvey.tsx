@@ -9,6 +9,7 @@ import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigat
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 import { CHANNEL_ITEMS } from '@/types/constants/channel';
 import { Channel } from '@/types/meeting';
+import { LAST_MEETING_STEP, LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const ChannelSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
@@ -39,7 +40,7 @@ const ChannelSurvey = () => {
       disableNext={matchMeeting ? !isChecked : !isCheckedDating}
       hasProgressBar={true}
       currStep={matchMeeting ? 13 : 14}
-      totalStep={matchMeeting ? 14 : 16}
+      totalStep={matchMeeting ? LAST_MEETING_STEP : LAST_DATING_STEP}
       handlePrevClick={() => meetingNavigate(Path.IsAbroadSurvey)}
       handleNextClick={handleNextClick}
     >

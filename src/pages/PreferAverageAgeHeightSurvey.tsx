@@ -7,6 +7,7 @@ import { useMatch } from 'react-router-dom';
 import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 import Path from '@/router/Path';
+import { LAST_MEETING_STEP, LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const PreferAverageAgeHeightSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
@@ -27,7 +28,7 @@ const PreferAverageAgeHeightSurvey = () => {
   return (
     <SurveyTemplate
       disableNext={!multiAgeOption || !multiHeightOption}
-      totalStep={matchMeeting ? 14 : 16}
+      totalStep={matchMeeting ? LAST_MEETING_STEP : LAST_DATING_STEP}
       currStep={matchMeeting ? 7 : 9}
       handlePrevClick={() => meetingNavigate(Path.PreferUniversitiesSurvey)}
       handleNextClick={handleNextClick}
