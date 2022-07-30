@@ -12,7 +12,7 @@ function LandingContainer() {
   const { isLogin } = useLoginState();
 
   const handleKakaoLoginClick = () => {
-    goKakaoLogin('LOGIN');
+    goKakaoLogin('login');
   };
 
   return (
