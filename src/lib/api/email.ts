@@ -6,7 +6,7 @@ export const postEmail = async (email: string) => {
 
 export const putEmail = async (authCode: string) => {
   const response = await client.put(`/email`, { authCode });
-  return response;
+  return response.data;
 };
 
 export const postEmailDomain = async (body: { domain: string; name: string }) => {

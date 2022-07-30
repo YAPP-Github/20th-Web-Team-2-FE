@@ -3,11 +3,7 @@ import styled from 'styled-components';
 import { Button, Modal } from '@/components/base';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Title } from '@/lib/styles/styledComponents';
-import CompleteButton from './buttons/CompleteButton';
-import EndButton from './buttons/EndButton';
-import NoneButton from './buttons/NoneButton';
-import SuccessButton from './buttons/SuccessButton';
-import FemaleSuccessButton from './buttons/FemaleSuccessButton';
+import { CompleteButton, EndButton, NoneButton, SuccessButton, FemaleSuccessButton } from './buttons';
 import Path from '@/router/Path';
 import { Status } from '@/pages/MatchingPage';
 import { getMeetingMatching } from '@/lib/api/meeting';
@@ -79,6 +75,9 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
 
       const { code } = response;
       switch (code) {
+        case 7000:
+          handleStatus('none');
+          break;
         case 7001:
           handleStatus('waiting');
           break;
@@ -94,6 +93,9 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
           break;
         case 7005:
           handleStatus('fail');
+          break;
+        case 7006:
+          handleStatus('cancel');
       }
     } catch (e) {
       setErrorMessage(() => e.response.data.message);
@@ -107,7 +109,7 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
 
   useEffect(() => {
     fetchMatchingResult();
-  }, []);
+  }, [type]);
 
   return (
     <>
@@ -143,6 +145,7 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
                 pay: <CompleteButton />,
                 end: <EndButton handleStatus={handleStatus} />,
                 fail: <EndButton handleStatus={handleStatus} />,
+                cancel: <EndButton handleStatus={handleStatus} />,
               }[btnName]
             }
           </ButtonWrapper>

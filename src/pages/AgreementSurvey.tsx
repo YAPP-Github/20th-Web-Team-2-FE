@@ -57,7 +57,7 @@ const AgreementSurvey = () => {
         : setDatingData({ ...initDatingState, agreement: isAllchecked });
     }
 
-    goKakaoLogin('ADDITIONAL');
+    goKakaoLogin(matchMeeting ? 'meeting' : 'dating');
   };
 
   return (

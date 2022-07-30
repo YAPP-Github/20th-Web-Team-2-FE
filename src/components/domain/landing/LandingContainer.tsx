@@ -6,13 +6,14 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useLoginState } from '@/atoms/userState';
 import { goKakaoLogin } from '@/utils/goKakaoLogin';
+import Cookies from 'js-cookie';
 
 function LandingContainer() {
   const navigate = useNavigate();
   const { isLogin } = useLoginState();
 
   const handleKakaoLoginClick = () => {
-    goKakaoLogin('LOGIN');
+    goKakaoLogin('login');
   };
 
   return (
@@ -40,7 +41,8 @@ function LandingContainer() {
             fullWidth
             variant={'default'}
             onClick={() => {
-              navigate('/type-of-meeting');
+              const authenticated = Cookies.get('authenticated') === 'true';
+              authenticated ? navigate('/type-of-meeting') : navigate('/auth-mail');
             }}
           >
             시작하기
