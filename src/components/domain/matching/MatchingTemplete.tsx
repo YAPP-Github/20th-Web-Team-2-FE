@@ -75,6 +75,9 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
 
       const { code } = response;
       switch (code) {
+        case 7000:
+          handleStatus('none');
+          break;
         case 7001:
           handleStatus('waiting');
           break;
@@ -103,7 +106,7 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
 
   useEffect(() => {
     fetchMatchingResult();
-  }, []);
+  }, [type]);
 
   return (
     <>
