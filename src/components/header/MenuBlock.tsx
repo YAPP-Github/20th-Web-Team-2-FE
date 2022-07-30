@@ -4,7 +4,7 @@ import { palette } from '@/lib/styles/palette';
 import styled from 'styled-components';
 import DatingInfoBox from './DatingInfoBox';
 import MeetingInfoBox from './MeetingInfoBox';
-import { postLogout, postWithdrawal } from '@/lib/api/login';
+import { postLogout, postWithdrawal } from '@/lib/api/user';
 import { useToggle } from '@/hooks/common';
 import { Modal } from '../base';
 interface MenuBlockProps {
