@@ -7,6 +7,7 @@ import Path from '@/router/Path';
 const OauthKakao = () => {
   const code = new URL(window.location.href).searchParams.get('code');
   const navigate = useNavigate();
+
   useEffect(() => {
     initiate();
   }, []);
@@ -15,7 +16,7 @@ const OauthKakao = () => {
     try {
       const data = await getToken();
       setToken(data);
-      navigate(Path.AuthMail);
+      data.authenticated ? navigate(Path.TypeOfMeetingSurvey) : navigate(Path.AuthMail);
     } catch (error) {
       console.log(error);
     }
@@ -29,6 +30,7 @@ const OauthKakao = () => {
 
   const setToken = (data: any) => {
     Cookies.set('AccessToken', data.accessToken, { expires: data.expires_in });
+    Cookies.set('authenticated', data.authenticated, { expires: data.expires_in });
     console.log(data.accessToken);
   };
 
