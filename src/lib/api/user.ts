@@ -18,7 +18,7 @@ export const getKakaoId = async () => {
 };
 
 export const postLogout = async () => {
-  const res = await apiClient.post('/logout');
+  const res = await apiClient.get('/logout');
   return res.data;
 };
 
