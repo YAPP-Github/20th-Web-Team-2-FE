@@ -6,7 +6,6 @@ import { Title } from '@/lib/styles/styledComponents';
 import CompleteButton from './buttons/CompleteButton';
 import EndButton from './buttons/EndButton';
 import NoneButton from './buttons/NoneButton';
-import WaitingButton from './buttons/WaitingButton';
 import SuccessButton from './buttons/SuccessButton';
 import Path from '@/router/Path';
 import { Status } from '@/pages/MatchingPage';
