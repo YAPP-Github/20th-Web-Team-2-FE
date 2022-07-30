@@ -8,14 +8,18 @@ const OauthKakao = () => {
   const code = new URL(window.location.href).searchParams.get('code');
   const navigate = useNavigate();
   useEffect(() => {
+    initiate();
+  }, []);
+
+  const initiate = async () => {
     try {
-      const data = getToken();
+      const data = await getToken();
       setToken(data);
       navigate(Path.AuthMail);
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  };
 
   const getToken = async () => {
     const response = await client.get(`/oauth/kakao?code=${code}`);
