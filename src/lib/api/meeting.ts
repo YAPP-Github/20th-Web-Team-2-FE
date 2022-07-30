@@ -12,6 +12,11 @@ export const getMeetingSurvey = async () => {
   return res.data;
 };
 
+export const patchMeetingSurvey = async (payload: Partial<Meeting>) => {
+  const res = await apiClient.patch<AxiosResponse>('/meeting/survey', payload);
+  return res.data;
+};
+
 export const postReMatchMettingSurvey = async () => {
   const res = await apiClient.post('/meeting/survey/rematch');
   return res.data;

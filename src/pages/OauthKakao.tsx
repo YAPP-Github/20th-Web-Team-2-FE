@@ -24,8 +24,8 @@ const OauthKakao = () => {
   };
 
   const setToken = (data: any) => {
-    Cookies.set('AccessToken', data.access_token, { expires: data.expires_in });
-    Cookies.set('RefreshToken', data.refresh_token, { expires: data.refresh_token_expires_in });
+    Cookies.set('AccessToken', data.accessToken, { expires: data.expires_in });
+    console.log(data.accessToken);
   };
 
   return <div></div>;

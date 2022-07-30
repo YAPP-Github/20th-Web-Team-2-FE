@@ -13,6 +13,8 @@ import {
 import styled from 'styled-components';
 import { getDatingSurvey } from '@/lib/api/dating';
 import { useDatingSessionState, useToggle } from '@/hooks/common';
+import { Link } from 'react-router-dom';
+import Path from '@/router/Path';
 
 const DatingInfoBox = () => {
   const { initDatingState, setDatingData } = useDatingSessionState();
@@ -79,61 +81,99 @@ const DatingInfoBox = () => {
         <GroupLabel>Me</GroupLabel>
         <InfoLabel>나의 정보</InfoLabel>
         <InfoBox>
-          <InfoEle>{age}살</InfoEle>
-          <InfoEle>{conversionGender(gender)}</InfoEle>
-          <InfoEle>{conversionDepartment(myDepartment)}</InfoEle>
-          <InfoEle>{mbti}</InfoEle>
-          <InfoEle>연애 횟수 : {conversionDateCount(myDateCount)}</InfoEle>
-          <InfoEle>{myHeight}cm</InfoEle>
-          <InfoEle>{conversionBody(myBody)}</InfoEle>
-          <InfoEle>{mySmoke ? '흡연' : '비흡연'}</InfoEle>
-          <InfoEle>{conversionCharacter(characteristic)}</InfoEle>
+          <InfoEle>
+            <Link to={`/updating/dating/${Path.MyGenderAge}`}>{age}살</Link>
+          </InfoEle>
+          <InfoEle>
+            <Link to={`/updating/dating/${Path.MyGenderAge}`}>{conversionGender(gender)}</Link>
+          </InfoEle>
+          <InfoEle>
+            <Link to={`/updating/dating/${Path.MyDepartmentCharacter}`}>{conversionDepartment(myDepartment)}</Link>
+          </InfoEle>
+          <InfoEle>
+            <Link to={`/updating/dating/${Path.MyMbtiHeight}`}>{mbti}</Link>
+          </InfoEle>
+          <InfoEle>
+            <Link to={`/updating/dating/${Path.MyDateCount}`}>연애 횟수 : {conversionDateCount(myDateCount)}</Link>
+          </InfoEle>
+          <InfoEle>
+            <Link to={`/updating/dating/${Path.MyMbtiHeight}`}>{myHeight}cm</Link>
+          </InfoEle>
+          <InfoEle>
+            <Link to={`/updating/dating/${Path.MyBodySmoke}`}>{conversionBody(myBody)}</Link>
+          </InfoEle>
+          <InfoEle>
+            <Link to={`/updating/dating/${Path.MyBodySmoke}`}>{mySmoke ? '흡연' : '비흡연'}</Link>
+          </InfoEle>
+          <InfoEle>
+            <Link to={`/updating/dating/${Path.MyDepartmentCharacter}`}>{conversionCharacter(characteristic)}</Link>
+          </InfoEle>
           <FlexEle>
-            {domesticAreas?.map((area, index) => (
-              <div key={area + domesticAreas}>
-                {addComma(index)}
-                {conversionDomesticArea(area)}
-              </div>
-            ))}
+            <Link to={`/updating/dating/${Path.DomesticAreasSurvey}`}>
+              {domesticAreas?.map((area, index) => (
+                <div key={area + domesticAreas}>
+                  {addComma(index)}
+                  {conversionDomesticArea(area)}
+                </div>
+              ))}
+            </Link>
           </FlexEle>
-          <InfoEle>{abroadAreas.length === 0 ? '기피지역 : 없음' : abroadAreas}</InfoEle>
-          <InfoEle>해외여부 : {isAbroad ? '예' : '아니요'}</InfoEle>
+          <InfoEle>
+            <Link to={`/updating/dating/${Path.AbroadAreasSurvey}`}>해외 지역 :{abroadAreas.length === 0 ? '없음' : abroadAreas}</Link>
+          </InfoEle>
+          <InfoEle>
+            <Link to={`/updating/dating/${Path.IsAbroadSurvey}`}>해외여부 : {isAbroad ? '예' : '아니요'}</Link>
+          </InfoEle>
         </InfoBox>
         <InfoLabel>선호 조건</InfoLabel>
         <InfoBox>
           <InfoEle>
-            {preferAge[0]}~{preferAge[1]}살
+            <Link to={`/updating/dating/${Path.PreferAgeHeightSurvey}`}>
+              {preferAge[0]}~{preferAge[1]}살
+            </Link>
           </InfoEle>
           <FlexEle>
-            {preferBodies?.map((body, index) => (
-              <div key={body + preferBodies}>
-                {addComma(index)}
-                {conversionBody(body)}
-              </div>
-            ))}
+            <Link to={`/updating/dating/${Path.PreferBodyDateCountSurvey}`}>
+              {preferBodies?.map((body, index) => (
+                <div key={body + preferBodies}>
+                  {addComma(index)}
+                  {conversionBody(body)}
+                </div>
+              ))}
+            </Link>
           </FlexEle>
           <FlexEle>
-            {preferCharacteristics?.map((charator, index) => (
-              <div key={charator + preferCharacteristics}>
-                {addComma(index)}
-                {conversionCharacter(charator)}
-              </div>
-            ))}
-          </FlexEle>
-          <InfoEle>{conversionDateCount(preferDateCount)}</InfoEle>
-          <FlexEle>
-            {preferDepartments?.map((department, index) => (
-              <div key={department + preferDepartments}>
-                {addComma(index)}
-                {conversionDepartment(department)}
-              </div>
-            ))}
+            <Link to={`/updating/dating/${Path.PreferDepartmentCharacterSurvey}`}>
+              {preferCharacteristics?.map((charator, index) => (
+                <div key={charator + preferCharacteristics}>
+                  {addComma(index)}
+                  {conversionCharacter(charator)}
+                </div>
+              ))}
+            </Link>
           </FlexEle>
           <InfoEle>
-            {preferHeight[0]}~{preferHeight[1]}cm
+            <Link to={`/updating/dating/${Path.PreferBodyDateCountSurvey}`}>{conversionDateCount(preferDateCount)}</Link>
           </InfoEle>
-          {/* <InfoEle>{preferUniversities}</InfoEle> */}
-          <InfoEle>흡연 : {isSmokeOk ? '괜찮아요' : '싫어요'}</InfoEle>
+          <FlexEle>
+            <Link to={`/updating/dating/${Path.PreferDepartmentCharacterSurvey}`}>
+              {preferDepartments?.map((department, index) => (
+                <div key={department + preferDepartments}>
+                  {addComma(index)}
+                  {conversionDepartment(department)}
+                </div>
+              ))}
+            </Link>
+          </FlexEle>
+          <InfoEle>
+            <Link to={`/updating/dating/${Path.PreferAgeHeightSurvey}`}>
+              {preferHeight[0]}~{preferHeight[1]}cm
+            </Link>
+          </InfoEle>
+          {/* <InfoEle><Link>{preferUniversities}</Link></InfoEle> */}
+          <InfoEle>
+            <Link to={`/updating/dating/${Path.MyDateCount}`}>흡연 : {isSmokeOk ? '괜찮아요' : '싫어요'}</Link>
+          </InfoEle>
         </InfoBox>
       </div>
       {isErrorModal && (
