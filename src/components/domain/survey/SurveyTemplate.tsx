@@ -78,7 +78,7 @@ export const Logo = styled(Link)`
 `;
 
 const ContentsWrapper = styled.div`
-  overflow: scroll;
+  overflow: auto;
   height: calc(100% - 56px - 117px - 38px - 20px);
 `;
 
