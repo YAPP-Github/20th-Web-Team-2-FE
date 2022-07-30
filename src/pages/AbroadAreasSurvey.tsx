@@ -37,7 +37,7 @@ const AbroadAreasSurvey = () => {
       handleNextClick={handleNextClick}
     >
       <Title>
-        <strong>미팅이 가능한 지역(도시명)</strong>을<br />
+        <strong>만남이 가능한 지역(도시명)</strong>을<br />
         모두 알려주세요.
       </Title>
       <SearchSelector
