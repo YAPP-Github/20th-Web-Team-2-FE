@@ -26,6 +26,13 @@ function MatchingStateTitle(state: string) {
               성사되었습니다!
             </strong>
           ),
+          femaleSuccess: (
+            <strong>
+              매칭이
+              <br />
+              성사되었습니다!
+            </strong>
+          ),
           pay: (
             <strong>
               결제가
