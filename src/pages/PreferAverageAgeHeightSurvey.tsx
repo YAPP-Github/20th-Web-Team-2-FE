@@ -3,25 +3,32 @@ import { SurveyTemplate } from '@/components/domain/survey';
 import { AgeBox, HeightBox } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import styled from 'styled-components';
-import { useMatch } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router-dom';
 import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 import Path from '@/router/Path';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
 
 const PreferAverageAgeHeightSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
+  const { isUpdate, onUpdateMeetingSurvey } = useUpdateSurvey();
   const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
-
+  const navigate = useNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const [multiAgeOption, setMultiAgeOption] = useState<number[]>(initMeetingState.preferAge);
   const [multiHeightOption, setMultiHeightOption] = useState<number[]>(initMeetingState.preferHeight);
 
   const handleNextClick = () => {
-    if (initMeetingState) {
-      setMeetingData({ ...initMeetingState, preferAge: multiAgeOption, preferHeight: multiHeightOption });
-    }
+    if (isUpdate) {
+      onUpdateMeetingSurvey({ ...initMeetingState, preferAge: multiAgeOption, preferHeight: multiHeightOption });
+      navigate(Path.MatchingDating);
+    } else {
+      if (initMeetingState) {
+        setMeetingData({ ...initMeetingState, preferAge: multiAgeOption, preferHeight: multiHeightOption });
+      }
 
-    meetingNavigate(matchMeeting ? Path.PreferDepartmentsSurvey : Path.PreferDepartmentCharacterSurvey);
+      meetingNavigate(matchMeeting ? Path.PreferDepartmentsSurvey : Path.PreferDepartmentCharacterSurvey);
+    }
   };
 
   return (
