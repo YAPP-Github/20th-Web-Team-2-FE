@@ -42,7 +42,7 @@ const AuthMail = () => {
             학교 메일로 인증해주세요.
           </strong>
         </Title>
-        <Description>예시: 1234@bu.du</Description>
+        <Description>예시: 1234@bu.edu</Description>
         <FormWrapper>
           <EmailForm onSubmitAuthCode={onSubmitAuthCode} />
           <AuthCodeForm email={email} onCheckAuthCode={onCheckAuthCode} />
