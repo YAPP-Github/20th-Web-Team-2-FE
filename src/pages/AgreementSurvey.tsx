@@ -25,7 +25,7 @@ const AgreementSurvey = () => {
     const searchParams = new URLSearchParams(location.search);
     const code = searchParams.get('code') ?? '';
 
-    getOauthKakaoAge({ code })
+    getOauthKakaoAge({ code, type: matchMeeting ? 'meeting' : 'dating' })
       .then((response) => {
         console.log(response);
         meetingNavigate(Path.KakaoIdSurvey);
