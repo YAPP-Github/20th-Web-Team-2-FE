@@ -9,7 +9,7 @@ function WaitingBox() {
       <StringEle>
         매칭은 <strong>매일밤 10시</strong>에 이루어집니다.
         <br />
-        매칭이 되면 카톡과 이메일로 링크를 보내드릴게요.
+        매칭이 되면 이메일로 링크를 보내드릴게요.
       </StringEle>
     </>
   );
