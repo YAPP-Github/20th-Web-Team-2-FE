@@ -8,9 +8,13 @@ import Path from '@/router/Path';
 import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 import { type Departments } from '@/types/meeting';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
+import { useNavigate } from 'react-router-dom';
 
 const OurDepartmentsAverageHeightSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
+  const navigate = useNavigate();
+  const { isUpdate, onUpdateMeetingSurvey } = useUpdateSurvey();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const getInitDepartments = OUR_DEPARTMENT_ITEMS.map((item) => {
     return { ...item, checked: initMeetingState.ourDepartments.some((initState) => initState === item.id) };
@@ -27,11 +31,15 @@ const OurDepartmentsAverageHeightSurvey = () => {
   const [heightOption, setHeightOption] = useState(initMeetingState.averageHeight);
 
   const handleNextClick = () => {
-    if (initMeetingState) {
-      setMeetingData({ ...initMeetingState, ourDepartments: ourDepartments ?? [], averageHeight: heightOption });
+    if (isUpdate) {
+      onUpdateMeetingSurvey({ ...initMeetingState, ourDepartments: ourDepartments ?? [], averageHeight: heightOption });
+      navigate(Path.MatchingDating);
+    } else {
+      if (initMeetingState) {
+        setMeetingData({ ...initMeetingState, ourDepartments: ourDepartments ?? [], averageHeight: heightOption });
+      }
+      meetingNavigate(Path.AvoidUniversitiesSurvey);
     }
-
-    meetingNavigate(Path.AvoidUniversitiesSurvey);
   };
 
   return (
