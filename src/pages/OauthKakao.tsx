@@ -16,7 +16,7 @@ const OauthKakao = () => {
     try {
       const data = await getToken();
       setToken(data);
-      navigate(Path.AuthMail);
+      data.authenticated ? navigate(Path.TypeOfMeetingSurvey) : navigate(Path.AuthMail);
     } catch (error) {
       console.log(error);
     }
