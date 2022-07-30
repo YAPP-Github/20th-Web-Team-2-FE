@@ -31,8 +31,19 @@ export interface Dating {
   kakaoId: string;
 }
 
+/*
+code : 7000 - 작성한 설문이 없을 때
+code : 7001 - 매칭 대기중인 상태
+code : 7002 - 매칭 성공 후 자신이 결제해야하는 상황 (남자의 경우만 해당)
+code : 7003 - 매칭 성공 후 상대가 결제해야하는 상황 (여자의 경우만 해당)
+code : 7004 - 모두 결제를 해서 서로의 정보를 확인하는 상황
+code : 7005 - 매칭에 실패한 상태
+*/
+
+type Code = 7000 | 7001 | 7002 | 7003 | 7004 | 7005;
+
 export interface DatingMatchingResultResponse {
-  code: number;
+  code: Code;
   message: string;
   partnerSurvey: DatingPartnerSurvey;
 }

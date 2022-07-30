@@ -7,10 +7,11 @@ import CompleteButton from './buttons/CompleteButton';
 import EndButton from './buttons/EndButton';
 import NoneButton from './buttons/NoneButton';
 import SuccessButton from './buttons/SuccessButton';
+import FemaleSuccessButton from './buttons/FemaleSuccessButton';
 import Path from '@/router/Path';
 import { Status } from '@/pages/MatchingPage';
-import { getMeetingMatching, postMeetingMatching } from '@/lib/api/meeting';
-import { getDatingMatching, postDatingMatching } from '@/lib/api/dating';
+import { getMeetingMatching } from '@/lib/api/meeting';
+import { getDatingMatching } from '@/lib/api/dating';
 import { useToggle } from '@/hooks/common';
 import { MeetingPartnerSurvey } from '@/types/meeting';
 import { DatingPartnerSurvey } from '@/types/dating';
@@ -62,33 +63,51 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
     location.pathname.includes('meeting') ? setType('meeting') : setType('dating');
   }, [location.pathname]);
 
-  const requestRandomMatching = async () => {
-    try {
-      type === 'meeting' ? await postMeetingMatching() : await postDatingMatching();
-      await fetchMatchingResult();
-    } catch (e) {
-      setErrorMessage(() => (e as Error).message.toString());
-      onToggleErrorModal();
-    }
-  };
+  // const requestRandomMatching = async () => {
+  //   try {
+  //     type === 'meeting' ? await postMeetingMatching() : await postDatingMatching();
+  //     await fetchMatchingResult();
+  //   } catch (e) {
+  //     setErrorMessage(() => (e as Error).message.toString());
+  //     onToggleErrorModal();
+  //   }
+  // };
 
   const fetchMatchingResult = async () => {
     try {
       const response = type === 'meeting' ? await getMeetingMatching() : await getDatingMatching();
-      if (!response?.partnerSurvey) {
-        setErrorMessage(() => response.message.toString());
-        onToggleErrorModal();
-      } else {
-        handleStatus('success');
-        type === 'meeting'
-          ? setMeetingMatchingResult(response.partnerSurvey as MeetingPartnerSurvey)
-          : setDatingMatchingResult(response.partnerSurvey as DatingPartnerSurvey);
+
+      const { code } = response;
+      switch (code) {
+        case 7001:
+          handleStatus('waiting');
+          break;
+        case 7002:
+          handleStatus('success');
+          break;
+        case 7003:
+          handleStatus('femaleSuccess');
+          break;
+        case 7004:
+          saveMatchingResult(response.partnerSurvey);
+          handleStatus('end');
+          break;
+        case 7005:
+          handleStatus('fail');
       }
     } catch (e) {
-      setErrorMessage(() => (e as Error).message.toString());
+      setErrorMessage(() => e.response.data.message);
       onToggleErrorModal();
     }
   };
+
+  const saveMatchingResult = (partnerSurvey: MeetingPartnerSurvey | DatingPartnerSurvey) => {
+    'age' in partnerSurvey ? setDatingMatchingResult(partnerSurvey) : setMeetingMatchingResult(partnerSurvey);
+  };
+
+  useEffect(() => {
+    fetchMatchingResult();
+  }, []);
 
   return (
     <>
@@ -120,6 +139,7 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
               {
                 none: <NoneButton />,
                 success: <SuccessButton />,
+                femaleSuccess: <FemaleSuccessButton />,
                 pay: <CompleteButton />,
                 end: <EndButton handleStatus={handleStatus} />,
                 fail: <EndButton handleStatus={handleStatus} />,

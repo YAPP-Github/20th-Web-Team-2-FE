@@ -12,10 +12,10 @@ import MeetingEndBox from '@/components/domain/matching/MeetingEndBox';
 import DatingEndBox from '@/components/domain/matching/DatingEndBox';
 import FailBox from '@/components/domain/matching/FailBox';
 
-export type Status = 'none' | 'waiting' | 'success' | 'pay' | 'end' | 'fail';
+export type Status = 'none' | 'waiting' | 'success' | 'femaleSuccess' | 'pay' | 'end' | 'fail';
 
 const MatchingPage = () => {
-  const [status, setStatus] = useState<Status>('waiting');
+  const [status, setStatus] = useState<Status>('none');
 
   const handleStatus = (status: Status) => setStatus(status);
 
@@ -32,6 +32,7 @@ const MatchingPage = () => {
                 none: <></>,
                 waiting: <WaitingBox />,
                 success: <SuccessBox payDeadline={matchingResult.payDeadline} />,
+                femaleSuccess: <CompleteBox date={matchingResult.payDeadline} status="femaleSuccess" />,
                 pay: <CompleteBox date={matchingResult.payDeadline} />,
                 end: <MeetingEndBox {...matchingResult} />,
                 fail: <FailBox />,
@@ -46,6 +47,7 @@ const MatchingPage = () => {
                 none: <></>,
                 waiting: <WaitingBox />,
                 success: <SuccessBox payDeadline={matchingResult.payDeadline} />,
+                femaleSuccess: <CompleteBox date={matchingResult.payDeadline} status="femaleSuccess" />,
                 pay: <CompleteBox date={matchingResult.payDeadline} />,
                 end: <DatingEndBox {...matchingResult} />,
                 fail: <FailBox />,
