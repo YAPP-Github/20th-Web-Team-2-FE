@@ -17,7 +17,7 @@ export const patchMeetingSurvey = async (payload: Partial<Meeting>) => {
   return res.data;
 };
 
-export const postReMatchMettingSurvey = async () => {
+export const postReMatchMeetingSurvey = async () => {
   const res = await apiClient.post('/meeting/survey/rematch');
   return res.data;
 };
