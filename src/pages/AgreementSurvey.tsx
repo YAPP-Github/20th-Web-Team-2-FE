@@ -3,20 +3,37 @@ import { SurveyTemplate } from '@/components/domain/survey';
 import useAgreementCheck from '@/hooks/agreement/useAgreementCheck';
 import { palette } from '@/lib/styles/palette';
 import { Title } from '@/lib/styles/styledComponents';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { FormWrapper } from './AuthMail';
 import Path from '@/router/Path';
-import { useMatch } from 'react-router-dom';
+import { useLocation, useMatch } from 'react-router-dom';
 import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
+import { goKakaoLogin } from '@/utils/goKakaoLogin';
+import { getOauthKakaoAge } from '@/lib/api/oauth';
 
 const AgreementSurvey = () => {
+  const location = useLocation();
   const matchMeeting = useMatch('/meeting/*');
   const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const { initDatingState, setDatingData } = useDatingSessionState();
   const { checkedList, checkedChoiceList, onChangeCheck, onChangeChoiceCheck, onCheckAll, isEssentialChecked, isAllchecked } = useAgreementCheck();
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const code = searchParams.get('code') ?? '';
+
+    getOauthKakaoAge({ code })
+      .then((response) => {
+        console.log(response);
+        meetingNavigate(Path.KakaoIdSurvey);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }, [location]);
 
   const handleNextClick = () => {
     if (initMeetingState) {
@@ -25,7 +42,7 @@ const AgreementSurvey = () => {
         : setDatingData({ ...initDatingState, agreement: isAllchecked });
     }
 
-    meetingNavigate(Path.KakaoIdSurvey);
+    goKakaoLogin('ADDITIONAL');
   };
 
   return (
