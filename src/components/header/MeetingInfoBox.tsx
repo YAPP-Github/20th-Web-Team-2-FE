@@ -26,8 +26,9 @@ function MeetingInfoBox() {
     averageHeight,
     play,
     typeOfMeeting,
-    mindset,
+    mindSet,
     gender,
+    isAbroad,
     // 여까지 우리팀정보
     preferAge,
     preferDepartments,
@@ -105,11 +106,14 @@ function MeetingInfoBox() {
               ))}
             </Link>
           </FlexEle>
-          {mindset && (
+          {mindSet && (
             <InfoEle>
-              <Link to={`/updating/meeting/${Path.MindsetSurvey}`}>{conversionMindset(mindset)} </Link>
+              <Link to={`/updating/meeting/${Path.MindsetSurvey}`}>{conversionMindset(mindSet)} </Link>
             </InfoEle>
           )}
+          <InfoEle>
+            <Link to={`/updating/meeting/${Path.IsAbroadSurvey}`}>해외 여부 : {isAbroad ? 'YES' : 'NO'} </Link>
+          </InfoEle>
         </InfoBox>
         <InfoLabel>선호 조건</InfoLabel>
         <InfoBox>
