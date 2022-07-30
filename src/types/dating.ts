@@ -29,6 +29,7 @@ export interface Dating {
   channel: Channel;
   agreement: boolean;
   kakaoId: string;
+  myUniversity: number;
 }
 
 /*

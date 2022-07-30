@@ -32,7 +32,8 @@ const AuthMail = () => {
 
   const onCheckAuthCode = async (authCode: string) => {
     try {
-      await putEmail(authCode);
+      const result = await putEmail(authCode);
+      Cookies.set('authenticated', result);
       navigate('/type-of-meeting');
     } catch (e) {
       onToggleErrorModal();
