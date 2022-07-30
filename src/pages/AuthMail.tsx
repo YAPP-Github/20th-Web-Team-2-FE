@@ -14,6 +14,7 @@ const AuthMail = () => {
   const [cantMoveNext, setCantMoveNext] = useState(true);
   const [email, setEmail] = useState('');
   const [isErrorModal, onToggleErrorModal] = useToggle();
+  const [modalMessage, setModalMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,8 +26,11 @@ const AuthMail = () => {
     try {
       await postEmail(email);
       setEmail(email);
+      onToggleErrorModal();
+      setModalMessage('이메일로 인증번호를 전송하였습니다. 인증번호를 입력해 주세요.');
     } catch (e) {
       onToggleErrorModal();
+      setModalMessage('에러가 발생했습니다😭 다시한번 시도해 주세요!');
     }
   };
 
@@ -37,6 +41,7 @@ const AuthMail = () => {
       navigate('/type-of-meeting');
     } catch (e) {
       onToggleErrorModal();
+      setModalMessage('에러가 발생했습니다😭 다시한번 시도해 주세요!');
     }
   };
 
@@ -64,7 +69,7 @@ const AuthMail = () => {
           height={140}
           bottonName="확인"
           title="알림"
-          text="에러가 발생했습니다😭 다시한번 시도해 주세요!"
+          text={modalMessage}
           onToggleModal={onToggleErrorModal}
           onClick={() => {
             void 0;
@@ -117,4 +122,5 @@ const StyledLink = styled(Link)`
   font-weight: 700;
   text-decoration: underline;
 `;
+
 export default AuthMail;
