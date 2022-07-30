@@ -9,24 +9,31 @@ import { useDatingNavigate } from '@/hooks/common/useNavigate';
 import { useDatingSessionState } from '@/hooks/common';
 import { GENDER_ITEMS } from '@/types/constants/constant';
 import { type Gender } from '@/types/meeting';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
 
 const MyGenderAge = () => {
   const navigate = useNavigate();
   const datingNavigate = useDatingNavigate();
   const { initDatingState, setDatingData } = useDatingSessionState();
   const [gender, setGender] = useState(initDatingState.gender);
+  const { isUpdate, onUpdateDatingSurvey } = useUpdateSurvey();
   const [age, setAge] = useState(initDatingState.age);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id } = e.target;
     setGender(id as Gender);
   };
-  const handleNextClick = () => {
-    if (initDatingState) {
-      setDatingData({ ...initDatingState, gender, age });
-    }
 
-    datingNavigate(Path.MyDepartmentCharacter);
+  const handleNextClick = () => {
+    if (isUpdate) {
+      onUpdateDatingSurvey({ ...initDatingState, gender, age });
+      navigate(Path.MatchingDating);
+    } else {
+      if (initDatingState) {
+        setDatingData({ ...initDatingState, gender, age });
+      }
+      datingNavigate(Path.MyDepartmentCharacter);
+    }
   };
 
   return (
