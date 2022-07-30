@@ -8,6 +8,7 @@ import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 import Path from '@/router/Path';
 import { type Departments } from '@/types/meeting';
+import { LAST_MEETING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const PreferDepartmentsSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
@@ -37,7 +38,7 @@ const PreferDepartmentsSurvey = () => {
     <SurveyTemplate
       disableNext={!preferDepartments}
       currStep={8}
-      totalStep={14}
+      totalStep={LAST_MEETING_STEP}
       handlePrevClick={() => meetingNavigate(Path.PreferAgeHeightSurvey)}
       handleNextClick={handleNextClick}
     >

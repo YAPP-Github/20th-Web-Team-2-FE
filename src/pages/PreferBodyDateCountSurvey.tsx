@@ -7,6 +7,7 @@ import { PREFER_BODY_ITEMS } from '@/types/constants/body';
 import { PREFER_DCOUNT_ITEMS } from '@/types/constants/dcount';
 import { useDatingSessionState } from '@/hooks/common';
 import { type DateCount, type Body } from '@/types/dating';
+import { LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const PreferBodyDateCountSurvey = () => {
   const datingNavigate = useDatingNavigate();
@@ -39,7 +40,7 @@ const PreferBodyDateCountSurvey = () => {
     <SurveyTemplate
       disableNext={!preferBodies && !preferDateCount}
       currStep={11}
-      totalStep={16}
+      totalStep={LAST_DATING_STEP}
       handlePrevClick={() => datingNavigate(Path.PreferDepartmentCharacterSurvey)}
       handleNextClick={handleNextClick}
     >

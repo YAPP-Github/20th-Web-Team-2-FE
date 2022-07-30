@@ -10,8 +10,9 @@ import { MeetingPartnerSurvey } from '@/types/meeting';
 import { DatingPartnerSurvey } from '@/types/dating';
 import MeetingEndBox from '@/components/domain/matching/MeetingEndBox';
 import DatingEndBox from '@/components/domain/matching/DatingEndBox';
+import FailBox from '@/components/domain/matching/FailBox';
 
-export type Status = 'none' | 'waiting' | 'success' | 'pay' | 'end';
+export type Status = 'none' | 'waiting' | 'success' | 'pay' | 'end' | 'fail';
 
 const MatchingPage = () => {
   const [status, setStatus] = useState<Status>('waiting');
@@ -33,6 +34,7 @@ const MatchingPage = () => {
                 success: <SuccessBox payDeadline={matchingResult.payDeadline} />,
                 pay: <CompleteBox date={matchingResult.payDeadline} />,
                 end: <MeetingEndBox {...matchingResult} />,
+                fail: <FailBox />,
               }[status]
             }
           </MatchingContents>
@@ -46,6 +48,7 @@ const MatchingPage = () => {
                 success: <SuccessBox payDeadline={matchingResult.payDeadline} />,
                 pay: <CompleteBox date={matchingResult.payDeadline} />,
                 end: <DatingEndBox {...matchingResult} />,
+                fail: <FailBox />,
               }[status]
             }
           </MatchingContents>

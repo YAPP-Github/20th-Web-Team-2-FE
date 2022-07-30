@@ -8,6 +8,7 @@ import Path from '@/router/Path';
 import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 import { type Departments } from '@/types/meeting';
+import { LAST_MEETING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const OurDepartmentsAverageHeightSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
@@ -38,7 +39,7 @@ const OurDepartmentsAverageHeightSurvey = () => {
     <SurveyTemplate
       disableNext={!checkedMultiOption || !heightOption}
       currStep={4}
-      totalStep={14}
+      totalStep={LAST_MEETING_STEP}
       handlePrevClick={() => meetingNavigate(Path.OurUniversitiesSurvey)}
       handleNextClick={handleNextClick}
     >

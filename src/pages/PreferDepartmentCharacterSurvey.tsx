@@ -8,6 +8,7 @@ import { PREFER_CHARACTER_ITEMS, CHARACTER_ITEM } from '@/types/constants/charac
 import { useDatingSessionState } from '@/hooks/common';
 import { type Departments } from '@/types/meeting';
 import { type Characteristic } from '@/types/dating';
+import { LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const PreferDepartmentCharacterSurvey = () => {
   const datingNavigate = useDatingNavigate();
@@ -51,7 +52,7 @@ const PreferDepartmentCharacterSurvey = () => {
     <SurveyTemplate
       disableNext={!preferDepartments || !preferCharacteristics}
       currStep={10}
-      totalStep={16}
+      totalStep={LAST_DATING_STEP}
       handlePrevClick={() => datingNavigate(Path.PreferAgeHeightSurvey)}
       handleNextClick={handleNextClick}
     >

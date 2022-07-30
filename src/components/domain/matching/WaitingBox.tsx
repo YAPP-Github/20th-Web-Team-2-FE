@@ -11,9 +11,6 @@ function WaitingBox() {
         <br />
         매칭이 되면 카톡과 이메일로 링크를 보내드릴게요.
       </StringEle>
-      <MarginTopEle>
-        랜덤매칭으로 이상형 반영없이 <br /> 바로 매칭받을 수 있어요
-      </MarginTopEle>
     </>
   );
 }

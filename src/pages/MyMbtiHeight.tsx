@@ -7,6 +7,7 @@ import { palette } from '@/lib/styles/palette';
 import Path from '@/router/Path';
 import { useDatingNavigate } from '@/hooks/common/useNavigate';
 import { useDatingSessionState } from '@/hooks/common';
+import { LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const MyMbtiHeight = () => {
   const datingNavigate = useDatingNavigate();
@@ -47,7 +48,7 @@ const MyMbtiHeight = () => {
     <SurveyTemplate
       disableNext={!mbti || !myHeight}
       currStep={4}
-      totalStep={16}
+      totalStep={LAST_DATING_STEP}
       handlePrevClick={() => datingNavigate(Path.MyDepartmentCharacter)}
       handleNextClick={handleNextClick}
     >
