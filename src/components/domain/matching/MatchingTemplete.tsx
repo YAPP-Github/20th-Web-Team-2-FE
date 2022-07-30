@@ -120,7 +120,6 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
             {
               {
                 none: <NoneButton />,
-                waiting: <WaitingButton handleClick={requestRandomMatching} />,
                 success: <SuccessButton />,
                 pay: <CompleteButton />,
                 end: <EndButton handleStatus={handleStatus} />,

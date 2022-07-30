@@ -14,7 +14,7 @@ import DatingEndBox from '@/components/domain/matching/DatingEndBox';
 export type Status = 'none' | 'waiting' | 'success' | 'pay' | 'end';
 
 const MatchingPage = () => {
-  const [status, setStatus] = useState<Status>('success');
+  const [status, setStatus] = useState<Status>('waiting');
 
   const handleStatus = (status: Status) => setStatus(status);
 

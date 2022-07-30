@@ -9,11 +9,8 @@ function WaitingBox() {
       <StringEle>
         매칭은 <strong>매일밤 10시</strong>에 이루어집니다.
         <br />
-        매칭이 되면 카톡과 이메일로 링크를 보내드릴게요.
+        매칭이 되면 이메일로 링크를 보내드릴게요.
       </StringEle>
-      <MarginTopEle>
-        랜덤매칭으로 이상형 반영없이 <br /> 바로 매칭받을 수 있어요
-      </MarginTopEle>
     </>
   );
 }
@@ -24,10 +21,6 @@ export const MatchingImg = styled.img`
 `;
 export const StringEle = styled.p`
   line-height: 26px;
-`;
-export const MarginTopEle = styled.p`
-  margin-top: 50px;
-  line-height: 22px;
 `;
 
 export default WaitingBox;
