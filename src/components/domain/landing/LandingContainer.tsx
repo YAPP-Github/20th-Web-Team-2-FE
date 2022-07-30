@@ -5,16 +5,14 @@ import { palette } from '@/lib/styles/palette';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useLoginState } from '@/atoms/userState';
+import { goKakaoLogin } from '@/utils/goKakaoLogin';
 
 function LandingContainer() {
   const navigate = useNavigate();
   const { isLogin } = useLoginState();
 
   const handleKakaoLoginClick = () => {
-    const clientId = import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY;
-    const redirectUri = encodeURI(`${window.location.origin}/oauth/kakao`);
-    const loginUrl = import.meta.env.VITE_KAKAO_OPEN_URL.replace('{clientId}', clientId).replace('{redirectUri}', redirectUri);
-    window.location.href = loginUrl;
+    goKakaoLogin('LOGIN');
   };
 
   return (
