@@ -44,7 +44,7 @@ const SurveyTemplate = ({
               variant={disableNext ? 'gray' : 'default'}
               fontWeight={disableNext ? 400 : 700}
             >
-              다음
+              {currStep === totalStep ? '제출' : '다음'}
             </Button>
           </ButtonWrapper>
         )}
@@ -52,6 +52,9 @@ const SurveyTemplate = ({
     </SurveyTemplateBlock>
   );
 };
+
+export const LAST_MEETING_STEP = 15;
+export const LAST_DATING_STEP = 16;
 
 const SurveyTemplateBlock = styled.div`
   position: relative;
