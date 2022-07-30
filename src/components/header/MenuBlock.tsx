@@ -7,6 +7,8 @@ import MeetingInfoBox from './MeetingInfoBox';
 import { postLogout, postWithdrawal } from '@/lib/api/user';
 import { useToggle } from '@/hooks/common';
 import { Modal } from '../base';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 interface MenuBlockProps {
   isMenu: boolean;
   onToggleMenu: () => void;
@@ -20,14 +22,20 @@ const TempUserData = {
 };
 
 function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
-  const [isModal, onToggleModal] = useToggle();
+  const [errorMessage, setErrorMessage] = useState('에러가 발생했습니다😭 다시한번 시도해 주세요!');
   const [isConfirm, setConfirm] = useState(false);
+  const [isModal, onToggleModal] = useToggle();
   const [isErrorModal, onToggleErrorModal] = useToggle();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       await postLogout();
+      Cookies.remove('AccessToken');
+      navigate('/');
     } catch (e) {
+      const message = e.message;
+      setErrorMessage(message);
       onToggleErrorModal();
     }
   };
@@ -86,7 +94,7 @@ function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
           height={140}
           bottonName="확인"
           title="알림"
-          text="에러가 발생했습니다😭 다시한번 시도해 주세요!"
+          text={errorMessage}
           onToggleModal={onToggleErrorModal}
           onClick={() => {
             void 0;
