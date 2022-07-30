@@ -7,3 +7,4 @@ export { default as MatchingTemplete } from './MatchingTemplete';
 export { default as MeetingEndBox } from './MeetingEndBox';
 export { default as SuccessBox } from './SuccessBox';
 export { default as WaitingBox } from './WaitingBox';
+export { default as CancelBox } from './CancelBox';
