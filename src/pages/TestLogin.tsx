@@ -6,7 +6,7 @@ import { Title } from '@/lib/styles/styledComponents';
 import { palette } from '@/lib/styles/palette';
 import { LoginForm } from '@/components/testLogin';
 import { LoginRequest } from '@/types/user';
-import { postLogin } from '@/lib/api/login';
+import { postLogin } from '@/lib/api/user';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { useToggle } from '@/hooks/common';
