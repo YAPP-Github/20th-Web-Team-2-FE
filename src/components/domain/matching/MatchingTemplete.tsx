@@ -93,6 +93,9 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
           break;
         case 7005:
           handleStatus('fail');
+          break;
+        case 7006:
+          handleStatus('cancel');
       }
     } catch (e) {
       setErrorMessage(() => e.response.data.message);
@@ -142,6 +145,7 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
                 pay: <CompleteButton />,
                 end: <EndButton handleStatus={handleStatus} />,
                 fail: <EndButton handleStatus={handleStatus} />,
+                cancel: <EndButton handleStatus={handleStatus} />,
               }[btnName]
             }
           </ButtonWrapper>

@@ -54,6 +54,13 @@ function MatchingStateTitle(state: string) {
               실패하였습니다.
             </strong>
           ),
+          cancel: (
+            <strong>
+              매칭이
+              <br />
+              취소되었습니다.
+            </strong>
+          ),
         }[state]
       }
     </>
