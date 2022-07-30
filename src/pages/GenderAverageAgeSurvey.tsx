@@ -18,7 +18,7 @@ const GenderAverageAgeSurvey = () => {
   const navigate = useNavigate();
   const meetingNavigate = useMeetingNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
-  const { onUpdateMeetingSurvey } = useUpdateSurvey();
+  const { isUpdate, onUpdateMeetingSurvey } = useUpdateSurvey();
   const [genderOption, setGenderOption] = useState(initMeetingState.gender);
   const [ageOption, setAgeOption] = useState(initMeetingState.averageAge);
   const meetingData = useRecoilValue(meetingState);
@@ -28,7 +28,7 @@ const GenderAverageAgeSurvey = () => {
     setGenderOption(id as Gender);
   };
   const handleNextClick = () => {
-    if (location.pathname.includes('updating')) {
+    if (isUpdate) {
       onUpdateMeetingSurvey({ ...initMeetingState, gender: genderOption, averageAge: ageOption });
       navigate('/');
     } else {
