@@ -25,14 +25,15 @@ const AgreementSurvey = () => {
     const searchParams = new URLSearchParams(location.search);
     const code = searchParams.get('code') ?? '';
 
-    getOauthKakaoAge({ code, type: matchMeeting ? 'meeting' : 'dating' })
-      .then((response) => {
-        console.log(response);
-        meetingNavigate(Path.KakaoIdSurvey);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
+    code &&
+      getOauthKakaoAge({ code, type: matchMeeting ? 'meeting' : 'dating' })
+        .then((response) => {
+          console.log(response);
+          meetingNavigate(Path.KakaoIdSurvey);
+        })
+        .catch((e) => {
+          console.error(e);
+        });
   }, [location]);
 
   const handleNextClick = () => {
