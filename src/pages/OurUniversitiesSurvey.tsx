@@ -8,6 +8,7 @@ import { useMeetingSessionState } from '@/hooks/common';
 import useUnivLoad from '@/hooks/survey/useUnivLoad';
 import styled from 'styled-components';
 import { palette } from '@/lib/styles/palette';
+import { LAST_MEETING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const OurUniversitiesSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
@@ -41,7 +42,7 @@ const OurUniversitiesSurvey = () => {
     <SurveyTemplate
       disableNext={ourUniversities.length < 1}
       hasProgressBar={true}
-      totalStep={14}
+      totalStep={LAST_MEETING_STEP}
       currStep={3}
       handlePrevClick={() => meetingNavigate(Path.GenderAverageAgeSurvey)}
       handleNextClick={handleNextClick}

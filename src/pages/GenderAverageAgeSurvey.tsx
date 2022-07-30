@@ -12,6 +12,7 @@ import { type Gender } from '@/types/meeting';
 import { useRecoilValue } from 'recoil';
 import { meetingState } from '@/atoms/meetingState';
 import { conversionTypeOfMeeting } from '@/utils/converson';
+import { LAST_MEETING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const GenderAverageAgeSurvey = () => {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ const GenderAverageAgeSurvey = () => {
     <SurveyTemplate
       disableNext={!ageOption || !genderOption}
       currStep={2}
-      totalStep={14}
+      totalStep={LAST_MEETING_STEP}
       handlePrevClick={() => navigate(Path.TypeOfMeetingSurvey)}
       handleNextClick={handleNextClick}
     >

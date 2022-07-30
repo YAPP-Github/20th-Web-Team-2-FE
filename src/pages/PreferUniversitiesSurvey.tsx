@@ -7,6 +7,7 @@ import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigat
 import Path from '@/router/Path';
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 import useUnivLoad from '@/hooks/survey/useUnivLoad';
+import { LAST_MEETING_STEP, LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const PreferUniversitiesSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
@@ -35,7 +36,7 @@ const PreferUniversitiesSurvey = () => {
     <SurveyTemplate
       disableNext={false}
       hasProgressBar={true}
-      totalStep={matchMeeting ? 14 : 16}
+      totalStep={matchMeeting ? LAST_MEETING_STEP : LAST_DATING_STEP}
       currStep={matchMeeting ? 6 : 8}
       handlePrevClick={handlePrevClick}
       handleNextClick={handleNextClick}

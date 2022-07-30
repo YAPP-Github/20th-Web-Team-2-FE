@@ -7,6 +7,7 @@ import { SMOKEOK_ITEMS } from '@/types/constants/smoke';
 import { useDatingSessionState } from '@/hooks/common';
 import { type DateCount } from '@/types/dating';
 import styled from 'styled-components';
+import { LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const MyDateCount = () => {
   const datingNavigate = useDatingNavigate();
@@ -31,7 +32,7 @@ const MyDateCount = () => {
     <SurveyTemplate
       disableNext={!myDateCount}
       hasProgressBar={true}
-      totalStep={16}
+      totalStep={LAST_DATING_STEP}
       currStep={6}
       handlePrevClick={() => datingNavigate(Path.MyBodySmoke)}
       handleNextClick={handleNextClick}

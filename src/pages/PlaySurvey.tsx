@@ -8,6 +8,7 @@ import Path from '@/router/Path';
 import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 import { type Play } from '@/types/meeting';
+import { LAST_MEETING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const PlaySurvey = () => {
   const meetingNavigate = useMeetingNavigate();
@@ -31,7 +32,7 @@ const PlaySurvey = () => {
     <SurveyTemplate
       disableNext={!checkedOption}
       currStep={10}
-      totalStep={14}
+      totalStep={LAST_MEETING_STEP}
       handlePrevClick={() => meetingNavigate(Path.MindsetSurvey)}
       handleNextClick={handleNextClick}
     >
