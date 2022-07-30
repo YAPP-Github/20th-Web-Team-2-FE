@@ -12,6 +12,8 @@ import { FlexEle, GroupLabel, InfoBox, InfoEle, InfoLabel } from './DatingInfoBo
 import { addComma } from '@/utils/addComma';
 import { getMeetingSurvey } from '@/lib/api/meeting';
 import { useMeetingSessionState, useToggle } from '@/hooks/common';
+import { Link } from 'react-router-dom';
+import Path from '@/router/Path';
 
 function MeetingInfoBox() {
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
@@ -68,44 +70,68 @@ function MeetingInfoBox() {
         <InfoLabel>우리 팀 정보</InfoLabel>
 
         <InfoBox>
-          <InfoEle>{conversionGender(gender)}</InfoEle>
-          <InfoEle>{conversionTypeOfMeeting(typeOfMeeting)}</InfoEle>
+          <InfoEle>
+            <Link to={`/updating/meeting/${Path.GenderAverageAgeSurvey}`}> {conversionGender(gender)}</Link>
+          </InfoEle>
+          <InfoEle>
+            <Link to={`/updating/meeting/${Path.TypeOfMeeting}`}>{conversionTypeOfMeeting(typeOfMeeting)}</Link>
+          </InfoEle>
           <FlexEle>
-            {ourDepartments?.map((department, index) => (
-              <div key={department + ourDepartments}>
-                {addComma(index)}
-                {conversionDepartment(department)}
-              </div>
-            ))}
+            <Link to={`/updating/meeting/${Path.OurDepartmentsAverageHeightSurvey}`}>
+              {ourDepartments?.map((department, index) => (
+                <div key={department + ourDepartments}>
+                  {addComma(index)}
+                  {conversionDepartment(department)}
+                </div>
+              ))}
+            </Link>
           </FlexEle>
-          <InfoEle>평균나이 : {averageAge}살</InfoEle>
-          <InfoEle>평균 키 : {averageHeight}cm</InfoEle>
-          <InfoEle>{conversionPlay(play)}</InfoEle>
+          <InfoEle>
+            <Link to={`/updating/meeting/${Path.GenderAverageAgeSurvey}`}>평균나이 : {averageAge}살</Link>
+          </InfoEle>
+          <InfoEle>
+            <Link to={`/updating/meeting/${Path.OurDepartmentsAverageHeightSurvey}`}>평균 키 : {averageHeight}cm</Link>
+          </InfoEle>
+          <InfoEle>
+            <Link to={`/updating/meeting/${Path.PlaySurvey}`}>{conversionPlay(play)}</Link>
+          </InfoEle>
           <FlexEle>
-            {domesticAreas?.map((area, index) => (
-              <div key={area + domesticAreas}>
-                {addComma(index)}
-                {conversionDomesticArea(area)}
-              </div>
-            ))}
+            <Link to={`/updating/meeting/${Path.DomesticAreasSurvey}`}>
+              {domesticAreas?.map((area, index) => (
+                <div key={area + domesticAreas}>
+                  {addComma(index)}
+                  {conversionDomesticArea(area)}
+                </div>
+              ))}
+            </Link>
           </FlexEle>
-          <InfoEle>{conversionMindset(mindset)}</InfoEle>
+          {mindset && (
+            <InfoEle>
+              <Link to={`/updating/meeting/${Path.MindsetSurvey}`}>{conversionMindset(mindset)} </Link>
+            </InfoEle>
+          )}
         </InfoBox>
         <InfoLabel>선호 조건</InfoLabel>
         <InfoBox>
           <InfoEle>
-            {preferAge[0]}~{preferAge[1]}살
+            <Link to={`/updating/meeting/${Path.PreferAgeHeightSurvey}`}>
+              {preferAge[0]}~{preferAge[1]}살
+            </Link>
           </InfoEle>
           <FlexEle>
-            {preferDepartments?.map((department, index) => (
-              <div key={department + preferDepartments}>
-                {addComma(index)}
-                {conversionDepartment(department)}
-              </div>
-            ))}
+            <Link to={`/updating/meeting/${Path.PreferDepartmentsSurvey}`}>
+              {preferDepartments?.map((department, index) => (
+                <div key={department + preferDepartments}>
+                  {addComma(index)}
+                  {conversionDepartment(department)}
+                </div>
+              ))}
+            </Link>
           </FlexEle>
           <InfoEle>
-            {preferHeight[0]}~{preferHeight[1]}cm
+            <Link to={`/updating/meeting/${Path.PreferAgeHeightSurvey}`}>
+              {preferHeight[0]}~{preferHeight[1]}cm
+            </Link>
           </InfoEle>
         </InfoBox>
       </div>
