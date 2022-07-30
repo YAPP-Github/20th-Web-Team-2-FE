@@ -9,13 +9,16 @@ import Path from '@/router/Path';
 import { useMeetingNavigate, useDatingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 import { type DomesticAreas } from '@/types/meeting';
-import { useMatch } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router-dom';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
 
 const DomesticAreasSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
+  const navigate = useNavigate();
   const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const { initDatingState, setDatingData } = useDatingSessionState();
+  const { isUpdate, onUpdateDatingSurvey, onUpdateMeetingSurvey } = useUpdateSurvey();
   const getInitDomesticAreas = DOMESTICAREAS_ITEMS.map((item) => {
     return matchMeeting
       ? { ...item, checked: initMeetingState.domesticAreas.some((initState) => initState === item.id) }
@@ -33,15 +36,21 @@ const DomesticAreasSurvey = () => {
   const domesticAreas = useMemo(() => getDomesticAreas, [checkedMultiOption]);
 
   const handleNextClick = () => {
-    if (initMeetingState) {
+    if (isUpdate) {
       matchMeeting
-        ? setMeetingData({ ...initMeetingState, domesticAreas: domesticAreas ?? [] })
-        : setDatingData({ ...initDatingState, domesticAreas: domesticAreas ?? [] });
+        ? onUpdateMeetingSurvey({ ...initMeetingState, domesticAreas: domesticAreas ?? [] })
+        : onUpdateDatingSurvey({ ...initDatingState, domesticAreas: domesticAreas ?? [] });
+      navigate(Path.MatchingDating);
+    } else {
+      if (initMeetingState) {
+        matchMeeting
+          ? setMeetingData({ ...initMeetingState, domesticAreas: domesticAreas ?? [] })
+          : setDatingData({ ...initDatingState, domesticAreas: domesticAreas ?? [] });
+      }
+
+      meetingNavigate(Path.ChannelSurvey);
     }
-
-    meetingNavigate(Path.ChannelSurvey);
   };
-
   return (
     <SurveyTemplate
       disableNext={!isChecked}
