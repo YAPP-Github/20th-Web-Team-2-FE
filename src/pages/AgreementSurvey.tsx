@@ -27,25 +27,26 @@ const AgreementSurvey = () => {
     const searchParams = new URLSearchParams(location.search);
     const code = searchParams.get('code') ?? '';
 
-    code &&
-      getOauthKakaoAge({ code, type: matchMeeting ? 'meeting' : 'dating' })
-        .then((response) => {
-          console.log(response);
-          if (response) {
-            meetingNavigate(Path.KakaoIdSurvey);
-          } else {
-            setModal({
-              open: true,
-              title: '성인 인증 필요',
-              message:
-                "설정 > 개인/ 보안> 카카오계정> 내 정보 관리> '생일을 알려주세요' 선택> '프로필 정보 추가 수집 동의' 선택> 생일 설정> 확인 후 연령대 정보 제공 동의를 눌러주세요.",
-            });
-          }
-        })
-        .catch((e) => {
-          setModal((prev) => ({ ...prev, open: true }));
-          console.error(e);
+    if (!code) return;
+
+    getOauthKakaoAge({ code, type: matchMeeting ? 'meeting' : 'dating' })
+      .then((response) => {
+        console.log(response);
+        if (response) {
+          meetingNavigate(Path.KakaoIdSurvey);
+          return;
+        }
+        setModal({
+          open: true,
+          title: '성인 인증 필요',
+          message:
+            "설정 > 개인/ 보안> 카카오계정> 내 정보 관리> '생일을 알려주세요' 선택> '프로필 정보 추가 수집 동의' 선택> 생일 설정> 확인 후 연령대 정보 제공 동의를 눌러주세요.",
         });
+      })
+      .catch((e) => {
+        setModal((prev) => ({ ...prev, open: true }));
+        console.error(e);
+      });
   }, [location]);
 
   const handleNextClick = () => {
