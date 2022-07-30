@@ -1,16 +1,11 @@
 import CompleteBox from '@/components/domain/matching/CompleteBox';
 import MatchingStateTitle from '@/components/domain/matching/MatchingStateTitle';
-import MatchingTemplete from '@/components/domain/matching/MatchingTemplete';
-import SuccessBox from '@/components/domain/matching/SuccessBox';
-import WaitingBox from '@/components/domain/matching/WaitingBox';
+import { MatchingTemplete, SuccessBox, WaitingBox, MeetingEndBox, DatingEndBox, FailBox } from '@/components/domain/matching';
 import { Contents } from '@/lib/styles/styledComponents';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { MeetingPartnerSurvey } from '@/types/meeting';
 import { DatingPartnerSurvey } from '@/types/dating';
-import MeetingEndBox from '@/components/domain/matching/MeetingEndBox';
-import DatingEndBox from '@/components/domain/matching/DatingEndBox';
-import FailBox from '@/components/domain/matching/FailBox';
 
 export type Status = 'none' | 'waiting' | 'success' | 'femaleSuccess' | 'pay' | 'end' | 'fail';
 
