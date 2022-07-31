@@ -27,7 +27,7 @@ const SearchSelector = ({ placeholder, searchData, selectedResults, setSelectedR
   useEffect(() => {
     const result = selectedResults.flatMap((id) => searchData.filter((item) => item.id === id)).map(({ name }) => name);
     setSelectedSchools(result);
-  }, []);
+  }, [selectedResults, searchData]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
