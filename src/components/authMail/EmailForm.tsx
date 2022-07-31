@@ -4,6 +4,7 @@ import { InputsWrapper, StyledButton, ErrorMessage } from '@/pages/AuthMail';
 import useForm, { InitialValues } from '@/hooks/common/useForm';
 import { checkForm } from '@/utils/validations';
 import { useToggle } from '@/hooks/common';
+import { palette } from '@/lib/styles/palette';
 
 interface EmailFormProps {
   onSubmitAuthCode: (email: string) => void;
@@ -41,7 +42,14 @@ const EmailForm = ({ onSubmitAuthCode }: EmailFormProps) => {
     <>
       <form onSubmit={handleSubmit}>
         <InputsWrapper>
-          <Input isFocus={onFocus} name="email" placeholder="이메일" maxLength={50} onChange={handleChange} />
+          <Input
+            isFocus={onFocus}
+            name="email"
+            placeholder="이메일"
+            backgroundColor={palette.backgroundColor}
+            maxLength={50}
+            onChange={handleChange}
+          />
           {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
           <StyledButton disabled={!!errors.email}>인증번호 보내기</StyledButton>
         </InputsWrapper>

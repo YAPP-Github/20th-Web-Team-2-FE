@@ -14,6 +14,7 @@ interface InputStyle {
    * STANDARD, FILLED,
    */
   variant?: InputVariantKeyTypes;
+  backgroundColor?: string;
 }
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, InputStyle {
@@ -45,6 +46,7 @@ const InputStyled = styled.input<InputProps>`
   line-height: 18px;
   letter-spacing: -0.02em;
   color: ${palette.black};
+  background-color: ${({ backgroundColor }) => backgroundColor ?? ''};
   outline: none;
   transition: all 0.2s linear;
   ::placeholder {
