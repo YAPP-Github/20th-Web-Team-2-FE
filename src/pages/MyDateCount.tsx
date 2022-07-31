@@ -8,9 +8,13 @@ import { useDatingSessionState } from '@/hooks/common';
 import { type DateCount } from '@/types/dating';
 import styled from 'styled-components';
 import { LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
+import { useNavigate } from 'react-router-dom';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
 
 const MyDateCount = () => {
   const datingNavigate = useDatingNavigate();
+  const navigate = useNavigate();
+  const { isUpdate, onUpdateDatingSurvey } = useUpdateSurvey();
   const { initDatingState, setDatingData } = useDatingSessionState();
   const [myDateCount, setMyDateCount] = useState<DateCount | string>(initDatingState.myDateCount);
   const [isSmokeOk, setIsSmokeOk] = useState(initDatingState.isSmokeOk);
@@ -21,11 +25,15 @@ const MyDateCount = () => {
   };
 
   const handleNextClick = () => {
-    if (initDatingState) {
-      setDatingData({ ...initDatingState, myDateCount: myDateCount as DateCount, isSmokeOk });
+    if (isUpdate) {
+      onUpdateDatingSurvey({ ...initDatingState, myDateCount: myDateCount as DateCount, isSmokeOk });
+      navigate(Path.MatchingDating);
+    } else {
+      if (initDatingState) {
+        setDatingData({ ...initDatingState, myDateCount: myDateCount as DateCount, isSmokeOk });
+      }
+      datingNavigate(Path.AvoidUniversitiesSurvey);
     }
-
-    datingNavigate(Path.AvoidUniversitiesSurvey);
   };
 
   return (

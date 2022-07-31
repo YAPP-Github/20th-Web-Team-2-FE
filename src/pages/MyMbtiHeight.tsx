@@ -8,10 +8,14 @@ import Path from '@/router/Path';
 import { useDatingNavigate } from '@/hooks/common/useNavigate';
 import { useDatingSessionState } from '@/hooks/common';
 import { LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
+import { useNavigate } from 'react-router-dom';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
 
 const MyMbtiHeight = () => {
   const datingNavigate = useDatingNavigate();
+  const navigate = useNavigate();
   const { initDatingState, setDatingData } = useDatingSessionState();
+  const { isUpdate, onUpdateDatingSurvey } = useUpdateSurvey();
   const [mbti, setMbti] = useState(initDatingState.mbti);
   const [myHeight, setMyHeight] = useState(initDatingState.myHeight);
   const [heightError, setHeightError] = useState(false);
@@ -35,11 +39,16 @@ const MyMbtiHeight = () => {
   };
 
   const handleNextClick = () => {
-    if (initDatingState) {
-      setDatingData({ ...initDatingState, mbti, myHeight });
-    }
+    if (isUpdate) {
+      onUpdateDatingSurvey({ ...initDatingState, mbti, myHeight });
+      navigate(Path.MatchingDating);
+    } else {
+      if (initDatingState) {
+        setDatingData({ ...initDatingState, mbti, myHeight });
+      }
 
-    datingNavigate(Path.MyBodySmoke);
+      datingNavigate(Path.MyBodySmoke);
+    }
   };
 
   const mbtis = ['ISTJ', 'ISFJ', 'INFJ', 'INTJ', 'ISTP', 'ISFP', 'INFP', 'INTP', 'ESTP', 'ESFP', 'ENFP', 'ENTP', 'ESTJ', 'ESFJ', 'ENFJ', 'ENTJ'];

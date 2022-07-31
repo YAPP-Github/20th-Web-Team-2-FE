@@ -14,10 +14,10 @@ import { LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const MyGenderAge = () => {
   const navigate = useNavigate();
+  const { isUpdate, onUpdateDatingSurvey } = useUpdateSurvey();
   const datingNavigate = useDatingNavigate();
   const { initDatingState, setDatingData } = useDatingSessionState();
   const [gender, setGender] = useState(initDatingState.gender);
-  const { isUpdate, onUpdateDatingSurvey } = useUpdateSurvey();
   const [age, setAge] = useState(initDatingState.age);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

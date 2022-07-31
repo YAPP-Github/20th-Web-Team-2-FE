@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useMatch } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router-dom';
 import { SurveyTemplate } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
 import SearchSelector from '@/components/domain/survey/SearchSelector';
@@ -8,9 +8,12 @@ import Path from '@/router/Path';
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 import useUnivLoad from '@/hooks/survey/useUnivLoad';
 import { LAST_MEETING_STEP, LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
 
 const PreferUniversitiesSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
+  const navigate = useNavigate();
+  const { isUpdate, onUpdateDatingSurvey, onUpdateMeetingSurvey } = useUpdateSurvey();
   const { univs } = useUnivLoad();
   const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
@@ -23,13 +26,19 @@ const PreferUniversitiesSurvey = () => {
   };
 
   const handleNextClick = () => {
-    if (initMeetingState) {
+    if (isUpdate) {
       matchMeeting
-        ? setMeetingData({ ...initMeetingState, preferUniversities })
-        : setDatingData({ ...initDatingState, preferUniversities: preferDatingUniversities });
+        ? onUpdateMeetingSurvey({ ...initMeetingState, preferUniversities })
+        : onUpdateDatingSurvey({ ...initDatingState, preferUniversities: preferDatingUniversities });
+      navigate(Path.MatchingDating);
+    } else {
+      if (initMeetingState) {
+        matchMeeting
+          ? setMeetingData({ ...initMeetingState, preferUniversities })
+          : setDatingData({ ...initDatingState, preferUniversities: preferDatingUniversities });
+      }
+      meetingNavigate(Path.PreferAgeHeightSurvey);
     }
-
-    meetingNavigate(Path.PreferAgeHeightSurvey);
   };
 
   return (
