@@ -20,6 +20,23 @@ export const TYPE_OF_MEETING_ITEMS = [
     text: '4: 4 미팅',
   },
 ];
+export const TYPE_OF_MEETING_ITEMS_UPDATE = [
+  {
+    name: 'typeOfMeeting',
+    id: 'TWO',
+    text: '2: 2 미팅',
+  },
+  {
+    name: 'typeOfMeeting',
+    id: 'THREE',
+    text: '3: 3 미팅',
+  },
+  {
+    name: 'typeOfMeeting',
+    id: 'FOUR',
+    text: '4: 4 미팅',
+  },
+];
 
 export const GENDER_ITEMS = [
   {

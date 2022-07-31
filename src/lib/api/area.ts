@@ -2,8 +2,6 @@ import apiClient from '.';
 
 export const getAboardAreaAPI = async () => {
   const res = await apiClient.get('/areas');
-  console.log(res);
-
   return res.data;
 };
 

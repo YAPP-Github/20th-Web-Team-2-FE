@@ -8,10 +8,14 @@ import Path from '@/router/Path';
 import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 import { type Play } from '@/types/meeting';
+import { useNavigate } from 'react-router-dom';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
 import { LAST_MEETING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const PlaySurvey = () => {
   const meetingNavigate = useMeetingNavigate();
+  const navigate = useNavigate();
+  const { isUpdate, onUpdateMeetingSurvey } = useUpdateSurvey();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const [checkedOption, setCheckedOption] = useState<Play>(initMeetingState.play);
 
@@ -21,11 +25,15 @@ const PlaySurvey = () => {
   };
 
   const handleNextClick = () => {
-    if (initMeetingState) {
-      setMeetingData({ ...initMeetingState, play: checkedOption });
+    if (isUpdate) {
+      onUpdateMeetingSurvey({ ...initMeetingState, play: checkedOption });
+      navigate(Path.MatchingDating);
+    } else {
+      if (initMeetingState) {
+        setMeetingData({ ...initMeetingState, play: checkedOption });
+      }
+      meetingNavigate(Path.IsAbroadSurvey);
     }
-
-    meetingNavigate(Path.IsAbroadSurvey);
   };
 
   return (

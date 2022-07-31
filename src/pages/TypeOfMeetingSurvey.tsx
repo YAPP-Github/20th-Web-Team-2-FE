@@ -6,8 +6,9 @@ import { useMeetingNavigate, useDatingNavigate } from '@/hooks/common/useNavigat
 import Path from '@/router/Path';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { type Meeting } from '@/types/meeting';
-import { TYPE_OF_MEETING_ITEMS } from '@/types/constants/constant';
+import { TYPE_OF_MEETING_ITEMS, TYPE_OF_MEETING_ITEMS_UPDATE } from '@/types/constants/constant';
 import { useMeetingSessionState } from '@/hooks/common';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
 import { LAST_MEETING_STEP, LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const TypeOfMeetingSurvey = () => {
@@ -16,25 +17,31 @@ const TypeOfMeetingSurvey = () => {
   const datingNavigate = useDatingNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const [checkedOption, setCheckedOption] = useState<Meeting['typeOfMeeting'] | string>(initMeetingState?.typeOfMeeting);
+  const { isUpdate, onUpdateMeetingSurvey } = useUpdateSurvey();
   const matchMeeting = useMatch('/meeting/*');
 
   const handleNextClick = () => {
-    if (initMeetingState) {
-      setMeetingData({ ...initMeetingState, typeOfMeeting: checkedOption as Meeting['typeOfMeeting'] });
-    }
+    if (isUpdate) {
+      onUpdateMeetingSurvey({ ...initMeetingState, typeOfMeeting: checkedOption as Meeting['typeOfMeeting'] });
+      navigate(Path.MatchingDating);
+    } else {
+      if (initMeetingState) {
+        setMeetingData({ ...initMeetingState, typeOfMeeting: checkedOption as Meeting['typeOfMeeting'] });
+      }
 
-    switch (checkedOption) {
-      case 'ONE':
-        datingNavigate(Path.MyGenderAge);
-        break;
-      case 'TWO':
-        meetingNavigate(Path.GenderAverageAgeSurvey);
-        break;
-      case 'THREE':
-        meetingNavigate(Path.GenderAverageAgeSurvey);
-        break;
-      case 'FOUR':
-        meetingNavigate(Path.GenderAverageAgeSurvey);
+      switch (checkedOption) {
+        case 'ONE':
+          datingNavigate(Path.MyGenderAge);
+          break;
+        case 'TWO':
+          meetingNavigate(Path.GenderAverageAgeSurvey);
+          break;
+        case 'THREE':
+          meetingNavigate(Path.GenderAverageAgeSurvey);
+          break;
+        case 'FOUR':
+          meetingNavigate(Path.GenderAverageAgeSurvey);
+      }
     }
   };
 
@@ -51,7 +58,12 @@ const TypeOfMeetingSurvey = () => {
         <br />
         유형을 알려주세요.
       </Title>
-      <ChooseFourBox checkedOption={checkedOption} setCheckedOption={setCheckedOption} items={TYPE_OF_MEETING_ITEMS} top={97}>
+      <ChooseFourBox
+        checkedOption={checkedOption}
+        setCheckedOption={setCheckedOption}
+        items={!isUpdate ? TYPE_OF_MEETING_ITEMS : TYPE_OF_MEETING_ITEMS_UPDATE}
+        top={97}
+      >
         1가지를 선택해주세요.
       </ChooseFourBox>
     </SurveyTemplate>

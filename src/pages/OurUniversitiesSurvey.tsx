@@ -8,23 +8,30 @@ import { useMeetingSessionState } from '@/hooks/common';
 import useUnivLoad from '@/hooks/survey/useUnivLoad';
 import styled from 'styled-components';
 import { palette } from '@/lib/styles/palette';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
+import { useNavigate } from 'react-router-dom';
 import { LAST_MEETING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const OurUniversitiesSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
+  const navigate = useNavigate();
   const { univs } = useUnivLoad();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
+  const { isUpdate, onUpdateMeetingSurvey } = useUpdateSurvey();
   const [ourUniversities, setOurUniversities] = useState<number[]>(initMeetingState.ourUniversities);
   const { typeOfMeeting } = initMeetingState;
 
   const handleNextClick = () => {
-    if (initMeetingState) {
-      setMeetingData({ ...initMeetingState, ourUniversities });
+    if (isUpdate) {
+      onUpdateMeetingSurvey({ ...initMeetingState, ourUniversities });
+      navigate(Path.MatchingDating);
+    } else {
+      if (initMeetingState) {
+        setMeetingData({ ...initMeetingState, ourUniversities });
+      }
+      meetingNavigate(Path.OurDepartmentsAverageHeightSurvey);
     }
-
-    meetingNavigate(Path.OurDepartmentsAverageHeightSurvey);
   };
-
   const maxUniv = useMemo(() => {
     switch (typeOfMeeting) {
       case 'ONE':

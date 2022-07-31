@@ -91,6 +91,7 @@ function Routing() {
               <Route path={Path.KakaoIdSurvey} element={<KakaoIdSurvey />} />
             </Route>
             <Route path={'/updating/meeting'} element={<Outlet />}>
+              <Route path={Path.TypeOfMeeting} element={<TypeOfMeetingSurvey />} />
               <Route path={Path.GenderAverageAgeSurvey} element={<GenderAverageAgeSurvey />} />
               <Route path={Path.OurUniversitiesSurvey} element={<OurUniversitiesSurvey />} />
               <Route path={Path.OurDepartmentsAverageHeightSurvey} element={<OurDepartmentsAverageHeightSurvey />} />
