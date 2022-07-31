@@ -24,6 +24,10 @@ const WaitingBoxBlock = styled.div`
   align-items: center;
 `;
 
+export const MatchingImg = styled.img`
+  width: 140px;
+`;
+
 export const StringEle = styled.p`
   line-height: 26px;
 `;
