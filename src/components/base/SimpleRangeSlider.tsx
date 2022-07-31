@@ -39,7 +39,9 @@ const SimpleRangeSlider = ({ min, max, initValue, isStep5 = false, onChange }: S
         range.current.style.width = `${maxPercent}%`;
       }
       if (sign.current) {
-        sign.current.style.left = `calc(${maxPercent}% - ${sign.current.clientWidth / 2}px${maxPercent > 90 ? ' - 40px' : ''})`;
+        sign.current.style.left = `calc(${maxPercent}% - ${sign.current.clientWidth / 2}px${
+          (maxPercent > 70 ? ' - 10px' : '') || (maxPercent < 30 ? ' + 10px' : '')
+        })`;
       }
     }
   }, [maxVal, getPercent]);
@@ -120,7 +122,7 @@ const SliderInput = styled.input<{ zIndex: number }>`
 `;
 
 const TrackWrapper = styled.div`
-  width: 100%;
+  width: 90%;
   position: relative;
 `;
 
