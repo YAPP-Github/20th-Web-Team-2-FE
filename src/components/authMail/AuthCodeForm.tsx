@@ -5,6 +5,7 @@ import useForm, { InitialValues } from '@/hooks/common/useForm';
 import useAuthNumber from '@/hooks/common/useAuthNumber';
 import styled from 'styled-components';
 import { useToggle } from '@/hooks/common';
+import { palette } from '@/lib/styles/palette';
 
 interface AuthCodeFormProps {
   email: string;
@@ -48,9 +49,16 @@ const AuthCodeForm = ({ email, onCheckAuthCode }: AuthCodeFormProps) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <FormWrapper onSubmit={handleSubmit}>
         <InputsWrapper>
-          <Input isFocus={!!email} name="authCode" placeholder="인증번호" maxLength={8} onChange={handleChange} />
+          <Input
+            isFocus={!!email}
+            name="authCode"
+            placeholder="인증번호"
+            backgroundColor={palette.backgroundColor}
+            maxLength={8}
+            onChange={handleChange}
+          />
           {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
           <StyledButton disabled={!!errors.authCode}>확인</StyledButton>
           {email && (
@@ -59,7 +67,7 @@ const AuthCodeForm = ({ email, onCheckAuthCode }: AuthCodeFormProps) => {
             </CountDownWrapper>
           )}
         </InputsWrapper>
-      </form>
+      </FormWrapper>
       {isErrorModal && (
         <Modal
           width={200}
@@ -76,6 +84,10 @@ const AuthCodeForm = ({ email, onCheckAuthCode }: AuthCodeFormProps) => {
     </>
   );
 };
+
+const FormWrapper = styled.form`
+  margin-top: 20px;
+`;
 
 const CountDownWrapper = styled.span`
   position: absolute;
