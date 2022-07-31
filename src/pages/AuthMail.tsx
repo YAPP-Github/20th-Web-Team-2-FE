@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { SurveyTemplate } from '@/components/domain/survey';
 import { Button, Modal } from '@/components/base';
@@ -8,28 +8,40 @@ import { EmailForm, AuthCodeForm } from '@/components/authMail';
 import { Link, useNavigate } from 'react-router-dom';
 import { useToggle } from '@/hooks/common';
 import { postEmail, putEmail } from '@/lib/api/email';
+import Cookies from 'js-cookie';
 
 const AuthMail = () => {
   const [cantMoveNext, setCantMoveNext] = useState(true);
   const [email, setEmail] = useState('');
   const [isErrorModal, onToggleErrorModal] = useToggle();
+  const [modalMessage, setModalMessage] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const authenticated = Cookies.get('authenticated') === 'true';
+    authenticated && navigate('/type-of-meeting');
+  }, []);
 
   const onSubmitAuthCode = async (email: string) => {
     try {
       await postEmail(email);
       setEmail(email);
+      onToggleErrorModal();
+      setModalMessage('이메일로 인증번호를 전송하였습니다. 인증번호를 입력해 주세요.');
     } catch (e) {
       onToggleErrorModal();
+      setModalMessage('에러가 발생했습니다😭 다시한번 시도해 주세요!');
     }
   };
 
   const onCheckAuthCode = async (authCode: string) => {
     try {
-      await putEmail(authCode);
+      const result = await putEmail(authCode);
+      Cookies.set('authenticated', result);
       navigate('/type-of-meeting');
     } catch (e) {
       onToggleErrorModal();
+      setModalMessage('에러가 발생했습니다😭 다시한번 시도해 주세요!');
     }
   };
 
@@ -42,7 +54,7 @@ const AuthMail = () => {
             학교 메일로 인증해주세요.
           </strong>
         </Title>
-        <Description>예시: 1234@bu.du</Description>
+        <Description>예시: 1234@bu.edu</Description>
         <FormWrapper>
           <EmailForm onSubmitAuthCode={onSubmitAuthCode} />
           <AuthCodeForm email={email} onCheckAuthCode={onCheckAuthCode} />
@@ -57,7 +69,7 @@ const AuthMail = () => {
           height={140}
           bottonName="확인"
           title="알림"
-          text="에러가 발생했습니다😭 다시한번 시도해 주세요!"
+          text={modalMessage}
           onToggleModal={onToggleErrorModal}
           onClick={() => {
             void 0;
@@ -82,10 +94,8 @@ export const StyledButton = styled(Button)`
 `;
 
 export const FormWrapper = styled.div`
-  position: absolute;
   width: 100%;
   top: 40%;
-  transform: translateY(-50%);
   margin-top: 65px;
 `;
 
@@ -112,4 +122,5 @@ const StyledLink = styled(Link)`
   font-weight: 700;
   text-decoration: underline;
 `;
+
 export default AuthMail;

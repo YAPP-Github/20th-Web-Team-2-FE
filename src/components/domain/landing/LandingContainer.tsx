@@ -3,22 +3,27 @@ import { StringLogo, RadiousLogo } from '@/assets/img';
 import { Button } from '@/components/base';
 import { palette } from '@/lib/styles/palette';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLoginState } from '@/atoms/userState';
+import { goKakaoLogin } from '@/utils/goKakaoLogin';
+import Cookies from 'js-cookie';
+import { HeaderWrapper } from '@/components/domain/survey/SurveyTemplate';
 
 function LandingContainer() {
   const navigate = useNavigate();
   const { isLogin } = useLoginState();
 
   const handleKakaoLoginClick = () => {
-    const clientId = import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY;
-    const redirectUri = encodeURI(`${window.location.origin}/oauth/kakao`);
-    const loginUrl = import.meta.env.VITE_KAKAO_OPEN_URL.replace('{clientId}', clientId).replace('{redirectUri}', redirectUri);
-    window.location.href = loginUrl;
+    goKakaoLogin('login');
   };
 
   return (
     <Container>
+      <HeaderWrapper>
+        <Logo href="https://intro.lonessum.com/" target="_blank" rel="noreferrer">
+          외딴썸
+        </Logo>
+      </HeaderWrapper>
       <MainIconBox>
         <Icon src={RadiousLogo} />
         <MainNameStyled src={StringLogo} alt="외딴썸" />
@@ -42,13 +47,14 @@ function LandingContainer() {
             fullWidth
             variant={'default'}
             onClick={() => {
-              navigate('/type-of-meeting');
+              const authenticated = Cookies.get('authenticated') === 'true';
+              authenticated ? navigate('/type-of-meeting') : navigate('/auth-mail');
             }}
           >
             시작하기
           </LandingBtn>
           <LandingBtn size="medium" fontWeight={700} fullWidth variant={'grayBlack'} onClick={() => navigate('/matching/meeting')}>
-            매칭 결과 확인
+            매칭 결과 확인하기
           </LandingBtn>
         </BtnBox>
       )}
@@ -64,8 +70,19 @@ const Container = styled.section`
   border-radius: 5px;
   flex: 1 0 auto;
 `;
+export const Logo = styled.a`
+  position: absolute;
+  left: 16px;
+  font-family: SangjuGotgam, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
+    'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 125%;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.8);
+`;
 const MainIconBox = styled.div`
-  padding-top: 152px;
+  padding-top: 76px;
   display: flex;
   flex-direction: column;
   flex: 1 1 60%;

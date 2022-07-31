@@ -10,6 +10,7 @@ import Path from '@/router/Path';
 import { type Departments } from '@/types/meeting';
 import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
 import { useNavigate } from 'react-router-dom';
+import { LAST_MEETING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const PreferDepartmentsSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
@@ -45,7 +46,7 @@ const PreferDepartmentsSurvey = () => {
     <SurveyTemplate
       disableNext={!preferDepartments}
       currStep={8}
-      totalStep={14}
+      totalStep={LAST_MEETING_STEP}
       handlePrevClick={() => meetingNavigate(Path.PreferAgeHeightSurvey)}
       handleNextClick={handleNextClick}
     >

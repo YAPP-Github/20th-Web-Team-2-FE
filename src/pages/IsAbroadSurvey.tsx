@@ -1,4 +1,3 @@
-/* eslint-disable react/no-children-prop */
 import React, { useState } from 'react';
 import { ChooseTwoBox, SurveyTemplate } from '@/components/domain/survey';
 import { Title } from '@/lib/styles/styledComponents';
@@ -11,6 +10,7 @@ import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { type Location } from '@/types/meeting';
 import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
+import { LAST_MEETING_STEP, LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const IsAbroadSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
@@ -54,7 +54,7 @@ const IsAbroadSurvey = () => {
       disableNext={false}
       hasProgressBar={true}
       currStep={matchMeeting ? 11 : 12}
-      totalStep={matchMeeting ? 14 : 16}
+      totalStep={matchMeeting ? LAST_MEETING_STEP : LAST_DATING_STEP}
       handlePrevClick={handlePrevClick}
       handleNextClick={handleNextClick}
     >

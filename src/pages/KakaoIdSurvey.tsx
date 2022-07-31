@@ -12,6 +12,7 @@ import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigat
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 import { postMeetingSurvey } from '@/lib/api/meeting';
 import { postDatingSurvey } from '@/lib/api/dating';
+import { LAST_MEETING_STEP, LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const KakaoIdSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
@@ -50,8 +51,8 @@ const KakaoIdSurvey = () => {
       <SurveyTemplate
         disableNext={!isConfirm}
         hasProgressBar={true}
-        currStep={14}
-        totalStep={14}
+        currStep={matchMeeting ? 15 : 16}
+        totalStep={matchMeeting ? LAST_MEETING_STEP : LAST_DATING_STEP}
         handlePrevClick={() => meetingNavigate(Path.AgreementSurvey)}
         handleNextClick={handleNextClick}
       >

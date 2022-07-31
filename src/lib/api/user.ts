@@ -1,9 +1,5 @@
 import apiClient from './index';
 import { LoginResponse, LoginRequest, KakaoIdResponse } from '@/types/user';
-/*
-  @desc
-  임시 아이디 비번: test1
-*/
 
 export const postJoin = async (payload: LoginRequest): Promise<LoginResponse | undefined> => {
   const res = await apiClient.post('/join', payload);
@@ -21,9 +17,8 @@ export const getKakaoId = async () => {
   return res.data;
 };
 
-/* @FIXME: 나중에 user.ts로 바꾸기 */
 export const postLogout = async () => {
-  const res = await apiClient.post('/logout');
+  const res = await apiClient.get('/logout');
   return res.data;
 };
 

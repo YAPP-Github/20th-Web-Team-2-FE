@@ -4,11 +4,12 @@ import { Title } from '@/lib/styles/styledComponents';
 import { ChooseFourBox } from '@/components/domain/survey';
 import { useMeetingNavigate, useDatingNavigate } from '@/hooks/common/useNavigate';
 import Path from '@/router/Path';
-import { useNavigate } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router-dom';
 import { type Meeting } from '@/types/meeting';
 import { TYPE_OF_MEETING_ITEMS, TYPE_OF_MEETING_ITEMS_UPDATE } from '@/types/constants/constant';
 import { useMeetingSessionState } from '@/hooks/common';
 import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
+import { LAST_MEETING_STEP, LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const TypeOfMeetingSurvey = () => {
   const navigate = useNavigate();
@@ -17,6 +18,8 @@ const TypeOfMeetingSurvey = () => {
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const [checkedOption, setCheckedOption] = useState<Meeting['typeOfMeeting'] | string>(initMeetingState?.typeOfMeeting);
   const { isUpdate, onUpdateMeetingSurvey } = useUpdateSurvey();
+  const matchMeeting = useMatch('/meeting/*');
+
   const handleNextClick = () => {
     if (isUpdate) {
       onUpdateMeetingSurvey({ ...initMeetingState, typeOfMeeting: checkedOption as Meeting['typeOfMeeting'] });
@@ -46,7 +49,7 @@ const TypeOfMeetingSurvey = () => {
     <SurveyTemplate
       disableNext={!checkedOption}
       currStep={1}
-      totalStep={14}
+      totalStep={matchMeeting ? LAST_MEETING_STEP : LAST_DATING_STEP}
       handlePrevClick={() => navigate(Path.LandingPage)}
       handleNextClick={handleNextClick}
     >

@@ -1,33 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Logo, Logout } from '@/assets/img';
 import { palette } from '@/lib/styles/palette';
 import styled from 'styled-components';
 import DatingInfoBox from './DatingInfoBox';
 import MeetingInfoBox from './MeetingInfoBox';
-import { postLogout, postWithdrawal } from '@/lib/api/login';
-import { useToggle } from '@/hooks/common';
+import { postLogout, postWithdrawal } from '@/lib/api/user';
+import { useDatingSessionState, useToggle } from '@/hooks/common';
 import { Modal } from '../base';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
+import useUnivLoad from '@/hooks/survey/useUnivLoad';
+
 interface MenuBlockProps {
   isMenu: boolean;
   onToggleMenu: () => void;
 }
-/**
- * 임시 유저 데이터
- */
-const TempUserData = {
-  email: 'coffee123@naver.com',
-  univ: 'Boston University',
-};
 
 function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
-  const [isModal, onToggleModal] = useToggle();
+  const [errorMessage, setErrorMessage] = useState('에러가 발생했습니다😭 다시한번 시도해 주세요!');
   const [isConfirm, setConfirm] = useState(false);
+  const [isModal, onToggleModal] = useToggle();
   const [isErrorModal, onToggleErrorModal] = useToggle();
+  const navigate = useNavigate();
+  const { initDatingState } = useDatingSessionState();
+  const { univs } = useUnivLoad();
+
+  const myUnivLabel = useMemo(() => {
+    return univs.find(({ id }) => id === initDatingState.myUniversity)?.name;
+  }, [univs]);
 
   const handleLogout = async () => {
     try {
       await postLogout();
+      Cookies.remove('AccessToken');
+      navigate('/');
     } catch (e) {
+      const message = (e as Error).message;
+      setErrorMessage(message);
       onToggleErrorModal();
     }
   };
@@ -55,8 +64,8 @@ function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
           <UserInfo>
             <SiteLogo src={Logo} alt="사이트 로고" />
             <UserBox>
-              <div>{TempUserData.email}</div>
-              <div className="univ">{TempUserData.univ}</div>
+              <div>{initDatingState.kakaoId}</div>
+              <div className="univ">{myUnivLabel}</div>
             </UserBox>
           </UserInfo>
           <LogoutButton onClick={handleLogout}>
@@ -86,7 +95,7 @@ function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
           height={140}
           bottonName="확인"
           title="알림"
-          text="에러가 발생했습니다😭 다시한번 시도해 주세요!"
+          text={errorMessage}
           onToggleModal={onToggleErrorModal}
           onClick={() => {
             void 0;

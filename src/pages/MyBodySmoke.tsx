@@ -7,6 +7,7 @@ import { MYBODY_ITEMS } from '@/types/constants/body';
 import { useDatingSessionState } from '@/hooks/common';
 import { type Body } from '@/types/dating';
 import styled from 'styled-components';
+import { LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const MyBodySmoke = () => {
   const datingNavigate = useDatingNavigate();
@@ -31,7 +32,7 @@ const MyBodySmoke = () => {
     <SurveyTemplate
       disableNext={!myBody}
       hasProgressBar={true}
-      totalStep={16}
+      totalStep={LAST_DATING_STEP}
       currStep={5}
       handlePrevClick={() => datingNavigate(Path.MyMbtiHeight)}
       handleNextClick={handleNextClick}

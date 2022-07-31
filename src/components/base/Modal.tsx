@@ -93,6 +93,7 @@ const ModalInner = styled.div<IModalInnerProps>`
   height: ${({ height }) => height}px;
   border-radius: 4px;
   animation: ${({ isClose }) => (isClose ? transitions.popOut : transitions.popIn)} 0.2s ease-in-out;
+  word-break: keep-all;
 `;
 
 const ModalTitle = styled.h2`
