@@ -8,12 +8,16 @@ import Path from '@/router/Path';
 import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 import { type MindSet } from '@/types/meeting';
+import { useNavigate } from 'react-router-dom';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
 import { LAST_MEETING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const MindsetSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
+  const navigate = useNavigate();
+  const { isUpdate, onUpdateMeetingSurvey } = useUpdateSurvey();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
-  const [checkedOption, setCheckedOption] = useState<MindSet>(initMeetingState.mindset);
+  const [checkedOption, setCheckedOption] = useState<MindSet>(initMeetingState.mindSet);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id } = e.target;
@@ -21,13 +25,16 @@ const MindsetSurvey = () => {
   };
 
   const handleNextClick = () => {
-    if (initMeetingState) {
-      setMeetingData({ ...initMeetingState, mindset: checkedOption });
+    if (isUpdate) {
+      onUpdateMeetingSurvey({ ...initMeetingState, mindSet: checkedOption });
+      navigate(Path.MatchingDating);
+    } else {
+      if (initMeetingState) {
+        setMeetingData({ ...initMeetingState, mindSet: checkedOption });
+      }
+      meetingNavigate(Path.PlaySurvey);
     }
-
-    meetingNavigate(Path.PlaySurvey);
   };
-
   return (
     <SurveyTemplate
       disableNext={!checkedOption}

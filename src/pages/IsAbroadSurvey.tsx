@@ -7,12 +7,15 @@ import { useMeetingNavigate, useDatingNavigate } from '@/hooks/common/useNavigat
 import Path from '@/router/Path';
 import { COUNTRY_ITEMS } from '@/types/constants/area';
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
-import { useMatch } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router-dom';
 import { type Location } from '@/types/meeting';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
 import { LAST_MEETING_STEP, LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const IsAbroadSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
+  const navigate = useNavigate();
+  const { isUpdate, onUpdateMeetingSurvey, onUpdateDatingSurvey } = useUpdateSurvey();
   const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const { initDatingState, setDatingData } = useDatingSessionState();
@@ -30,13 +33,20 @@ const IsAbroadSurvey = () => {
   };
 
   const handleNextClick = () => {
-    if (initMeetingState) {
+    if (isUpdate) {
       matchMeeting
-        ? setMeetingData({ ...initMeetingState, isAbroad: isAbroad === 'ABROAD' ? true : false })
-        : setDatingData({ ...initDatingState, isAbroad: isAbroadDating === 'ABROAD' ? true : false });
-    }
+        ? onUpdateMeetingSurvey({ ...initMeetingState, isAbroad: isAbroad === 'ABROAD' ? true : false })
+        : onUpdateDatingSurvey({ ...initDatingState, isAbroad: isAbroadDating === 'ABROAD' ? true : false });
+      navigate(Path.MatchingDating);
+    } else {
+      if (initMeetingState) {
+        matchMeeting
+          ? setMeetingData({ ...initMeetingState, isAbroad: isAbroad === 'ABROAD' ? true : false })
+          : setDatingData({ ...initDatingState, isAbroad: isAbroadDating === 'ABROAD' ? true : false });
+      }
 
-    meetingNavigate(ISABOARD === 'ABROAD' ? Path.AbroadAreasSurvey : Path.DomesticAreasSurvey);
+      meetingNavigate(ISABOARD === 'ABROAD' ? Path.AbroadAreasSurvey : Path.DomesticAreasSurvey);
+    }
   };
 
   return (

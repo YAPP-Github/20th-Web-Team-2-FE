@@ -8,10 +8,14 @@ import { useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { useMeetingSessionState } from '@/hooks/common';
 import Path from '@/router/Path';
 import { type Departments } from '@/types/meeting';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
+import { useNavigate } from 'react-router-dom';
 import { LAST_MEETING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const PreferDepartmentsSurvey = () => {
   const meetingNavigate = useMeetingNavigate();
+  const navigate = useNavigate();
+  const { isUpdate, onUpdateMeetingSurvey } = useUpdateSurvey();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
   const getInitDepartments = PREFER_DEPARTMENT_ITEMS.map((item) => {
     return { ...item, checked: initMeetingState.preferDepartments.some((initState) => initState === item.id) };
@@ -27,11 +31,15 @@ const PreferDepartmentsSurvey = () => {
   const savedPreferDepartments = useMemo(() => getPreferDepartments, [preferDepartments]);
 
   const handleNextClick = () => {
-    if (initMeetingState) {
-      setMeetingData({ ...initMeetingState, preferDepartments: savedPreferDepartments ?? [] });
+    if (isUpdate) {
+      onUpdateMeetingSurvey({ ...initMeetingState, preferDepartments: savedPreferDepartments ?? [] });
+      navigate(Path.MatchingDating);
+    } else {
+      if (initMeetingState) {
+        setMeetingData({ ...initMeetingState, preferDepartments: savedPreferDepartments ?? [] });
+      }
+      meetingNavigate(Path.MindsetSurvey);
     }
-
-    meetingNavigate(Path.MindsetSurvey);
   };
 
   return (

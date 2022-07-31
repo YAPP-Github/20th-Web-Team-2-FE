@@ -12,12 +12,14 @@ import { type Gender } from '@/types/meeting';
 import { useRecoilValue } from 'recoil';
 import { meetingState } from '@/atoms/meetingState';
 import { conversionTypeOfMeeting } from '@/utils/converson';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
 import { LAST_MEETING_STEP } from '@/components/domain/survey/SurveyTemplate';
 
 const GenderAverageAgeSurvey = () => {
   const navigate = useNavigate();
   const meetingNavigate = useMeetingNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
+  const { isUpdate, onUpdateMeetingSurvey } = useUpdateSurvey();
   const [genderOption, setGenderOption] = useState(initMeetingState.gender);
   const [ageOption, setAgeOption] = useState(initMeetingState.averageAge);
   const meetingData = useRecoilValue(meetingState);
@@ -27,11 +29,15 @@ const GenderAverageAgeSurvey = () => {
     setGenderOption(id as Gender);
   };
   const handleNextClick = () => {
-    if (initMeetingState) {
-      setMeetingData({ ...initMeetingState, gender: genderOption, averageAge: ageOption });
+    if (isUpdate) {
+      onUpdateMeetingSurvey({ ...initMeetingState, gender: genderOption, averageAge: ageOption });
+      navigate('/');
+    } else {
+      if (initMeetingState) {
+        setMeetingData({ ...initMeetingState, gender: genderOption, averageAge: ageOption });
+      }
+      meetingNavigate(Path.OurUniversitiesSurvey);
     }
-
-    meetingNavigate(Path.OurUniversitiesSurvey);
   };
 
   return (
