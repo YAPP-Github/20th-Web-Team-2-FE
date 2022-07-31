@@ -10,19 +10,27 @@ import { useDatingSessionState } from '@/hooks/common';
 import { type Departments } from '@/types/meeting';
 import { type Characteristic } from '@/types/dating';
 import { LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
+import { useNavigate } from 'react-router-dom';
 
 const MyDepartmentCharacter = () => {
   const datingNavigate = useDatingNavigate();
+  const navigate = useNavigate();
+  const { isUpdate, onUpdateDatingSurvey } = useUpdateSurvey();
   const { initDatingState, setDatingData } = useDatingSessionState();
   const [myDepartment, setMyDepartment] = useState<Departments | string>(initDatingState.myDepartment);
   const [characteristic, setCharacteristic] = useState<Characteristic | string>(initDatingState.characteristic);
 
   const handleNextClick = () => {
-    if (initDatingState) {
-      setDatingData({ ...initDatingState, myDepartment: myDepartment as Departments, characteristic: characteristic as Characteristic });
+    if (isUpdate) {
+      onUpdateDatingSurvey({ ...initDatingState, myDepartment: myDepartment as Departments, characteristic: characteristic as Characteristic });
+      navigate(Path.MatchingDating);
+    } else {
+      if (initDatingState) {
+        setDatingData({ ...initDatingState, myDepartment: myDepartment as Departments, characteristic: characteristic as Characteristic });
+      }
+      datingNavigate(Path.MyMbtiHeight);
     }
-
-    datingNavigate(Path.MyMbtiHeight);
   };
 
   return (

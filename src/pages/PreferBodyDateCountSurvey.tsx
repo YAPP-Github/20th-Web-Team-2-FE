@@ -8,8 +8,12 @@ import { PREFER_DCOUNT_ITEMS } from '@/types/constants/dcount';
 import { useDatingSessionState } from '@/hooks/common';
 import { type DateCount, type Body } from '@/types/dating';
 import { LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
+import { useNavigate } from 'react-router-dom';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
 
 const PreferBodyDateCountSurvey = () => {
+  const navigate = useNavigate();
+  const { isUpdate, onUpdateDatingSurvey } = useUpdateSurvey();
   const datingNavigate = useDatingNavigate();
   const { initDatingState, setDatingData } = useDatingSessionState();
   const [preferDateCount, setPreferDateCount] = useState<DateCount | string>(initDatingState.preferDateCount);
@@ -29,11 +33,15 @@ const PreferBodyDateCountSurvey = () => {
   }, []);
 
   const handleNextClick = () => {
-    if (initDatingState) {
-      setDatingData({ ...initDatingState, preferBodies: savedPreferBodies, preferDateCount: preferDateCount as DateCount });
+    if (isUpdate) {
+      onUpdateDatingSurvey({ ...initDatingState, preferBodies: savedPreferBodies, preferDateCount: preferDateCount as DateCount });
+      navigate(Path.MatchingDating);
+    } else {
+      if (initDatingState) {
+        setDatingData({ ...initDatingState, preferBodies: savedPreferBodies, preferDateCount: preferDateCount as DateCount });
+      }
+      datingNavigate(Path.IsAbroadSurvey);
     }
-
-    datingNavigate(Path.IsAbroadSurvey);
   };
 
   return (

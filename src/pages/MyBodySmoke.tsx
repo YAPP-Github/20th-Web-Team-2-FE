@@ -8,9 +8,13 @@ import { useDatingSessionState } from '@/hooks/common';
 import { type Body } from '@/types/dating';
 import styled from 'styled-components';
 import { LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
+import { useNavigate } from 'react-router-dom';
 
 const MyBodySmoke = () => {
   const datingNavigate = useDatingNavigate();
+  const navigate = useNavigate();
+  const { isUpdate, onUpdateDatingSurvey } = useUpdateSurvey();
   const { initDatingState, setDatingData } = useDatingSessionState();
   const [myBody, setMyBody] = useState<Body | string>(initDatingState.myBody);
   const [mySmoke, setMySmoke] = useState(initDatingState.mySmoke);
@@ -21,13 +25,16 @@ const MyBodySmoke = () => {
   };
 
   const handleNextClick = () => {
-    if (initDatingState) {
-      setDatingData({ ...initDatingState, myBody: myBody as Body, mySmoke });
+    if (isUpdate) {
+      onUpdateDatingSurvey({ ...initDatingState, myBody: myBody as Body, mySmoke });
+      navigate(Path.MatchingDating);
+    } else {
+      if (initDatingState) {
+        setDatingData({ ...initDatingState, myBody: myBody as Body, mySmoke });
+      }
+      datingNavigate(Path.MyDateCount);
     }
-
-    datingNavigate(Path.MyDateCount);
   };
-
   return (
     <SurveyTemplate
       disableNext={!myBody}
