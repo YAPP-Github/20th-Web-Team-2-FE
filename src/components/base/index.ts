@@ -6,4 +6,5 @@ export { default as SimpleRangeSlider } from './SimpleRangeSlider';
 export { default as CheckBox } from './CheckBox';
 export { default as MultiRangeSlider } from './MultiRangeSlider';
 export { default as ProgressBar } from './ProgressBar';
+export { default as IntervalPoints } from './IntervalPoints';
 export { default as Test } from './Test';
