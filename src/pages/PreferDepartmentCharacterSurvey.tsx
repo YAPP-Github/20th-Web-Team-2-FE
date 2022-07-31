@@ -9,9 +9,13 @@ import { useDatingSessionState } from '@/hooks/common';
 import { type Departments } from '@/types/meeting';
 import { type Characteristic } from '@/types/dating';
 import { LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
+import { useNavigate } from 'react-router-dom';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
 
 const PreferDepartmentCharacterSurvey = () => {
   const datingNavigate = useDatingNavigate();
+  const navigate = useNavigate();
+  const { isUpdate, onUpdateDatingSurvey } = useUpdateSurvey();
   const { initDatingState, setDatingData } = useDatingSessionState();
 
   // @Desc: string[] 값을 받아와서 기존 constants에 checked 속성을 끼워넣기
@@ -41,11 +45,15 @@ const PreferDepartmentCharacterSurvey = () => {
   }, []);
 
   const handleNextClick = () => {
-    if (initDatingState) {
-      setDatingData({ ...initDatingState, preferDepartments: savedPreferDepartments, preferCharacteristics: savedPreferCharacteristics });
+    if (isUpdate) {
+      onUpdateDatingSurvey({ ...initDatingState, preferDepartments: savedPreferDepartments, preferCharacteristics: savedPreferCharacteristics });
+      navigate(Path.MatchingDating);
+    } else {
+      if (initDatingState) {
+        setDatingData({ ...initDatingState, preferDepartments: savedPreferDepartments, preferCharacteristics: savedPreferCharacteristics });
+      }
+      datingNavigate(Path.PreferBodyDateCountSurvey);
     }
-
-    datingNavigate(Path.PreferBodyDateCountSurvey);
   };
 
   return (

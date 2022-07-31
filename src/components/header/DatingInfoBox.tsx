@@ -108,16 +108,16 @@ const DatingInfoBox = () => {
           <InfoEle>
             <Link to={`/updating/dating/${Path.MyDepartmentCharacter}`}>{conversionCharacter(characteristic)}</Link>
           </InfoEle>
-          <FlexEle>
-            <Link to={`/updating/dating/${Path.DomesticAreasSurvey}`}>
+          <Link to={`/updating/dating/${Path.DomesticAreasSurvey}`}>
+            <FlexEle>
               {domesticAreas?.map((area, index) => (
                 <div key={area + domesticAreas}>
                   {addComma(index)}
                   {conversionDomesticArea(area)}
                 </div>
               ))}
-            </Link>
-          </FlexEle>
+            </FlexEle>
+          </Link>
           <InfoEle>
             <Link to={`/updating/dating/${Path.AbroadAreasSurvey}`}>해외 지역 :{abroadAreas.length === 0 ? '없음' : abroadAreas}</Link>
           </InfoEle>
@@ -132,39 +132,43 @@ const DatingInfoBox = () => {
               {preferAge[0]}~{preferAge[1]}살
             </Link>
           </InfoEle>
-          <FlexEle>
-            <Link to={`/updating/dating/${Path.PreferBodyDateCountSurvey}`}>
+
+          <Link to={`/updating/dating/${Path.PreferBodyDateCountSurvey}`}>
+            <FlexEle>
               {preferBodies?.map((body, index) => (
                 <div key={body + preferBodies}>
                   {addComma(index)}
                   {conversionBody(body)}
                 </div>
               ))}
-            </Link>
-          </FlexEle>
-          <FlexEle>
-            <Link to={`/updating/dating/${Path.PreferDepartmentCharacterSurvey}`}>
+            </FlexEle>
+          </Link>
+
+          <Link to={`/updating/dating/${Path.PreferDepartmentCharacterSurvey}`}>
+            <FlexEle>
               {preferCharacteristics?.map((charator, index) => (
                 <div key={charator + preferCharacteristics}>
                   {addComma(index)}
                   {conversionCharacter(charator)}
                 </div>
               ))}
-            </Link>
-          </FlexEle>
+            </FlexEle>
+          </Link>
           <InfoEle>
             <Link to={`/updating/dating/${Path.PreferBodyDateCountSurvey}`}>{conversionDateCount(preferDateCount)}</Link>
           </InfoEle>
-          <FlexEle>
-            <Link to={`/updating/dating/${Path.PreferDepartmentCharacterSurvey}`}>
+
+          <Link to={`/updating/dating/${Path.PreferDepartmentCharacterSurvey}`}>
+            <FlexEle>
               {preferDepartments?.map((department, index) => (
                 <div key={department + preferDepartments}>
                   {addComma(index)}
                   {conversionDepartment(department)}
                 </div>
               ))}
-            </Link>
-          </FlexEle>
+            </FlexEle>
+          </Link>
+
           <InfoEle>
             <Link to={`/updating/dating/${Path.PreferAgeHeightSurvey}`}>
               {preferHeight[0]}~{preferHeight[1]}cm
@@ -209,20 +213,22 @@ export const InfoBox = styled.ul`
 `;
 
 export const InfoEle = styled.li`
-  max-width: 200px;
+  max-width: 150px;
   position: relative;
+  display: inline-block;
   height: 23px;
   line-height: 14px;
   background-color: ${({ theme }) => theme.palette.grayLight};
   border-radius: 4px;
   padding: 4px 10px;
   font-size: 12px;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 export const FlexEle = styled(InfoEle)`
   display: flex;
+  flex-wrap: nowrap;
 `;
 
 export default DatingInfoBox;

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { useMatch } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router-dom';
 import { useDatingNavigate, useMeetingNavigate } from '@/hooks/common/useNavigate';
 import { SurveyTemplate } from '@/components/domain/survey';
 import Path from '@/router/Path';
@@ -8,9 +8,12 @@ import SearchSelector from '@/components/domain/survey/SearchSelector';
 import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 import useAboardAreaLoad from '@/hooks/survey/useAboardAreaLoad';
 import { LAST_MEETING_STEP, LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
+import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
 
 const AbroadAreasSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
+  const navigate = useNavigate();
+  const { isUpdate, onUpdateDatingSurvey, onUpdateMeetingSurvey } = useUpdateSurvey();
   const { area } = useAboardAreaLoad();
   const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
@@ -19,14 +22,20 @@ const AbroadAreasSurvey = () => {
   const [abroadAreasDating, setAbroadAreasDating] = useState<number[]>(initDatingState.abroadAreas);
 
   const handleNextClick = () => {
-    if (initMeetingState) {
-      matchMeeting ? setMeetingData({ ...initMeetingState, abroadAreas }) : setDatingData({ ...initDatingState, abroadAreas: abroadAreasDating });
+    if (isUpdate) {
+      matchMeeting
+        ? onUpdateMeetingSurvey({ ...initMeetingState, abroadAreas })
+        : onUpdateDatingSurvey({ ...initDatingState, abroadAreas: abroadAreasDating });
+      navigate(Path.MatchingDating);
+    } else {
+      if (initMeetingState) {
+        matchMeeting ? setMeetingData({ ...initMeetingState, abroadAreas }) : setDatingData({ ...initDatingState, abroadAreas: abroadAreasDating });
+      }
+      meetingNavigate(Path.ChannelSurvey);
     }
-
-    meetingNavigate(Path.ChannelSurvey);
   };
 
-  const checkDisabled = useMemo(() => (matchMeeting ? abroadAreas.length === 0 : abroadAreasDating.length === 0), []);
+  const checkDisabled = useMemo(() => (matchMeeting ? abroadAreas.length === 0 : abroadAreasDating.length === 0), [matchMeeting, abroadAreasDating]);
 
   return (
     <SurveyTemplate

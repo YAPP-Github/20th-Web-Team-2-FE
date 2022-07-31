@@ -1,3 +1,4 @@
+import { patchDatingSurvey } from '@/lib/api/dating';
 import { patchMeetingSurvey } from '@/lib/api/meeting';
 import { Dating } from '@/types/dating';
 import { Meeting } from '@/types/meeting';
@@ -21,7 +22,7 @@ const useUpdateSurvey = () => {
   };
   const onUpdateDatingSurvey = async (data: Partial<Dating>) => {
     try {
-      await patchMeetingSurvey(data);
+      await patchDatingSurvey(data);
     } catch (error) {
       console.log(error);
     }

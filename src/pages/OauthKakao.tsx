@@ -16,7 +16,7 @@ const OauthKakao = () => {
     try {
       const data = await getToken();
       setToken(data);
-      data.authenticated ? navigate(Path.TypeOfMeetingSurvey) : navigate(Path.AuthMail);
+      data.authenticated ? navigate(Path.LandingPage) : navigate(Path.AuthMail);
     } catch (error) {
       console.log(error);
     }
@@ -24,14 +24,12 @@ const OauthKakao = () => {
 
   const getToken = async () => {
     const response = await client.get(`/oauth/kakao?code=${code}`);
-    console.log(response.data);
     return response.data;
   };
 
   const setToken = (data: any) => {
     Cookies.set('AccessToken', data.accessToken, { expires: data.expires_in });
     Cookies.set('authenticated', data.authenticated, { expires: data.expires_in });
-    console.log(data.accessToken);
   };
 
   return <div></div>;

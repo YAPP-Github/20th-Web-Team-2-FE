@@ -5,15 +5,16 @@ import { Button, Modal } from '@/components/base';
 import { Title } from '@/lib/styles/styledComponents';
 import { palette } from '@/lib/styles/palette';
 import { EmailForm, AuthCodeForm } from '@/components/authMail';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useToggle } from '@/hooks/common';
 import { postEmail, putEmail } from '@/lib/api/email';
 import Cookies from 'js-cookie';
 
 const AuthMail = () => {
-  const [cantMoveNext, setCantMoveNext] = useState(true);
+  const [cantMoveNext] = useState(true);
   const [email, setEmail] = useState('');
   const [isErrorModal, onToggleErrorModal] = useToggle();
+  const [isNextModal, onToggleNextModal] = useToggle();
   const [modalMessage, setModalMessage] = useState('');
   const navigate = useNavigate();
 
@@ -38,7 +39,8 @@ const AuthMail = () => {
     try {
       const result = await putEmail(authCode);
       Cookies.set('authenticated', result);
-      navigate('/type-of-meeting');
+      onToggleNextModal();
+      setModalMessage('인증이 완료되었습니다. 설문을 시작해 주세요.');
     } catch (e) {
       onToggleErrorModal();
       setModalMessage('에러가 발생했습니다😭 다시한번 시도해 주세요!');
@@ -59,7 +61,13 @@ const AuthMail = () => {
           <EmailForm onSubmitAuthCode={onSubmitAuthCode} />
           <AuthCodeForm email={email} onCheckAuthCode={onCheckAuthCode} />
           <AddSchoolParagraph>
-            학교가 없다고 나오나요? <StyledLink to="/">학교 추가하기</StyledLink>
+            학교가 없다고 나오나요?{' '}
+            <StyledLink
+              href="https://docs.google.com/forms/d/e/1FAIpQLScTbXoWfKIUtgInYvEaeqDQofvQalNndwcbHMR9F4s5al0v1A/viewform?usp=sf_link"
+              target="_blank"
+            >
+              학교 추가하기
+            </StyledLink>
           </AddSchoolParagraph>
         </FormWrapper>
       </SurveyTemplate>
@@ -73,6 +81,19 @@ const AuthMail = () => {
           onToggleModal={onToggleErrorModal}
           onClick={() => {
             void 0;
+          }}
+        />
+      )}
+      {isNextModal && (
+        <Modal
+          width={200}
+          height={140}
+          bottonName="확인"
+          title="알림"
+          text={modalMessage}
+          onToggleModal={onToggleNextModal}
+          onClick={() => {
+            navigate('/type-of-meeting');
           }}
         />
       )}
@@ -116,7 +137,7 @@ const AddSchoolParagraph = styled.p`
   margin-top: 16px;
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   padding-left: 4px;
   color: ${palette.primary};
   font-weight: 700;

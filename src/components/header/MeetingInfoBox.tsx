@@ -77,16 +77,16 @@ function MeetingInfoBox() {
           <InfoEle>
             <Link to={`/updating/meeting/${Path.TypeOfMeeting}`}>{conversionTypeOfMeeting(typeOfMeeting)}</Link>
           </InfoEle>
-          <FlexEle>
-            <Link to={`/updating/meeting/${Path.OurDepartmentsAverageHeightSurvey}`}>
+          <Link to={`/updating/meeting/${Path.OurDepartmentsAverageHeightSurvey}`}>
+            <FlexEle>
               {ourDepartments?.map((department, index) => (
                 <div key={department + ourDepartments}>
                   {addComma(index)}
                   {conversionDepartment(department)}
                 </div>
               ))}
-            </Link>
-          </FlexEle>
+            </FlexEle>
+          </Link>
           <InfoEle>
             <Link to={`/updating/meeting/${Path.GenderAverageAgeSurvey}`}>평균나이 : {averageAge}살</Link>
           </InfoEle>
@@ -96,16 +96,16 @@ function MeetingInfoBox() {
           <InfoEle>
             <Link to={`/updating/meeting/${Path.PlaySurvey}`}>{conversionPlay(play)}</Link>
           </InfoEle>
-          <FlexEle>
-            <Link to={`/updating/meeting/${Path.DomesticAreasSurvey}`}>
+          <Link to={`/updating/meeting/${Path.DomesticAreasSurvey}`}>
+            <FlexEle>
               {domesticAreas?.map((area, index) => (
                 <div key={area + domesticAreas}>
                   {addComma(index)}
                   {conversionDomesticArea(area)}
                 </div>
               ))}
-            </Link>
-          </FlexEle>
+            </FlexEle>
+          </Link>
           {mindSet && (
             <InfoEle>
               <Link to={`/updating/meeting/${Path.MindsetSurvey}`}>{conversionMindset(mindSet)} </Link>
@@ -122,16 +122,18 @@ function MeetingInfoBox() {
               {preferAge[0]}~{preferAge[1]}살
             </Link>
           </InfoEle>
-          <FlexEle>
-            <Link to={`/updating/meeting/${Path.PreferDepartmentsSurvey}`}>
+
+          <Link to={`/updating/meeting/${Path.PreferDepartmentsSurvey}`}>
+            <FlexEle>
               {preferDepartments?.map((department, index) => (
                 <div key={department + preferDepartments}>
                   {addComma(index)}
                   {conversionDepartment(department)}
                 </div>
               ))}
-            </Link>
-          </FlexEle>
+            </FlexEle>
+          </Link>
+
           <InfoEle>
             <Link to={`/updating/meeting/${Path.PreferAgeHeightSurvey}`}>
               {preferHeight[0]}~{preferHeight[1]}cm
