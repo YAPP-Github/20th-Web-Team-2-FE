@@ -3,7 +3,7 @@ import { StringLogo, RadiousLogo } from '@/assets/img';
 import { Button } from '@/components/base';
 import { palette } from '@/lib/styles/palette';
 import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useLoginState } from '@/atoms/userState';
 import { goKakaoLogin } from '@/utils/goKakaoLogin';
 import Cookies from 'js-cookie';
@@ -35,9 +35,6 @@ function LandingContainer() {
           <LandingBtn size="medium" fontWeight={700} fullWidth variant={'kakao'} onClick={handleKakaoLoginClick}>
             카카오 로그인
           </LandingBtn>
-          <Button size="medium" fontWeight={700} fullWidth onClick={() => navigate('/test-login')}>
-            일반 로그인
-          </Button>
         </BtnBox>
       ) : (
         <BtnBox>
@@ -96,6 +93,7 @@ const BtnBox = styled.div`
   align-items: center;
   flex-direction: column;
   flex: 1 1 8%;
+  margin-bottom: 42px;
 `;
 const LandingBtn = styled(Button)`
   margin: 4px;
