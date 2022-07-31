@@ -67,6 +67,7 @@ const GenderAverageAgeSurvey = () => {
 
 const StyledTitle = styled(Title)`
   font-weight: 400;
+  padding-bottom: 30px;
 `;
 
 export default GenderAverageAgeSurvey;
