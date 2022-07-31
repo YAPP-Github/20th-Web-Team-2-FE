@@ -1,7 +1,7 @@
-import React from 'react';
 import Lottie from 'lottie-react';
 import { partyAnimation } from '@/assets/lotties';
 import styled from 'styled-components';
+import { IntervalPoints } from '@/components/base';
 
 function MatchingStateTitle(state: string) {
   return (
@@ -19,7 +19,7 @@ function MatchingStateTitle(state: string) {
             <strong>
               매칭을
               <br />
-              성사시키는 중입니다...
+              성사시키는 중입니다 <IntervalPoints />
             </strong>
           ),
           success: (
