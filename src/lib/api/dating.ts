@@ -17,6 +17,11 @@ export const postDatingSurvey = async (payload: Dating) => {
   return res.data;
 };
 
+export const patchDatingSurvey = async (payload: Partial<Dating>) => {
+  const res = await apiClient.patch('/dating/survey', payload);
+  return res.data;
+};
+
 export const getDatingSurvey = async () => {
   const res = await apiClient.get<Dating>('/dating/survey');
   return res.data;
