@@ -13,9 +13,10 @@ import Cookies from 'js-cookie';
 const AuthMail = () => {
   const [cantMoveNext] = useState(true);
   const [email, setEmail] = useState('');
+  const [isModal, onToggleModal] = useToggle();
   const [isErrorModal, onToggleErrorModal] = useToggle();
   const [isNextModal, onToggleNextModal] = useToggle();
-  const [modalMessage, setModalMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState({ title: '에러', text: '에러가 발생했습니다😭<br /> 다시한번 시도해 주세요!' });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,11 +28,16 @@ const AuthMail = () => {
     try {
       await postEmail(email);
       setEmail(email);
-      onToggleErrorModal();
-      setModalMessage('이메일로 인증번호를 전송하였습니다. 인증번호를 입력해 주세요.');
+      onToggleModal();
     } catch (e) {
+      const { code } = e.response.data;
+      if (code === 'UNSUPPORTED_EMAIL') {
+        setErrorMessage({
+          title: '지원하는 학교가 아닙니다 🥲',
+          text: '"학교 추가하기"에서<br /> 학교 추가를 요청해주세요!',
+        });
+      }
       onToggleErrorModal();
-      setModalMessage('에러가 발생했습니다😭 다시한번 시도해 주세요!');
     }
   };
 
@@ -40,10 +46,13 @@ const AuthMail = () => {
       const result = await putEmail(authCode);
       Cookies.set('authenticated', result);
       onToggleNextModal();
-      setModalMessage('인증이 완료되었습니다. 설문을 시작해 주세요.');
     } catch (e) {
+      const { message } = e.response.data;
+      setErrorMessage({
+        title: '에러',
+        text: message,
+      });
       onToggleErrorModal();
-      setModalMessage('에러가 발생했습니다😭 다시한번 시도해 주세요!');
     }
   };
 
@@ -76,9 +85,25 @@ const AuthMail = () => {
           width={200}
           height={140}
           bottonName="확인"
-          title="알림"
-          text={modalMessage}
+          title={errorMessage.title}
+          text={errorMessage.text}
           onToggleModal={onToggleErrorModal}
+          onClick={() => {
+            void 0;
+          }}
+        />
+      )}
+      {isModal && (
+        <Modal
+          width={200}
+          height={140}
+          bottonName="확인"
+          title="알림"
+          text="
+              이메일로 인증번호를 전송하였습니다. <br />
+              인증번호를 입력해 주세요.
+            "
+          onToggleModal={onToggleModal}
           onClick={() => {
             void 0;
           }}
@@ -90,7 +115,7 @@ const AuthMail = () => {
           height={140}
           bottonName="확인"
           title="알림"
-          text={modalMessage}
+          text="인증이 완료되었습니다. 👏 설문을 시작해 주세요."
           onToggleModal={onToggleNextModal}
           onClick={() => {
             navigate('/type-of-meeting');

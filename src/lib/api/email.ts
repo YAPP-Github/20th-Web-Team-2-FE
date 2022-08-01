@@ -1,7 +1,8 @@
 import client from '@/lib/api/index';
 
 export const postEmail = async (email: string) => {
-  await client.post(`/email`, { email });
+  const response = await client.post(`/email`, { email });
+  return response.data;
 };
 
 export const putEmail = async (authCode: string) => {
