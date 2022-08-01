@@ -26,3 +26,8 @@ export const postWithdraw = async () => {
   const res = await apiClient.delete('/withdraw');
   return res.data;
 };
+
+export const getMyInfo = async () => {
+  const res = await apiClient.get('/myInfo');
+  return res.data;
+};
