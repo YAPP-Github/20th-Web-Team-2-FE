@@ -4,7 +4,7 @@ import { palette } from '@/lib/styles/palette';
 import styled from 'styled-components';
 import DatingInfoBox from './DatingInfoBox';
 import MeetingInfoBox from './MeetingInfoBox';
-import { postLogout, postWithdrawal } from '@/lib/api/user';
+import { postLogout, postWithdraw } from '@/lib/api/user';
 import { useDatingSessionState, useToggle } from '@/hooks/common';
 import { Modal } from '../base';
 import Cookies from 'js-cookie';
@@ -33,27 +33,33 @@ function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
     try {
       await postLogout();
       Cookies.remove('AccessToken');
+      Cookies.remove('authenticated');
       navigate('/');
     } catch (e) {
-      const message = (e as Error).message;
+      const { message } = e.response.data;
       setErrorMessage(message);
       onToggleErrorModal();
     }
   };
 
-  const handleWithdrawal = async () => {
+  const handleWithdraw = async () => {
     try {
       if (isConfirm) {
-        await postWithdrawal();
+        await postWithdraw();
+        Cookies.remove('AccessToken');
+        Cookies.remove('authenticated');
+        navigate('/');
       }
     } catch (e) {
+      const { message } = e.response.data;
+      setErrorMessage(message);
       onToggleErrorModal();
     }
   };
 
   useEffect(() => {
     if (isConfirm) {
-      handleWithdrawal();
+      handleWithdraw();
     }
   }, [isConfirm]);
 
@@ -83,7 +89,7 @@ function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
           height={140}
           bottonName="확인"
           title="정말 탈퇴하시겠습니까?"
-          text="　탈퇴하면 모든 설문정보가 
+          text="탈퇴하면 모든 설문정보가<br />
           사라집니다."
           onToggleModal={onToggleModal}
           onClick={() => setConfirm(true)}
