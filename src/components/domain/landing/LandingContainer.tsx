@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StringLogo, RadiousLogo } from '@/assets/img';
 import { Button } from '@/components/base';
 import { palette } from '@/lib/styles/palette';
@@ -12,9 +12,19 @@ import { HeaderWrapper } from '@/components/domain/survey/SurveyTemplate';
 function LandingContainer() {
   const navigate = useNavigate();
   const { isLogin } = useLoginState();
+  const [isAuth, setAuth] = useState(false);
+
+  useEffect(() => {
+    const authenticated = Cookies.get('authenticated') === 'true';
+    setAuth(authenticated);
+  }, []);
 
   const handleKakaoLoginClick = () => {
     goKakaoLogin('login');
+  };
+
+  const checkAuthRedirect = ({ startSurvey = true }: { startSurvey?: boolean }) => {
+    isAuth ? (startSurvey ? navigate('/type-of-meeting') : navigate('/matching/meeting')) : navigate('/auth-mail');
   };
 
   return (
@@ -50,7 +60,7 @@ function LandingContainer() {
           >
             시작하기
           </LandingBtn>
-          <LandingBtn size="medium" fontWeight={700} fullWidth variant={'grayBlack'} onClick={() => navigate('/matching/meeting')}>
+          <LandingBtn size="medium" fontWeight={700} fullWidth variant={'grayBlack'} onClick={() => checkAuthRedirect({ startSurvey: false })}>
             매칭 결과 확인하기
           </LandingBtn>
         </BtnBox>

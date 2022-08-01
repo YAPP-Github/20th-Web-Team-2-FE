@@ -14,20 +14,20 @@ const OauthKakao = () => {
 
   const initiate = async () => {
     try {
-      const data = await getToken();
-      setToken(data);
+      const data = await getKakaoLoginInfo();
+      setKakaoLoginInfo(data);
       data.authenticated ? navigate(Path.LandingPage) : navigate(Path.AuthMail);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const getToken = async () => {
+  const getKakaoLoginInfo = async () => {
     const response = await client.get(`/oauth/kakao?code=${code}`);
     return response.data;
   };
 
-  const setToken = (data: any) => {
+  const setKakaoLoginInfo = (data: any) => {
     Cookies.set('AccessToken', data.accessToken, { expires: data.expires_in });
     Cookies.set('authenticated', data.authenticated, { expires: data.expires_in });
   };
