@@ -22,8 +22,8 @@ export const postLogout = async () => {
   return res.data;
 };
 
-export const postWithdrawal = async () => {
-  const res = await apiClient.post('/withdrawal');
+export const postWithdraw = async () => {
+  const res = await apiClient.delete('/withdraw');
   return res.data;
 };
 

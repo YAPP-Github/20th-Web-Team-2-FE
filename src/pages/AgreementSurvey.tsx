@@ -32,7 +32,6 @@ const AgreementSurvey = () => {
 
     getOauthKakaoAge({ code, type: matchMeeting ? 'meeting' : 'dating' })
       .then((response) => {
-        console.log(response);
         if (response) {
           meetingNavigate(Path.KakaoIdSurvey);
           return;
