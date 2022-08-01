@@ -138,9 +138,23 @@ function Routing() {
   );
 }
 const PageLayout = styled.div`
+  overflow: auto;
   background-color: ${palette.backgroundColor};
   height: 100%;
-  /* position: relative; */
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: ${palette.backgroundColor};
+    border-radius: 0px 10px 10px 0;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${palette.grayLight};
+    border-radius: 12px;
+    background-clip: padding-box;
+    border: 1px solid transparent;
+  }
 `;
 const PageWrapper = styled.main`
   margin: 0 auto;
