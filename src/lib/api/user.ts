@@ -26,3 +26,8 @@ export const postWithdrawal = async () => {
   const res = await apiClient.post('/withdrawal');
   return res.data;
 };
+
+export const getMyInfo = async () => {
+  const res = await apiClient.get('/myInfo');
+  return res.data;
+};
