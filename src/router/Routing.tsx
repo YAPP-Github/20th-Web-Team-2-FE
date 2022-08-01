@@ -35,7 +35,6 @@ import {
   AdminPage,
   EndSurvey,
 } from '@/pages';
-import Test from '@/components/base/Test';
 import UserHeader from '@/components/header/UserHeader';
 import { palette } from '@/lib/styles/palette';
 import LoginCheck from '@/components/base/LoginCheck';
@@ -50,7 +49,6 @@ function Routing() {
             <Route path={Path.LandingPage} element={<LandingPage />} />
             <Route path={Path.AdminPage} element={<AdminPage />} />
             <Route path={Path.TestLogin} element={<TestLogin />} />
-            <Route path={Path.Component} element={<Test />} />
             <Route path={Path.AuthMail} element={<AuthMail />} />
             <Route path={Path.TypeOfMeetingSurvey} element={<TypeOfMeetingSurvey />} />
             <Route path={Path.OauthKakao} element={<OauthKakao />} />
