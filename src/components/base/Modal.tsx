@@ -45,7 +45,7 @@ function ModalTemplate({ width = 264, height = 140, title, text, bottonName, onT
       <ModalTemplateBlock onMouseDown={onToggleModal} {...rest}>
         <ModalInner width={width} height={height} onMouseDown={(e) => e.stopPropagation()} isClose={isClose}>
           <ModalTitle>{title}</ModalTitle>
-          <ModalText>{text}</ModalText>
+          <ModalText dangerouslySetInnerHTML={createMarkup(text)} />
           <ModalBtnBox>
             <ModalButton height={28} width={90} variant="gray" onClick={onCloseModal}>
               취소
@@ -141,3 +141,7 @@ const ModalBackground = styled.div`
 `;
 
 export default ModalTemplate;
+
+function createMarkup(params: string) {
+  return { __html: params };
+}

@@ -22,7 +22,6 @@ const AuthCodeForm = ({ email, onCheckAuthCode }: AuthCodeFormProps) => {
     },
     onSubmit: async () => {
       try {
-        console.log('try submit authCode');
         onCheckAuthCode(values.authCode);
       } catch (e) {
         onToggleErrorModal();
