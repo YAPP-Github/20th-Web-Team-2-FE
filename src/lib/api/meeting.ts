@@ -1,5 +1,5 @@
 import apiClient from './index';
-import { Meeting, MeetingMatchingResultResponse } from '@/types/meeting';
+import { Meeting, MatchingResultResponse } from '@/types/meeting';
 import { AxiosResponse } from 'axios';
 
 export const postMeetingSurvey = async (payload: Meeting) => {
@@ -28,6 +28,6 @@ export const postMeetingMatching = async () => {
 };
 
 export const getMeetingMatching = async () => {
-  const res = await apiClient.get<MeetingMatchingResultResponse>('/meeting/matching');
+  const res = await apiClient.get<MatchingResultResponse>('/meeting/matching');
   return res.data;
 };

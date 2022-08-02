@@ -1,9 +1,10 @@
 import apiClient from './index';
-import { Dating, DatingMatchingResultResponse } from '@/types/dating';
+import { Dating } from '@/types/dating';
 import { AxiosResponse } from 'axios';
+import { MatchingResultResponse } from '@/types/meeting';
 
 export const getDatingMatching = async () => {
-  const res = await apiClient.get<DatingMatchingResultResponse>('/dating/matching');
+  const res = await apiClient.get<MatchingResultResponse>('/dating/matching');
   return res.data;
 };
 

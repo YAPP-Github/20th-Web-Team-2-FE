@@ -1,4 +1,4 @@
-import { type Gender, Departments, DomesticAreas, Channel, Play, MindSet, TypeOfMeeting } from './meeting';
+import { type Gender, Departments, DomesticAreas, Channel, TypeOfMeeting } from './meeting';
 
 export type Characteristic = 'VERY_QUIET' | 'A_LITTLE_QUIET' | 'VERY_ACTIVE' | 'A_LITTLE_ACTIVE';
 export type Body = 'SKINNY' | 'SLIM' | 'MUSCULAR' | 'CHUBBY';
@@ -42,14 +42,6 @@ code : 7005 - 매칭에 실패한 상태
 code : 7006 - 상대방 탈퇴로 인한 매칭 취소 상태
 */
 
-type Code = 7000 | 7001 | 7002 | 7003 | 7004 | 7005 | 7006;
-
-export interface DatingMatchingResultResponse {
-  code: Code;
-  message: string;
-  partnerSurvey: DatingPartnerSurvey;
-}
-
 export interface DatingPartnerSurvey {
   age: number;
   areas: string[];
@@ -61,5 +53,4 @@ export interface DatingPartnerSurvey {
   isSmoke: boolean;
   kakaoId: string;
   university: string;
-  payDeadline: string;
 }

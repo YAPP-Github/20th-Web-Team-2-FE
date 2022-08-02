@@ -1,4 +1,4 @@
-import { Body, Characteristic } from '@/types/dating';
+import { DatingPartnerSurvey } from '@/types/dating';
 
 export type Gender = 'MALE' | 'FEMALE';
 export type TypeOfMeeting = 'ONE' | 'TWO' | 'THREE' | 'FOUR';
@@ -43,10 +43,12 @@ code : 7006 - 상대방 탈퇴로 인한 매칭 취소 상태
 
 type Code = 7000 | 7001 | 7002 | 7003 | 7004 | 7005 | 7006;
 
-export interface MeetingMatchingResultResponse {
+export interface MatchingResultResponse {
   code: Code;
   message: string;
-  partnerSurvey: MeetingPartnerSurvey;
+  partnerSurvey: MeetingPartnerSurvey | DatingPartnerSurvey;
+  payDeadLine: string;
+  payName: string;
 }
 
 export interface MeetingPartnerSurvey {
@@ -58,5 +60,4 @@ export interface MeetingPartnerSurvey {
   mindset: MindSet | '';
   play: Play | '';
   universities: string;
-  payDeadline: string;
 }
