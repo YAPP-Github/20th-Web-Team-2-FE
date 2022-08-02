@@ -59,7 +59,7 @@ const OurUniversitiesSurvey = () => {
         모두 입력해주세요.
       </Title>
       <SearchSelector
-        placeholder="학교를 검색하세요. (없을 시 '기타' 입력)"
+        placeholder="학교를 검색하세요."
         searchData={univs}
         selectedResults={ourUniversities}
         setSelectedResults={setOurUniversities}
