@@ -33,7 +33,7 @@ const EmailForm = ({ onSubmitAuthCode }: EmailFormProps) => {
         newErrors.email = '이메일을 입력해주세요';
         return newErrors;
       }
-      if (email && !checkForm({ value: email, type: 'email' })) newErrors.email = '올바른 이메일 형식이 아닙니다';
+      if (email && !checkForm({ value: email, type: 'email' })) newErrors.email = '교육용 이메일은 edu, ca, ie 중 하나로 끝나야 합니다.';
       return newErrors;
     },
   });
