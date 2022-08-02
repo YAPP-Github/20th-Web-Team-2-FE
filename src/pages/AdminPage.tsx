@@ -1,29 +1,24 @@
 import { Button } from '@/components/base';
-import { getMeetingUsers, getDatingUsers, patchDatingPayment, patchMeetingPayment } from '@/lib/api/admin';
+import { getMeetingPaymentTargets, getDatingPaymentTargets, patchDatingPayment, patchMeetingPayment } from '@/lib/api/admin';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { type AdminUsersStatus } from '@/types/user';
+import type { AdminPaymentTargets } from '@/types/user';
 
 type UserType = 'meeting' | 'dating';
 
 const AdminPage = () => {
   const [userType, setUserType] = useState<UserType>('meeting');
-  const [datingUsers, setDatingUsers] = useState<AdminUsersStatus[]>([]);
-  const [meetingUsers, setMeetingUsers] = useState<AdminUsersStatus[]>([]);
+  const [datingUsers, setDatingUsers] = useState<AdminPaymentTargets[]>([]);
+  const [meetingUsers, setMeetingUsers] = useState<AdminPaymentTargets[]>([]);
 
   const users = userType === 'meeting' ? meetingUsers : datingUsers;
 
   const handlePayment = async (kakaoId: string) => {
     try {
-      if (userType === 'meeting') {
-        const res = await patchMeetingPayment(kakaoId);
-        setMeetingUsers(res);
-        return;
-      }
-      const res = await patchDatingPayment(kakaoId);
-      setDatingUsers(res);
+      userType === 'meeting' ? patchMeetingPayment(kakaoId) : patchDatingPayment(kakaoId);
     } catch (e) {
-      alert(e.message);
+      const { message } = e.response.data;
+      alert(message);
     }
   };
 
@@ -31,11 +26,11 @@ const AdminPage = () => {
     const getUsersInfo = async () => {
       try {
         if (userType === 'meeting') {
-          const res = await getMeetingUsers();
+          const res = await getMeetingPaymentTargets();
           setMeetingUsers(res);
           return;
         }
-        const res = await getDatingUsers();
+        const res = await getDatingPaymentTargets();
         setDatingUsers(res);
       } catch (e) {
         alert(e.message);
@@ -43,7 +38,7 @@ const AdminPage = () => {
     };
 
     getUsersInfo();
-  }, [userType]);
+  }, [userType, handlePayment]);
 
   return (
     <AdminPageBlock>
@@ -68,19 +63,21 @@ const AdminPage = () => {
       <Table>
         <thead>
           <tr>
-            <th>kakaoId</th>
-            <th>status</th>
-            <th>지불여부</th>
-            <th>지불버튼</th>
+            <th>femaleId</th>
+            <th>maleId</th>
+            <th>payName</th>
+            <th>isPaid</th>
+            <th>payButton</th>
           </tr>
         </thead>
         <tbody>
-          {users.map(({ kakaoId, matchStatus, paid }) => (
-            <tr key={kakaoId}>
-              <td>{kakaoId}</td>
-              <td>{matchStatus}</td>
-              <PaidColumn paid={paid}>{String(paid)}</PaidColumn>
-              <td>{matchStatus === 'MATCHED' && <Button onClick={() => handlePayment(kakaoId)}>지불하기</Button>}</td>
+          {users.map(({ femaleId, maleId, payName, isPaid }) => (
+            <tr key={maleId}>
+              <td>{femaleId}</td>
+              <td>{maleId}</td>
+              <td>{payName}</td>
+              <PaidColumn paid={isPaid}>{String(isPaid)}</PaidColumn>
+              <td>{isPaid ? '지불 완료' : <Button onClick={() => handlePayment(maleId)}>지불하기</Button>}</td>
             </tr>
           ))}
         </tbody>
@@ -90,8 +87,9 @@ const AdminPage = () => {
 };
 
 const AdminPageBlock = styled.div`
-  max-width: 1024px;
-  width: 100%;
+  position: relative;
+  right: 100px;
+  width: 500px;
 `;
 
 const Table = styled.table`

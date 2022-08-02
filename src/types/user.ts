@@ -13,10 +13,9 @@ export interface KakaoIdResponse {
   id: number;
 }
 
-type MatchStatus = 'WAITING' | 'MATCHED' | 'FAILED' | 'DONE' | 'PAID';
-
-export interface AdminUsersStatus {
-  kakaoId: string;
-  matchStatus: MatchStatus;
-  paid: boolean;
+export interface AdminPaymentTargets {
+  femaleId: string;
+  maleId: string;
+  payName: string;
+  isPaid: boolean;
 }
