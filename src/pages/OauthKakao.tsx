@@ -16,7 +16,7 @@ const OauthKakao = () => {
     try {
       const data = await getKakaoLoginInfo();
       setKakaoLoginInfo(data);
-      data.authenticated ? navigate(Path.LandingPage) : navigate(Path.AuthMail);
+      navigate(Path.LandingPage);
     } catch (error) {
       console.log(error);
     }

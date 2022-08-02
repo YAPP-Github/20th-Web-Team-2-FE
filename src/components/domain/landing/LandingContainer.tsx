@@ -8,6 +8,7 @@ import { useLoginState } from '@/atoms/userState';
 import { goKakaoLogin } from '@/utils/goKakaoLogin';
 import Cookies from 'js-cookie';
 import { HeaderWrapper } from '@/components/domain/survey/SurveyTemplate';
+import Path from '@/router/Path';
 
 function LandingContainer() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ function LandingContainer() {
   };
 
   const checkAuthRedirect = ({ startSurvey = true }: { startSurvey?: boolean }) => {
-    isAuth ? (startSurvey ? navigate('/type-of-meeting') : navigate('/matching/meeting')) : navigate('/auth-mail');
+    isAuth ? (startSurvey ? navigate(Path.TypeOfMeeting) : navigate(Path.MatchingMeeting)) : navigate('/auth-mail');
   };
 
   return (
@@ -55,7 +56,7 @@ function LandingContainer() {
             variant={'default'}
             onClick={() => {
               const authenticated = Cookies.get('authenticated') === 'true';
-              authenticated ? navigate('/type-of-meeting') : navigate('/auth-mail');
+              authenticated ? navigate(Path.TypeOfMeeting) : navigate(Path.AuthMail);
             }}
           >
             시작하기

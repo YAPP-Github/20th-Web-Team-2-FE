@@ -9,9 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import { useToggle } from '@/hooks/common';
 import { postEmail, putEmail } from '@/lib/api/email';
 import Cookies from 'js-cookie';
+import Path from '@/router/Path';
 
 const AuthMail = () => {
-  const [cantMoveNext] = useState(true);
   const [email, setEmail] = useState('');
   const [isModal, onToggleModal] = useToggle();
   const [isErrorModal, onToggleErrorModal] = useToggle();
@@ -21,7 +21,7 @@ const AuthMail = () => {
 
   useEffect(() => {
     const authenticated = Cookies.get('authenticated') === 'true';
-    authenticated && navigate('/type-of-meeting');
+    authenticated && navigate(Path.LandingPage);
   }, []);
 
   const onSubmitAuthCode = async (email: string) => {
@@ -56,9 +56,13 @@ const AuthMail = () => {
     }
   };
 
+  const handlePrevNextClick = () => {
+    navigate('/');
+  };
+
   return (
     <>
-      <SurveyTemplate disableNext={cantMoveNext} hasProgressBar={false}>
+      <SurveyTemplate disableNext={!isNextModal} hasProgressBar={false} handlePrevClick={handlePrevNextClick} handleNextClick={handlePrevNextClick}>
         <Title>
           <strong>
             신원 확인을 위해 <br />
