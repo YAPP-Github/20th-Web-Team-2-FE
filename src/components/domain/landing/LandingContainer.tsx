@@ -55,7 +55,7 @@ function LandingContainer() {
             variant={'default'}
             onClick={() => {
               const authenticated = Cookies.get('authenticated') === 'true';
-              authenticated ? navigate('/type-of-meeting') : navigate('/auth-mail');
+              authenticated ? navigate('/') : navigate('/auth-mail');
             }}
           >
             시작하기
