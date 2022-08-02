@@ -7,7 +7,7 @@ interface checkFormProps {
 
 export const checkForm = ({ value, type }: checkFormProps) => {
   const regex = {
-    email: /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.(edu|ca)$/i,
+    email: /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.(edu|ca|ie)$/i,
   };
 
   if (type === 'email') {
