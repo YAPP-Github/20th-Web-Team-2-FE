@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useToggle } from '@/hooks/common';
 import { postEmail, putEmail } from '@/lib/api/email';
 import Cookies from 'js-cookie';
+import Path from '@/router/Path';
 
 const AuthMail = () => {
   const [email, setEmail] = useState('');
@@ -20,7 +21,7 @@ const AuthMail = () => {
 
   useEffect(() => {
     const authenticated = Cookies.get('authenticated') === 'true';
-    authenticated && navigate('/type-of-meeting');
+    authenticated && navigate(Path.LandingPage);
   }, []);
 
   const onSubmitAuthCode = async (email: string) => {
