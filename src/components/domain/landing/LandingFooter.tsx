@@ -32,7 +32,7 @@ function LandingFooter() {
           <IconStyled
             src={KakaoIcon}
             onClick={() => {
-              window.open('http://pf.kakao.com/_XUkxkb', '_blank');
+              window.open('http://pf.kakao.com/_XyXIxj/chat', '_blank');
             }}
           />
           <IconStyled
