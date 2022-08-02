@@ -11,7 +11,6 @@ import { postEmail, putEmail } from '@/lib/api/email';
 import Cookies from 'js-cookie';
 
 const AuthMail = () => {
-  const [cantMoveNext] = useState(true);
   const [email, setEmail] = useState('');
   const [isModal, onToggleModal] = useToggle();
   const [isErrorModal, onToggleErrorModal] = useToggle();
@@ -56,9 +55,13 @@ const AuthMail = () => {
     }
   };
 
+  const handlePrevNextClick = () => {
+    navigate('/');
+  };
+
   return (
     <>
-      <SurveyTemplate disableNext={cantMoveNext} hasProgressBar={false}>
+      <SurveyTemplate disableNext={!isNextModal} hasProgressBar={false} handlePrevClick={handlePrevNextClick} handleNextClick={handlePrevNextClick}>
         <Title>
           <strong>
             신원 확인을 위해 <br />
