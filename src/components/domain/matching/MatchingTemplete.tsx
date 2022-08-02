@@ -9,41 +9,41 @@ import { Status } from '@/pages/MatchingPage';
 import { getMeetingMatching } from '@/lib/api/meeting';
 import { getDatingMatching } from '@/lib/api/dating';
 import { useToggle } from '@/hooks/common';
-import { MeetingPartnerSurvey } from '@/types/meeting';
-import { DatingPartnerSurvey } from '@/types/dating';
+import { MatchingResultResponse } from '@/types/meeting';
 
 interface MatchingTemplateProps {
-  meeting: (matchingResult: MeetingPartnerSurvey) => ReactNode;
-  dating: (matchingResult: DatingPartnerSurvey) => ReactNode;
+  meeting: (matchingResult: MatchingResultResponse) => ReactNode;
+  dating: (matchingResult: MatchingResultResponse) => ReactNode;
   title: ReactNode;
   btnName: string;
   handleStatus: (status: Status) => void;
 }
 
-const initMeetingSurvey: MeetingPartnerSurvey = {
-  areas: [],
-  averageAge: 0,
-  averageHeight: 0,
-  departments: [],
-  kakaoId: '',
-  mindset: '',
-  play: '',
-  universities: '',
-  payDeadline: '',
+const initMeetingSurvey: MatchingResultResponse = {
+  code: 7000,
+  message: '',
+  partnerSurvey: { areas: [], averageAge: 0, averageHeight: 0, departments: [], kakaoId: '', mindset: '', play: '', universities: '' },
+  payDeadLine: '',
+  payName: '',
 };
 
-const initDatingSurvey: DatingPartnerSurvey = {
-  age: 0,
-  areas: [],
-  body: '',
-  characteristic: '',
-  dateCount: '',
-  department: '',
-  height: 0,
-  isSmoke: false,
-  kakaoId: '',
-  university: '',
-  payDeadline: '',
+const initDatingSurvey: MatchingResultResponse = {
+  code: 7000,
+  message: '',
+  partnerSurvey: {
+    age: 0,
+    areas: [],
+    body: '',
+    characteristic: '',
+    dateCount: '',
+    department: '',
+    height: 0,
+    isSmoke: false,
+    kakaoId: '',
+    university: '',
+  },
+  payDeadLine: '',
+  payName: '',
 };
 
 const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: MatchingTemplateProps) => {
@@ -52,8 +52,8 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
   const navigate = useNavigate();
   const [isErrorModal, onToggleErrorModal] = useToggle();
   const [errorMessage, setErrorMessage] = useState('');
-  const [meetingMatchingResult, setMeetingMatchingResult] = useState<MeetingPartnerSurvey>(initMeetingSurvey);
-  const [datingMatchingResult, setDatingMatchingResult] = useState<DatingPartnerSurvey>(initDatingSurvey);
+  const [meetingMatchingResult, setMeetingMatchingResult] = useState<MatchingResultResponse>(initMeetingSurvey);
+  const [datingMatchingResult, setDatingMatchingResult] = useState<MatchingResultResponse>(initDatingSurvey);
 
   useEffect(() => {
     location.pathname.includes('meeting') ? setType('meeting') : setType('dating');
@@ -72,7 +72,6 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
   const fetchMatchingResult = async () => {
     try {
       const response = type === 'meeting' ? await getMeetingMatching() : await getDatingMatching();
-
       const { code } = response;
       switch (code) {
         case 7000:
@@ -88,7 +87,7 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
           handleStatus('femaleSuccess');
           break;
         case 7004:
-          saveMatchingResult(response.partnerSurvey);
+          saveMatchingResult(response);
           handleStatus('end');
           break;
         case 7005:
@@ -98,12 +97,12 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
           handleStatus('cancel');
       }
     } catch (e) {
-      setErrorMessage(() => e.response.data.message);
+      setErrorMessage(() => (e as any).response.data.message);
       onToggleErrorModal();
     }
   };
 
-  const saveMatchingResult = (partnerSurvey: MeetingPartnerSurvey | DatingPartnerSurvey) => {
+  const saveMatchingResult = (partnerSurvey: MatchingResultResponse) => {
     'age' in partnerSurvey ? setDatingMatchingResult(partnerSurvey) : setMeetingMatchingResult(partnerSurvey);
   };
 
@@ -140,7 +139,7 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
             {
               {
                 none: <NoneButton />,
-                success: <SuccessButton />,
+                success: <SuccessButton payName={type === 'meeting' ? meetingMatchingResult.payName : datingMatchingResult.payName} />,
                 femaleSuccess: <FemaleSuccessButton />,
                 pay: <CompleteButton />,
                 end: <EndButton handleStatus={handleStatus} />,

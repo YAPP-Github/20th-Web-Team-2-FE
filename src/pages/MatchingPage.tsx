@@ -4,7 +4,7 @@ import { MatchingTemplete, SuccessBox, WaitingBox, MeetingEndBox, DatingEndBox, 
 import { Contents } from '@/lib/styles/styledComponents';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { MeetingPartnerSurvey } from '@/types/meeting';
+import { MatchingResultResponse, MeetingPartnerSurvey } from '@/types/meeting';
 import { DatingPartnerSurvey } from '@/types/dating';
 
 export type Status = 'none' | 'waiting' | 'success' | 'femaleSuccess' | 'pay' | 'end' | 'fail' | 'cancel';
@@ -20,32 +20,32 @@ const MatchingPage = () => {
         btnName={status}
         title={MatchingStateTitle(status)}
         handleStatus={handleStatus}
-        meeting={(matchingResult: MeetingPartnerSurvey) => (
+        meeting={(matchingResult: MatchingResultResponse) => (
           <MatchingContents>
             {
               {
                 none: <></>,
                 waiting: <WaitingBox />,
-                success: <SuccessBox payDeadline={matchingResult.payDeadline} />,
-                femaleSuccess: <CompleteBox date={matchingResult.payDeadline} status="femaleSuccess" />,
-                pay: <CompleteBox date={matchingResult.payDeadline} />,
-                end: <MeetingEndBox {...matchingResult} />,
+                success: <SuccessBox payDeadline={matchingResult.payDeadLine} />,
+                femaleSuccess: <CompleteBox date={matchingResult.payDeadLine} status="femaleSuccess" />,
+                pay: <CompleteBox date={matchingResult.payDeadLine} />,
+                end: <MeetingEndBox {...(matchingResult.partnerSurvey as MeetingPartnerSurvey)} />,
                 fail: <FailBox />,
                 cancel: <CancelBox />,
               }[status]
             }
           </MatchingContents>
         )}
-        dating={(matchingResult: DatingPartnerSurvey) => (
+        dating={(matchingResult: MatchingResultResponse) => (
           <MatchingContents>
             {
               {
                 none: <></>,
                 waiting: <WaitingBox />,
-                success: <SuccessBox payDeadline={matchingResult.payDeadline} />,
-                femaleSuccess: <CompleteBox date={matchingResult.payDeadline} status="femaleSuccess" />,
-                pay: <CompleteBox date={matchingResult.payDeadline} />,
-                end: <DatingEndBox {...matchingResult} />,
+                success: <SuccessBox payDeadline={matchingResult.payDeadLine} />,
+                femaleSuccess: <CompleteBox date={matchingResult.payDeadLine} status="femaleSuccess" />,
+                pay: <CompleteBox date={matchingResult.payDeadLine} />,
+                end: <DatingEndBox {...(matchingResult.partnerSurvey as DatingPartnerSurvey)} />,
                 fail: <FailBox />,
                 cancel: <CancelBox />,
               }[status]

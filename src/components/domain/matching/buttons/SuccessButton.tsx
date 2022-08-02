@@ -5,7 +5,11 @@ import styled from 'styled-components';
 import { Modal } from '@/components/base';
 import { useToggle } from '@/hooks/common';
 
-function SuccessButton() {
+interface SuccessButtonProps {
+  payName: string;
+}
+
+function SuccessButton({ payName }: SuccessButtonProps) {
   const [isModal, onToggleModal] = useToggle();
   const [isErrorModal, onToggleErrorModal] = useToggle();
 
@@ -23,8 +27,7 @@ function SuccessButton() {
         <img src={CopyWhiteIcon} alt="복사" width={17} height={17} /> <Text>농협 301-0312-2534-81</Text>
       </Button>
       <Warning>
-        받는 분 통장 표시는 <span>카톡 아이디 첫 7자리</span>로 해주세요! <br />
-        (ex: minsu30)
+        ⚠️ 받는 분 통장 표시를 ‘<span>{payName}</span>’ 로 바꿔주셔야 확인이 가능합니다 ⚠️
       </Warning>
       {isModal && (
         <Modal

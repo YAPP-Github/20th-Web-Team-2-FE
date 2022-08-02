@@ -59,8 +59,10 @@ const IsAbroadSurvey = () => {
       handleNextClick={handleNextClick}
     >
       <Title>
-        지금 한국이신가요? <br />
-        해외이신가요?
+        <strong>
+          지금 한국이신가요? <br />
+          해외이신가요?
+        </strong>
       </Title>
       <BtnWrapper>
         <ChooseTwoBox height={100} items={COUNTRY_ITEMS} selectedOption={matchMeeting ? isAbroad : isAbroadDating} onChangeOption={onChangeOption} />
@@ -71,7 +73,7 @@ const IsAbroadSurvey = () => {
 
 const BtnWrapper = styled(FormWrapper)`
   display: flex;
-  margin-top: 0px;
+  margin-top: 71px;
 `;
 
 export default IsAbroadSurvey;
