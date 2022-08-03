@@ -65,7 +65,7 @@ function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
           <UserInfo>
             <SiteLogo src={Logo} alt="사이트 로고" />
             <UserBox>
-              {/* <strong>{info?.email}</strong> */}
+              <strong>{info?.email}</strong>
               <div className="univ">{info?.university}</div>
             </UserBox>
           </UserInfo>
