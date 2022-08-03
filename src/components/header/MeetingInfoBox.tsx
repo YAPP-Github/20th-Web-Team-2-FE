@@ -39,6 +39,7 @@ function MeetingInfoBox() {
     const getMeetingData = async () => {
       try {
         const res = await getMeetingSurvey();
+        console.log(res);
         setMeetingData(res);
       } catch (e) {
         if ((e as any).message === '작성한 설문이 없습니다.') {
@@ -49,9 +50,8 @@ function MeetingInfoBox() {
         onToggleErrorModal();
       }
     };
-    console.log('asd2');
+
     getMeetingData();
-    console.log('asd3');
   }, []);
 
   if (!doSurvey)
