@@ -39,20 +39,18 @@ function MeetingInfoBox() {
     const getMeetingData = async () => {
       try {
         const res = await getMeetingSurvey();
-        if (res) {
-          setMeetingData(res);
-        }
+        console.log(res);
+        setMeetingData(res);
       } catch (e) {
-        if ((e as any).request.status === 400) {
+        if ((e as any).message === '작성한 설문이 없습니다.') {
           setDoSurvey(false);
           return;
         }
-        if ((e as any).request.status === 500) {
-          onToggleErrorModal();
-          return;
-        }
+        setDoSurvey(false);
+        onToggleErrorModal();
       }
     };
+
     getMeetingData();
   }, []);
 

@@ -30,8 +30,7 @@ const AuthMail = () => {
       setEmail(email);
       onToggleModal();
     } catch (e) {
-      const { code } = e.response.data;
-      if (code === 'UNSUPPORTED_EMAIL') {
+      if ((e as any).message === '지원하지 않는 대학입니다.') {
         setErrorMessage({
           title: '지원하는 학교가 아닙니다 🥲',
           text: '"학교 추가하기"에서<br /> 학교 추가를 요청해주세요!',
@@ -47,10 +46,9 @@ const AuthMail = () => {
       Cookies.set('authenticated', result);
       onToggleNextModal();
     } catch (e) {
-      const { message } = e.response.data;
       setErrorMessage({
         title: '에러',
-        text: message,
+        text: (e as any).message,
       });
       onToggleErrorModal();
     }

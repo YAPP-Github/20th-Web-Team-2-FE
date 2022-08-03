@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import React, { MouseEventHandler, ReactNode } from 'react';
 import { Button } from '@/components/base';
 import ProgressBar, { ProgressBarProps } from '@/components/base/ProgressBar';
@@ -24,6 +24,8 @@ const SurveyTemplate = ({
   handleNextClick,
   disabledFooter = false,
 }: SurveyTemplateProps) => {
+  const location = useLocation();
+  const navigate = useNavigate();
   return (
     <SurveyTemplateBlock>
       <HeaderWrapper>
@@ -34,8 +36,14 @@ const SurveyTemplate = ({
         {hasProgressBar && <ProgressBar currStep={currStep} totalStep={totalStep} />}
         {!disabledFooter && (
           <ButtonWrapper>
-            <Button size="medium" variant="gray" onClick={handlePrevClick}>
-              이전
+            <Button
+              size="medium"
+              variant="gray"
+              onClick={() => {
+                location.pathname.includes('updating') ? navigate('/') : handlePrevClick;
+              }}
+            >
+              {location.pathname.includes('updating') ? '취소' : '이전'}
             </Button>
             <Button
               onClick={handleNextClick}
@@ -44,7 +52,7 @@ const SurveyTemplate = ({
               variant={disableNext ? 'gray' : 'default'}
               fontWeight={disableNext ? 400 : 700}
             >
-              {currStep === totalStep ? '제출' : '다음'}
+              {location.pathname.includes('updating') ? '수정' : currStep === totalStep ? '제출' : '다음'}
             </Button>
           </ButtonWrapper>
         )}

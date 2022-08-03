@@ -31,8 +31,7 @@ function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
       Cookies.remove('authenticated');
       navigate('/');
     } catch (e) {
-      const { message } = e.response.data;
-      setErrorMessage(message);
+      setErrorMessage((e as any).message);
       onToggleErrorModal();
     }
   };
@@ -46,8 +45,7 @@ function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
         navigate('/');
       }
     } catch (e) {
-      const { message } = e.response.data;
-      setErrorMessage(message);
+      setErrorMessage((e as any).message);
       onToggleErrorModal();
     }
   };
@@ -73,8 +71,8 @@ function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
             <img src={Logout} />
           </LogoutButton>
         </SidebarHeader>
-        {isMenu && <MeetingInfoBox />}
-        {isMenu && <DatingInfoBox />}
+        <MeetingInfoBox />
+        <DatingInfoBox />
         <WithdrawalButton onClick={onToggleModal}>탈퇴하기</WithdrawalButton>
       </NavBarBlock>
       <NavBackground onClick={onToggleMenu} isMenu={isMenu} />

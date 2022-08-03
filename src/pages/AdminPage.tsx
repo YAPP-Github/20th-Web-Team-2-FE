@@ -17,8 +17,7 @@ const AdminPage = () => {
     try {
       userType === 'meeting' ? patchMeetingPayment(kakaoId) : patchDatingPayment(kakaoId);
     } catch (e) {
-      const { message } = e.response.data;
-      alert(message);
+      alert((e as any).message);
     }
   };
 
@@ -33,7 +32,7 @@ const AdminPage = () => {
         const res = await getDatingPaymentTargets();
         setDatingUsers(res);
       } catch (e) {
-        alert(e.message);
+        alert((e as any).message);
       }
     };
 
