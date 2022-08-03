@@ -26,6 +26,13 @@ const SurveyTemplate = ({
 }: SurveyTemplateProps) => {
   const location = useLocation();
   const navigate = useNavigate();
+
+  const onClickPrev = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    console.log(handlePrevClick);
+    if (location.pathname.includes('updating')) navigate('/');
+    else if (handlePrevClick) handlePrevClick(e);
+  };
+
   return (
     <SurveyTemplateBlock>
       <HeaderWrapper>
@@ -34,13 +41,13 @@ const SurveyTemplate = ({
       <ContentsWrapper>{children}</ContentsWrapper>
       <NavigationWrapper>
         {hasProgressBar && <ProgressBar currStep={currStep} totalStep={totalStep} />}
-        {!disabledFooter && (
+        {!disabledFooter && handlePrevClick && (
           <ButtonWrapper>
             <Button
               size="medium"
               variant="gray"
-              onClick={() => {
-                location.pathname.includes('updating') ? navigate('/') : handlePrevClick;
+              onClick={(e) => {
+                onClickPrev(e);
               }}
             >
               {location.pathname.includes('updating') ? '취소' : '이전'}

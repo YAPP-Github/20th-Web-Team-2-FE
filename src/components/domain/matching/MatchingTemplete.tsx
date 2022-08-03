@@ -97,7 +97,7 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
           handleStatus('cancel');
       }
     } catch (e) {
-      setErrorMessage(() => (e as any).response.data.message);
+      setErrorMessage(() => (e as any).message);
       onToggleErrorModal();
     }
   };
