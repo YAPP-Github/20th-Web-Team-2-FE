@@ -39,7 +39,7 @@ const AbroadAreasSurvey = () => {
 
   return (
     <SurveyTemplate
-      disableNext={checkDisabled}
+      disableNext={!checkDisabled}
       hasProgressBar={true}
       currStep={matchMeeting ? 12 : 13}
       totalStep={matchMeeting ? LAST_MEETING_STEP : LAST_DATING_STEP}
