@@ -47,19 +47,16 @@ const DatingInfoBox = () => {
   useEffect(() => {
     const getDatingData = async () => {
       try {
+        console.log('asd');
         const res = await getDatingSurvey();
-        if (res) {
-          setDatingData(res);
-        }
+        setDatingData(res);
       } catch (e) {
-        if ((e as any).request.status === 400) {
+        if ((e as any).message === '작성한 설문이 없습니다.') {
           setDoSurvey(false);
           return;
         }
-        if ((e as any).request.status === 500) {
-          onToggleErrorModal();
-          return;
-        }
+        setDoSurvey(false);
+        onToggleErrorModal();
       }
     };
 

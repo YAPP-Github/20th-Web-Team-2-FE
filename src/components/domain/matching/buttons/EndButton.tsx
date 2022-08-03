@@ -27,8 +27,7 @@ function EndButton({ handleStatus }: EndButtonProps) {
       matchMeeting ? await postReMatchMeetingSurvey() : await postReMatchDatingSurvey();
       handleStatus('waiting');
     } catch (e) {
-      const { message } = e.response.data;
-      setErrorMessage(message);
+      setErrorMessage((e as any).message);
       onToggleErrorModal();
     }
   };

@@ -23,7 +23,7 @@ const AdminPage = () => {
       const res = await patchDatingPayment(kakaoId);
       setDatingUsers(res);
     } catch (e) {
-      alert(e.message);
+      alert((e as any).message);
     }
   };
 
@@ -38,7 +38,7 @@ const AdminPage = () => {
         const res = await getDatingUsers();
         setDatingUsers(res);
       } catch (e) {
-        alert(e.message);
+        alert((e as any).message);
       }
     };
 
