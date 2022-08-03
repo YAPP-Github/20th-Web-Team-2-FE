@@ -119,7 +119,7 @@ const AuthMail = () => {
           height={140}
           bottonName="확인"
           title="알림"
-          text="인증이 완료되었습니다. 👏 설문을 시작해 주세요."
+          text="인증이 완료되었습니다.<br /> 👏 설문을 시작해 주세요."
           onToggleModal={onToggleNextModal}
           onClick={() => {
             navigate('/type-of-meeting');
