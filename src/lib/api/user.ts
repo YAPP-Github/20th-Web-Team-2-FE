@@ -7,7 +7,6 @@ export const postJoin = async (payload: LoginRequest): Promise<LoginResponse | u
 };
 
 export const postLogin = async (payload: LoginRequest): Promise<LoginResponse | undefined> => {
-  await apiClient.post('/join', payload);
   const res = await apiClient.post('/login', payload);
   return res.data;
 };
