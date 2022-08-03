@@ -10,6 +10,7 @@ import { Modal } from '../base';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import useMyInfoLoad from '@/hooks/user/useMyInfoLoad';
+import surveyStorage from '@/utils/surveyStorage';
 
 interface MenuBlockProps {
   isMenu: boolean;
@@ -29,6 +30,7 @@ function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
       await postLogout();
       Cookies.remove('AccessToken');
       Cookies.remove('authenticated');
+      surveyStorage.remove();
       navigate('/');
     } catch (e) {
       setErrorMessage((e as any).message);

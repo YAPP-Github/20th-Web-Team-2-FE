@@ -10,12 +10,14 @@ const AdminPage = () => {
   const [userType, setUserType] = useState<UserType>('meeting');
   const [datingUsers, setDatingUsers] = useState<AdminPaymentTargets[]>([]);
   const [meetingUsers, setMeetingUsers] = useState<AdminPaymentTargets[]>([]);
+  const [render, setRender] = useState(true);
 
   const users = userType === 'meeting' ? meetingUsers : datingUsers;
 
   const handlePayment = async (kakaoId: string) => {
     try {
       userType === 'meeting' ? patchMeetingPayment(kakaoId) : patchDatingPayment(kakaoId);
+      setRender(!render);
     } catch (e) {
       alert((e as any).message);
     }
@@ -37,7 +39,7 @@ const AdminPage = () => {
     };
 
     getUsersInfo();
-  }, [userType, handlePayment]);
+  }, [userType, render]);
 
   return (
     <AdminPageBlock>
