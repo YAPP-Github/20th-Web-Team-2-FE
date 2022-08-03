@@ -14,6 +14,7 @@ import { goKakaoLogin } from '@/utils/goKakaoLogin';
 import { getOauthKakaoAge } from '@/lib/api/oauth';
 import { LAST_MEETING_STEP, LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 import { Modal } from '@/components/base';
+import { ChevronIcon } from '@/assets/img';
 
 const AgreementSurvey = () => {
   const location = useLocation();
@@ -75,8 +76,15 @@ const AgreementSurvey = () => {
         <FormWrapper>
           <CheckBox text="전체동의" impotrant checked={isAllchecked} onChange={onCheckAll} />
           <DivisionLineStyled />
-          {checkedList.map(({ checked, name, text }) => (
-            <CheckBox key={text} text={text} name={name} checked={checked} onChange={onChangeCheck} />
+          {checkedList.map(({ checked, name, text, link }) => (
+            <Item key={name}>
+              <CheckBox key={text} text={text} name={name} checked={checked} onChange={onChangeCheck} />
+              {link && (
+                <a href={link} target="_blank" rel="noreferrer">
+                  <img src={ChevronIcon} />
+                </a>
+              )}
+            </Item>
           ))}
           {checkedChoiceList.map(({ checked, name, text }) => (
             <CheckBox key={text} text={text} name={name} checked={checked} onChange={onChangeChoiceCheck} />
@@ -102,6 +110,25 @@ const AgreementSurvey = () => {
 
 export const DivisionLineStyled = styled.div`
   border: 0.75px solid ${palette.grayLight};
+`;
+
+const Item = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+
+  a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+
+    img {
+      width: 14px;
+    }
+  }
 `;
 
 export default AgreementSurvey;
