@@ -35,11 +35,14 @@ const AbroadAreasSurvey = () => {
     }
   };
 
-  const checkDisabled = useMemo(() => (matchMeeting ? abroadAreas.length === 0 : abroadAreasDating.length === 0), [matchMeeting, abroadAreasDating]);
+  const checkDisabled = useMemo(
+    () => (matchMeeting ? abroadAreas.length === 0 : abroadAreasDating.length === 0),
+    [matchMeeting, abroadAreas, abroadAreasDating],
+  );
 
   return (
     <SurveyTemplate
-      disableNext={!checkDisabled}
+      disableNext={checkDisabled}
       hasProgressBar={true}
       currStep={matchMeeting ? 12 : 13}
       totalStep={matchMeeting ? LAST_MEETING_STEP : LAST_DATING_STEP}
