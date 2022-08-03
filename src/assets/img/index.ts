@@ -13,3 +13,4 @@ export { default as CopyIcon } from './CopyIcon.png';
 export { default as CopyWhiteIcon } from './CopyWhiteIcon.png';
 export { default as TripleLineMenu } from './TripleLineMenu.png';
 export { default as Logout } from './Logout.png';
+export { default as ChevronIcon } from './Chevron.png';

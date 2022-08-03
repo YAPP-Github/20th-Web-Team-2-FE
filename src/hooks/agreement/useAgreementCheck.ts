@@ -6,16 +6,19 @@ const useAgreementCheck = () => {
       name: 'over19',
       text: '(필수) 만 19세 이상입니다',
       checked: false,
+      link: '',
     },
     {
       name: 'serviceAgree',
       text: '(필수) 서비스 이용약관 동의서',
       checked: false,
+      link: 'https://charmed-hyacinth-41c.notion.site/0861ec794c8f43a0b466c20e82f12de7',
     },
     {
       name: 'privacyAgree',
       text: '(필수) 개인정보 수집 및 이용 동의서',
       checked: false,
+      link: 'https://charmed-hyacinth-41c.notion.site/8f1e211d74774e7288ca3352c54566a0',
     },
   ]);
 
@@ -24,6 +27,7 @@ const useAgreementCheck = () => {
       name: 'eventAgree',
       text: '(선택) 혜택/이벤트 정보 수신 동의서',
       checked: false,
+      link: '',
     },
   ]);
 
