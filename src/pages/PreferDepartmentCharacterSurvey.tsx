@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { ChooseFourBox, SurveyTemplate } from '@/components/domain/survey';
 import { ChooseFourBoxItemProps } from '@/components/domain/survey/ChooseFourBox';
 import { useDatingNavigate } from '@/hooks/common/useNavigate';
@@ -30,6 +30,9 @@ const PreferDepartmentCharacterSurvey = () => {
   const [preferDepartments, setPreferDepartments] = useState<ChooseFourBoxItemProps[]>(initDepartments);
   const [preferCharacteristics, setPreferCharacteristics] = useState<ChooseFourBoxItemProps[]>(initCharacteristics);
 
+  const isMultiDepartChecked = useMemo(() => preferDepartments.some((item) => item.checked), [preferDepartments]);
+  const isMultiCharChecked = useMemo(() => preferCharacteristics.some((item) => item.checked), [preferCharacteristics]);
+
   // @Desc: 기존 constants에 checked 속성의 아이템 리스트들을 string[] 형태로 바꿔주기
   const savedPreferDepartments = preferDepartments.reduce<Departments[]>((prev, cur) => {
     if (cur.checked) {
@@ -58,7 +61,7 @@ const PreferDepartmentCharacterSurvey = () => {
 
   return (
     <SurveyTemplate
-      disableNext={!preferDepartments || !preferCharacteristics}
+      disableNext={!isMultiDepartChecked || !isMultiCharChecked}
       currStep={10}
       totalStep={LAST_DATING_STEP}
       handlePrevClick={() => datingNavigate(Path.PreferAgeHeightSurvey)}

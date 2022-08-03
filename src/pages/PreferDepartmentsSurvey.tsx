@@ -30,6 +30,8 @@ const PreferDepartmentsSurvey = () => {
   }, []);
   const savedPreferDepartments = useMemo(() => getPreferDepartments, [preferDepartments]);
 
+  const isMultiChecked = useMemo(() => preferDepartments.some((item) => item.checked), [preferDepartments]);
+
   const handleNextClick = () => {
     if (isUpdate) {
       onUpdateMeetingSurvey({ ...initMeetingState, preferDepartments: savedPreferDepartments ?? [] });
@@ -44,7 +46,7 @@ const PreferDepartmentsSurvey = () => {
 
   return (
     <SurveyTemplate
-      disableNext={!preferDepartments}
+      disableNext={!isMultiChecked}
       currStep={8}
       totalStep={LAST_MEETING_STEP}
       handlePrevClick={() => meetingNavigate(Path.PreferAgeHeightSurvey)}
