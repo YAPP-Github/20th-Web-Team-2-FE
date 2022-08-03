@@ -65,7 +65,7 @@ function MenuBlock({ isMenu, onToggleMenu }: MenuBlockProps) {
           <UserInfo>
             <SiteLogo src={Logo} alt="사이트 로고" />
             <UserBox>
-              <div>{info?.email}</div>
+              {/* <strong>{info?.email}</strong> */}
               <div className="univ">{info?.university}</div>
             </UserBox>
           </UserInfo>
@@ -168,15 +168,26 @@ const UserBox = styled.div`
   flex-direction: column;
   justify-content: center;
   padding-left: 4px;
-  font-weight: 700;
-  .univ {
+
+  strong {
     font-size: 14px;
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .univ {
+    font-size: 13px;
     font-weight: 400;
     color: ${palette.grayDark};
+    padding-top: 2px;
   }
 `;
 
 const LogoutButton = styled.button`
+  padding-left: 5px;
+
   img {
     width: 14px;
     height: 14px;
@@ -184,9 +195,10 @@ const LogoutButton = styled.button`
 `;
 
 const WithdrawalButton = styled.button`
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding-top: 20px;
   font-size: 10px;
   color: ${palette.grayDark};
 `;
