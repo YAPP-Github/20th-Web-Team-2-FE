@@ -6,7 +6,7 @@ import { Title } from '@/lib/styles/styledComponents';
 import { palette } from '@/lib/styles/palette';
 import { LoginForm } from '@/components/testLogin';
 import { LoginRequest } from '@/types/user';
-import { postLogin } from '@/lib/api/user';
+import { postJoin, postLogin } from '@/lib/api/user';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { useToggle } from '@/hooks/common';
@@ -30,6 +30,13 @@ const TestLogin = () => {
       onToggleErrorModal();
     }
   };
+  const onJoin = async (values: LoginRequest) => {
+    try {
+      await postJoin(values);
+    } catch (e) {
+      onToggleErrorModal();
+    }
+  };
 
   const handleNextClick = () => {
     navigate('/type-of-meeting');
@@ -47,7 +54,7 @@ const TestLogin = () => {
         </Title>
         <Description>임시 로그인 계정: test4</Description>
         <FormWrapper>
-          <LoginForm onSubmitAuthCode={onSubmitAuthCode} />
+          <LoginForm onSubmitAuthCode={onSubmitAuthCode} onJoin={onJoin} />
         </FormWrapper>
       </SurveyTemplate>
       {isErrorModal && (
