@@ -62,7 +62,7 @@ const MyMbtiHeight = () => {
       handleNextClick={handleNextClick}
     >
       <StyledTitle>본인의 MBTI를 알려주세요.</StyledTitle>
-      <Anchor target="_blank" href="https://types.my/quiz/create?step=5">
+      <Anchor target="_blank" href="https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC">
         나의 MBTI 알아보기
       </Anchor>
       <UnitSelector placeholder="MBTI를 검색하세요." searchData={mbtis} selectedResult={mbti} setSelectedResult={setMbti} />
