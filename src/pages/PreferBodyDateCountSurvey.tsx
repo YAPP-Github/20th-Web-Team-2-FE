@@ -32,6 +32,8 @@ const PreferBodyDateCountSurvey = () => {
     return prev;
   }, []);
 
+  const isMultiChecked = useMemo(() => preferBodies.some((item) => item.checked), [preferBodies]);
+
   const handleNextClick = () => {
     if (isUpdate) {
       onUpdateDatingSurvey({ ...initDatingState, preferBodies: savedPreferBodies, preferDateCount: preferDateCount as DateCount });
@@ -46,7 +48,7 @@ const PreferBodyDateCountSurvey = () => {
 
   return (
     <SurveyTemplate
-      disableNext={!preferBodies && !preferDateCount}
+      disableNext={!isMultiChecked || !preferDateCount}
       currStep={11}
       totalStep={LAST_DATING_STEP}
       handlePrevClick={() => datingNavigate(Path.PreferDepartmentCharacterSurvey)}

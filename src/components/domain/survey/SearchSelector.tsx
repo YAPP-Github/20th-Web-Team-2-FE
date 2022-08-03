@@ -36,10 +36,18 @@ const SearchSelector = ({ placeholder, searchData, selectedResults, setSelectedR
     const noMatchData = !searchData.map(({ id }) => id).includes(id);
     const existSelected = selectedResults.includes(id);
     const overMaxLimit = selectedResults.length >= (max ?? defaultMax);
-    if (noMatchData || existSelected || overMaxLimit) return;
+    if (noMatchData || existSelected) {
+      return;
+    }
+
+    if (overMaxLimit) {
+      setSelectedResults((prev) => prev.slice(1));
+      setSelectedSchools((prev) => prev.slice(1));
+    }
 
     setSelectedResults((prev) => [...prev, id]);
     setSelectedSchools((prev) => [...prev, value]);
+    resetClick();
   };
 
   const handleDeleteClick = (value: string) => {

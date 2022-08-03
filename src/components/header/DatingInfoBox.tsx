@@ -229,11 +229,3 @@ export const FlexEle = styled(InfoEle)`
 `;
 
 export default DatingInfoBox;
-{
-  /* {ourUniversities.map((univ, index) => (
-            <p key={univ}>
-              {schools[univ].name}
-              {addTailComma(ourUniversities.length, index)}
-            </p>
-          ))} */
-}
