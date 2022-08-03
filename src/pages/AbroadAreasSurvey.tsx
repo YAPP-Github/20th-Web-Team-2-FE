@@ -36,7 +36,7 @@ const AbroadAreasSurvey = () => {
   };
 
   const checkDisabled = useMemo(
-    () => (matchMeeting ? abroadAreas.length === 0 : abroadAreasDating.length === 0),
+    () => (matchMeeting ? abroadAreas?.length === 0 : abroadAreasDating?.length === 0),
     [matchMeeting, abroadAreas, abroadAreasDating],
   );
 
