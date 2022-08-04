@@ -7,11 +7,11 @@ function CancelBox() {
       <>
         <MatchingImg src={MatchingFail} alt="매칭 실패 이미지" />
         <StringEle>
-          매칭이 성사되었으나
-          <br />
           상대방이 서비스를 탈퇴하여
           <br />
           매칭이 취소되었습니다.
+          <br />
+          이미 결제를 완료 하셨다면,
           <br />
           지불하신 금액은 <strong>1영업일</strong> 이내 환불됩니다.
         </StringEle>

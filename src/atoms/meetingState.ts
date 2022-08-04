@@ -19,7 +19,7 @@ const INITIAL_MEETING_STATE: Meeting = {
   preferAge: [20, 25],
   preferHeight: [140, 180],
   preferDepartments: ['LIBERAL', 'SCIENCE'],
-  mindset: 'ALL',
+  mindSet: 'ALL',
   play: 'ALL',
   isAbroad: false,
   domesticAreas: ['SNW', 'SNE', 'SSW', 'SSE'],
