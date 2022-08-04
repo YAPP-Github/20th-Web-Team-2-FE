@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button, Modal } from '@/components/base';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Title } from '@/lib/styles/styledComponents';
 import { CompleteButton, EndButton, NoneButton, SuccessButton, FemaleSuccessButton } from './buttons';
 import Path from '@/router/Path';
@@ -10,6 +10,7 @@ import { getMeetingMatching } from '@/lib/api/meeting';
 import { getDatingMatching } from '@/lib/api/dating';
 import { useToggle } from '@/hooks/common';
 import { MatchingResultResponse } from '@/types/meeting';
+import useMatchingType from '@/hooks/survey/useMatchingType';
 
 interface MatchingTemplateProps {
   meeting: (matchingResult: MatchingResultResponse) => ReactNode;
@@ -47,18 +48,12 @@ const initDatingSurvey: MatchingResultResponse = {
 };
 
 const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: MatchingTemplateProps) => {
-  const location = useLocation();
-  const [type, setType] = useState('meeting');
+  const [type] = useMatchingType();
   const navigate = useNavigate();
   const [isErrorModal, onToggleErrorModal] = useToggle();
   const [errorMessage, setErrorMessage] = useState('');
   const [meetingMatchingResult, setMeetingMatchingResult] = useState<MatchingResultResponse>(initMeetingSurvey);
   const [datingMatchingResult, setDatingMatchingResult] = useState<MatchingResultResponse>(initDatingSurvey);
-
-  useEffect(() => {
-    location.pathname.includes('meeting') ? setType('meeting') : setType('dating');
-  }, [location.pathname]);
-  //이부분 소현님과 의논
 
   // const requestRandomMatching = async () => {
   //   try {
@@ -69,7 +64,6 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
   //     onToggleErrorModal();
   //   }
   // };
-  console.log(datingMatchingResult);
   const saveMatchingResult = (partnerSurvey: MatchingResultResponse) => {
     type === 'dating' ? setDatingMatchingResult(partnerSurvey) : setMeetingMatchingResult(partnerSurvey);
   };
@@ -93,7 +87,6 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
           case 7003:
             handleStatus('femaleSuccess');
             saveMatchingResult(response);
-
             break;
           case 7004:
             handleStatus('end');
