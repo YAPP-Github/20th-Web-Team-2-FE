@@ -38,10 +38,12 @@ const IsAbroadSurvey = () => {
     if (isUpdate) {
       if (type === 'meeting') {
         onUpdateMeetingSurvey({ ...initMeetingState, isAbroad: isAbroad === 'ABROAD' ? true : false });
+        setMeetingData({ ...initMeetingState, isAbroad: isAbroad === 'ABROAD' ? true : false });
         navigate(ISABOARD === 'ABROAD' ? `/updating/meeting/${Path.AbroadAreasSurvey}` : `/updating/meeting/${Path.DomesticAreasSurvey}`);
       }
       if (type === 'dating') {
         onUpdateDatingSurvey({ ...initDatingState, isAbroad: isAbroadDating === 'ABROAD' ? true : false });
+        setDatingData({ ...initDatingState, isAbroad: isAbroadDating === 'ABROAD' ? true : false });
         navigate(ISABOARD === 'ABROAD' ? `/updating/dating/${Path.AbroadAreasSurvey}` : `/updating/dating/${Path.DomesticAreasSurvey}`);
       }
     } else {
