@@ -6,19 +6,32 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { MatchingResultResponse, MeetingPartnerSurvey } from '@/types/meeting';
 import { DatingPartnerSurvey } from '@/types/dating';
+import useMatchingType from '@/hooks/survey/useMatchingType';
 
 export type Status = 'none' | 'waiting' | 'success' | 'femaleSuccess' | 'pay' | 'end' | 'fail' | 'cancel';
 
-const MatchingPage = () => {
-  const [status, setStatus] = useState<Status>('none');
+export interface MatchingStatus {
+  meeting: Status;
+  dating: Status;
+}
 
-  const handleStatus = (status: Status) => setStatus(status);
+const MatchingPage = () => {
+  const [type] = useMatchingType();
+
+  const [status, setStatus] = useState<MatchingStatus>({
+    meeting: 'none',
+    dating: 'none',
+  });
+
+  const handleStatus = (status: Status) => {
+    setStatus((prev) => ({ ...prev, [type]: status }));
+  };
 
   return (
     <>
       <MatchingTemplete
-        btnName={status}
-        title={MatchingStateTitle(status)}
+        btnName={status[type]}
+        title={MatchingStateTitle(status[type])}
         handleStatus={handleStatus}
         meeting={(matchingResult: MatchingResultResponse) => (
           <MatchingContents>
@@ -32,7 +45,7 @@ const MatchingPage = () => {
                 end: <MeetingEndBox {...(matchingResult.partnerSurvey as MeetingPartnerSurvey)} />,
                 fail: <FailBox />,
                 cancel: <CancelBox />,
-              }[status]
+              }[status[type]]
             }
           </MatchingContents>
         )}
@@ -48,7 +61,7 @@ const MatchingPage = () => {
                 end: <DatingEndBox {...(matchingResult.partnerSurvey as DatingPartnerSurvey)} />,
                 fail: <FailBox />,
                 cancel: <CancelBox />,
-              }[status]
+              }[status[type]]
             }
           </MatchingContents>
         )}
