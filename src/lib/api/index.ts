@@ -2,6 +2,7 @@ import axios from 'axios';
 import { SERVER_URL } from '@/lib/constants';
 import Cookies from 'js-cookie';
 import { logout } from '@/utils/logout';
+import surveyStorage from '@/utils/surveyStorage';
 
 const apiClient = axios.create({
   baseURL: SERVER_URL,
@@ -36,7 +37,10 @@ apiClient.interceptors.response.use(
         break;
       case 'INACTIVE_USER':
         alert('비정상적인 유저입니다.');
-        await logout();
+        Cookies.remove('AccessToken');
+        Cookies.remove('authenticated');
+        surveyStorage.remove();
+        window.location.replace('https://lonessum.com/');
         break;
       default:
         throw new Error(response.data.message);
