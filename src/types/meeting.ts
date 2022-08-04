@@ -29,6 +29,7 @@ export interface Meeting {
   channel: Channel;
   agreement: boolean;
   kakaoId: string;
+  stringAbroadAreas: string[];
 }
 
 /*
