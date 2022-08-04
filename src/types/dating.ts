@@ -30,6 +30,7 @@ export interface Dating {
   agreement: boolean;
   kakaoId: string;
   myUniversity: number;
+  stringAbroadAreas: string[];
 }
 
 /*
