@@ -37,14 +37,7 @@ function DatingEndBox({ age, areas, body, characteristic, dateCount, department,
 
         <FlexLine>
           <InfoLabel>지역</InfoLabel>
-          <InfoText>
-            {areas?.map((area, index) => (
-              <div key={area}>
-                {addComma(index)}
-                {conversionDomesticArea(area)}
-              </div>
-            ))}
-          </InfoText>
+          <InfoText>{areas?.toString()}</InfoText>
         </FlexLine>
 
         <FlexLine>

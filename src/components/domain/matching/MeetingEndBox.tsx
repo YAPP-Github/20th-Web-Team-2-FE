@@ -35,14 +35,7 @@ function MeetingEndBox({ areas, averageAge, averageHeight, departments, kakaoId,
         </FlexLine>
         <FlexLine>
           <InfoLabel>지역</InfoLabel>
-          <InfoFlexText>
-            {areas?.map((area, index) => (
-              <div key={area}>
-                {addComma(index)}
-                {conversionDomesticArea(area)}
-              </div>
-            ))}
-          </InfoFlexText>
+          <InfoFlexText>{areas?.toString()}</InfoFlexText>
         </FlexLine>
         <FlexLine>
           <InfoLabel>마인드셋</InfoLabel>
