@@ -30,13 +30,13 @@ apiClient.interceptors.response.use(
     const { response } = error;
     console.log(response.data.message);
     switch (response.data.code) {
-      case 'INVALID_JWT':
+      case 'JWT_NOT_EXIST':
         alert('로그인 시간이 만료되었습니다. 메인으로 이동합니다. 다시 로그인 해주세요!');
-        logout();
+        await logout();
         break;
       case 'INACTIVE_USER':
         alert('비정상적인 유저입니다.');
-        logout();
+        await logout();
         break;
 
       default:
