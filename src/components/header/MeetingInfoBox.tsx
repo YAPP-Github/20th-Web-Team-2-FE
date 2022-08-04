@@ -111,7 +111,7 @@ function MeetingInfoBox() {
           )}
           <InfoEle>
             <Link to={`/updating/meeting/${Path.AbroadAreasSurvey}`} style={{ textOverflow: 'ellipsis' }}>
-              해외 지역 : {stringAbroadAreas.length === 0 ? '없음' : stringAbroadAreas.toString()}
+              해외 지역 : {stringAbroadAreas?.length === 0 ? '없음' : stringAbroadAreas?.toString()}
             </Link>
           </InfoEle>
           <InfoEle>
