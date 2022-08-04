@@ -34,10 +34,14 @@ const IsAbroadSurvey = () => {
 
   const handleNextClick = () => {
     if (isUpdate) {
-      matchMeeting
-        ? onUpdateMeetingSurvey({ ...initMeetingState, isAbroad: isAbroad === 'ABROAD' ? true : false })
-        : onUpdateDatingSurvey({ ...initDatingState, isAbroad: isAbroadDating === 'ABROAD' ? true : false });
-      navigate(Path.MatchingDating);
+      if (matchMeeting) {
+        onUpdateMeetingSurvey({ ...initMeetingState, isAbroad: isAbroad === 'ABROAD' ? true : false });
+        navigate(ISABOARD === 'ABROAD' ? `/updating/meeting/${Path.AbroadAreasSurvey}` : `/updating/meeting/${Path.DomesticAreasSurvey}`);
+      }
+      if (!matchMeeting) {
+        onUpdateDatingSurvey({ ...initDatingState, isAbroad: isAbroadDating === 'ABROAD' ? true : false });
+        navigate(ISABOARD === 'ABROAD' ? `/updating/dating/${Path.AbroadAreasSurvey}` : `/updating/dating/${Path.DomesticAreasSurvey}`);
+      }
     } else {
       if (initMeetingState) {
         matchMeeting
