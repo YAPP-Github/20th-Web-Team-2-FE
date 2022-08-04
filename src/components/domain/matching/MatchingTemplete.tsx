@@ -81,9 +81,11 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
           handleStatus('waiting');
           break;
         case 7002:
+          saveMatchingResult(response);
           handleStatus('success');
           break;
         case 7003:
+          saveMatchingResult(response);
           handleStatus('femaleSuccess');
           break;
         case 7004:
@@ -103,7 +105,7 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
   };
 
   const saveMatchingResult = (partnerSurvey: MatchingResultResponse) => {
-    'age' in partnerSurvey ? setDatingMatchingResult(partnerSurvey) : setMeetingMatchingResult(partnerSurvey);
+    type === 'dating' ? setDatingMatchingResult(partnerSurvey) : setMeetingMatchingResult(partnerSurvey);
   };
 
   useEffect(() => {

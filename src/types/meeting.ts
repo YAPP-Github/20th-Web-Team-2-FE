@@ -46,7 +46,7 @@ type Code = 7000 | 7001 | 7002 | 7003 | 7004 | 7005 | 7006;
 export interface MatchingResultResponse {
   code: Code;
   message: string;
-  partnerSurvey: MeetingPartnerSurvey | DatingPartnerSurvey;
+  partnerSurvey: MeetingPartnerSurvey | DatingPartnerSurvey | null;
   payDeadLine: string;
   payName: string;
 }

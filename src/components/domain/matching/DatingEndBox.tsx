@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import KakaoCopyBox from './KakaoCopyBox';
 import { DatingPartnerSurvey } from '@/types/dating';
 import { memo } from 'react';
-import { conversionBody, conversionCharacter, conversionDateCount } from '@/utils/converson';
+import { conversionBody, conversionCharacter, conversionDateCount, conversionDomesticArea } from '@/utils/converson';
+import { addComma } from '@/utils/addComma';
 
 function DatingEndBox({ age, areas, body, characteristic, dateCount, department, height, isSmoke, kakaoId, university }: DatingPartnerSurvey) {
   return (
@@ -33,10 +34,19 @@ function DatingEndBox({ age, areas, body, characteristic, dateCount, department,
           <InfoLabel>학과</InfoLabel>
           <InfoFlexText>{department}</InfoFlexText>
         </FlexLine>
+
         <FlexLine>
           <InfoLabel>지역</InfoLabel>
-          <InfoText>{areas.join(',')}</InfoText>
+          <InfoText>
+            {areas?.map((area, index) => (
+              <div key={area}>
+                {addComma(index)}
+                {conversionDomesticArea(area)}
+              </div>
+            ))}
+          </InfoText>
         </FlexLine>
+
         <FlexLine>
           <InfoLabel>체형</InfoLabel>
           <InfoText>{conversionBody(body)}</InfoText>
