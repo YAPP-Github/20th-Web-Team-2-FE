@@ -9,9 +9,11 @@ import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 import useUnivLoad from '@/hooks/survey/useUnivLoad';
 import { LAST_MEETING_STEP, LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
+import useMatchingType from '@/hooks/survey/useMatchingType';
 
 const PreferUniversitiesSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
+  const [type] = useMatchingType();
   const navigate = useNavigate();
   const { isUpdate, onUpdateDatingSurvey, onUpdateMeetingSurvey } = useUpdateSurvey();
   const { univs } = useUnivLoad();
@@ -27,7 +29,7 @@ const PreferUniversitiesSurvey = () => {
 
   const handleNextClick = () => {
     if (isUpdate) {
-      matchMeeting
+      type === 'meeting'
         ? onUpdateMeetingSurvey({ ...initMeetingState, preferUniversities })
         : onUpdateDatingSurvey({ ...initDatingState, preferUniversities: preferDatingUniversities });
       navigate(Path.MatchingDating);
