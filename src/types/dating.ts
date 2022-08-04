@@ -44,7 +44,7 @@ code : 7006 - 상대방 탈퇴로 인한 매칭 취소 상태
 
 export interface DatingPartnerSurvey {
   age: number;
-  areas: string[];
+  areas?: string[] | [];
   body: Body | '';
   characteristic: Characteristic | '';
   dateCount: TypeOfMeeting | '';

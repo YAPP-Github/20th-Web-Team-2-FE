@@ -47,7 +47,6 @@ const DatingInfoBox = () => {
   useEffect(() => {
     const getDatingData = async () => {
       try {
-        console.log('asd');
         const res = await getDatingSurvey();
         setDatingData(res);
       } catch (e) {
