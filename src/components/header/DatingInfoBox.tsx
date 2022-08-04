@@ -40,7 +40,7 @@ const DatingInfoBox = () => {
     preferHeight,
     isSmokeOk,
     isAbroad,
-    abroadAreas,
+    stringAbroadAreas,
     //여까지 선호 조건
   } = initDatingState;
 
@@ -115,7 +115,9 @@ const DatingInfoBox = () => {
             </FlexEle>
           </Link>
           <InfoEle>
-            <Link to={`/updating/dating/${Path.AbroadAreasSurvey}`}>해외 지역 :{abroadAreas.length === 0 ? '없음' : abroadAreas}</Link>
+            <Link to={`/updating/dating/${Path.AbroadAreasSurvey}`} style={{ textOverflow: 'ellipsis' }}>
+              해외 지역 : {stringAbroadAreas.length === 0 ? '없음' : stringAbroadAreas.toString()}
+            </Link>
           </InfoEle>
           <InfoEle>
             <Link to={`/updating/dating/${Path.IsAbroadSurvey}`}>해외여부 : {isAbroad ? '예' : '아니요'}</Link>

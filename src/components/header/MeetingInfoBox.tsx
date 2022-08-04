@@ -29,6 +29,7 @@ function MeetingInfoBox() {
     mindSet,
     gender,
     isAbroad,
+    stringAbroadAreas,
     // 여까지 우리팀정보
     preferAge,
     preferDepartments,
@@ -109,7 +110,12 @@ function MeetingInfoBox() {
             </InfoEle>
           )}
           <InfoEle>
-            <Link to={`/updating/meeting/${Path.IsAbroadSurvey}`}>해외 여부 : {isAbroad ? 'YES' : 'NO'} </Link>
+            <Link to={`/updating/meeting/${Path.AbroadAreasSurvey}`} style={{ textOverflow: 'ellipsis' }}>
+              해외 지역 : {stringAbroadAreas.length === 0 ? '없음' : stringAbroadAreas.toString()}
+            </Link>
+          </InfoEle>
+          <InfoEle>
+            <Link to={`/updating/meeting/${Path.IsAbroadSurvey}`}>해외여부 : {isAbroad ? '예' : '아니요'} </Link>
           </InfoEle>
         </InfoBox>
         <InfoLabel>선호 조건</InfoLabel>
