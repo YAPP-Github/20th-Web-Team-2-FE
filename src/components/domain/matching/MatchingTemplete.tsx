@@ -58,6 +58,7 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
   useEffect(() => {
     location.pathname.includes('meeting') ? setType('meeting') : setType('dating');
   }, [location.pathname]);
+  //이부분 소현님과 의논
 
   // const requestRandomMatching = async () => {
   //   try {
@@ -68,47 +69,49 @@ const MatchingTemplete = ({ meeting, dating, btnName, title, handleStatus }: Mat
   //     onToggleErrorModal();
   //   }
   // };
-
-  const fetchMatchingResult = async () => {
-    try {
-      const response = type === 'meeting' ? await getMeetingMatching() : await getDatingMatching();
-      const { code } = response;
-      switch (code) {
-        case 7000:
-          handleStatus('none');
-          break;
-        case 7001:
-          handleStatus('waiting');
-          break;
-        case 7002:
-          saveMatchingResult(response);
-          handleStatus('success');
-          break;
-        case 7003:
-          saveMatchingResult(response);
-          handleStatus('femaleSuccess');
-          break;
-        case 7004:
-          saveMatchingResult(response);
-          handleStatus('end');
-          break;
-        case 7005:
-          handleStatus('fail');
-          break;
-        case 7006:
-          handleStatus('cancel');
-      }
-    } catch (e) {
-      setErrorMessage(() => (e as any).message);
-      onToggleErrorModal();
-    }
-  };
-
+  console.log(datingMatchingResult);
   const saveMatchingResult = (partnerSurvey: MatchingResultResponse) => {
     type === 'dating' ? setDatingMatchingResult(partnerSurvey) : setMeetingMatchingResult(partnerSurvey);
   };
 
   useEffect(() => {
+    const fetchMatchingResult = async () => {
+      try {
+        const response = type === 'meeting' ? await getMeetingMatching() : await getDatingMatching();
+        const { code } = response;
+        switch (code) {
+          case 7000:
+            handleStatus('none');
+            break;
+          case 7001:
+            handleStatus('waiting');
+            break;
+          case 7002:
+            handleStatus('success');
+            saveMatchingResult(response);
+            break;
+          case 7003:
+            handleStatus('femaleSuccess');
+            saveMatchingResult(response);
+
+            break;
+          case 7004:
+            handleStatus('end');
+            saveMatchingResult(response);
+            break;
+          case 7005:
+            handleStatus('fail');
+            break;
+          case 7006:
+            handleStatus('cancel');
+        }
+      } catch (e) {
+        console.log(typeof e);
+        setErrorMessage(() => (e as any).message);
+        onToggleErrorModal();
+      }
+    };
+
     fetchMatchingResult();
   }, [type]);
 

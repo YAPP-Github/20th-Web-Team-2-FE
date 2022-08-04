@@ -32,6 +32,7 @@ const INITIAL_DATING_STATE: Dating = {
   channel: 'FACEBOOK',
   agreement: true,
   kakaoId: '',
+  myUniversity: 0,
 };
 
 const datingState = atom<Dating>({
