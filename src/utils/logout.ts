@@ -1,9 +1,9 @@
-import { postWithdraw } from '@/lib/api/user';
+import { postLogout } from '@/lib/api/user';
 import Cookies from 'js-cookie';
 import surveyStorage from './surveyStorage';
 
 export async function logout() {
-  await postWithdraw();
+  await postLogout();
   Cookies.remove('AccessToken');
   Cookies.remove('authenticated');
   surveyStorage.remove();
