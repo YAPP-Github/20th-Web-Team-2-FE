@@ -61,8 +61,9 @@ const KakaoIdSurvey = () => {
           알려주세요.
         </Title>
         <SubTitle>
-          매칭이 성사되면 10,000원 <br />
-          결제후 상대방에게 전달됩니다.
+          매칭이 성사되면 상대방에게
+          <br />
+          전달될 카톡 아이디입니다.
         </SubTitle>
         <InputWrapper>
           <Input
