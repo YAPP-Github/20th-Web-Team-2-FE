@@ -64,7 +64,7 @@ const AuthMail = () => {
         <Title>
           <strong>
             신원 확인을 위해 <br />
-            학교 메일로 인증해주세요.
+            <MintString>학교 메일</MintString>로 인증해주세요.
           </strong>
         </Title>
         <Description>예시: 1234@bu.edu</Description>
@@ -169,6 +169,10 @@ const StyledLink = styled.a`
   color: ${palette.primary};
   font-weight: 700;
   text-decoration: underline;
+`;
+
+const MintString = styled.span`
+  color: ${palette.primary};
 `;
 
 export default AuthMail;
