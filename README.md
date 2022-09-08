@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://user-images.githubusercontent.com/84016039/188946976-3272ae76-0a70-4d5b-a584-9cd7423aa34f.png" />
+    <img src="https://user-images.githubusercontent.com/84016039/189094201-9bf798c6-9870-484d-bbd7-780d23f5a719.png" />
 </div>
 
 ### <div align="center">유학생을 위한 미팅/소개팅 서비스 외딴썸</div>
