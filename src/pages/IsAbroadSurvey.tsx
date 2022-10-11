@@ -11,6 +11,7 @@ import { useMatch, useNavigate } from 'react-router-dom';
 import { type Location } from '@/types/meeting';
 import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
 import { LAST_MEETING_STEP, LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
+import useMatchingType from '@/hooks/survey/useMatchingType';
 
 const IsAbroadSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
@@ -22,6 +23,7 @@ const IsAbroadSurvey = () => {
   const [isAbroad, setIsAbroad] = useState<Location>(initMeetingState.isAbroad ? 'ABROAD' : 'DOMESTIC');
   const [isAbroadDating, setIsAbroadDating] = useState<Location>(initDatingState.isAbroad ? 'ABROAD' : 'DOMESTIC');
   const ISABOARD = matchMeeting ? isAbroad : isAbroadDating;
+  const [type] = useMatchingType();
 
   const onChangeOption = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id } = e.target;
@@ -34,10 +36,16 @@ const IsAbroadSurvey = () => {
 
   const handleNextClick = () => {
     if (isUpdate) {
-      matchMeeting
-        ? onUpdateMeetingSurvey({ ...initMeetingState, isAbroad: isAbroad === 'ABROAD' ? true : false })
-        : onUpdateDatingSurvey({ ...initDatingState, isAbroad: isAbroadDating === 'ABROAD' ? true : false });
-      navigate(Path.MatchingDating);
+      if (type === 'meeting') {
+        onUpdateMeetingSurvey({ ...initMeetingState, isAbroad: isAbroad === 'ABROAD' ? true : false });
+        setMeetingData({ ...initMeetingState, isAbroad: isAbroad === 'ABROAD' ? true : false });
+        navigate(ISABOARD === 'ABROAD' ? `/updating/meeting/${Path.AbroadAreasSurvey}` : `/updating/meeting/${Path.DomesticAreasSurvey}`);
+      }
+      if (type === 'dating') {
+        onUpdateDatingSurvey({ ...initDatingState, isAbroad: isAbroadDating === 'ABROAD' ? true : false });
+        setDatingData({ ...initDatingState, isAbroad: isAbroadDating === 'ABROAD' ? true : false });
+        navigate(ISABOARD === 'ABROAD' ? `/updating/dating/${Path.AbroadAreasSurvey}` : `/updating/dating/${Path.DomesticAreasSurvey}`);
+      }
     } else {
       if (initMeetingState) {
         matchMeeting

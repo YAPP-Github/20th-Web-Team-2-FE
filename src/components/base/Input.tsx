@@ -28,14 +28,14 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, InputS
 }
 
 const Input = ({ width = '100%', height = '38px', focusColor = palette.primary, variant = 'standard', isFocus = false, ...rest }: InputProps) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  // const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (inputRef.current && isFocus) {
-      inputRef.current.focus();
-    }
-  }, [isFocus]);
-  return <InputStyled ref={inputRef} {...rest} height={height} width={width} focusColor={focusColor} isFocus={isFocus} variant={variant} />;
+  // useEffect(() => {
+  //   if (inputRef.current && isFocus) {
+  //     inputRef.current.focus();
+  //   }
+  // }, [isFocus]);
+  return <InputStyled autoFocus={isFocus} {...rest} height={height} width={width} focusColor={focusColor} isFocus={isFocus} variant={variant} />;
 };
 
 const InputStyled = styled.input<InputProps>`

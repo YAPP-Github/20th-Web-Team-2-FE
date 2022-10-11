@@ -31,6 +31,8 @@ const OurDepartmentsAverageHeightSurvey = () => {
   const ourDepartments = useMemo(() => getOurDepartments, [checkedMultiOption]);
   const [heightOption, setHeightOption] = useState(initMeetingState.averageHeight);
 
+  const isCheckedMultiOption = useMemo(() => checkedMultiOption.some((v) => v.checked), [checkedMultiOption]);
+
   const handleNextClick = () => {
     if (isUpdate) {
       onUpdateMeetingSurvey({ ...initMeetingState, ourDepartments: ourDepartments ?? [], averageHeight: heightOption });
@@ -43,9 +45,11 @@ const OurDepartmentsAverageHeightSurvey = () => {
     }
   };
 
+  console.log(checkedMultiOption);
+
   return (
     <SurveyTemplate
-      disableNext={!checkedMultiOption || !heightOption}
+      disableNext={!isCheckedMultiOption || !heightOption}
       currStep={4}
       totalStep={LAST_MEETING_STEP}
       handlePrevClick={() => meetingNavigate(Path.OurUniversitiesSurvey)}

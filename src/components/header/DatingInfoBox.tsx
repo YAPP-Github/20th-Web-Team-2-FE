@@ -40,7 +40,7 @@ const DatingInfoBox = () => {
     preferHeight,
     isSmokeOk,
     isAbroad,
-    abroadAreas,
+    stringAbroadAreas,
     //여까지 선호 조건
   } = initDatingState;
 
@@ -48,18 +48,14 @@ const DatingInfoBox = () => {
     const getDatingData = async () => {
       try {
         const res = await getDatingSurvey();
-        if (res) {
-          setDatingData(res);
-        }
+        setDatingData(res);
       } catch (e) {
-        if ((e as any).request.status === 400) {
+        if ((e as any).message === '작성한 설문이 없습니다.') {
           setDoSurvey(false);
           return;
         }
-        if ((e as any).request.status === 500) {
-          onToggleErrorModal();
-          return;
-        }
+        setDoSurvey(false);
+        onToggleErrorModal();
       }
     };
 
@@ -119,7 +115,9 @@ const DatingInfoBox = () => {
             </FlexEle>
           </Link>
           <InfoEle>
-            <Link to={`/updating/dating/${Path.AbroadAreasSurvey}`}>해외 지역 :{abroadAreas.length === 0 ? '없음' : abroadAreas}</Link>
+            <Link to={`/updating/dating/${Path.AbroadAreasSurvey}`} style={{ textOverflow: 'ellipsis' }}>
+              해외 지역 : {stringAbroadAreas?.length === 0 ? '없음' : stringAbroadAreas?.toString()}
+            </Link>
           </InfoEle>
           <InfoEle>
             <Link to={`/updating/dating/${Path.IsAbroadSurvey}`}>해외여부 : {isAbroad ? '예' : '아니요'}</Link>
@@ -232,11 +230,3 @@ export const FlexEle = styled(InfoEle)`
 `;
 
 export default DatingInfoBox;
-{
-  /* {ourUniversities.map((univ, index) => (
-            <p key={univ}>
-              {schools[univ].name}
-              {addTailComma(ourUniversities.length, index)}
-            </p>
-          ))} */
-}

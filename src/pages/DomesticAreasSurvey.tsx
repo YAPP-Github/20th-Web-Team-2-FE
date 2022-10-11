@@ -12,9 +12,11 @@ import { type DomesticAreas } from '@/types/meeting';
 import { useMatch, useNavigate } from 'react-router-dom';
 import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
 import { LAST_MEETING_STEP, LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
+import useMatchingType from '@/hooks/survey/useMatchingType';
 
 const DomesticAreasSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
+  const [type] = useMatchingType();
   const navigate = useNavigate();
   const meetingNavigate = matchMeeting ? useMeetingNavigate() : useDatingNavigate();
   const { initMeetingState, setMeetingData } = useMeetingSessionState();
@@ -38,7 +40,7 @@ const DomesticAreasSurvey = () => {
 
   const handleNextClick = () => {
     if (isUpdate) {
-      matchMeeting
+      type === 'meeting'
         ? onUpdateMeetingSurvey({ ...initMeetingState, domesticAreas: domesticAreas ?? [] })
         : onUpdateDatingSurvey({ ...initDatingState, domesticAreas: domesticAreas ?? [] });
       navigate(Path.MatchingDating);

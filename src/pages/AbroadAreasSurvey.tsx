@@ -9,6 +9,7 @@ import { useMeetingSessionState, useDatingSessionState } from '@/hooks/common';
 import useAboardAreaLoad from '@/hooks/survey/useAboardAreaLoad';
 import { LAST_MEETING_STEP, LAST_DATING_STEP } from '@/components/domain/survey/SurveyTemplate';
 import useUpdateSurvey from '@/hooks/survey/useUpdateSurvey';
+import useMatchingType from '@/hooks/survey/useMatchingType';
 
 const AbroadAreasSurvey = () => {
   const matchMeeting = useMatch('/meeting/*');
@@ -20,10 +21,11 @@ const AbroadAreasSurvey = () => {
   const { initDatingState, setDatingData } = useDatingSessionState();
   const [abroadAreas, setAbroadAreas] = useState<number[]>(initMeetingState.abroadAreas);
   const [abroadAreasDating, setAbroadAreasDating] = useState<number[]>(initDatingState.abroadAreas);
+  const [type] = useMatchingType();
 
   const handleNextClick = () => {
     if (isUpdate) {
-      matchMeeting
+      type === 'meeting'
         ? onUpdateMeetingSurvey({ ...initMeetingState, abroadAreas })
         : onUpdateDatingSurvey({ ...initDatingState, abroadAreas: abroadAreasDating });
       navigate(Path.MatchingDating);
@@ -35,7 +37,10 @@ const AbroadAreasSurvey = () => {
     }
   };
 
-  const checkDisabled = useMemo(() => (matchMeeting ? abroadAreas.length === 0 : abroadAreasDating.length === 0), [matchMeeting, abroadAreasDating]);
+  const checkDisabled = useMemo(
+    () => (matchMeeting ? abroadAreas?.length === 0 : abroadAreasDating?.length === 0),
+    [matchMeeting, abroadAreas, abroadAreasDating],
+  );
 
   return (
     <SurveyTemplate

@@ -1,7 +1,7 @@
 import { palette } from '@/lib/styles/palette';
 import styled from 'styled-components';
 import KakaoCopyBox from './KakaoCopyBox';
-import { conversionDepartment, conversionMindset, conversionPlay } from '@/utils/converson';
+import { conversionDepartment, conversionDomesticArea, conversionMindset, conversionPlay } from '@/utils/converson';
 import { addComma } from '@/utils/addComma';
 import { memo } from 'react';
 import { MeetingPartnerSurvey } from '@/types/meeting';
@@ -35,14 +35,7 @@ function MeetingEndBox({ areas, averageAge, averageHeight, departments, kakaoId,
         </FlexLine>
         <FlexLine>
           <InfoLabel>지역</InfoLabel>
-          <InfoFlexText>
-            {areas?.map((area, index) => (
-              <div key={area}>
-                {addComma(index)}
-                {area}
-              </div>
-            ))}
-          </InfoFlexText>
+          <InfoFlexText>{areas?.toString()}</InfoFlexText>
         </FlexLine>
         <FlexLine>
           <InfoLabel>마인드셋</InfoLabel>

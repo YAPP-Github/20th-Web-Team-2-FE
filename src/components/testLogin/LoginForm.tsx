@@ -8,9 +8,10 @@ import { useToggle } from '@/hooks/common';
 
 interface LoginFormProps {
   onSubmitAuthCode: (values: LoginRequest) => void;
+  onJoin: (values: LoginRequest) => void;
 }
 
-const LoginForm = ({ onSubmitAuthCode }: LoginFormProps) => {
+const LoginForm = ({ onSubmitAuthCode, onJoin }: LoginFormProps) => {
   const [onFocus, setFocus] = useState(true);
   const [isErrorModal, onToggleErrorModal] = useToggle();
   const { values, errors, handleSubmit, handleChange } = useForm<LoginRequest>({
@@ -54,6 +55,9 @@ const LoginForm = ({ onSubmitAuthCode }: LoginFormProps) => {
           <Input name="password" placeholder="비밀번호" maxLength={50} onChange={handleChange} />
           {errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
         </InputsWrapper>
+        <Button type="button" onClick={() => onJoin(values)}>
+          회원가입
+        </Button>
         <Button>로그인</Button>
       </FormsWrapper>
       {isErrorModal && (
